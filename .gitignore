@@ -1,0 +1,6 @@
+# Dumpster output
+.dumpster
+/data
+.venv
+*.egg-info
+__pycache__

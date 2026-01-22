@@ -1,0 +1,24 @@
+version: "3"
+
+tasks:
+  release:
+    desc: Point releases/current to the latest versioned release directory
+    cmds:
+      - |
+        set -e
+        echo "Detecting latest release..."
+
+        latest_dir=$(ls -d releases/*/ 2>/dev/null \
+          | sed 's:/*$::' \
+          | sort -V \
+          | tail -n 1)
+
+        if [ -z "$latest_dir" ]; then
+          echo "No release directories found under releases/"
+          exit 1
+        fi
+
+        latest=$(basename "$latest_dir")
+
+        ln -sfn "$latest" releases/current
+        echo "Updated symlink: releases/current → $latest"
