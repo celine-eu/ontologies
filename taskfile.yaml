@@ -22,3 +22,5 @@ tasks:
 
         ln -sfn "$latest" releases/current
         echo "Updated symlink: releases/current → $latest"
+
+        git tag -f $latest

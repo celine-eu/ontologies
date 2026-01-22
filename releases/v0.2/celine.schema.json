@@ -1,581 +1,514 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://celine-eu.github.io/ontologies/celine/schema/1.0.0",
-  "title": "CELINE JSON-LD API Schema (Lean)",
+  "$id": "https://celine-eu.github.io/schemas/rec-registry.json",
+  "title": "CELINE REC Registry Document",
   "type": "object",
-  "description": "JSON Schema for JSON-LD payloads conforming to the CELINE ontology profile. Uses @id/@type and terms defined in the CELINE JSON-LD context.",
-  "oneOf": [
-    {
+  "additionalProperties": false,
+  "required": [
+    "context",
+    "community",
+    "participants",
+    "memberships",
+    "sites",
+    "assets",
+    "meters",
+    "timeseries"
+  ],
+  "properties": {
+    "context": {
+      "type": "object",
+      "description": "Prefix map for CURIE expansion (JSON-LD-like). Keys are prefixes; values are base IRIs.",
+      "additionalProperties": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "community": {
       "$ref": "#/$defs/EnergyCommunity"
     },
-    {
-      "$ref": "#/$defs/Participant"
+    "participants": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Participant"
+      }
     },
-    {
-      "$ref": "#/$defs/Membership"
+    "memberships": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Membership"
+      }
     },
-    {
-      "$ref": "#/$defs/Site"
+    "sites": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Site"
+      }
     },
-    {
-      "$ref": "#/$defs/Asset"
+    "assets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Asset"
+      }
     },
-    {
-      "$ref": "#/$defs/Meter"
+    "meters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Meter"
+      }
     },
-    {
-      "$ref": "#/$defs/Tariff"
+    "timeseries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TimeSeries"
+      }
     },
-    {
-      "$ref": "#/$defs/TimeSeries"
-    },
-    {
-      "$ref": "#/$defs/Datapoint"
-    },
-    {
-      "$ref": "#/$defs/Forecast"
-    },
-    {
-      "$ref": "#/$defs/KPIAssessment"
-    },
-    {
-      "$ref": "#/$defs/Snapshot"
-    },
-    {
-      "$ref": "#/$defs/Scenario"
-    },
-    {
-      "$ref": "#/$defs/ModelRun"
-    },
-    {
-      "$ref": "#/$defs/WeatherObservation"
-    }
-  ],
-  "$defs": {
-    "Iri": {
-      "type": "string",
-      "format": "uri"
-    },
-    "JsonLdBase": {
+    "topology": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "@context": {
-          "oneOf": [
-            {
-              "type": "string",
-              "format": "uri"
-            },
-            {
-              "type": "object"
-            }
-          ]
-        },
-        "@id": {
-          "$ref": "#/$defs/Iri"
-        },
-        "@type": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "array",
-              "items": {
-                "type": "string"
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "source",
+              "target",
+              "predicate"
+            ],
+            "properties": {
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "target": {
+                "type": "string",
+                "minLength": 1
+              },
+              "predicate": {
+                "$ref": "#/$defs/CurieOrUri"
               }
             }
-          ]
-        },
-        "id": {
-          "$ref": "#/$defs/Iri"
-        },
-        "type": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          ]
+          }
         }
+      }
+    }
+  },
+  "$defs": {
+    "CurieOrUri": {
+      "description": "Either an absolute IRI/URI or a CURIE such as auth:users/123.",
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9+.-]*:[^\\s]+$"
+        }
+      ]
+    },
+    "Key": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "GeoJSON": {
+      "description": "GeoJSON geometry. Coordinates must be lon/lat order (WGS84).",
+      "type": "object",
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Point",
+            "Polygon",
+            "MultiPolygon",
+            "LineString",
+            "MultiPoint",
+            "MultiLineString"
+          ]
+        },
+        "coordinates": {}
       },
       "additionalProperties": true
     },
     "EnergyCommunity": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "name"
+      ],
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/Key"
         },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "EnergyCommunity"
-            },
-            "type": {
-              "const": "EnergyCommunity"
-            },
-            "hasMember": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/Iri"
-              }
-            },
-            "hasMembership": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/Iri"
+        "id": {
+          "$ref": "#/$defs/CurieOrUri",
+          "description": "Optional explicit @id IRI for JSON-LD generation."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "website": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "coverage_areas": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "key",
+              "name"
+            ],
+            "properties": {
+              "key": {
+                "$ref": "#/$defs/Key"
+              },
+              "name": {
+                "type": "string"
+              },
+              "geo": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/GeoJSON"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               }
             }
-          },
-          "required": [
-            "@id"
-          ],
-          "additionalProperties": true
+          }
         }
-      ]
+      }
     },
     "Participant": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "name",
+        "auth_uri"
+      ],
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/Key"
         },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "Participant"
-            },
-            "type": {
-              "const": "Participant"
-            },
-            "isMemberOf": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/Iri"
-              }
-            },
-            "ownsAsset": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/Iri"
-              }
-            }
-          },
-          "required": [
-            "@id"
+        "id": {
+          "$ref": "#/$defs/CurieOrUri"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Local categorization (e.g., individual, SME, municipality)."
+        },
+        "auth_uri": {
+          "$ref": "#/$defs/CurieOrUri"
+        },
+        "external_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "contacts": {
+          "type": [
+            "object",
+            "null"
           ],
           "additionalProperties": true
         }
-      ]
+      }
     },
     "Membership": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "community",
+        "participant",
+        "role",
+        "status"
+      ],
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/Key"
         },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "Membership"
-            },
-            "type": {
-              "const": "Membership"
-            },
-            "membershipParticipant": {
-              "$ref": "#/$defs/Iri"
-            },
-            "membershipCommunity": {
-              "$ref": "#/$defs/Iri"
-            },
-            "membershipRole": {
-              "type": "string"
-            },
-            "votingWeight": {
-              "type": "number"
-            },
-            "validFrom": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "validTo": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          "required": [
-            "@id",
-            "membershipParticipant",
-            "membershipCommunity"
-          ],
-          "additionalProperties": true
+        "community": {
+          "$ref": "#/$defs/Key"
+        },
+        "participant": {
+          "$ref": "#/$defs/Key"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "operator",
+            "prosumer",
+            "consumer"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "inactive",
+            "pending"
+          ]
         }
-      ]
+      }
     },
     "Site": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "name",
+        "geo"
+      ],
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/Key"
         },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "Site"
+        "id": {
+          "$ref": "#/$defs/CurieOrUri"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "address": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "geo": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GeoJSON"
             },
-            "type": {
-              "const": "Site"
+            {
+              "type": "object",
+              "description": "Legacy lat/lon form (accepted for backward compatibility).",
+              "required": [
+                "lat",
+                "lon"
+              ],
+              "properties": {
+                "lat": {
+                  "type": "number"
+                },
+                "lon": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
             }
-          },
-          "required": [
-            "@id"
-          ],
-          "additionalProperties": true
+          ]
         }
-      ]
+      }
     },
     "Asset": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "name",
+        "type"
+      ],
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/Key"
         },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "Asset"
+        "id": {
+          "$ref": "#/$defs/CurieOrUri"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "SUBSTATION",
+            "PV_SYSTEM",
+            "STORAGE_SYSTEM",
+            "OTHER"
+          ]
+        },
+        "owner": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Key"
             },
-            "type": {
-              "const": "Asset"
-            },
-            "isOwnedBy": {
-              "$ref": "#/$defs/Iri"
-            },
-            "locatedAt": {
-              "$ref": "#/$defs/Iri"
-            },
-            "hasMeter": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/Iri"
-              }
-            },
-            "hasTimeSeries": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/Iri"
-              }
-            },
-            "hasTariff": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/Iri"
-              }
+            {
+              "type": "null"
             }
-          },
-          "required": [
-            "@id"
-          ],
-          "additionalProperties": true
+          ]
+        },
+        "site": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Key"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "geo": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GeoJSON"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "capacity_kwp": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "capacity_kwh": {
+          "type": [
+            "number",
+            "null"
+          ]
         }
-      ]
+      }
     },
     "Meter": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "sensor_id",
+        "participant"
+      ],
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/Key"
         },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "Meter"
-            },
-            "type": {
-              "const": "Meter"
-            },
-            "locatedAt": {
-              "$ref": "#/$defs/Iri"
-            },
-            "hasTimeSeries": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/Iri"
-              }
-            },
-            "hasTariff": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/Iri"
-              }
-            }
-          },
-          "required": [
-            "@id"
-          ],
-          "additionalProperties": true
-        }
-      ]
-    },
-    "Tariff": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
+        "id": {
+          "$ref": "#/$defs/CurieOrUri"
         },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "Tariff"
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "participant": {
+          "$ref": "#/$defs/Key"
+        },
+        "site": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Key"
             },
-            "type": {
-              "const": "Tariff"
-            },
-            "validFrom": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "validTo": {
-              "type": "string",
-              "format": "date-time"
+            {
+              "type": "null"
             }
-          },
-          "required": [
-            "@id"
+          ]
+        },
+        "sensor_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "substation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Key"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pod_code": {
+          "type": [
+            "string",
+            "null"
           ],
-          "additionalProperties": true
+          "description": "Deprecated/PII. Prefer sensor_id."
         }
-      ]
+      }
     },
     "TimeSeries": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "metric",
+        "unit",
+        "observed_entity",
+        "dataset_uri"
+      ],
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/Key"
         },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "TimeSeries"
-            },
-            "type": {
-              "const": "TimeSeries"
-            },
-            "observedEntity": {
-              "$ref": "#/$defs/Iri"
-            },
-            "metric": {
-              "type": "string"
-            },
-            "unit": {
-              "type": "string"
-            },
-            "hasDatapoint": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/Iri"
-              }
-            }
-          },
-          "required": [
-            "@id"
+        "id": {
+          "$ref": "#/$defs/CurieOrUri"
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observed_entity": {
+          "$ref": "#/$defs/Key"
+        },
+        "dataset_uri": {
+          "$ref": "#/$defs/CurieOrUri"
+        },
+        "dataset_filter": {
+          "type": [
+            "object",
+            "null"
           ],
           "additionalProperties": true
         }
-      ]
-    },
-    "Datapoint": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "Datapoint"
-            },
-            "type": {
-              "const": "Datapoint"
-            },
-            "timestamp": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "value": {
-              "type": "number"
-            }
-          },
-          "required": [
-            "@id",
-            "timestamp",
-            "value"
-          ],
-          "additionalProperties": true
-        }
-      ]
-    },
-    "Forecast": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/TimeSeries"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "Forecast"
-            },
-            "type": {
-              "const": "Forecast"
-            },
-            "producedBy": {
-              "$ref": "#/$defs/Iri"
-            }
-          },
-          "additionalProperties": true
-        }
-      ]
-    },
-    "KPIAssessment": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "KPIAssessment"
-            },
-            "type": {
-              "const": "KPIAssessment"
-            },
-            "producedBy": {
-              "$ref": "#/$defs/Iri"
-            },
-            "validFrom": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "validTo": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          "required": [
-            "@id"
-          ],
-          "additionalProperties": true
-        }
-      ]
-    },
-    "Snapshot": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "Snapshot"
-            },
-            "type": {
-              "const": "Snapshot"
-            },
-            "validFrom": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "validTo": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          "required": [
-            "@id"
-          ],
-          "additionalProperties": true
-        }
-      ]
-    },
-    "Scenario": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "Scenario"
-            },
-            "type": {
-              "const": "Scenario"
-            }
-          },
-          "required": [
-            "@id"
-          ],
-          "additionalProperties": true
-        }
-      ]
-    },
-    "ModelRun": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "ModelRun"
-            },
-            "type": {
-              "const": "ModelRun"
-            },
-            "usesSnapshot": {
-              "$ref": "#/$defs/Iri"
-            },
-            "usesScenario": {
-              "$ref": "#/$defs/Iri"
-            }
-          },
-          "required": [
-            "@id"
-          ],
-          "additionalProperties": true
-        }
-      ]
-    },
-    "WeatherObservation": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/JsonLdBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "WeatherObservation"
-            },
-            "type": {
-              "const": "WeatherObservation"
-            }
-          },
-          "required": [
-            "@id"
-          ],
-          "additionalProperties": true
-        }
-      ]
+      }
     }
   }
 }

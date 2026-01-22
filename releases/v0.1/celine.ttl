@@ -24,7 +24,7 @@
     a owl:Ontology ;
     rdfs:label "CELINE Unified Ontology Profile" ;
     rdfs:comment "Unified ontology profile combining SAREF, SOSA/SSN, SAREF4ENER, SAREF4CITY, BIGG, SEAS and EM-KPI for the CELINE Digital Twin and Energy Community Platform." ;
-    owl:versionInfo "1.0.0-alpha1" ;
+    owl:versionIRI <https://celine-eu.github.io/ontologies/releases/v0.1> ;
     dcterms:publisher "CELINE Project" ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     owl:imports

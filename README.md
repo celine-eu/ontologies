@@ -19,19 +19,19 @@ The CELINE ontology is **not a standalone domain ontology**, but a **unified ont
 - **[CELINE ontology documentation](https://celine-eu.github.io/ontologies/celine/)**  
   Documentation of the CELINE ontology
 
-- **[CELINE ontology (Turtle)](celine.ttl)**  
+- **[CELINE ontology (Turtle)](releases/current/celine.ttl)**  
   The formal OWL/RDF definition of the CELINE Unified Ontology Profile.  
   Defines CELINE classes and properties and aligns them with SAREF, SOSA, BIGG, SEAS, and EM-KPI.
 
-- **[CELINE SHACL shapes](celine.shacl.ttl)**  
+- **[CELINE SHACL shapes](releases/current/celine.shacl.ttl)**  
   SHACL shapes defining semantic constraints on the RDF graph after JSON-LD expansion.  
   Used to validate observations, time series, meters, energy communities, and KPIs.
 
-- **[CELINE JSON-LD context](celine.jsonld)**  
+- **[CELINE JSON-LD context](releases/current/celine.jsonld)**  
   JSON-LD `@context` defining prefixes, aliases, and mappings used by CELINE APIs and data pipelines.  
   This is the primary entry point for developers producing JSON-LD payloads.
 
-- **[CELINE JSON Schema](celine.schema.json)**  
+- **[CELINE JSON Schema](releases/current/celine.schema.json)**  
   JSON Schema used at API boundaries to validate incoming JSON-LD payloads before semantic expansion.
 
 

@@ -16,6 +16,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
 
 #################################################################
 # Ontology header
@@ -25,7 +26,7 @@
   rdfs:label "CELINE Ontology Profile (Lean)"@en ;
   rdfs:comment "Lean CELINE profile ontology for REC registry, forecasting and Digital Twin APIs. Reuses PECO as the primary backbone, complemented by SAREF/SAREF4ENER (device/meter semantics), BIGG (KPI assessment), SOSA (weather observations) and PROV-O (provenance). Designed to remain practical and API-oriented."@en ;
   dcterms:publisher "CELINE" ;
-  owl:versionIRI <https://celine-eu.github.io/ontologies/celine/1.0.0> ;
+  owl:versionIRI <https://celine-eu.github.io/ontologies/releases/v0.2> ;
   owl:imports
     <https://purl.org/peco/peco-core> ,
     <https://saref.etsi.org/core/> ,
@@ -35,7 +36,7 @@
     <http://bigg-project.eu/ontology/bigg4kpi#> .
 
 #################################################################
-# CELINE classes (semantic anchors)
+# CELINE classes (thin semantic anchors)
 #################################################################
 
 celine:EnergyCommunity a owl:Class ;
@@ -300,3 +301,33 @@ celine:producedBy a owl:ObjectProperty ;
   rdfs:domain prov:Entity ;
   rdfs:range celine:ModelRun ;
   owl:equivalentProperty prov:wasGeneratedBy .
+
+celine:authURI a owl:DatatypeProperty ;
+  rdfs:label "authentication URI"@en ;
+  rdfs:comment "IRI/CURIE-expanded URI of the participant in the authentication/IdM system."@en ;
+  rdfs:domain celine:Participant ;
+  rdfs:range xsd:anyURI .
+
+celine:sensorId a owl:DatatypeProperty ;
+  rdfs:label "sensor id"@en ;
+  rdfs:comment "Non-PII sensor identifier used to filter metering datasets."@en ;
+  rdfs:domain celine:Meter ;
+  rdfs:range xsd:string .
+
+celine:datasetURI a owl:DatatypeProperty ;
+  rdfs:label "dataset URI"@en ;
+  rdfs:comment "URI of the dataset resource where time series datapoints are stored/queried."@en ;
+  rdfs:domain celine:TimeSeries ;
+  rdfs:range xsd:anyURI .
+
+celine:geoJSON a owl:DatatypeProperty ;
+  rdfs:label "GeoJSON geometry"@en ;
+  rdfs:comment "GeoJSON geometry (WGS84; coordinates in lon/lat order) for consistent geospatial positioning."@en ;
+  rdfs:domain prov:Entity ;
+  rdfs:range xsd:string .
+
+celine:connectedTo a owl:ObjectProperty ;
+  rdfs:label "connected to"@en ;
+  rdfs:comment "Topological connection between two entities (e.g., meter connected to substation)."@en ;
+  rdfs:domain prov:Entity ;
+  rdfs:range prov:Entity .
