@@ -1,937 +1,165 @@
 {
   "@context": {
-    "bigg": "http://bigg-project.eu/ontology#",
-    "bigg4kpi": "http://bigg-project.eu/ontology/bigg4kpi#",
-    "celine": "https://celine-eu.github.io/ontologies/celine#",
-    "dcterms": "http://purl.org/dc/terms/",
-    "geo": "http://www.opengis.net/ont/geosparql#",
+    "celine": "https://w3id.org/celine/ontology#",
     "owl": "http://www.w3.org/2002/07/owl#",
-    "peco": "https://purl.org/peco/peco-core#",
-    "prov": "http://www.w3.org/ns/prov#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "s4bldg": "https://saref.etsi.org/saref4bldg/",
-    "s4city": "https://saref.etsi.org/saref4city/",
-    "s4ener": "https://saref.etsi.org/saref4ener/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dct": "http://purl.org/dc/terms/",
+    "time": "http://www.w3.org/2006/time#",
+    "peco": "https://purl.org/peco/peco-core#",
     "saref": "https://saref.etsi.org/core/",
     "sosa": "http://www.w3.org/ns/sosa/",
-    "xsd": "http://www.w3.org/2001/XMLSchema#"
+    "bigg": "https://w3id.org/bigg/ontology#",
+    "label": "rdfs:label",
+    "description": "dct:description",
+    "type": "@type",
+    "id": "@id",
+    "hasCommunity": {
+      "@id": "celine:hasCommunity",
+      "@type": "@id"
+    },
+    "usesAsset": {
+      "@id": "celine:usesAsset",
+      "@type": "@id"
+    },
+    "hasSimulation": {
+      "@id": "celine:hasSimulation",
+      "@type": "@id"
+    },
+    "hasScenario": {
+      "@id": "celine:hasScenario",
+      "@type": "@id"
+    },
+    "hasSimulationRun": {
+      "@id": "celine:hasSimulationRun",
+      "@type": "@id"
+    },
+    "usesDataset": {
+      "@id": "celine:usesDataset",
+      "@type": "@id"
+    },
+    "producesDataset": {
+      "@id": "celine:producesDataset",
+      "@type": "@id"
+    },
+    "evaluatesKPI": {
+      "@id": "celine:evaluatesKPI",
+      "@type": "@id"
+    },
+    "hasKPIEvaluation": {
+      "@id": "celine:hasKPIEvaluation",
+      "@type": "@id"
+    },
+    "hasTimeInterval": {
+      "@id": "celine:hasTimeInterval",
+      "@type": "@id"
+    },
+    "usesObservation": {
+      "@id": "celine:usesObservation",
+      "@type": "@id"
+    },
+    "identifier": "dct:identifier",
+    "source": {
+      "@id": "dct:source",
+      "@type": "@id"
+    },
+    "value": "rdf:value"
   },
   "@graph": [
     {
-      "@id": "celine:Asset",
-      "@type": "owl:Class",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "A physical or logical energy asset (PV, battery, EVSE, load, meter, etc.). PECO defines the asset backbone; SAREF provides device semantics."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Asset"
-      },
-      "rdfs:subClassOf": [
-        {
-          "@id": "peco:Asset"
-        },
-        {
-          "@id": "saref:Device"
-        }
-      ]
-    },
-    {
-      "@id": "celine:usesSnapshot",
-      "@type": "owl:ObjectProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Links a model run, forecast or KPI assessment to the snapshot it is based on."
-      },
-      "rdfs:domain": {
-        "@id": "prov:Activity"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "uses snapshot"
-      },
-      "rdfs:range": {
-        "@id": "celine:Snapshot"
+      "@id": "celine:CELINEOntology",
+      "@type": "owl:Ontology",
+      "label": "CELINE Core Ontology",
+      "description": "Lightweight orchestration ontology for Renewable Energy Communities and Digital Twin workflows. CELINE integrates PECO, SAREF, SOSA and BIGG without redefining domain semantics.",
+      "dct:license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
       }
     },
     {
-      "@id": "celine:datasetURI",
-      "@type": "owl:DatatypeProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "URI of the dataset resource where time series datapoints are stored/queried."
-      },
-      "rdfs:domain": {
-        "@id": "celine:TimeSeries"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "dataset URI"
-      },
-      "rdfs:range": {
-        "@id": "xsd:anyURI"
-      }
-    },
-    {
-      "@id": "celine:Participant",
+      "@id": "celine:CommunityContext",
       "@type": "owl:Class",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "An actor participating in a community (individual, organisation, aggregator, operator). This is a thin alias over PECO Agent with PROV agent semantics."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Participant"
-      },
-      "rdfs:subClassOf": [
-        {
-          "@id": "peco:Agent"
-        },
-        {
-          "@id": "prov:Agent"
-        }
-      ]
+      "label": "Community Context"
     },
     {
       "@id": "celine:Scenario",
       "@type": "owl:Class",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "A set of assumptions and overrides applied to a Snapshot for what-if analysis and digital twin runs."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Scenario"
-      },
-      "rdfs:subClassOf": {
-        "@id": "prov:Entity"
-      }
+      "label": "Scenario"
     },
     {
-      "@id": "celine:producedBy",
-      "@type": "owl:ObjectProperty",
-      "owl:equivalentProperty": {
-        "@id": "prov:wasGeneratedBy"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Links an entity (forecast/KPI) to the model run that generated it."
-      },
-      "rdfs:domain": {
-        "@id": "prov:Entity"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "produced by"
-      },
-      "rdfs:range": {
-        "@id": "celine:ModelRun"
-      }
-    },
-    {
-      "@id": "celine:Membership",
+      "@id": "celine:Simulation",
       "@type": "owl:Class",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "A membership record capturing a participant's role(s), weights and validity within a community."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Membership"
-      },
-      "rdfs:subClassOf": {
-        "@id": "prov:Entity"
-      }
+      "label": "Simulation"
     },
     {
-      "@id": "celine:Meter",
+      "@id": "celine:SimulationRun",
       "@type": "owl:Class",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "A metering point / point of delivery (POD) that may be associated with an EnergyMeter device."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Meter"
-      },
-      "rdfs:subClassOf": [
-        {
-          "@id": "peco:POD"
-        },
-        {
-          "@id": "s4ener:EnergyMeter"
-        }
-      ]
+      "label": "Simulation Run"
     },
     {
-      "@id": "https://celine-eu.github.io/ontologies/celine/",
-      "@type": "owl:Ontology",
-      "dcterms:publisher": "CELINE",
-      "owl:imports": [
-        {
-          "@id": "https://purl.org/peco/peco-core"
-        },
-        {
-          "@id": "saref:"
-        },
-        {
-          "@id": "s4ener:"
-        },
-        {
-          "@id": "sosa:"
-        },
-        {
-          "@id": "prov:"
-        },
-        {
-          "@id": "bigg4kpi:"
-        }
-      ],
-      "owl:versionIRI": {
-        "@id": "https://celine-eu.github.io/ontologies/celine/1.0.0"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Lean CELINE profile ontology for REC registry, forecasting and Digital Twin APIs. Reuses PECO as the primary backbone, complemented by SAREF/SAREF4ENER (device/meter semantics), BIGG (KPI assessment), SOSA (weather observations) and PROV-O (provenance). Designed to remain practical and API-oriented."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "CELINE Ontology Profile (Lean)"
-      }
-    },
-    {
-      "@id": "celine:WeatherObservation",
+      "@id": "celine:DatasetReference",
       "@type": "owl:Class",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "An observation of a weather-related phenomenon (temperature, irradiance, wind, etc.), modelled using SOSA."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Weather Observation"
-      },
-      "rdfs:subClassOf": {
-        "@id": "sosa:Observation"
-      }
+      "label": "Dataset Reference"
     },
     {
-      "@id": "celine:relatedToPOD",
-      "@type": "owl:ObjectProperty",
-      "owl:equivalentProperty": {
-        "@id": "peco:related_to_pod"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Associates a measurement/series with a POD. Alias of peco:related_to_pod."
-      },
-      "rdfs:domain": {
-        "@id": "owl:Thing"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "related to POD"
-      },
-      "rdfs:range": {
-        "@id": "celine:Meter"
-      }
-    },
-    {
-      "@id": "celine:KPIAssessment",
+      "@id": "celine:KPIEvaluation",
       "@type": "owl:Class",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "An assessment result for a KPI, typically derived from measurements/forecasts over a time window."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "KPI Assessment"
-      },
-      "rdfs:subClassOf": [
-        {
-          "@id": "bigg4kpi:KPIAssessment"
-        },
-        {
-          "@id": "prov:Entity"
-        }
-      ]
+      "label": "KPI Evaluation"
     },
     {
-      "@id": "celine:validFrom",
-      "@type": "owl:DatatypeProperty",
-      "owl:equivalentProperty": {
-        "@id": "peco:valid_from"
-      },
-      "rdfs:domain": {
-        "@id": "prov:Entity"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "valid from"
-      },
-      "rdfs:range": {
-        "@id": "xsd:dateTime"
-      }
-    },
-    {
-      "@id": "celine:geoJSON",
-      "@type": "owl:DatatypeProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "GeoJSON geometry (WGS84; coordinates in lon/lat order) for consistent geospatial positioning."
-      },
-      "rdfs:domain": {
-        "@id": "prov:Entity"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "GeoJSON geometry"
-      },
-      "rdfs:range": {
-        "@id": "xsd:string"
-      }
-    },
-    {
-      "@id": "celine:Snapshot",
-      "@type": "owl:Class",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "A frozen, reproducible capture of the REC catalogue state and configuration used for computations (forecasting, simulation, KPI evaluation)."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Snapshot"
-      },
-      "rdfs:subClassOf": {
-        "@id": "prov:Entity"
-      }
-    },
-    {
-      "@id": "celine:hasDatapoint",
+      "@id": "celine:hasCommunity",
       "@type": "owl:ObjectProperty",
-      "owl:equivalentProperty": {
-        "@id": "peco:has_datapoint"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Associates a time series with its datapoints. Alias of peco:has_datapoint."
-      },
-      "rdfs:domain": {
-        "@id": "celine:TimeSeries"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "has datapoint"
-      },
-      "rdfs:range": {
-        "@id": "celine:Datapoint"
-      }
+      "label": "has energy community"
     },
     {
-      "@id": "celine:connectedTo",
+      "@id": "celine:usesAsset",
       "@type": "owl:ObjectProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Topological connection between two entities (e.g., meter connected to substation)."
-      },
-      "rdfs:domain": {
-        "@id": "prov:Entity"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "connected to"
-      },
-      "rdfs:range": {
-        "@id": "prov:Entity"
-      }
+      "label": "uses asset"
     },
     {
-      "@id": "celine:Measurement",
-      "@type": "owl:Class",
-      "owl:equivalentClass": {
-        "@id": "peco:Measurement"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "A measurement event or record. CELINE uses PECO Measurement for energy-domain measurement semantics."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Measurement"
-      }
-    },
-    {
-      "@id": "celine:membershipCommunity",
+      "@id": "celine:hasScenario",
       "@type": "owl:ObjectProperty",
-      "rdfs:domain": {
-        "@id": "celine:Membership"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "membership community"
-      },
-      "rdfs:range": {
-        "@id": "celine:EnergyCommunity"
-      }
+      "label": "has scenario"
     },
     {
-      "@id": "celine:value",
-      "@type": "owl:DatatypeProperty",
-      "owl:equivalentProperty": {
-        "@id": "peco:has_value"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Numeric value of a datapoint. Alias of peco:has_value."
-      },
-      "rdfs:domain": {
-        "@id": "celine:Datapoint"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "value"
-      },
-      "rdfs:range": {
-        "@id": "xsd:decimal"
-      }
-    },
-    {
-      "@id": "celine:unit",
-      "@type": "owl:DatatypeProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Unit of measure (string code) used in APIs when a full unit ontology is not required."
-      },
-      "rdfs:domain": {
-        "@id": "owl:Thing"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "unit"
-      },
-      "rdfs:range": {
-        "@id": "xsd:string"
-      }
-    },
-    {
-      "@id": "celine:sensorId",
-      "@type": "owl:DatatypeProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Non-PII sensor identifier used to filter metering datasets."
-      },
-      "rdfs:domain": {
-        "@id": "celine:Meter"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "sensor id"
-      },
-      "rdfs:range": {
-        "@id": "xsd:string"
-      }
-    },
-    {
-      "@id": "celine:authURI",
-      "@type": "owl:DatatypeProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "IRI/CURIE-expanded URI of the participant in the authentication/IdM system."
-      },
-      "rdfs:domain": {
-        "@id": "celine:Participant"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "authentication URI"
-      },
-      "rdfs:range": {
-        "@id": "xsd:anyURI"
-      }
-    },
-    {
-      "@id": "celine:isOwnedBy",
+      "@id": "celine:hasSimulation",
       "@type": "owl:ObjectProperty",
-      "owl:equivalentProperty": {
-        "@id": "peco:is_owned_by"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Links an asset to its owner participant. Alias of peco:is_owned_by."
-      },
-      "rdfs:domain": {
-        "@id": "celine:Asset"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "is owned by"
-      },
-      "rdfs:range": {
-        "@id": "celine:Participant"
-      }
+      "label": "has simulation"
     },
     {
-      "@id": "celine:EnergyCommunity",
-      "@type": "owl:Class",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "A Renewable/Citizen Energy Community represented in CELINE. PECO provides the primary semantics; SAREF4CITY alignment is optional for smart city interoperability."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Energy Community"
-      },
-      "rdfs:subClassOf": [
-        {
-          "@id": "peco:Citizen_energy_community"
-        },
-        {
-          "@id": "s4city:Community"
-        }
-      ]
-    },
-    {
-      "@id": "celine:Datapoint",
-      "@type": "owl:Class",
-      "owl:equivalentClass": {
-        "@id": "peco:Datapoint"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "A single time-value pair in a time series."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Datapoint"
-      }
-    },
-    {
-      "@id": "celine:hasTariff",
+      "@id": "celine:hasSimulationRun",
       "@type": "owl:ObjectProperty",
-      "owl:equivalentProperty": {
-        "@id": "peco:has_tariff"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Associates a community, membership, POD or asset with a tariff. Alias of peco:has_tariff."
-      },
-      "rdfs:domain": {
-        "@id": "owl:Thing"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "has tariff"
-      },
-      "rdfs:range": {
-        "@id": "celine:Tariff"
-      }
+      "label": "has simulation run"
     },
     {
-      "@id": "celine:TimeSeries",
-      "@type": "owl:Class",
-      "owl:equivalentClass": {
-        "@id": "peco:Timeseries"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "A time series of datapoints (measured or forecast). CELINE adopts PECO Timeseries for efficient API representation."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Time Series"
-      }
-    },
-    {
-      "@id": "celine:Forecast",
-      "@type": "owl:Class",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "A forecast represented as a time series, with provenance of the generating model/run."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Forecast"
-      },
-      "rdfs:subClassOf": [
-        {
-          "@id": "peco:Forecast"
-        },
-        {
-          "@id": "peco:Timeseries"
-        }
-      ]
-    },
-    {
-      "@id": "celine:relatedToForecast",
+      "@id": "celine:usesDataset",
       "@type": "owl:ObjectProperty",
-      "owl:equivalentProperty": {
-        "@id": "peco:related_to_forecast"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Associates an entity to a forecast series. Alias of peco:related_to_forecast."
-      },
-      "rdfs:domain": {
-        "@id": "owl:Thing"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "related to forecast"
-      },
-      "rdfs:range": {
-        "@id": "celine:Forecast"
-      }
+      "label": "uses dataset"
     },
     {
-      "@id": "celine:membershipRole",
-      "@type": "owl:DatatypeProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Role of the participant within the community (e.g., consumer, prosumer, producer, operator)."
-      },
-      "rdfs:domain": {
-        "@id": "celine:Membership"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "membership role"
-      },
-      "rdfs:range": {
-        "@id": "xsd:string"
-      }
-    },
-    {
-      "@id": "celine:hasMembership",
+      "@id": "celine:producesDataset",
       "@type": "owl:ObjectProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Links a community to membership records (role, weights, validity)."
-      },
-      "rdfs:domain": {
-        "@id": "celine:EnergyCommunity"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "has membership"
-      },
-      "rdfs:range": {
-        "@id": "celine:Membership"
-      }
+      "label": "produces dataset"
     },
     {
-      "@id": "celine:hasTimeSeries",
+      "@id": "celine:evaluatesKPI",
       "@type": "owl:ObjectProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Associates an entity (asset, POD, KPI, forecast) with a time series."
-      },
-      "rdfs:domain": {
-        "@id": "owl:Thing"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "has time series"
-      },
-      "rdfs:range": {
-        "@id": "celine:TimeSeries"
-      }
+      "label": "evaluates KPI"
     },
     {
-      "@id": "celine:ownsAsset",
+      "@id": "celine:hasKPIEvaluation",
       "@type": "owl:ObjectProperty",
-      "owl:equivalentProperty": {
-        "@id": "peco:owns"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Links a participant to an owned asset. Alias of peco:owns."
-      },
-      "rdfs:domain": {
-        "@id": "celine:Participant"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "owns asset"
-      },
-      "rdfs:range": {
-        "@id": "celine:Asset"
-      }
+      "label": "has KPI evaluation"
     },
     {
-      "@id": "celine:metric",
-      "@type": "owl:DatatypeProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Identifier of the metric/phenomenon (e.g., active_power, energy, temperature, irradiance)."
-      },
-      "rdfs:domain": {
-        "@id": "owl:Thing"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "metric"
-      },
-      "rdfs:range": {
-        "@id": "xsd:string"
-      }
-    },
-    {
-      "@id": "celine:hasMember",
+      "@id": "celine:hasTimeInterval",
       "@type": "owl:ObjectProperty",
-      "owl:equivalentProperty": {
-        "@id": "peco:has_member"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Links a community to a participant that is a member of the community. Alias of peco:has_member."
-      },
-      "rdfs:domain": {
-        "@id": "celine:EnergyCommunity"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "has member"
-      },
-      "rdfs:range": {
-        "@id": "celine:Participant"
-      }
+      "label": "has time interval"
     },
     {
-      "@id": "celine:validTo",
-      "@type": "owl:DatatypeProperty",
-      "owl:equivalentProperty": {
-        "@id": "peco:valid_to"
-      },
-      "rdfs:domain": {
-        "@id": "prov:Entity"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "valid to"
-      },
-      "rdfs:range": {
-        "@id": "xsd:dateTime"
-      }
-    },
-    {
-      "@id": "celine:Site",
-      "@type": "owl:Class",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "A physical site relevant to a community (building, facility, or spatial container) where assets are located."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Site"
-      },
-      "rdfs:subClassOf": [
-        {
-          "@id": "peco:Site"
-        },
-        {
-          "@id": "s4bldg:Building"
-        }
-      ]
-    },
-    {
-      "@id": "celine:locatedAt",
+      "@id": "celine:usesObservation",
       "@type": "owl:ObjectProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Links an asset or POD to the site where it is located."
-      },
-      "rdfs:domain": {
-        "@id": "owl:Thing"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "located at"
-      },
-      "rdfs:range": {
-        "@id": "celine:Site"
-      }
-    },
-    {
-      "@id": "celine:observedEntity",
-      "@type": "owl:ObjectProperty",
-      "owl:equivalentProperty": {
-        "@id": "peco:related_to_property_of_interest"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "The entity that a time series / measurement refers to."
-      },
-      "rdfs:domain": {
-        "@id": "owl:Thing"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "observed entity"
-      },
-      "rdfs:range": {
-        "@id": "owl:Thing"
-      }
-    },
-    {
-      "@id": "celine:FlexibilityRequest",
-      "@type": "owl:Class",
-      "owl:equivalentClass": {
-        "@id": "peco:Flexibility_request"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "A request or event describing flexibility needs/activation in the community."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Flexibility Request"
-      }
-    },
-    {
-      "@id": "celine:isMemberOf",
-      "@type": "owl:ObjectProperty",
-      "owl:equivalentProperty": {
-        "@id": "peco:is_member_of"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Links a participant to the community they are a member of. Alias of peco:is_member_of."
-      },
-      "rdfs:domain": {
-        "@id": "celine:Participant"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "is member of"
-      },
-      "rdfs:range": {
-        "@id": "celine:EnergyCommunity"
-      }
-    },
-    {
-      "@id": "celine:Tariff",
-      "@type": "owl:Class",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "A tariff applicable to a community/member/asset for allocation, billing or settlement. Anchored in PECO and optionally aligned with BIGG tariff."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Tariff"
-      },
-      "rdfs:subClassOf": [
-        {
-          "@id": "peco:Tariff"
-        },
-        {
-          "@id": "bigg:Tariff"
-        }
-      ]
-    },
-    {
-      "@id": "celine:ModelRun",
-      "@type": "owl:Class",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "An execution activity that generates forecasts, simulations, or KPI assessments from a snapshot and scenario."
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "Model Run"
-      },
-      "rdfs:subClassOf": {
-        "@id": "prov:Activity"
-      }
-    },
-    {
-      "@id": "celine:membershipParticipant",
-      "@type": "owl:ObjectProperty",
-      "rdfs:domain": {
-        "@id": "celine:Membership"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "membership participant"
-      },
-      "rdfs:range": {
-        "@id": "celine:Participant"
-      }
-    },
-    {
-      "@id": "celine:timestamp",
-      "@type": "owl:DatatypeProperty",
-      "owl:equivalentProperty": {
-        "@id": "peco:has_timestamp"
-      },
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Timestamp of a datapoint. Alias of peco:has_timestamp."
-      },
-      "rdfs:domain": {
-        "@id": "celine:Datapoint"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "timestamp"
-      },
-      "rdfs:range": {
-        "@id": "xsd:dateTime"
-      }
-    },
-    {
-      "@id": "celine:hasMeter",
-      "@type": "owl:ObjectProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Associates an asset or site with a metering point (POD / meter)."
-      },
-      "rdfs:domain": {
-        "@id": "owl:Thing"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "has meter"
-      },
-      "rdfs:range": {
-        "@id": "celine:Meter"
-      }
-    },
-    {
-      "@id": "celine:usesScenario",
-      "@type": "owl:ObjectProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Links a model run, forecast or KPI assessment to a scenario of assumptions/overrides."
-      },
-      "rdfs:domain": {
-        "@id": "prov:Activity"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "uses scenario"
-      },
-      "rdfs:range": {
-        "@id": "celine:Scenario"
-      }
-    },
-    {
-      "@id": "celine:votingWeight",
-      "@type": "owl:DatatypeProperty",
-      "rdfs:comment": {
-        "@language": "en",
-        "@value": "Optional voting weight or share used in governance."
-      },
-      "rdfs:domain": {
-        "@id": "celine:Membership"
-      },
-      "rdfs:label": {
-        "@language": "en",
-        "@value": "voting weight"
-      },
-      "rdfs:range": {
-        "@id": "xsd:decimal"
-      }
+      "label": "uses observation"
     }
   ]
 }

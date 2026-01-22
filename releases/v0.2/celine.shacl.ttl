@@ -1,131 +1,167 @@
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix celine: <https://celine-eu.github.io/ontologies/celine#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix celine: <https://w3id.org/celine/ontology#> .
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix time:   <http://www.w3.org/2006/time#> .
 
-#################################################################
-# SHACL Shapes for CELINE core entities used by the REC registry
-#################################################################
+@prefix peco:   <https://purl.org/peco/peco-core#> .
+@prefix saref:  <https://saref.etsi.org/core/> .
+@prefix sosa:   <http://www.w3.org/ns/sosa/> .
+@prefix bigg:   <https://w3id.org/bigg/ontology#> .
 
-celine:EnergyCommunityShape a sh:NodeShape ;
-  sh:targetClass celine:EnergyCommunity ;
-  sh:property [
-    sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
-    sh:minCount 1 ;
-    sh:datatype xsd:string ;
-  ] ;
-  sh:property [
-    sh:path celine:hasMembership ;
-    sh:nodeKind sh:IRI ;
-    sh:minCount 0 ;
-  ] .
+################################################################################
+# CELINE SHACL Profile (lean, orchestration-only)
+################################################################################
 
-celine:ParticipantShape a sh:NodeShape ;
-  sh:targetClass celine:Participant ;
-  sh:property [
-    sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
-    sh:minCount 1 ;
-    sh:datatype xsd:string ;
-  ] ;
-  sh:property [
-    sh:path celine:authURI ;
-    sh:minCount 1 ;
-    sh:datatype xsd:anyURI ;
-  ] .
+celine:CommunityContextShape
+    a sh:NodeShape ;
+    sh:targetClass celine:CommunityContext ;
+    rdfs:label "CommunityContext constraints" ;
+    sh:property [
+        sh:path celine:hasCommunity ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class peco:EnergyCommunity ;
+    ] ;
+    sh:property [
+        sh:path celine:usesAsset ;
+        sh:nodeKind sh:IRI ;
+        sh:class saref:Device ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasSimulation ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:Simulation ;
+        sh:minCount 0 ;
+    ] .
 
-celine:MembershipShape a sh:NodeShape ;
-  sh:targetClass celine:Membership ;
-  sh:property [
-    sh:path celine:membershipCommunity ;
-    sh:minCount 1 ;
-    sh:class celine:EnergyCommunity ;
-  ] ;
-  sh:property [
-    sh:path celine:membershipParticipant ;
-    sh:minCount 1 ;
-    sh:class celine:Participant ;
-  ] ;
-  sh:property [
-    sh:path celine:membershipRole ;
-    sh:minCount 1 ;
-    sh:datatype xsd:string ;
-    sh:in ( "operator" "prosumer" "consumer" ) ;
-  ] .
+celine:ScenarioShape
+    a sh:NodeShape ;
+    sh:targetClass celine:Scenario ;
+    rdfs:label "Scenario constraints" ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path dct:description ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasTimeInterval ;
+        sh:nodeKind sh:IRI ;
+        sh:class time:Interval ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] .
 
-celine:SiteShape a sh:NodeShape ;
-  sh:targetClass celine:Site ;
-  sh:property [
-    sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
-    sh:minCount 1 ;
-    sh:datatype xsd:string ;
-  ] ;
-  sh:property [
-    sh:path celine:geoJSON ;
-    sh:minCount 1 ;
-    sh:datatype xsd:string ;
-    sh:description "GeoJSON string literal (if you store structured GeoJSON, serialize to JSON string for RDF)." ;
-  ] .
+celine:SimulationShape
+    a sh:NodeShape ;
+    sh:targetClass celine:Simulation ;
+    rdfs:label "Simulation constraints" ;
+    sh:property [
+        sh:path celine:hasScenario ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:Scenario ;
+    ] ;
+    sh:property [
+        sh:path celine:hasSimulationRun ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:SimulationRun ;
+        sh:minCount 0 ;
+    ] .
 
-celine:AssetShape a sh:NodeShape ;
-  sh:targetClass celine:Asset ;
-  sh:property [
-    sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
-    sh:minCount 1 ;
-    sh:datatype xsd:string ;
-  ] ;
-  sh:property [
-    sh:path celine:locatedAt ;
-    sh:minCount 0 ;
-    sh:class celine:Site ;
-  ] ;
-  sh:property [
-    sh:path celine:isOwnedBy ;
-    sh:minCount 0 ;
-    sh:class celine:Participant ;
-  ] ;
-  sh:property [
-    sh:path celine:geoJSON ;
-    sh:minCount 0 ;
-    sh:datatype xsd:string ;
-  ] .
+celine:SimulationRunShape
+    a sh:NodeShape ;
+    sh:targetClass celine:SimulationRun ;
+    rdfs:label "SimulationRun constraints" ;
+    sh:property [
+        sh:path celine:usesDataset ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:DatasetReference ;
+    ] ;
+    sh:property [
+        sh:path celine:producesDataset ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:DatasetReference ;
+    ] ;
+    sh:property [
+        sh:path celine:hasKPIEvaluation ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:KPIEvaluation ;
+    ] ;
+    sh:property [
+        sh:path celine:usesObservation ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+        sh:class sosa:Observation ;
+    ] .
 
-celine:MeterShape a sh:NodeShape ;
-  sh:targetClass celine:Meter ;
-  sh:property [
-    sh:path celine:sensorId ;
-    sh:minCount 1 ;
-    sh:datatype xsd:string ;
-  ] ;
-  sh:property [
-    sh:path celine:isOwnedBy ;
-    sh:minCount 1 ;
-    sh:class celine:Participant ;
-  ] ;
-  sh:property [
-    sh:path celine:connectedTo ;
-    sh:minCount 0 ;
-    sh:nodeKind sh:IRI ;
-  ] .
+celine:DatasetReferenceShape
+    a sh:NodeShape ;
+    sh:targetClass celine:DatasetReference ;
+    rdfs:label "DatasetReference constraints" ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path dct:source ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 0 ;
+    ] .
 
-celine:TimeSeriesShape a sh:NodeShape ;
-  sh:targetClass celine:TimeSeries ;
-  sh:property [
-    sh:path celine:datasetURI ;
-    sh:minCount 1 ;
-    sh:datatype xsd:anyURI ;
-  ] ;
-  sh:property [
-    sh:path celine:metric ;
-    sh:minCount 1 ;
-    sh:datatype xsd:string ;
-  ] ;
-  sh:property [
-    sh:path celine:unit ;
-    sh:minCount 1 ;
-    sh:datatype xsd:string ;
-  ] ;
-  sh:property [
-    sh:path celine:observedEntity ;
-    sh:minCount 1 ;
-    sh:nodeKind sh:IRI ;
-  ] .
+celine:KPIEvaluationShape
+    a sh:NodeShape ;
+    sh:targetClass celine:KPIEvaluation ;
+    rdfs:label "KPIEvaluation constraints" ;
+    sh:property [
+        sh:path celine:evaluatesKPI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class bigg:KPI ;
+    ] ;
+    sh:property [
+        sh:path rdf:value ;
+        sh:minCount 0 ;
+        sh:or (
+            [ sh:datatype xsd:decimal ]
+            [ sh:datatype xsd:double ]
+            [ sh:datatype xsd:string ]
+        ) ;
+    ] .
+
+################################################################################
+# TIME interval minimal constraints (recommended)
+################################################################################
+
+celine:TimeIntervalShape
+    a sh:NodeShape ;
+    sh:targetClass time:Interval ;
+    rdfs:label "time:Interval minimal constraints" ;
+    sh:property [
+        sh:path time:hasBeginning ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path time:hasEnd ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] .
