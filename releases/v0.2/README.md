@@ -1,103 +1,164 @@
 # CELINE Core Semantic Stack
 
-This package contains the core semantic definition of CELINE, starting from a single authoritative ontology (celine.ttl) and deriving the corresponding validation and serialization artifacts: SHACL shapes, JSON-LD, and JSON Schema.
+This repository contains the **core semantic definition** of CELINE, starting from a single authoritative ontology (`celine.ttl`) and deriving the corresponding **validation** and **serialization** artifacts:
 
-The intent is to maintain one source of truth for meaning, and align all other artifacts to it.
+- SHACL shapes
+- JSON-LD context/representation
+- JSON Schema for API-level validation
 
----
-
-## 1. celine.ttl — Core Ontology (Authoritative)
-
-Format: RDF / Turtle
-
-Role: Semantic source of truth
-
-celine.ttl defines the conceptual model used across CELINE services. It declares the core classes and predicates that represent the domain semantics.
-
-Core classes include:
-- EnergyCommunity
-- Participant
-- Membership
-- Site
-- Asset
-- Meter
-- TimeSeries
-
-Core predicates include:
-- authURI (link to authentication / identity systems)
-- datasetURI (link to external datasets)
-- sensorId (non-PII identifier for metering)
-- hasMembership
-- isOwnedBy
-- locatedAt
-- connectedTo
-- observedEntity
-
-The ontology provides stable semantics independent of APIs, storage, or serialization formats. All other artifacts must remain consistent with this file.
+The intent is to maintain **one source of truth** for meaning, and generate or align all other artifacts from it.
 
 ---
 
-## 2. celine.shacl.ttl — SHACL Validation Profile
+## 1. [celine.ttl](celine.ttl) - Core Ontology (Authoritative)
 
-Format: SHACL (RDF)
+**Format:** RDF / Turtle  
+**Role:** Semantic source of truth
 
-Depends on: celine.ttl
+`celine.ttl` defines the **conceptual model** used across CELINE services.  
+It declares:
 
-The SHACL profile defines semantic constraints on RDF graphs that use the CELINE ontology.
+### Core Classes
+- `celine:EnergyCommunity`
+- `celine:Participant`
+- `celine:Membership`
+- `celine:Site`
+- `celine:Asset`
+- `celine:Meter`
+- `celine:TimeSeries`
 
-Examples of enforced constraints:
-- A Participant must have exactly one authURI
-- A Meter must have a sensorId and be owned by a Participant
-- A TimeSeries must reference a datasetURI and an observed entity
-- Membership roles must be one of: operator, prosumer, consumer
+### Core Relationships & Properties
+- Identity and linkage:
+  - `celine:authURI`
+  - `celine:datasetURI`
+  - `celine:sensorId`
+- Structural relations:
+  - `celine:hasMembership`
+  - `celine:isOwnedBy`
+  - `celine:locatedAt`
+  - `celine:connectedTo`
+  - `celine:observedEntity`
 
-SHACL validates graph-level semantics and relationships. It is applied after data has been converted to RDF or JSON-LD. It does not validate JSON or YAML syntax.
+### Purpose
+- Provide **stable semantics** independent of any specific API or storage model
+- Enable reasoning, linking, and interoperability
+- Act as the reference for all downstream validation rules
+
+All other artifacts must be **consistent with this ontology**.
 
 ---
 
-## 3. celine.jsonld — JSON-LD Representation
+## 2. [celine.shacl.ttl](celine.shacl.ttl) - SHACL Validation Profile
 
-Format: JSON-LD
+**Format:** SHACL (RDF)  
+**Depends on:** `celine.ttl`
 
-Derived from: celine.ttl
+The SHACL file defines **constraints** on RDF graphs that use the CELINE ontology.
 
-This file provides a JSON-compatible representation of the CELINE ontology.
+### What SHACL Validates
+Examples of enforced rules:
+- A `celine:Participant` **must** have exactly one `celine:authURI`
+- A `celine:Meter` **must**:
+  - have a `celine:sensorId`
+  - be owned by a `celine:Participant`
+- A `celine:TimeSeries` **must**:
+  - reference a `celine:datasetURI`
+  - reference exactly one observed entity
+- A `celine:Membership` role must be one of:
+  - `operator`
+  - `prosumer`
+  - `consumer`
 
-Its role is to bridge RDF and JSON-based systems, enabling conversion pipelines such as:
-- YAML or JSON to JSON-LD
-- JSON-LD to RDF
+### Scope
+- SHACL validates **graph-level semantics**
+- It runs **after** data has been converted to RDF/JSON-LD
+- It does not validate JSON/YAML syntax
 
-JSON-LD preserves global identifiers, class semantics, and relationships. It is intended for interoperability and internal processing, not for manual authoring.
+SHACL ensures semantic correctness, not just structural correctness.
 
 ---
 
-## 4. celine.rec.schema.json — JSON Schema
+## 3. [celine.jsonld](celine.jsonld) - JSON-LD Representation
 
-Format: JSON Schema (Draft 2020-12)
+**Format:** JSON-LD  
+**Derived from:** `celine.ttl`
 
-Aligned with: celine.ttl
+This file provides a **JSON-compatible representation** of the CELINE ontology.
 
-The JSON Schema validates REC registry documents at the API or configuration level.
+### Role
+- Bridge between RDF and JSON-based systems
+- Enable conversion pipelines:
+  - YAML / JSON → JSON-LD → RDF
+- Preserve:
+  - global identifiers (IRIs)
+  - class semantics
+  - relationships
 
-It ensures:
+### Intended Usage
+- Internal processing
+- Interoperability with RDF tooling
+- Not intended for manual authoring
+
+JSON-LD ensures that JSON data remains semantically equivalent to RDF.
+
+---
+
+## 4. [celine.schema.json](celine.schema.json) - JSON Schema
+
+**Format:** JSON Schema (Draft 2020-12)  
+**Aligned with:** `celine.ttl`
+
+This schema validates **REC registry documents** at the API or configuration level.
+
+### What JSON Schema Validates
 - Required fields are present
 - Field types are correct
-- Structural consistency of documents
-- Identifier fields accept either full IRIs or CURIEs
+- Structural consistency of registry documents
+- Identifier fields accept:
+  - full IRIs, or
+  - CURIEs (e.g. `auth:users/123`)
 
-JSON Schema does not perform semantic reasoning or cross-entity validation. Those concerns are handled by SHACL.
+### What JSON Schema Does NOT Validate
+- Semantic constraints across entities
+- Ontology-level consistency
+- Role inference or reasoning
+
+Those concerns are handled by **SHACL**.
 
 ---
 
 ## 5. Relationship Between Artifacts
 
-celine.ttl defines meaning.
-celine.jsonld provides a JSON serialization of that meaning.
-celine.shacl.ttl validates RDF graphs built from that meaning.
-celine.rec.schema.json validates JSON or YAML documents before semantic processing.
+```text
+celine.ttl
+   ↓ (defines meaning)
+celine.jsonld
+   ↓ (serialization)
+RDF graph
+   ↓ (validation)
+celine.shacl.ttl
+
+REC JSON / YAML
+   ↓ (structural validation)
+celine.rec.schema.json
+```
+
+- `celine.ttl` defines **what things mean**
+- `celine.shacl.ttl` defines **what is allowed**
+- `celine.jsonld` defines **how RDF is exchanged as JSON**
+- `celine.rec.schema.json` defines **what APIs accept**
 
 ---
 
 ## 6. Design Rationale
 
-This layered approach avoids duplicating semantics, keeps validation explicit, and aligns with semantic web and data space practices. It allows CELINE to remain interoperable, auditable, and evolvable while preserving developer usability.
+- Avoid duplicating semantics across formats
+- Keep validation layered and explicit
+- Allow gradual tightening of constraints
+- Remain compatible with semantic web standards and data spaces
+
+This approach ensures CELINE remains:
+
+- interoperable
+- auditable
+- evolvable
