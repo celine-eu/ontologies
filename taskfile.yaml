@@ -23,4 +23,8 @@ tasks:
         ln -sfn "$latest" releases/current
         echo "Updated symlink: releases/current → $latest"
 
+        git add .
+        git commit -m "release $latest"
+
         git tag -f $latest
+        git push -f
