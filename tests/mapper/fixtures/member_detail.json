@@ -1,0 +1,21 @@
+{
+  "id": "m-001",
+  "key": "alice-rossi",
+  "name": "Alice Rossi",
+  "role": "producer_consumer",
+  "status": "active",
+  "area": "trentino",
+  "user_id": "auth0|user123",
+  "created_at": "2024-02-01T08:00:00Z",
+  "updated_at": "2024-06-01T12:00:00Z",
+  "delivery_points": [
+    {
+      "id": "dp-001",
+      "type": "electricity",
+      "address": "Via Roma 1, Folgaria TN",
+      "tariff": "F1-F2-F3",
+      "active": true,
+      "description": "Main meter"
+    }
+  ]
+}

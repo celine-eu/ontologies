@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://w3id.org/celine/schema/mapping_spec.schema.json",
+  "title": "CELINE MappingSpec",
+  "description": "Schema for CELINE declarative mapping spec YAML files.",
+  "type": "object",
+  "required": ["version", "target_type", "id_template", "fields"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "enum": ["1"]
+    },
+    "target_type": {
+      "type": "string",
+      "minLength": 1,
+      "description": "RDF class CURIE or full IRI (e.g. 'peco:Renewable_energy_community')"
+    },
+    "id_template": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Jinja2 template for @id. Variables: row fields + context dict."
+    },
+    "label_template": {
+      "type": "string",
+      "description": "Optional Jinja2 template for rdfs:label shorthand."
+    },
+    "context_vars": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Names of variables injected from the caller context (not from the row)."
+    },
+    "fields": {
+      "type": "array",
+      "minItems": 0,
+      "items": { "$ref": "#/$defs/FieldMapping" }
+    }
+  },
+  "$defs": {
+    "FieldMapping": {
+      "type": "object",
+      "required": ["target"],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Key in the input row dict. Omit for kind=constant."
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Ontology property CURIE or full IRI."
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["literal", "iri", "nested", "constant"],
+          "default": "literal"
+        },
+        "datatype": {
+          "type": "string",
+          "description": "XSD datatype CURIE (e.g. xsd:string, xsd:decimal). Used for kind=literal."
+        },
+        "required": {
+          "type": "boolean",
+          "default": false,
+          "description": "Raise MappingError if source field is absent or null."
+        },
+        "iri_template": {
+          "type": "string",
+          "description": "Jinja2 template for kind=iri. {value} is the source field value."
+        },
+        "value": {
+          "description": "Constant value for kind=constant."
+        },
+        "nested_type": {
+          "type": "string",
+          "description": "RDF class CURIE for the nested sub-node. Required for kind=nested."
+        },
+        "nested_fields": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/FieldMapping" },
+          "description": "Field mappings applied to each item in the nested list/object."
+        }
+      },
+      "if": { "properties": { "kind": { "const": "constant" } }, "required": ["kind"] },
+      "then": { "required": ["target", "value"] },
+      "else": {
+        "if": { "properties": { "kind": { "const": "nested" } }, "required": ["kind"] },
+        "then": { "required": ["target", "source", "nested_type"] }
+      }
+    }
+  }
+}

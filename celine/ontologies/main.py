@@ -6,12 +6,14 @@ from typing import List, Optional
 from celine.ontologies.fetch import fetch_ontologies
 from celine.ontologies.analyze import analyze_ontologies
 from celine.ontologies.tree import generate_ontology_tree
+from celine.mapper.cli import mapper_app
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
 ontology_app = typer.Typer(
-    name="ontology", help="Ontology utilities: download, analyze, tree view."
+    name="ontology", help="Ontology utilities: download, analyze, tree view, mapping."
 )
+ontology_app.add_typer(mapper_app)
 
 
 @ontology_app.command("fetch")

@@ -1,0 +1,8 @@
+{
+  "id": "dp-001",
+  "type": "electricity",
+  "address": "Via Roma 1, Folgaria TN",
+  "tariff": "F1-F2-F3",
+  "active": true,
+  "description": "Main electricity meter for Alice Rossi"
+}

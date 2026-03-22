@@ -1,0 +1,22 @@
+[
+  {
+    "provider": "open-meteo",
+    "run_time_utc": "2024-06-01T00:00:00+00:00",
+    "forecast_time_utc": "2024-06-01T06:00:00+00:00",
+    "lat": 45.9,
+    "lon": 11.17,
+    "asob_s_wm2": 210.5,
+    "performance_ratio": 0.80,
+    "pv_kwh_per_kwp_hourly": 0.168
+  },
+  {
+    "provider": "open-meteo",
+    "run_time_utc": "2024-06-01T00:00:00+00:00",
+    "forecast_time_utc": "2024-06-01T07:00:00+00:00",
+    "lat": 45.9,
+    "lon": 11.17,
+    "asob_s_wm2": 480.2,
+    "performance_ratio": 0.82,
+    "pv_kwh_per_kwp_hourly": 0.394
+  }
+]

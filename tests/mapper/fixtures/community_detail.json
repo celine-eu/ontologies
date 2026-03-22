@@ -1,0 +1,40 @@
+{
+  "id": "6f3a1c2d-4e5b-4f6a-8c7d-9e0f1a2b3c4d",
+  "key": "it-folgaria",
+  "name": "REC Folgaria",
+  "description": "Renewable energy community in Folgaria, Trentino.",
+  "created_at": "2024-01-15T09:00:00Z",
+  "updated_at": "2024-06-01T12:00:00Z",
+  "topology": [
+    {
+      "id": "node-001",
+      "name": "Folgaria Grid Connection",
+      "type": "grid",
+      "area": "trentino",
+      "parent": null,
+      "operator": "Dolomiti Energia"
+    },
+    {
+      "id": "node-002",
+      "name": "Participant Cluster A",
+      "type": "cluster",
+      "area": "trentino",
+      "parent": "node-001",
+      "operator": null
+    }
+  ],
+  "areas": {
+    "trentino": {
+      "name": "Trentino",
+      "location": {"lat": 45.9, "lon": 11.17}
+    }
+  },
+  "contact": {
+    "email": "info@rec-folgaria.it",
+    "phone": "+39 0461 000000"
+  },
+  "settings": {
+    "timezone": "Europe/Rome",
+    "currency": "EUR"
+  }
+}

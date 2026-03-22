@@ -1,0 +1,41 @@
+# Maps a DeliveryPointSchema dict (from rec-registry get_delivery_point_by_id()
+# or embedded in MemberDetailSchema.delivery_points) to peco:Electric_POD.
+version: "1"
+target_type: "peco:Electric_POD"
+id_template: "https://w3id.org/celine/pod/{id}"
+
+context_vars:
+  - community_key
+  - member_key
+
+fields:
+  - source: id
+    target: "dct:identifier"
+    datatype: xsd:string
+    required: true
+
+  - source: type
+    target: "rdfs:comment"
+    datatype: xsd:string
+
+  - source: description
+    target: "dct:description"
+    datatype: xsd:string
+
+  - source: address
+    target: "peco:address"
+    datatype: xsd:string
+
+  - source: tariff
+    target: "peco:has_tariff"
+    datatype: xsd:string
+
+  # active status (boolean)
+  - source: active
+    target: "peco:related_to_property"
+    datatype: xsd:boolean
+
+  # Link to owning member (member_key from context_vars)
+  - target: "peco:is_port_of"
+    kind: iri
+    iri_template: "https://w3id.org/celine/member/{member_key}"

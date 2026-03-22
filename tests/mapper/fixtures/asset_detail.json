@@ -1,0 +1,20 @@
+{
+  "id": "a-001",
+  "key": "pv-alice-001",
+  "name": "Alice PV Panel 3kWp",
+  "asset_type": "pv",
+  "sensor_id": "sensor-pv-alice-001",
+  "owner_key": "alice-rossi",
+  "owner_user_id": "auth0|user123",
+  "device": {
+    "capacity_kwp": 3.0,
+    "orientation": "south",
+    "tilt_deg": 30
+  },
+  "properties": {
+    "installation_date": "2023-05-10"
+  },
+  "relationships": {},
+  "created_at": "2023-05-10T00:00:00Z",
+  "updated_at": "2024-06-01T12:00:00Z"
+}

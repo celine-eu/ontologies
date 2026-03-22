@@ -1,0 +1,59 @@
+# Maps a MemberDetailSchema dict (from rec-registry get_member() / list_members())
+# to peco:Energy_community_member.
+version: "1"
+target_type: "peco:Energy_community_member"
+id_template: "https://w3id.org/celine/member/{key}"
+label_template: "{name}"
+
+context_vars:
+  - community_key
+
+fields:
+  - source: key
+    target: "dct:identifier"
+    datatype: xsd:string
+    required: true
+
+  - source: name
+    target: "rdfs:label"
+    datatype: xsd:string
+
+  - source: role
+    target: "rdfs:comment"
+    datatype: xsd:string
+
+  - source: status
+    target: "peco:related_to"
+    datatype: xsd:string
+
+  - source: area
+    target: "peco:related_to_property"
+    datatype: xsd:string
+
+  - source: user_id
+    target: "peco:created_by"
+    datatype: xsd:string
+
+  # Link back to the community (community_key comes from context_vars)
+  - target: "peco:is_member_of"
+    kind: iri
+    iri_template: "https://w3id.org/celine/rec/{community_key}"
+
+  # Delivery points (PODs) owned by this member
+  - source: delivery_points
+    target: "peco:has_port"
+    kind: nested
+    nested_type: "peco:Electric_POD"
+    nested_fields:
+      - source: id
+        target: "dct:identifier"
+        required: true
+      - source: type
+        target: "rdfs:comment"
+        datatype: xsd:string
+      - source: address
+        target: "peco:address"
+        datatype: xsd:string
+      - source: tariff
+        target: "peco:has_tariff"
+        datatype: xsd:string

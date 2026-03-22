@@ -1,0 +1,41 @@
+# Maps a CommunityDetailSchema dict (from rec-registry get_community())
+# to peco:Renewable_energy_community + celine:CommunityContext nodes.
+version: "1"
+target_type: "peco:Renewable_energy_community"
+id_template: "https://w3id.org/celine/rec/{key}"
+label_template: "{name}"
+
+fields:
+  - source: key
+    target: "dct:identifier"
+    datatype: xsd:string
+    required: true
+
+  - source: description
+    target: "dct:description"
+    datatype: xsd:string
+
+  # Back-reference to the celine:CommunityContext wrapper (IRI only)
+  - source: key
+    target: "celine:hasCommunity"
+    kind: iri
+    iri_template: "https://w3id.org/celine/context/{value}"
+
+  # Topology nodes (area-level, partial mapping)
+  - source: topology
+    target: "peco:contains"
+    kind: nested
+    nested_type: "peco:Site"
+    nested_fields:
+      - source: id
+        target: "dct:identifier"
+        required: true
+      - source: name
+        target: "rdfs:label"
+        datatype: xsd:string
+      - source: type
+        target: "rdfs:comment"
+        datatype: xsd:string
+      - source: area
+        target: "peco:related_to"
+        datatype: xsd:string

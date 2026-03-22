@@ -1,0 +1,23 @@
+[
+  {
+    "ts": "2024-06-01T00:00:00+00:00",
+    "total_consumption_kw": 12.5,
+    "total_production_kw": 8.3,
+    "self_consumption_kw": 7.1,
+    "self_consumption_ratio": 0.856
+  },
+  {
+    "ts": "2024-06-01T00:15:00+00:00",
+    "total_consumption_kw": 11.2,
+    "total_production_kw": 9.1,
+    "self_consumption_kw": 8.4,
+    "self_consumption_ratio": 0.923
+  },
+  {
+    "ts": "2024-06-01T00:30:00+00:00",
+    "total_consumption_kw": 10.8,
+    "total_production_kw": 10.5,
+    "self_consumption_kw": 9.9,
+    "self_consumption_ratio": 0.943
+  }
+]

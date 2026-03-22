@@ -1,0 +1,40 @@
+# Maps an AssetDetailSchema dict (from rec-registry list_assets() / get_asset())
+# to saref:Device.
+version: "1"
+target_type: "saref:Device"
+id_template: "https://w3id.org/celine/device/{key}"
+label_template: "{name}"
+
+context_vars:
+  - community_key
+
+fields:
+  - source: key
+    target: "dct:identifier"
+    datatype: xsd:string
+    required: true
+
+  - source: name
+    target: "rdfs:label"
+    datatype: xsd:string
+
+  - source: asset_type
+    target: "rdfs:comment"
+    datatype: xsd:string
+
+  # sensor_id links this device to SOSA observations
+  - source: sensor_id
+    target: "sosa:isHostedBy"
+    kind: iri
+    iri_template: "https://w3id.org/celine/sensor/{value}"
+
+  # Owner: link to peco:Energy_community_member
+  - source: owner_key
+    target: "peco:is_owned_by"
+    kind: iri
+    iri_template: "https://w3id.org/celine/member/{value}"
+
+  # Community context back-reference (community_key comes from context_vars)
+  - target: "celine:usesAsset"
+    kind: iri
+    iri_template: "https://w3id.org/celine/context/{community_key}"
