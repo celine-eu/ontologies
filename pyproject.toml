@@ -3,7 +3,7 @@ name = "celine-ontologies"
 version = "0.1.0"
 description = "CELINE Ontologies support libraries"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
     "httpx>=0.28.1",
     "rdflib>=7.5.0",
@@ -17,6 +17,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "python-semantic-release>=10.5.3",
     "pytest>=9.0.2",
 ]
 
