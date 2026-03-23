@@ -50,6 +50,11 @@ tasks:
 
         echo "Docs generated at $output"
 
+        if [ -f "specs/$version/README.md" ]; then
+          cp "specs/$version/README.md" "$output/readme.md"
+          echo "Copied specs/$version/README.md → $output/readme.md"
+        fi
+
   release:ontology:
     desc: Point specs/current to the latest versioned spec directory
     cmds:
@@ -74,7 +79,7 @@ tasks:
         echo "Updated symlink: specs/current → $latest"
 
         git add .
-        git commit -m "release $latest"
+        git commit -m "release ontology $latest"
 
-        git tag -f $latest
+        git tag -f "celine-ontology-$latest"
         git push -f

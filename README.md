@@ -1,101 +1,135 @@
 # CELINE Ontology
 
-This directory contains the **semantic artifacts** used in the CELINE project to support:
+Semantic artifacts and mapping tools for the CELINE project, supporting:
 
 - semantic interoperability across datasets
 - Digital Twins (WP3)
 - Demonstrators, KPIs, and evaluation (WP5)
 - mapping from tabular data to RDF / JSON-LD
 
-The CELINE ontology is **not a standalone domain ontology**, but a **unified ontology profile** that aligns and connects established standards (SAREF, SOSA, BIGG, SEAS, EM-KPI) into a coherent semantic target for the CELINE ecosystem.
+The CELINE ontology is a **unified ontology profile** — not a standalone domain ontology — that connects PECO, SAREF, SOSA, BIGG and EM-KPI into a coherent semantic target for the CELINE ecosystem.
+
+**Namespace**: `https://w3id.org/celine#`
+**Documentation**: <https://celine-eu.github.io/ontologies/>
 
 ---
 
-## Contents
+## Repository structure
 
-### Core ontology artifacts
+```
+specs/          Ontology source artifacts (versioned)
+  current/      → symlink to latest version
+  v0.3/
+    celine.ttl           OWL/RDF definition (Turtle)
+    celine.shacl.ttl     SHACL validation shapes
+    celine.jsonld        JSON-LD context
+    celine.schema.json   JSON Schema for API validation
 
+releases/       Generated WIDOCO HTML documentation (versioned)
+  current/      → symlink to latest version
+  v0.3/         index-en.html + supporting assets
 
-- **[CELINE ontology documentation](https://celine-eu.github.io/ontologies/)**  
-  Documentation of the CELINE ontology
-
-- **[CELINE ontology (Turtle)](releases/current/celine.ttl)**  
-  The formal OWL/RDF definition of the CELINE Unified Ontology Profile.  
-  Defines CELINE classes and properties and aligns them with PECO, SAREF, SOSA, BIGG, SEAS, and EM-KPI.
-
-- **[CELINE SHACL shapes](releases/current/celine.shacl.ttl)**  
-  SHACL shapes defining semantic constraints on the RDF graph after JSON-LD expansion.  
-  Used to validate observations, time series, meters, energy communities, scenarios and KPIs.
-
-- **[CELINE JSON-LD context](releases/current/celine.jsonld)**  
-  JSON-LD `@context` defining prefixes, aliases, and mappings used by CELINE APIs and data pipelines.  
-  This is the primary entry point for developers producing JSON-LD payloads.
-
-- **[CELINE JSON Schema](releases/current/celine.schema.json)**  
-  JSON Schema used at API boundaries to validate incoming JSON-LD payloads before semantic expansion.
-
+src/            Python package (celine-ontologies)
+  celine/
+    mapper/     Declarative data→RDF mapping engine
+    ontologies/ Ontology management CLI
+```
 
 ---
 
-### Repository & mapping configuration
+## Ontology artifacts
 
-- **[Open repository configuration](open-repository.yaml)**  
-  YAML configuration listing datasets, governance metadata, and extension points for ontology mapping.
-
-- **[Open repository JSON Schema](open-repository.schema.json)**  
-  JSON Schema defining the structure of the dataset catalogue and repository configuration used by CELINE tooling.
+| Artifact | Description |
+|---|---|
+| [celine.ttl](specs/current/celine.ttl) | Formal OWL/RDF definition |
+| [celine.shacl.ttl](specs/current/celine.shacl.ttl) | SHACL shapes for semantic validation |
+| [celine.jsonld](specs/current/celine.jsonld) | JSON-LD `@context` for APIs and pipelines |
+| [celine.schema.json](specs/current/celine.schema.json) | JSON Schema for API-level payload validation |
 
 ---
 
-## How these artifacts work together
+## Python package
 
-The CELINE semantic stack follows a layered validation and mapping approach:
+```bash
+# Mapper API only (OutputMapper, CelineGraphBuilder)
+pip install celine-ontologies[mapper]
 
-1. **Tabular data** is exposed via dataset APIs  
-2. **Mapping definitions** bind dataset schemas to ontology classes and properties  
-3. **JSON-LD** is generated using `celine.jsonld`  
-4. **JSON Schema** (`celine.schema.json`) validates payload structure at the API level  
-5. **JSON-LD expansion** produces RDF  
-6. **SHACL validation** (`celine.shacl.ttl`) enforces semantic correctness  
-7. Validated data is ingested into the **CELINE Digital Twin / Knowledge Graph**
+# Ontology management CLI (fetch, analyze, tree)
+pip install celine-ontologies[cli]
 
-This separation ensures:
-- developer-friendly APIs
-- strict semantic validation
-- long-term interoperability
+# Everything
+pip install celine-ontologies[all]
+```
+
+### Mapper usage
+
+```python
+from pathlib import Path
+from celine.mapper import OutputMapper
+
+mapper = OutputMapper.from_yaml_path(
+    Path("src/celine/mapper/specs/obs_rec_energy.yaml"),
+    context={"community_key": "it-folgaria"},
+)
+nodes = mapper.map_many(rows)
+```
+
+### CLI
+
+```bash
+# Validate a mapping spec
+celine-ontologies mapper validate-spec path/to/spec.yaml
+
+# Map data to JSON-LD
+celine-ontologies mapper map spec.yaml input.json
+
+# Map + SHACL validation (requires [mapper])
+celine-ontologies mapper shacl-check spec.yaml input.json
+
+# Ontology utilities
+celine-ontologies fetch
+celine-ontologies analyze
+celine-ontologies tree
+```
+
+---
+
+## How the semantic stack fits together
+
+```
+Tabular data
+  ↓  mapping spec (YAML)
+JSON-LD  ←  celine.jsonld context
+  ↓  celine.schema.json
+JSON Schema validation
+  ↓  RDF expansion
+SHACL validation  ←  celine.shacl.ttl
+  ↓
+CELINE Knowledge Graph / Digital Twin
+```
+
+---
+
+## Releasing a new version
+
+```bash
+# 1. Add specs/vX.X/ with the new ontology artifacts
+
+# 2. Update the specs/current symlink and tag
+task release:ontology
+
+# 3. Generate WIDOCO HTML docs locally (requires Docker)
+task docs:widoco           # latest version
+task docs:widoco -- vX.X  # specific version
+```
+
+WIDOCO docs are also generated automatically in CI on every push that changes a `specs/v*/celine.ttl`.
 
 ---
 
 ## Design principles
 
-- **Standards first**: reuse ETSI SAREF, W3C SOSA/SSN, BIGG, SEAS, EM-KPI
-- **Thin CELINE layer**: only project-specific glue concepts are defined
-- **Modular & versionable**: artifacts can evolve independently
-- **Tool-friendly**: compatible with rdflib, JSON-LD, SHACL engines
-
----
-
-## Intended audience
-
-- CELINE developers integrating data sources
-- WP3 Digital Twin engineers
-- WP5 demonstrator and KPI designers
-- Data governance and interoperability stakeholders
-
----
-
-## Versioning & publication
-
-These ontology artifacts are published via **GitHub Pages** to provide stable, resolvable URLs suitable for:
-
-- JSON-LD contexts
-- ontology references in catalogues
-- external integrations
-
-Always prefer **versioned URLs** when referencing ontology artifacts in mappings or production systems.
-
----
-
-## Questions & contributions
-
-For questions, discussions, or proposed changes to the CELINE ontology profile, please refer to the main CELINE repository or open an issue in the relevant project repository.
+- **Standards first**: reuse ETSI SAREF, W3C SOSA/SSN, BIGG, EM-KPI
+- **Thin CELINE layer**: only project-specific glue concepts are defined here
+- **Modular & versionable**: `specs/` and `releases/` evolve independently
+- **Tool-friendly**: compatible with rdflib, JSON-LD processors, SHACL engines
