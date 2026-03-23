@@ -1,5 +1,12 @@
-<h2 id="desc" class="list">null: Description <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<h2 id="desc" class="list">CELINE Core Ontology: Description <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
 
-<span class="markdown">This is a placeholder text for the description of your ontology. The description should include an explanation and a diagram explaining how the classes are related, examples of usage, etc.
+<span class="markdown">The ontology defines six classes coordinating the CELINE semantic stack:
 
-</span>
+- **CommunityContext** binds a PECO EnergyCommunity to its assets, datasets and simulations.
+- **Scenario** captures assumptions, temporal scope and configuration for one or more simulation runs.
+- **Simulation** is the abstract definition of a simulation, independent of execution.
+- **SimulationRun** is a concrete execution of a Simulation under a specific Scenario, referencing input/output datasets, SOSA observations and KPI evaluations.
+- **DatasetReference** is a lightweight pointer to an external dataset; CELINE does not define dataset schemas.
+- **KPIEvaluation** records the result of evaluating a BIGG KPI within a SimulationRun or Scenario.
+
+All cross-domain links — to energy communities (PECO), devices (SAREF), observations (SOSA) and performance indicators (BIGG) — are expressed via object properties that reference terms from the imported vocabularies directly, without subclassing or redefining them.</span>

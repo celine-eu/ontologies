@@ -24,6 +24,7 @@
                               <http://purl.org/dc/terms/title> "CELINE Core Ontology" ;
                               <http://purl.org/vocab/vann/preferredNamespacePrefix> "celine" ;
                               <http://purl.org/vocab/vann/preferredNamespaceUri> "https://w3id.org/celine-eu#" ;
+                              rdfs:label "CELINE Core Ontology" ;
                               rdfs:seeAlso <https://celine-eu.github.io/> ,
                                            <https://github.com/celine-eu> ,
                                            <https://www.celineproject.eu/> ;

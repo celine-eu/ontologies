@@ -34,6 +34,7 @@
         <terms:title>CELINE Core Ontology</terms:title>
         <vann:preferredNamespacePrefix>celine</vann:preferredNamespacePrefix>
         <vann:preferredNamespaceUri>https://w3id.org/celine-eu#</vann:preferredNamespaceUri>
+        <rdfs:label>CELINE Core Ontology</rdfs:label>
         <rdfs:seeAlso rdf:resource="https://celine-eu.github.io/"/>
         <rdfs:seeAlso rdf:resource="https://github.com/celine-eu"/>
         <rdfs:seeAlso rdf:resource="https://www.celineproject.eu/"/>

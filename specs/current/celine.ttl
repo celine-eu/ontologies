@@ -22,6 +22,7 @@
     owl:versionIRI      <https://w3id.org/celine-eu/v0.3> ;
     owl:priorVersion    <https://w3id.org/celine-eu/v0.2> ;
     owl:versionInfo     "0.3" ;
+    rdfs:label          "CELINE Core Ontology" ;
     dct:title           "CELINE Core Ontology" ;
     dct:description     """The CELINE Core Ontology is a lightweight orchestration profile for
     Renewable Energy Communities (RECs) and Digital Twin workflows. It connects established
