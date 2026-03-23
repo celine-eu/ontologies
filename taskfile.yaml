@@ -70,6 +70,7 @@ tasks:
         fi
 
   release:ontology:
+    deps: [docs:widoco]
     desc: Copy latest versioned spec into specs/current
     cmds:
       - |
