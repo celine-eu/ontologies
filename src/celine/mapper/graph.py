@@ -4,10 +4,12 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import jsonschema
-import rdflib
+
+if TYPE_CHECKING:
+    import rdflib
 
 _RELEASES_DIR = Path(__file__).resolve().parent.parent.parent / "releases" / "v0.2"
 _CONTEXT_PATH = _RELEASES_DIR / "celine.jsonld"
@@ -90,6 +92,13 @@ class CelineGraphBuilder:
 
     def to_rdf_graph(self, document: dict[str, Any]) -> rdflib.Graph:
         """Parse a JSON-LD document into an rdflib Graph."""
+        try:
+            import rdflib  # noqa: PLC0415
+        except ImportError as exc:
+            raise ImportError(
+                "rdflib is required for RDF graph operations. "
+                "Install it with: pip install celine-ontologies[mapper]"
+            ) from exc
         g = rdflib.Graph()
         g.parse(data=json.dumps(document), format="json-ld")
         return g
@@ -108,7 +117,15 @@ class CelineGraphBuilder:
         except ImportError as exc:
             raise ImportError(
                 "pyshacl is required for SHACL validation. "
-                "Install it with: pip install pyshacl"
+                "Install it with: pip install celine-ontologies[mapper]"
+            ) from exc
+
+        try:
+            import rdflib  # noqa: PLC0415
+        except ImportError as exc:
+            raise ImportError(
+                "rdflib is required for SHACL validation. "
+                "Install it with: pip install celine-ontologies[mapper]"
             ) from exc
 
         shacl_graph = rdflib.Graph()

@@ -5,14 +5,22 @@ description = "CELINE Ontologies support libraries"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "jsonschema>=4.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+mapper = [
+    "rdflib>=7.5.0",
+    "pyshacl>=0.26.0",
+]
+cli = [
+    "typer>=0.21.1",
     "httpx>=0.28.1",
     "rdflib>=7.5.0",
-    "typer>=0.21.1",
-    "pydantic>=2.0",
-    "pyshacl>=0.26.0",
-    "jsonschema>=4.0",
-    "jinja2>=3.1",
-    "pyyaml>=6.0",
+]
+all = [
+    "celine-ontologies[mapper,cli]",
 ]
 
 [dependency-groups]
