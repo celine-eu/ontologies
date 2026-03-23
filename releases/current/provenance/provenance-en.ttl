@@ -2,9 +2,10 @@
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix : <> .
-<https://w3id.org/celine/v0.3> a prov:Entity;
+<https://w3id.org/celine-eu/v0.3> a prov:Entity;
 	 dc:title "CELINE Core Ontology";
 	 prov:wasAttributedTo <https://github.com/dgarijo/Widoco/>,<http://www.essepuntato.it/lode/>;
-	 prov:wasRevisionOf <https://w3id.org/celine/v0.2>;
-	 prov:wasGeneratedAt "2026-03-23";
+	 prov:specializationOf <https://w3id.org/celine-eu>;
+	 prov:wasRevisionOf <https://w3id.org/celine-eu/v0.2>;
+	 prov:wasGeneratedAt "Date created";
 .

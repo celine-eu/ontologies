@@ -88,6 +88,12 @@ tasks:
         cp -r "specs/$latest" specs/current
         echo "Copied specs/$latest → specs/current"
 
+        if [ -d "releases/$latest" ]; then
+          rm -rf releases/current
+          cp -r "releases/$latest" releases/current
+          echo "Copied releases/$latest → releases/current"
+        fi
+
         git add .
         git commit -m "release ontology $latest" || true
 

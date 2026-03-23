@@ -1,3 +1,15 @@
 <h2 id="intro" class="list">Introduction <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
-<span class="markdown">
-This is a place holder text for the introduction. The introduction should briefly describe the ontology, its motivation, state of the art and goals.</span>
+<span class="markdown">CELINE (Cross-sectorial integrated digital services Enabling energy Localized INnovation and community Empowerment) is a Horizon Europe research project (Grant Agreement No. 101160667) that develops a Digital Toolbox for households, energy communities and cooperative organisations to optimise energy management and support investment decisions around photovoltaic systems, battery storage, electric vehicles and heat pumps. The project validates its solutions across three European demonstration sites in Spain, Finland and Italy.
+
+The CELINE Core Ontology supports the semantic layer of this toolbox. It is a thin orchestration profile — not a standalone domain ontology — that binds together existing standards into a coherent semantic target for the CELINE ecosystem:
+
+- **PECO** (https://purl.org/peco) models the Energy Community structure.
+- **SAREF / SAREF4ENER** (ETSI) covers smart devices and energy assets.
+- **SOSA/SSN** (W3C) covers sensor observations and measurements.
+- **BIGG** (BeeGroup/CIMNE) provides KPI definitions for building and community energy performance.
+
+The ontology introduces only the glue concepts needed to coordinate these standards within CELINE: CommunityContext, Scenario, Simulation, SimulationRun, DatasetReference and KPIEvaluation. All cross-cutting links — to energy communities, devices, observations and KPIs — are expressed via lightweight object properties that reference terms from the imported vocabularies.
+
+Project website: https://www.celineproject.eu/
+Source code and issues: https://github.com/celine-eu
+Documentation: https://celine-eu.github.io/</span>
