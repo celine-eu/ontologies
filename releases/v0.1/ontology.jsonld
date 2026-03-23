@@ -1,0 +1,369 @@
+[ {
+  "@id" : "http://bigg-project.eu/ontology#CO2EmissionsFactor",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://bigg-project.eu/ontology#Tariff",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://bigg-project.eu/ontology#TimeSeriesList",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://bigg-project.eu/ontology#dateTime",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ]
+}, {
+  "@id" : "http://bigg-project.eu/ontology#hasValue",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ]
+}, {
+  "@id" : "http://bigg-project.eu/ontology/bigg4kpi#KPIAssessment",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#Asset",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Asset"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "https://saref.etsi.org/core/Device"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#CO2Factor",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "CO2 Emission Factor"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://bigg-project.eu/ontology#CO2EmissionsFactor"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#EnergyCommunity",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Energy Community"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "https://saref.etsi.org/saref4city/Community"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#EnergyKPI",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Energy KPI"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://bigg-project.eu/ontology/bigg4kpi#KPIAssessment"
+  }, {
+    "@id" : "https://omic-tools.org/ontology/em-kpi#EnergyPerformanceIndicator"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#FlexibilityEvent",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Flexibility Event"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "https://w3id.org/seas/DemandResponseEvent"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#Forecast",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Forecast"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "https://w3id.org/seas/Forecast"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#Meter",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Meter"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "https://saref.etsi.org/saref4ener/EnergyMeter"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#Observation",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Observation"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://www.w3.org/ns/sosa/Observation"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#Prosumer",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Prosumer"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "https://saref.etsi.org/saref4city/CityObject"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#Tariff",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Tariff"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://bigg-project.eu/ontology#Tariff"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#TimeSeries",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Time Series"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://bigg-project.eu/ontology#TimeSeriesList"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#evaluatedBy",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#EnergyCommunity"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "evaluated by"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#EnergyKPI"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#hasCO2Factor",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#EnergyCommunity"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has CO2 factor"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#CO2Factor"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#hasFlexibilityEvent",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Asset"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has flexibility event"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#FlexibilityEvent"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#hasForecast",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#EnergyCommunity"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has forecast"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Forecast"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#hasMember",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#EnergyCommunity"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has member"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Prosumer"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#hasMeter",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Asset"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has meter"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Meter"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#hasObservation",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Asset"
+  }, {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Meter"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has observation"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Observation"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#hasTariff",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#EnergyCommunity"
+  }, {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Prosumer"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has tariff"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Tariff"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#hasTimeSeries",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Meter"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has time series"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#TimeSeries"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#isLocatedIn",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Asset"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "is located in"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://saref.etsi.org/saref4bldg/BuildingSpace"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#measuredConsumption",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "measured consumption"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "https://saref.etsi.org/saref4ener/hasEnergyConsumption"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#measuredProduction",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "measured production"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "https://saref.etsi.org/saref4ener/hasEnergyProduction"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#ownsAsset",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Prosumer"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "owns asset"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/celine#Asset"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#pointTime",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "point time"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://www.w3.org/2001/XMLSchema#dateTime"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://bigg-project.eu/ontology#dateTime"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#pointValue",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "point value"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://www.w3.org/2001/XMLSchema#float"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://bigg-project.eu/ontology#hasValue"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#timestamp",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "timestamp"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://www.w3.org/2001/XMLSchema#dateTime"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine#value",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "value"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://www.w3.org/2001/XMLSchema#float"
+  } ]
+}, {
+  "@id" : "https://celine-eu.github.io/ontologies/celine/",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Ontology" ],
+  "http://purl.org/dc/terms/license" : [ {
+    "@id" : "https://creativecommons.org/licenses/by/4.0/"
+  } ],
+  "http://purl.org/dc/terms/publisher" : [ {
+    "@value" : "CELINE Project"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "Unified ontology profile combining SAREF, SOSA/SSN, SAREF4ENER, SAREF4CITY, BIGG, SEAS and EM-KPI for the CELINE Digital Twin and Energy Community Platform."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "CELINE Unified Ontology Profile"
+  } ],
+  "http://www.w3.org/2002/07/owl#imports" : [ {
+    "@id" : "http://www.w3.org/ns/sosa/"
+  }, {
+    "@id" : "https://saref.etsi.org/core/"
+  }, {
+    "@id" : "https://saref.etsi.org/saref4city/"
+  }, {
+    "@id" : "https://saref.etsi.org/saref4ener/"
+  }, {
+    "@id" : "https://w3id.org/seas/"
+  } ],
+  "http://www.w3.org/2002/07/owl#versionIRI" : [ {
+    "@id" : "https://celine-eu.github.io/ontologies/releases/v0.1"
+  } ]
+}, {
+  "@id" : "https://omic-tools.org/ontology/em-kpi#EnergyPerformanceIndicator",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "https://saref.etsi.org/saref4bldg/BuildingSpace",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "https://saref.etsi.org/saref4city/Community",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "https://saref.etsi.org/saref4ener/EnergyMeter",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "https://saref.etsi.org/saref4ener/hasEnergyConsumption",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ]
+}, {
+  "@id" : "https://saref.etsi.org/saref4ener/hasEnergyProduction",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ]
+}, {
+  "@id" : "https://w3id.org/seas/DemandResponseEvent",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "https://w3id.org/seas/Forecast",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+} ]

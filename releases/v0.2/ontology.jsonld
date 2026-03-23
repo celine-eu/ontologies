@@ -1,0 +1,221 @@
+[ {
+  "@id" : "https://purl.org/peco/peco-core#EnergyCommunity",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "https://w3id.org/bigg/ontology#KPI",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#CELINEOntology",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Ontology" ],
+  "http://purl.org/dc/terms/description" : [ {
+    "@value" : "\n    Lightweight orchestration ontology for Renewable Energy Communities\n    and Digital Twin workflows. CELINE integrates PECO, SAREF, SOSA and BIGG\n    without redefining domain semantics.\n    "
+  } ],
+  "http://purl.org/dc/terms/license" : [ {
+    "@id" : "https://creativecommons.org/licenses/by/4.0/"
+  } ],
+  "http://purl.org/dc/terms/title" : [ {
+    "@value" : "CELINE Core Ontology"
+  } ],
+  "http://www.w3.org/2002/07/owl#imports" : [ {
+    "@id" : "https://github.com/w3c/sdw/raw/refs/heads/gh-pages/ssn/integrated/sosa.ttl"
+  }, {
+    "@id" : "https://purl.org/peco/peco-core"
+  }, {
+    "@id" : "https://raw.githubusercontent.com/BeeGroup-cimne/biggontology/refs/heads/main/extensions/bigg4kpi.ttl"
+  }, {
+    "@id" : "https://raw.githubusercontent.com/BeeGroup-cimne/biggontology/refs/heads/main/ontology/ontology.ttl"
+  }, {
+    "@id" : "https://saref.etsi.org/core/v3.1.1/saref.ttl"
+  }, {
+    "@id" : "https://saref.etsi.org/saref4ener/v1.2.1/saref4ener.ttl"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#CommunityContext",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "\n    Operational context binding a PECO Energy Community\n    with assets, datasets and simulations.\n    "
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Community Context"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#DatasetReference",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "\n    Reference to an external dataset used as input or produced as output.\n    CELINE does not define dataset schemas.\n    "
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Dataset Reference"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#KPIEvaluation",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "\n    Evaluation of a BIGG KPI in a specific Scenario or SimulationRun.\n    "
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "KPI Evaluation"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#Scenario",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "\n    Definition of assumptions, temporal scope and configuration\n    for one or more simulations.\n    "
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Scenario"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#Simulation",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "\n    Abstract simulation definition independent from execution.\n    "
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Simulation"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#SimulationRun",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "\n    Concrete execution of a Simulation under a specific Scenario.\n    "
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Simulation Run"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#evaluatesKPI",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine/ontology#KPIEvaluation"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "evaluates KPI"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://w3id.org/bigg/ontology#KPI"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#hasCommunity",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine/ontology#CommunityContext"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has energy community"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://purl.org/peco/peco-core#EnergyCommunity"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#hasKPIEvaluation",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine/ontology#SimulationRun"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has KPI evaluation"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://w3id.org/celine/ontology#KPIEvaluation"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#hasScenario",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine/ontology#Simulation"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has scenario"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://w3id.org/celine/ontology#Scenario"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#hasSimulation",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine/ontology#CommunityContext"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has simulation"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://w3id.org/celine/ontology#Simulation"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#hasSimulationRun",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine/ontology#Simulation"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has simulation run"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://w3id.org/celine/ontology#SimulationRun"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#hasTimeInterval",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "has time interval"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://www.w3.org/2006/time#Interval"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#producesDataset",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine/ontology#SimulationRun"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "produces dataset"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://w3id.org/celine/ontology#DatasetReference"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#usesAsset",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "References SAREF or SAREF4ENER devices."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine/ontology#CommunityContext"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "uses asset"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://saref.etsi.org/core/Device"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#usesDataset",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine/ontology#SimulationRun"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "uses dataset"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://w3id.org/celine/ontology#DatasetReference"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine/ontology#usesObservation",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "References SOSA observations (e.g. weather, sensors)."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine/ontology#SimulationRun"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "uses observation"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://www.w3.org/ns/sosa/Observation"
+  } ]
+} ]

@@ -1,0 +1,362 @@
+<h2 id="crossreference" class="list">Cross-reference for CELINE Core Ontology classes, object properties and data properties <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+This section provides details for each class and property defined by CELINE Core Ontology.
+<div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="classes">
+ <h3 id="classes-headline" class="list">Classes</h3>
+ <ul class="hlist">
+  <li><a href="#https://w3id.org/celine/ontology#CommunityContext" title="https://w3id.org/celine/ontology#CommunityContext">Community Context</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#DatasetReference" title="https://w3id.org/celine/ontology#DatasetReference">Dataset Reference</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#KPIEvaluation" title="https://w3id.org/celine/ontology#KPIEvaluation">KPI Evaluation</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#Scenario" title="https://w3id.org/celine/ontology#Scenario">Scenario</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#Simulation" title="https://w3id.org/celine/ontology#Simulation">Simulation</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#SimulationRun" title="https://w3id.org/celine/ontology#SimulationRun">Simulation Run</a></li>
+ </ul>
+ <div class="entity" id="https://w3id.org/celine/ontology#CommunityContext">
+  <h3>Community Context<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#CommunityContext</p>
+  <div class="comment">
+   <span class="markdown"> Operational context binding a PECO Energy Community with assets, datasets and simulations. </span>
+  </div>
+  <dl class="description">
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#https://w3id.org/celine/ontology#hasCommunity" title="https://w3id.org/celine/ontology#hasCommunity">has energy community</a> <sup class="type-op" title="object property">op</sup>, <a href="#https://w3id.org/celine/ontology#hasSimulation" title="https://w3id.org/celine/ontology#hasSimulation">has simulation</a> <sup class="type-op" title="object property">op</sup>, <a href="#https://w3id.org/celine/ontology#usesAsset" title="https://w3id.org/celine/ontology#usesAsset">uses asset</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#DatasetReference">
+  <h3>Dataset Reference<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#DatasetReference</p>
+  <div class="comment">
+   <span class="markdown"> Reference to an external dataset used as input or produced as output. CELINE does not define dataset schemas. </span>
+  </div>
+  <dl class="description">
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#https://w3id.org/celine/ontology#producesDataset" title="https://w3id.org/celine/ontology#producesDataset">produces dataset</a> <sup class="type-op" title="object property">op</sup>, <a href="#https://w3id.org/celine/ontology#usesDataset" title="https://w3id.org/celine/ontology#usesDataset">uses dataset</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#KPIEvaluation">
+  <h3>KPI Evaluation<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#KPIEvaluation</p>
+  <div class="comment">
+   <span class="markdown"> Evaluation of a BIGG KPI in a specific Scenario or SimulationRun. </span>
+  </div>
+  <dl class="description">
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#https://w3id.org/celine/ontology#evaluatesKPI" title="https://w3id.org/celine/ontology#evaluatesKPI">evaluates KPI</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#https://w3id.org/celine/ontology#hasKPIEvaluation" title="https://w3id.org/celine/ontology#hasKPIEvaluation">has KPI evaluation</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#Scenario">
+  <h3>Scenario<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#Scenario</p>
+  <div class="comment">
+   <span class="markdown"> Definition of assumptions, temporal scope and configuration for one or more simulations. </span>
+  </div>
+  <dl class="description">
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#https://w3id.org/celine/ontology#hasScenario" title="https://w3id.org/celine/ontology#hasScenario">has scenario</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#Simulation">
+  <h3>Simulation<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#Simulation</p>
+  <div class="comment">
+   <span class="markdown"> Abstract simulation definition independent from execution. </span>
+  </div>
+  <dl class="description">
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#https://w3id.org/celine/ontology#hasScenario" title="https://w3id.org/celine/ontology#hasScenario">has scenario</a> <sup class="type-op" title="object property">op</sup>, <a href="#https://w3id.org/celine/ontology#hasSimulationRun" title="https://w3id.org/celine/ontology#hasSimulationRun">has simulation run</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#https://w3id.org/celine/ontology#hasSimulation" title="https://w3id.org/celine/ontology#hasSimulation">has simulation</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#SimulationRun">
+  <h3>Simulation Run<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#SimulationRun</p>
+  <div class="comment">
+   <span class="markdown"> Concrete execution of a Simulation under a specific Scenario. </span>
+  </div>
+  <dl class="description">
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#https://w3id.org/celine/ontology#hasKPIEvaluation" title="https://w3id.org/celine/ontology#hasKPIEvaluation">has KPI evaluation</a> <sup class="type-op" title="object property">op</sup>, <a href="#https://w3id.org/celine/ontology#producesDataset" title="https://w3id.org/celine/ontology#producesDataset">produces dataset</a> <sup class="type-op" title="object property">op</sup>, <a href="#https://w3id.org/celine/ontology#usesDataset" title="https://w3id.org/celine/ontology#usesDataset">uses dataset</a> <sup class="type-op" title="object property">op</sup>, <a href="#https://w3id.org/celine/ontology#usesObservation" title="https://w3id.org/celine/ontology#usesObservation">uses observation</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#https://w3id.org/celine/ontology#hasSimulationRun" title="https://w3id.org/celine/ontology#hasSimulationRun">has simulation run</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+</div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="objectproperties">
+ <h3 id="properties" class="list">Object Properties</h3>
+ <ul class="hlist">
+  <li><a href="#https://w3id.org/celine/ontology#evaluatesKPI" title="https://w3id.org/celine/ontology#evaluatesKPI">evaluates KPI</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#hasCommunity" title="https://w3id.org/celine/ontology#hasCommunity">has energy community</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#hasKPIEvaluation" title="https://w3id.org/celine/ontology#hasKPIEvaluation">has KPI evaluation</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#hasScenario" title="https://w3id.org/celine/ontology#hasScenario">has scenario</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#hasSimulation" title="https://w3id.org/celine/ontology#hasSimulation">has simulation</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#hasSimulationRun" title="https://w3id.org/celine/ontology#hasSimulationRun">has simulation run</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#hasTimeInterval" title="https://w3id.org/celine/ontology#hasTimeInterval">has time interval</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#producesDataset" title="https://w3id.org/celine/ontology#producesDataset">produces dataset</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#usesAsset" title="https://w3id.org/celine/ontology#usesAsset">uses asset</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#usesDataset" title="https://w3id.org/celine/ontology#usesDataset">uses dataset</a></li>
+  <li><a href="#https://w3id.org/celine/ontology#usesObservation" title="https://w3id.org/celine/ontology#usesObservation">uses observation</a></li>
+ </ul>
+ <div class="entity" id="https://w3id.org/celine/ontology#evaluatesKPI">
+  <h3>evaluates KPI<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#evaluatesKPI</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#KPIEvaluation" title="https://w3id.org/celine/ontology#KPIEvaluation">KPI Evaluation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="https://w3id.org/bigg/ontology#KPI" target="_blank" title="https://w3id.org/bigg/ontology#KPI">K P I</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#hasCommunity">
+  <h3>has energy community<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#hasCommunity</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#CommunityContext" title="https://w3id.org/celine/ontology#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="https://purl.org/peco/peco-core#EnergyCommunity" target="_blank" title="https://purl.org/peco/peco-core#EnergyCommunity">Energy Community</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#hasKPIEvaluation">
+  <h3>has KPI evaluation<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#hasKPIEvaluation</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#SimulationRun" title="https://w3id.org/celine/ontology#SimulationRun">Simulation Run</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#KPIEvaluation" title="https://w3id.org/celine/ontology#KPIEvaluation">KPI Evaluation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#hasScenario">
+  <h3>has scenario<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#hasScenario</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#Simulation" title="https://w3id.org/celine/ontology#Simulation">Simulation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#Scenario" title="https://w3id.org/celine/ontology#Scenario">Scenario</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#hasSimulation">
+  <h3>has simulation<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#hasSimulation</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#CommunityContext" title="https://w3id.org/celine/ontology#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#Simulation" title="https://w3id.org/celine/ontology#Simulation">Simulation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#hasSimulationRun">
+  <h3>has simulation run<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#hasSimulationRun</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#Simulation" title="https://w3id.org/celine/ontology#Simulation">Simulation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#SimulationRun" title="https://w3id.org/celine/ontology#SimulationRun">Simulation Run</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#hasTimeInterval">
+  <h3>has time interval<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#hasTimeInterval</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2006/time#Interval" target="_blank" title="http://www.w3.org/2006/time#Interval">Time interval</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#producesDataset">
+  <h3>produces dataset<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#producesDataset</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#SimulationRun" title="https://w3id.org/celine/ontology#SimulationRun">Simulation Run</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#DatasetReference" title="https://w3id.org/celine/ontology#DatasetReference">Dataset Reference</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#usesAsset">
+  <h3>uses asset<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#usesAsset</p>
+  <div class="comment">
+   <span class="markdown">References SAREF or SAREF4ENER devices.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#CommunityContext" title="https://w3id.org/celine/ontology#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="https://saref.etsi.org/core/Device" target="_blank" title="https://saref.etsi.org/core/Device">Device</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#usesDataset">
+  <h3>uses dataset<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#usesDataset</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#SimulationRun" title="https://w3id.org/celine/ontology#SimulationRun">Simulation Run</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#DatasetReference" title="https://w3id.org/celine/ontology#DatasetReference">Dataset Reference</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://w3id.org/celine/ontology#usesObservation">
+  <h3>uses observation<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine/ontology#usesObservation</p>
+  <div class="comment">
+   <span class="markdown">References SOSA observations (e.g. weather, sensors).</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#https://w3id.org/celine/ontology#SimulationRun" title="https://w3id.org/celine/ontology#SimulationRun">Simulation Run</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/ns/sosa/Observation" target="_blank" title="http://www.w3.org/ns/sosa/Observation">Observation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+</div><div id="legend">
+<h2>Legend <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<div   class="entity">
+<sup class="type-c" title="Classes">c</sup>: Classes <br/>
+<sup class="type-op" title="Object Properties">op</sup>: Object Properties <br/>
+</div>
+</div>

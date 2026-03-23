@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://w3id.org/celine#"
+     xml:base="https://w3id.org/celine"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:wot="http://xmlns.com/wot/0.1/"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:prov="http://www.w3.org/ns/prov#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:schema="http://schema.org/"
+     xmlns:opla-sd="http://ontologydesignpatterns.org/opla-sd#">
+    <owl:Ontology rdf:about="https://w3id.org/celine">
+        <owl:versionIRI rdf:resource="https://w3id.org/celine/v0.3"/>
+        <owl:imports rdf:resource="https://purl.org/peco/peco-core"/>
+        <owl:imports rdf:resource="https://raw.githubusercontent.com/BeeGroup-cimne/biggontology/776e245668bba171b0eacfccfa9d6e5166860d8e/extensions/bigg4kpi.ttl"/>
+        <owl:imports rdf:resource="https://raw.githubusercontent.com/BeeGroup-cimne/biggontology/776e245668bba171b0eacfccfa9d6e5166860d8e/ontology/ontology.ttl"/>
+        <owl:imports rdf:resource="https://raw.githubusercontent.com/w3c/sdw/dee1bdd3c339d8a0ab512c7f9bc97a08912ad7d6/ssn/integrated/sosa.ttl"/>
+        <owl:imports rdf:resource="https://saref.etsi.org/core/v3.1.1/saref.ttl"/>
+        <owl:imports rdf:resource="https://saref.etsi.org/saref4ener/v1.2.1/saref4ener.ttl"/>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-03-23</terms:created>
+        <terms:description>Lightweight orchestration ontology for Renewable Energy Communities
+    and Digital Twin workflows. CELINE integrates PECO, SAREF, SOSA and BIGG
+    without redefining domain semantics.</terms:description>
+        <terms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+        <terms:title>CELINE Core Ontology</terms:title>
+        <vann:preferredNamespacePrefix>celine</vann:preferredNamespacePrefix>
+        <vann:preferredNamespaceUri>https://w3id.org/celine#</vann:preferredNamespaceUri>
+        <owl:priorVersion rdf:resource="https://w3id.org/celine/v0.2"/>
+        <owl:versionInfo>0.3</owl:versionInfo>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- https://w3id.org/celine#evaluatesKPI -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine#evaluatesKPI">
+        <rdfs:domain rdf:resource="https://w3id.org/celine#KPIEvaluation"/>
+        <rdfs:range rdf:resource="https://w3id.org/bigg/ontology#KPI"/>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>evaluates KPI</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine#hasCommunity -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine#hasCommunity">
+        <rdfs:domain rdf:resource="https://w3id.org/celine#CommunityContext"/>
+        <rdfs:range rdf:resource="https://purl.org/peco/peco-core#EnergyCommunity"/>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>has energy community</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine#hasKPIEvaluation -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine#hasKPIEvaluation">
+        <rdfs:domain rdf:resource="https://w3id.org/celine#SimulationRun"/>
+        <rdfs:range rdf:resource="https://w3id.org/celine#KPIEvaluation"/>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>has KPI evaluation</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine#hasScenario -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine#hasScenario">
+        <rdfs:domain rdf:resource="https://w3id.org/celine#Simulation"/>
+        <rdfs:range rdf:resource="https://w3id.org/celine#Scenario"/>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>has scenario</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine#hasSimulation -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine#hasSimulation">
+        <rdfs:domain rdf:resource="https://w3id.org/celine#CommunityContext"/>
+        <rdfs:range rdf:resource="https://w3id.org/celine#Simulation"/>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>has simulation</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine#hasSimulationRun -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine#hasSimulationRun">
+        <rdfs:domain rdf:resource="https://w3id.org/celine#Simulation"/>
+        <rdfs:range rdf:resource="https://w3id.org/celine#SimulationRun"/>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>has simulation run</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine#hasTimeInterval -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine#hasTimeInterval">
+        <rdfs:range rdf:resource="http://www.w3.org/2006/time#Interval"/>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>has time interval</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine#producesDataset -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine#producesDataset">
+        <rdfs:domain rdf:resource="https://w3id.org/celine#SimulationRun"/>
+        <rdfs:range rdf:resource="https://w3id.org/celine#DatasetReference"/>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>produces dataset</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine#usesAsset -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine#usesAsset">
+        <rdfs:domain rdf:resource="https://w3id.org/celine#CommunityContext"/>
+        <rdfs:range rdf:resource="https://saref.etsi.org/core/Device"/>
+        <rdfs:comment>References SAREF or SAREF4ENER devices.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>uses asset</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine#usesDataset -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine#usesDataset">
+        <rdfs:domain rdf:resource="https://w3id.org/celine#SimulationRun"/>
+        <rdfs:range rdf:resource="https://w3id.org/celine#DatasetReference"/>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>uses dataset</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine#usesObservation -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine#usesObservation">
+        <rdfs:domain rdf:resource="https://w3id.org/celine#SimulationRun"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+        <rdfs:comment>References SOSA observations (e.g. weather, sensors).</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>uses observation</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- https://purl.org/peco/peco-core#EnergyCommunity -->
+
+
+    <owl:Class rdf:about="https://purl.org/peco/peco-core#EnergyCommunity"/>
+    
+
+
+    <!-- https://w3id.org/bigg/ontology#KPI -->
+
+
+    <owl:Class rdf:about="https://w3id.org/bigg/ontology#KPI"/>
+    
+
+
+    <!-- https://w3id.org/celine#CommunityContext -->
+
+
+    <owl:Class rdf:about="https://w3id.org/celine#CommunityContext">
+        <rdfs:comment>Operational context binding a PECO Energy Community
+    with assets, datasets and simulations.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>Community Context</rdfs:label>
+        <skos:example>ex:ctx1 a celine:CommunityContext ;
+    celine:hasCommunity    ex:rec_valdarno ;
+    celine:usesAsset       ex:pv_panel_01 ;
+    celine:hasSimulation   ex:sim_baseline .</skos:example>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/celine#DatasetReference -->
+
+
+    <owl:Class rdf:about="https://w3id.org/celine#DatasetReference">
+        <rdfs:comment>Reference to an external dataset used as input or produced as output.
+    CELINE does not define dataset schemas.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>Dataset Reference</rdfs:label>
+        <skos:example>ex:ds_irradiance a celine:DatasetReference ;
+    dct:identifier  &quot;irradiance-2025-07&quot; ;
+    dct:source      &lt;https://data.example.org/weather/irradiance&gt; .</skos:example>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/celine#KPIEvaluation -->
+
+
+    <owl:Class rdf:about="https://w3id.org/celine#KPIEvaluation">
+        <rdfs:comment>Evaluation of a BIGG KPI in a specific Scenario or SimulationRun.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>KPI Evaluation</rdfs:label>
+        <skos:example>ex:kpi_self_sufficiency a celine:KPIEvaluation ;
+    celine:evaluatesKPI bigg:SelfSufficiencyRate ;
+    rdf:value           &quot;0.72&quot;^^xsd:decimal .</skos:example>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/celine#Scenario -->
+
+
+    <owl:Class rdf:about="https://w3id.org/celine#Scenario">
+        <rdfs:comment>Definition of assumptions, temporal scope and configuration
+    for one or more simulations.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>Scenario</rdfs:label>
+        <skos:example>ex:sc_summer a celine:Scenario ;
+    rdfs:label              &quot;Summer 2025 baseline&quot; ;
+    dct:description         &quot;24-hour simulation with historical irradiance data.&quot; ;
+    celine:hasTimeInterval  ex:interval_2025_summer .</skos:example>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/celine#Simulation -->
+
+
+    <owl:Class rdf:about="https://w3id.org/celine#Simulation">
+        <rdfs:comment>Abstract simulation definition independent from execution.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>Simulation</rdfs:label>
+        <skos:example>ex:sim1 a celine:Simulation ;
+    celine:hasScenario      ex:sc_summer ;
+    celine:hasSimulationRun ex:run_001 .</skos:example>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/celine#SimulationRun -->
+
+
+    <owl:Class rdf:about="https://w3id.org/celine#SimulationRun">
+        <rdfs:comment>Concrete execution of a Simulation under a specific Scenario.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine"/>
+        <rdfs:label>Simulation Run</rdfs:label>
+        <skos:example>ex:run_001 a celine:SimulationRun ;
+    celine:usesDataset      ex:ds_irradiance ;
+    celine:producesDataset  ex:ds_energy_forecast ;
+    celine:hasKPIEvaluation ex:kpi_self_sufficiency .</skos:example>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/ -->
+
+

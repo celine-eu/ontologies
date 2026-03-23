@@ -1,0 +1,163 @@
+{
+  "@context": {
+    "celine": "https://w3id.org/celine#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dct": "http://purl.org/dc/terms/",
+    "time": "http://www.w3.org/2006/time#",
+    "peco": "https://purl.org/peco/peco-core#",
+    "saref": "https://saref.etsi.org/core/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "bigg": "https://w3id.org/bigg/ontology#",
+    "label": "rdfs:label",
+    "description": "dct:description",
+    "type": "@type",
+    "id": "@id",
+    "hasCommunity": {
+      "@id": "celine:hasCommunity",
+      "@type": "@id"
+    },
+    "usesAsset": {
+      "@id": "celine:usesAsset",
+      "@type": "@id"
+    },
+    "hasSimulation": {
+      "@id": "celine:hasSimulation",
+      "@type": "@id"
+    },
+    "hasScenario": {
+      "@id": "celine:hasScenario",
+      "@type": "@id"
+    },
+    "hasSimulationRun": {
+      "@id": "celine:hasSimulationRun",
+      "@type": "@id"
+    },
+    "usesDataset": {
+      "@id": "celine:usesDataset",
+      "@type": "@id"
+    },
+    "producesDataset": {
+      "@id": "celine:producesDataset",
+      "@type": "@id"
+    },
+    "evaluatesKPI": {
+      "@id": "celine:evaluatesKPI",
+      "@type": "@id"
+    },
+    "hasKPIEvaluation": {
+      "@id": "celine:hasKPIEvaluation",
+      "@type": "@id"
+    },
+    "hasTimeInterval": {
+      "@id": "celine:hasTimeInterval",
+      "@type": "@id"
+    },
+    "usesObservation": {
+      "@id": "celine:usesObservation",
+      "@type": "@id"
+    },
+    "identifier": "dct:identifier",
+    "source": {
+      "@id": "dct:source",
+      "@type": "@id"
+    },
+    "value": "rdf:value"
+  },
+  "@graph": [
+    {
+      "@id": "https://w3id.org/celine",
+      "@type": "owl:Ontology",
+      "label": "CELINE Core Ontology",
+      "description": "Lightweight orchestration ontology for Renewable Energy Communities and Digital Twin workflows. CELINE integrates PECO, SAREF, SOSA and BIGG without redefining domain semantics.",
+      "dct:license": { "@id": "https://creativecommons.org/licenses/by/4.0/" }
+    },
+    {
+      "@id": "celine:CommunityContext",
+      "@type": "owl:Class",
+      "label": "Community Context"
+    },
+    {
+      "@id": "celine:Scenario",
+      "@type": "owl:Class",
+      "label": "Scenario"
+    },
+    {
+      "@id": "celine:Simulation",
+      "@type": "owl:Class",
+      "label": "Simulation"
+    },
+    {
+      "@id": "celine:SimulationRun",
+      "@type": "owl:Class",
+      "label": "Simulation Run"
+    },
+    {
+      "@id": "celine:DatasetReference",
+      "@type": "owl:Class",
+      "label": "Dataset Reference"
+    },
+    {
+      "@id": "celine:KPIEvaluation",
+      "@type": "owl:Class",
+      "label": "KPI Evaluation"
+    },
+    {
+      "@id": "celine:hasCommunity",
+      "@type": "owl:ObjectProperty",
+      "label": "has energy community"
+    },
+    {
+      "@id": "celine:usesAsset",
+      "@type": "owl:ObjectProperty",
+      "label": "uses asset"
+    },
+    {
+      "@id": "celine:hasScenario",
+      "@type": "owl:ObjectProperty",
+      "label": "has scenario"
+    },
+    {
+      "@id": "celine:hasSimulation",
+      "@type": "owl:ObjectProperty",
+      "label": "has simulation"
+    },
+    {
+      "@id": "celine:hasSimulationRun",
+      "@type": "owl:ObjectProperty",
+      "label": "has simulation run"
+    },
+    {
+      "@id": "celine:usesDataset",
+      "@type": "owl:ObjectProperty",
+      "label": "uses dataset"
+    },
+    {
+      "@id": "celine:producesDataset",
+      "@type": "owl:ObjectProperty",
+      "label": "produces dataset"
+    },
+    {
+      "@id": "celine:evaluatesKPI",
+      "@type": "owl:ObjectProperty",
+      "label": "evaluates KPI"
+    },
+    {
+      "@id": "celine:hasKPIEvaluation",
+      "@type": "owl:ObjectProperty",
+      "label": "has KPI evaluation"
+    },
+    {
+      "@id": "celine:hasTimeInterval",
+      "@type": "owl:ObjectProperty",
+      "label": "has time interval"
+    },
+    {
+      "@id": "celine:usesObservation",
+      "@type": "owl:ObjectProperty",
+      "label": "uses observation"
+    }
+  ]
+}

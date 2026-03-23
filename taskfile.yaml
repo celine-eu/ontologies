@@ -8,22 +8,26 @@ tasks:
       - git push --tags
 
   docs:widoco:
-    desc: "Generate WIDOCO HTML docs for a release (default: latest). Override with VERSION=vX.X"
+    desc: "Generate WIDOCO HTML docs for a spec version (default: latest). Pass version as: task docs:widoco -- vX.X"
     vars:
       VERSION:
         sh: |
-          ls -d releases/*/ 2>/dev/null \
-            | sed 's:/*$::' \
-            | grep -v current \
-            | sort -V \
-            | tail -n 1 \
-            | xargs basename
+          if [ -n "{{.CLI_ARGS}}" ]; then
+            echo "{{.CLI_ARGS}}"
+          else
+            ls -d specs/*/ 2>/dev/null \
+              | sed 's:/*$::' \
+              | grep -v current \
+              | sort -V \
+              | tail -n 1 \
+              | xargs basename
+          fi
     cmds:
       - |
         set -e
         version="{{.VERSION}}"
-        input="releases/$version/celine.ttl"
-        output="releases/$version/docs"
+        input="specs/$version/celine.ttl"
+        output="releases/$version"
 
         if [ ! -f "$input" ]; then
           echo "Ontology file not found: $input"
@@ -32,11 +36,12 @@ tasks:
 
         echo "Generating WIDOCO docs for $version..."
         mkdir -p "$output"
+        chmod 777 "$output"
 
         docker run --rm \
-          -v "$(pwd)/releases/$version:/usr/local/widoco/in:ro" \
+          -v "$(pwd)/specs/$version:/usr/local/widoco/in:ro" \
           -v "$(pwd)/$output:/usr/local/widoco/out" \
-          dgarijo/widoco:latest \
+          ghcr.io/dgarijo/widoco:v1.4.23 \
           -ontFile /usr/local/widoco/in/celine.ttl \
           -outFolder /usr/local/widoco/out \
           -rewriteAll \
@@ -46,26 +51,27 @@ tasks:
         echo "Docs generated at $output"
 
   release:ontology:
-    desc: Point releases/current to the latest versioned release directory
+    desc: Point specs/current to the latest versioned spec directory
     cmds:
       - |
         set -e
-        echo "Detecting latest release..."
+        echo "Detecting latest spec..."
 
-        latest_dir=$(ls -d releases/*/ 2>/dev/null \
+        latest_dir=$(ls -d specs/*/ 2>/dev/null \
           | sed 's:/*$::' \
+          | grep -v current \
           | sort -V \
           | tail -n 1)
 
         if [ -z "$latest_dir" ]; then
-          echo "No release directories found under releases/"
+          echo "No spec directories found under specs/"
           exit 1
         fi
 
         latest=$(basename "$latest_dir")
 
-        ln -sfn "$latest" releases/current
-        echo "Updated symlink: releases/current → $latest"
+        ln -sfn "$latest" specs/current
+        echo "Updated symlink: specs/current → $latest"
 
         git add .
         git commit -m "release $latest"

@@ -1,0 +1,465 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://celine-eu.github.io/ontologies/celine/"
+     xml:base="https://celine-eu.github.io/ontologies/celine/"
+     xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+     xmlns:ns1="http://creativecommons.org/ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:seas="https://w3id.org/seas/"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:schema="http://schema.org/">
+    <owl:Ontology rdf:about="https://celine-eu.github.io/ontologies/celine/">
+        <owl:versionIRI rdf:resource="https://celine-eu.github.io/ontologies/releases/v0.1"/>
+        <owl:imports rdf:resource="http://www.w3.org/ns/sosa/"/>
+        <owl:imports rdf:resource="https://saref.etsi.org/core/"/>
+        <owl:imports rdf:resource="https://saref.etsi.org/saref4city/"/>
+        <owl:imports rdf:resource="https://saref.etsi.org/saref4ener/"/>
+        <owl:imports rdf:resource="https://w3id.org/seas/"/>
+        <terms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+        <terms:publisher>CELINE Project</terms:publisher>
+        <rdfs:comment>Unified ontology profile combining SAREF, SOSA/SSN, SAREF4ENER, SAREF4CITY, BIGG, SEAS and EM-KPI for the CELINE Digital Twin and Energy Community Platform.</rdfs:comment>
+        <rdfs:label>CELINE Unified Ontology Profile</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#evaluatedBy -->
+
+
+    <owl:ObjectProperty rdf:about="https://celine-eu.github.io/ontologies/celine#evaluatedBy">
+        <rdfs:domain rdf:resource="https://celine-eu.github.io/ontologies/celine#EnergyCommunity"/>
+        <rdfs:range rdf:resource="https://celine-eu.github.io/ontologies/celine#EnergyKPI"/>
+        <rdfs:label>evaluated by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#hasCO2Factor -->
+
+
+    <owl:ObjectProperty rdf:about="https://celine-eu.github.io/ontologies/celine#hasCO2Factor">
+        <rdfs:domain rdf:resource="https://celine-eu.github.io/ontologies/celine#EnergyCommunity"/>
+        <rdfs:range rdf:resource="https://celine-eu.github.io/ontologies/celine#CO2Factor"/>
+        <rdfs:label>has CO2 factor</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#hasFlexibilityEvent -->
+
+
+    <owl:ObjectProperty rdf:about="https://celine-eu.github.io/ontologies/celine#hasFlexibilityEvent">
+        <rdfs:domain rdf:resource="https://celine-eu.github.io/ontologies/celine#Asset"/>
+        <rdfs:range rdf:resource="https://celine-eu.github.io/ontologies/celine#FlexibilityEvent"/>
+        <rdfs:label>has flexibility event</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#hasForecast -->
+
+
+    <owl:ObjectProperty rdf:about="https://celine-eu.github.io/ontologies/celine#hasForecast">
+        <rdfs:domain rdf:resource="https://celine-eu.github.io/ontologies/celine#EnergyCommunity"/>
+        <rdfs:range rdf:resource="https://celine-eu.github.io/ontologies/celine#Forecast"/>
+        <rdfs:label>has forecast</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#hasMember -->
+
+
+    <owl:ObjectProperty rdf:about="https://celine-eu.github.io/ontologies/celine#hasMember">
+        <rdfs:domain rdf:resource="https://celine-eu.github.io/ontologies/celine#EnergyCommunity"/>
+        <rdfs:range rdf:resource="https://celine-eu.github.io/ontologies/celine#Prosumer"/>
+        <rdfs:label>has member</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#hasMeter -->
+
+
+    <owl:ObjectProperty rdf:about="https://celine-eu.github.io/ontologies/celine#hasMeter">
+        <rdfs:domain rdf:resource="https://celine-eu.github.io/ontologies/celine#Asset"/>
+        <rdfs:range rdf:resource="https://celine-eu.github.io/ontologies/celine#Meter"/>
+        <rdfs:label>has meter</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#hasObservation -->
+
+
+    <owl:ObjectProperty rdf:about="https://celine-eu.github.io/ontologies/celine#hasObservation">
+        <rdfs:domain rdf:resource="https://celine-eu.github.io/ontologies/celine#Asset"/>
+        <rdfs:domain rdf:resource="https://celine-eu.github.io/ontologies/celine#Meter"/>
+        <rdfs:range rdf:resource="https://celine-eu.github.io/ontologies/celine#Observation"/>
+        <rdfs:label>has observation</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#hasTariff -->
+
+
+    <owl:ObjectProperty rdf:about="https://celine-eu.github.io/ontologies/celine#hasTariff">
+        <rdfs:domain rdf:resource="https://celine-eu.github.io/ontologies/celine#EnergyCommunity"/>
+        <rdfs:domain rdf:resource="https://celine-eu.github.io/ontologies/celine#Prosumer"/>
+        <rdfs:range rdf:resource="https://celine-eu.github.io/ontologies/celine#Tariff"/>
+        <rdfs:label>has tariff</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#hasTimeSeries -->
+
+
+    <owl:ObjectProperty rdf:about="https://celine-eu.github.io/ontologies/celine#hasTimeSeries">
+        <rdfs:domain rdf:resource="https://celine-eu.github.io/ontologies/celine#Meter"/>
+        <rdfs:range rdf:resource="https://celine-eu.github.io/ontologies/celine#TimeSeries"/>
+        <rdfs:label>has time series</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#isLocatedIn -->
+
+
+    <owl:ObjectProperty rdf:about="https://celine-eu.github.io/ontologies/celine#isLocatedIn">
+        <rdfs:domain rdf:resource="https://celine-eu.github.io/ontologies/celine#Asset"/>
+        <rdfs:range rdf:resource="https://saref.etsi.org/saref4bldg/BuildingSpace"/>
+        <rdfs:label>is located in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#measuredConsumption -->
+
+
+    <owl:ObjectProperty rdf:about="https://celine-eu.github.io/ontologies/celine#measuredConsumption">
+        <rdfs:subPropertyOf rdf:resource="https://saref.etsi.org/saref4ener/hasEnergyConsumption"/>
+        <rdfs:label>measured consumption</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#measuredProduction -->
+
+
+    <owl:ObjectProperty rdf:about="https://celine-eu.github.io/ontologies/celine#measuredProduction">
+        <rdfs:subPropertyOf rdf:resource="https://saref.etsi.org/saref4ener/hasEnergyProduction"/>
+        <rdfs:label>measured production</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#ownsAsset -->
+
+
+    <owl:ObjectProperty rdf:about="https://celine-eu.github.io/ontologies/celine#ownsAsset">
+        <rdfs:domain rdf:resource="https://celine-eu.github.io/ontologies/celine#Prosumer"/>
+        <rdfs:range rdf:resource="https://celine-eu.github.io/ontologies/celine#Asset"/>
+        <rdfs:label>owns asset</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://saref.etsi.org/saref4ener/hasEnergyConsumption -->
+
+
+    <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4ener/hasEnergyConsumption"/>
+    
+
+
+    <!-- https://saref.etsi.org/saref4ener/hasEnergyProduction -->
+
+
+    <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4ener/hasEnergyProduction"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://bigg-project.eu/ontology#dateTime -->
+
+
+    <owl:DatatypeProperty rdf:about="http://bigg-project.eu/ontology#dateTime"/>
+    
+
+
+    <!-- http://bigg-project.eu/ontology#hasValue -->
+
+
+    <owl:DatatypeProperty rdf:about="http://bigg-project.eu/ontology#hasValue"/>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#pointTime -->
+
+
+    <owl:DatatypeProperty rdf:about="https://celine-eu.github.io/ontologies/celine#pointTime">
+        <rdfs:subPropertyOf rdf:resource="http://bigg-project.eu/ontology#dateTime"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:label>point time</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#pointValue -->
+
+
+    <owl:DatatypeProperty rdf:about="https://celine-eu.github.io/ontologies/celine#pointValue">
+        <rdfs:subPropertyOf rdf:resource="http://bigg-project.eu/ontology#hasValue"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:label>point value</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#timestamp -->
+
+
+    <owl:DatatypeProperty rdf:about="https://celine-eu.github.io/ontologies/celine#timestamp">
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:label>timestamp</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#value -->
+
+
+    <owl:DatatypeProperty rdf:about="https://celine-eu.github.io/ontologies/celine#value">
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:label>value</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://bigg-project.eu/ontology#CO2EmissionsFactor -->
+
+
+    <owl:Class rdf:about="http://bigg-project.eu/ontology#CO2EmissionsFactor"/>
+    
+
+
+    <!-- http://bigg-project.eu/ontology#Tariff -->
+
+
+    <owl:Class rdf:about="http://bigg-project.eu/ontology#Tariff"/>
+    
+
+
+    <!-- http://bigg-project.eu/ontology#TimeSeriesList -->
+
+
+    <owl:Class rdf:about="http://bigg-project.eu/ontology#TimeSeriesList"/>
+    
+
+
+    <!-- http://bigg-project.eu/ontology/bigg4kpi#KPIAssessment -->
+
+
+    <owl:Class rdf:about="http://bigg-project.eu/ontology/bigg4kpi#KPIAssessment"/>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#Asset -->
+
+
+    <owl:Class rdf:about="https://celine-eu.github.io/ontologies/celine#Asset">
+        <rdfs:subClassOf rdf:resource="https://saref.etsi.org/core/Device"/>
+        <rdfs:label>Asset</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#CO2Factor -->
+
+
+    <owl:Class rdf:about="https://celine-eu.github.io/ontologies/celine#CO2Factor">
+        <rdfs:subClassOf rdf:resource="http://bigg-project.eu/ontology#CO2EmissionsFactor"/>
+        <rdfs:label>CO2 Emission Factor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#EnergyCommunity -->
+
+
+    <owl:Class rdf:about="https://celine-eu.github.io/ontologies/celine#EnergyCommunity">
+        <rdfs:subClassOf rdf:resource="https://saref.etsi.org/saref4city/Community"/>
+        <rdfs:label>Energy Community</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#EnergyKPI -->
+
+
+    <owl:Class rdf:about="https://celine-eu.github.io/ontologies/celine#EnergyKPI">
+        <rdfs:subClassOf rdf:resource="http://bigg-project.eu/ontology/bigg4kpi#KPIAssessment"/>
+        <rdfs:subClassOf rdf:resource="https://omic-tools.org/ontology/em-kpi#EnergyPerformanceIndicator"/>
+        <rdfs:label>Energy KPI</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#FlexibilityEvent -->
+
+
+    <owl:Class rdf:about="https://celine-eu.github.io/ontologies/celine#FlexibilityEvent">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/seas/DemandResponseEvent"/>
+        <rdfs:label>Flexibility Event</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#Forecast -->
+
+
+    <owl:Class rdf:about="https://celine-eu.github.io/ontologies/celine#Forecast">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/seas/Forecast"/>
+        <rdfs:label>Forecast</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#Meter -->
+
+
+    <owl:Class rdf:about="https://celine-eu.github.io/ontologies/celine#Meter">
+        <rdfs:subClassOf rdf:resource="https://saref.etsi.org/saref4ener/EnergyMeter"/>
+        <rdfs:label>Meter</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#Observation -->
+
+
+    <owl:Class rdf:about="https://celine-eu.github.io/ontologies/celine#Observation">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+        <rdfs:label>Observation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#Prosumer -->
+
+
+    <owl:Class rdf:about="https://celine-eu.github.io/ontologies/celine#Prosumer">
+        <rdfs:subClassOf rdf:resource="https://saref.etsi.org/saref4city/CityObject"/>
+        <rdfs:label>Prosumer</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#Tariff -->
+
+
+    <owl:Class rdf:about="https://celine-eu.github.io/ontologies/celine#Tariff">
+        <rdfs:subClassOf rdf:resource="http://bigg-project.eu/ontology#Tariff"/>
+        <rdfs:label>Tariff</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://celine-eu.github.io/ontologies/celine#TimeSeries -->
+
+
+    <owl:Class rdf:about="https://celine-eu.github.io/ontologies/celine#TimeSeries">
+        <rdfs:subClassOf rdf:resource="http://bigg-project.eu/ontology#TimeSeriesList"/>
+        <rdfs:label>Time Series</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://omic-tools.org/ontology/em-kpi#EnergyPerformanceIndicator -->
+
+
+    <owl:Class rdf:about="https://omic-tools.org/ontology/em-kpi#EnergyPerformanceIndicator"/>
+    
+
+
+    <!-- https://saref.etsi.org/saref4bldg/BuildingSpace -->
+
+
+    <owl:Class rdf:about="https://saref.etsi.org/saref4bldg/BuildingSpace"/>
+    
+
+
+    <!-- https://saref.etsi.org/saref4city/Community -->
+
+
+    <owl:Class rdf:about="https://saref.etsi.org/saref4city/Community"/>
+    
+
+
+    <!-- https://saref.etsi.org/saref4ener/EnergyMeter -->
+
+
+    <owl:Class rdf:about="https://saref.etsi.org/saref4ener/EnergyMeter"/>
+    
+
+
+    <!-- https://w3id.org/seas/DemandResponseEvent -->
+
+
+    <owl:Class rdf:about="https://w3id.org/seas/DemandResponseEvent"/>
+    
+
+
+    <!-- https://w3id.org/seas/Forecast -->
+
+
+    <owl:Class rdf:about="https://w3id.org/seas/Forecast"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/ -->
+
+

@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://w3id.org/celine/v0.3/celine.schema.json",
+  "title": "CELINE JSON-LD schema",
+  "type": "object",
+  "required": [
+    "@context",
+    "@graph"
+  ],
+  "properties": {
+    "@context": {
+      "description": "JSON-LD context (object, array, or IRI).",
+      "anyOf": [
+        { "type": "object" },
+        { "type": "array" },
+        { "type": "string", "format": "uri" }
+      ]
+    },
+    "@graph": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/Node" }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "IRI": {
+      "type": "string",
+      "minLength": 1
+    },
+    "IRIorList": {
+      "anyOf": [
+        { "$ref": "#/$defs/IRI" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/$defs/IRI" },
+          "minItems": 1
+        }
+      ]
+    },
+    "TypeField": {
+      "anyOf": [
+        { "type": "string" },
+        {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      ]
+    },
+    "NodeBase": {
+      "type": "object",
+      "required": ["@id", "@type"],
+      "properties": {
+        "@id": { "$ref": "#/$defs/IRI" },
+        "@type": { "$ref": "#/$defs/TypeField" },
+        "label": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "CommunityContext": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:CommunityContext" },
+                { "type": "array", "contains": { "const": "celine:CommunityContext" } }
+              ]
+            },
+            "hasCommunity": { "$ref": "#/$defs/IRI" },
+            "usesAsset": { "$ref": "#/$defs/IRIorList" },
+            "hasSimulation": { "$ref": "#/$defs/IRIorList" }
+          },
+          "required": ["hasCommunity"]
+        }
+      ]
+    },
+    "Scenario": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:Scenario" },
+                { "type": "array", "contains": { "const": "celine:Scenario" } }
+              ]
+            },
+            "hasTimeInterval": { "$ref": "#/$defs/IRI" }
+          }
+        }
+      ]
+    },
+    "Simulation": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:Simulation" },
+                { "type": "array", "contains": { "const": "celine:Simulation" } }
+              ]
+            },
+            "hasScenario": { "$ref": "#/$defs/IRI" },
+            "hasSimulationRun": { "$ref": "#/$defs/IRIorList" }
+          },
+          "required": ["hasScenario"]
+        }
+      ]
+    },
+    "SimulationRun": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:SimulationRun" },
+                { "type": "array", "contains": { "const": "celine:SimulationRun" } }
+              ]
+            },
+            "usesDataset": { "$ref": "#/$defs/IRIorList" },
+            "producesDataset": { "$ref": "#/$defs/IRIorList" },
+            "hasKPIEvaluation": { "$ref": "#/$defs/IRIorList" },
+            "usesObservation": { "$ref": "#/$defs/IRIorList" }
+          },
+          "required": ["usesDataset"]
+        }
+      ]
+    },
+    "DatasetReference": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:DatasetReference" },
+                { "type": "array", "contains": { "const": "celine:DatasetReference" } }
+              ]
+            },
+            "identifier": { "type": "string" },
+            "source": { "$ref": "#/$defs/IRI" }
+          },
+          "required": ["identifier"]
+        }
+      ]
+    },
+    "KPIEvaluation": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:KPIEvaluation" },
+                { "type": "array", "contains": { "const": "celine:KPIEvaluation" } }
+              ]
+            },
+            "evaluatesKPI": { "$ref": "#/$defs/IRI" },
+            "value": {
+              "anyOf": [
+                { "type": "number" },
+                { "type": "string" }
+              ]
+            }
+          },
+          "required": ["evaluatesKPI"]
+        }
+      ]
+    },
+    "Node": {
+      "anyOf": [
+        { "$ref": "#/$defs/CommunityContext" },
+        { "$ref": "#/$defs/Scenario" },
+        { "$ref": "#/$defs/Simulation" },
+        { "$ref": "#/$defs/SimulationRun" },
+        { "$ref": "#/$defs/DatasetReference" },
+        { "$ref": "#/$defs/KPIEvaluation" },
+        { "$ref": "#/$defs/NodeBase" }
+      ]
+    }
+  }
+}
