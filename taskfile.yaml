@@ -38,6 +38,11 @@ tasks:
         mkdir -p "$output"
         chmod 777 "$output"
 
+        conf_flag=""
+        if [ -f "specs/$version/widoco.conf" ]; then
+          conf_flag="-confFile /usr/local/widoco/in/widoco.conf"
+        fi
+
         docker run --rm \
           -v "$(pwd)/specs/$version:/usr/local/widoco/in:ro" \
           -v "$(pwd)/$output:/usr/local/widoco/out" \
@@ -46,7 +51,8 @@ tasks:
           -outFolder /usr/local/widoco/out \
           -rewriteAll \
           -lang en \
-          -includeAnnotationProperties
+          -includeAnnotationProperties \
+          $conf_flag
 
         echo "Docs generated at $output"
 

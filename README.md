@@ -9,7 +9,8 @@ Semantic artifacts and mapping tools for the CELINE project, supporting:
 
 The CELINE ontology is a **unified ontology profile** — not a standalone domain ontology — that connects PECO, SAREF, SOSA, BIGG and EM-KPI into a coherent semantic target for the CELINE ecosystem.
 
-**Namespace**: `https://w3id.org/celine#`
+**Namespace**: `https://w3id.org/celine-eu#`
+
 **Documentation**: <https://celine-eu.github.io/ontologies/>
 
 ---

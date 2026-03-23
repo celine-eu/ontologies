@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://w3id.org/celine/v0.3/celine.schema.json",
+  "$id": "https://w3id.org/celine-eu/v0.3/celine.schema.json",
   "title": "CELINE JSON-LD schema",
   "type": "object",
   "required": [

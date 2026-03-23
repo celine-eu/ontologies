@@ -39,6 +39,11 @@ jobs:
           mkdir -p "releases/$version"
           chmod 777 "releases/$version"
 
+          conf_flag=""
+          if [ -f "${{ github.workspace }}/specs/$version/widoco.conf" ]; then
+            conf_flag="-confFile /usr/local/widoco/in/widoco.conf"
+          fi
+
           docker run --rm \
             -v "${{ github.workspace }}/specs/$version:/usr/local/widoco/in:ro" \
             -v "${{ github.workspace }}/releases/$version:/usr/local/widoco/out" \
@@ -47,7 +52,8 @@ jobs:
             -outFolder /usr/local/widoco/out \
             -rewriteAll \
             -lang en \
-            -includeAnnotationProperties
+            -includeAnnotationProperties \
+            $conf_flag
 
       - name: Update releases/current symlink
         if: steps.detect.outputs.skip != 'true'

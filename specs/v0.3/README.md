@@ -1,19 +1,19 @@
 # CELINE Ontology v0.3
 
-**Namespace**: `https://w3id.org/celine#`
-**IRI**: `https://w3id.org/celine`
-**Version IRI**: `https://w3id.org/celine/v0.3`
+**Namespace**: `https://w3id.org/celine-eu#`
+**IRI**: `https://w3id.org/celine-eu`
+**Version IRI**: `https://w3id.org/celine-eu/v0.3`
 
 Consolidation release. Same conceptual model as v0.2, focused on publication quality: streamlined IRI, stable import refs, documentation annotations, and proper ontology metadata.
 
 ## Changes from v0.2
 
-- **IRI simplified**: `https://w3id.org/celine/ontology#` → `https://w3id.org/celine#` (removes the `/ontology` subpath)
+- **IRI simplified**: `https://w3id.org/celine-eu/ontology#` → `https://w3id.org/celine-eu#` (removes the `/ontology` subpath)
 - **Stable import refs**: GitHub `refs/heads/` replaced with pinned commit SHAs
   - `w3c/sdw` → `dee1bdd3c3`
   - `BeeGroup-cimne/biggontology` → `776e245668`
 - **`skos:example`** added to every class with a realistic Turtle snippet
-- **`rdfs:isDefinedBy`** added to every class and property, pointing to `<https://w3id.org/celine>`
+- **`rdfs:isDefinedBy`** added to every class and property, pointing to `<https://w3id.org/celine-eu>`
 - **Ontology metadata** added: `owl:versionIRI`, `owl:priorVersion`, `owl:versionInfo`, `dct:created`, `vann:preferredNamespacePrefix`, `vann:preferredNamespaceUri`
 
 ## Classes

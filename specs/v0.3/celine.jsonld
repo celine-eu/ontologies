@@ -1,6 +1,6 @@
 {
   "@context": {
-    "celine": "https://w3id.org/celine#",
+    "celine": "https://w3id.org/celine-eu#",
     "owl": "http://www.w3.org/2002/07/owl#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
@@ -68,7 +68,7 @@
   },
   "@graph": [
     {
-      "@id": "https://w3id.org/celine",
+      "@id": "https://w3id.org/celine-eu",
       "@type": "owl:Ontology",
       "label": "CELINE Core Ontology",
       "description": "Lightweight orchestration ontology for Renewable Energy Communities and Digital Twin workflows. CELINE integrates PECO, SAREF, SOSA and BIGG without redefining domain semantics.",
