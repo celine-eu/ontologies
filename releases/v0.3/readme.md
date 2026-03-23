@@ -1,9 +1,7 @@
 # CELINE Ontology v0.3
 
 **Namespace**: `https://w3id.org/celine-eu#`
-
 **IRI**: `https://w3id.org/celine-eu`
-
 **Version IRI**: `https://w3id.org/celine-eu/v0.3`
 
 Consolidation release. Same conceptual model as v0.2, focused on publication quality: streamlined IRI, stable import refs, documentation annotations, and proper ontology metadata.

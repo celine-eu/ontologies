@@ -35,24 +35,27 @@ tasks:
         fi
 
         echo "Generating WIDOCO docs for $version..."
+        rm -rf "$output"
         mkdir -p "$output"
-        chmod 777 "$output"
 
         conf_flag=""
         if [ -f "specs/$version/widoco.conf" ]; then
           conf_flag="-confFile /usr/local/widoco/in/widoco.conf"
         fi
 
-        docker run --rm \
+        cid=$(docker create \
           -v "$(pwd)/specs/$version:/usr/local/widoco/in:ro" \
-          -v "$(pwd)/$output:/usr/local/widoco/out" \
           ghcr.io/dgarijo/widoco:v1.4.23 \
           -ontFile /usr/local/widoco/in/celine.ttl \
-          -outFolder /usr/local/widoco/out \
+          -outFolder /tmp/out \
           -rewriteAll \
           -lang en \
           -includeAnnotationProperties \
-          $conf_flag
+          $conf_flag)
+
+        docker start --attach "$cid"
+        docker cp "$cid:/tmp/out/." "$output/"
+        docker rm "$cid"
 
         echo "Docs generated at $output"
 
