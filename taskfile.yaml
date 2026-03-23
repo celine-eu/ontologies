@@ -59,6 +59,11 @@ tasks:
 
         echo "Docs generated at $output"
 
+        if [ -d "specs/$version/sections" ]; then
+          cp specs/$version/sections/*.html "$output/sections/"
+          echo "Overlaid custom sections from specs/$version/sections/"
+        fi
+
         if [ -f "specs/$version/README.md" ]; then
           cp "specs/$version/README.md" "$output/readme.md"
           echo "Copied specs/$version/README.md → $output/readme.md"
