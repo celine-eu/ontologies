@@ -1,0 +1,59 @@
+name: Generate WIDOCO Docs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "releases/v*/celine.ttl"
+
+permissions:
+  contents: write
+
+jobs:
+  widoco:
+    name: Generate WIDOCO HTML Docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Detect changed release version
+        id: detect
+        run: |
+          version=$(git diff --name-only HEAD~1 HEAD \
+            | grep -oP 'releases/\K(v[^/]+)(?=/celine\.ttl)' \
+            | tail -n 1)
+
+          if [ -z "$version" ]; then
+            echo "No celine.ttl change detected — skipping"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=$version" >> "$GITHUB_OUTPUT"
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate WIDOCO docs
+        if: steps.detect.outputs.skip != 'true'
+        run: |
+          version="${{ steps.detect.outputs.version }}"
+          mkdir -p "releases/$version/docs"
+
+          docker run --rm \
+            -v "${{ github.workspace }}/releases/$version:/usr/local/widoco/in:ro" \
+            -v "${{ github.workspace }}/releases/$version/docs:/usr/local/widoco/out" \
+            dgarijo/widoco:latest \
+            -ontFile /usr/local/widoco/in/celine.ttl \
+            -outFolder /usr/local/widoco/out \
+            -rewriteAll \
+            -lang en \
+            -includeAnnotationProperties
+
+      - name: Commit and push docs
+        if: steps.detect.outputs.skip != 'true'
+        run: |
+          version="${{ steps.detect.outputs.version }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "releases/$version/docs"
+          git diff --cached --quiet || git commit -m "docs: generate WIDOCO docs for $version"
+          git push

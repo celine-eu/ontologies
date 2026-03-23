@@ -7,6 +7,44 @@ tasks:
       - git push
       - git push --tags
 
+  docs:widoco:
+    desc: "Generate WIDOCO HTML docs for a release (default: latest). Override with VERSION=vX.X"
+    vars:
+      VERSION:
+        sh: |
+          ls -d releases/*/ 2>/dev/null \
+            | sed 's:/*$::' \
+            | grep -v current \
+            | sort -V \
+            | tail -n 1 \
+            | xargs basename
+    cmds:
+      - |
+        set -e
+        version="{{.VERSION}}"
+        input="releases/$version/celine.ttl"
+        output="releases/$version/docs"
+
+        if [ ! -f "$input" ]; then
+          echo "Ontology file not found: $input"
+          exit 1
+        fi
+
+        echo "Generating WIDOCO docs for $version..."
+        mkdir -p "$output"
+
+        docker run --rm \
+          -v "$(pwd)/releases/$version:/usr/local/widoco/in:ro" \
+          -v "$(pwd)/$output:/usr/local/widoco/out" \
+          dgarijo/widoco:latest \
+          -ontFile /usr/local/widoco/in/celine.ttl \
+          -outFolder /usr/local/widoco/out \
+          -rewriteAll \
+          -lang en \
+          -includeAnnotationProperties
+
+        echo "Docs generated at $output"
+
   release:ontology:
     desc: Point releases/current to the latest versioned release directory
     cmds:
