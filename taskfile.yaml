@@ -92,4 +92,5 @@ tasks:
         git commit -m "release ontology $latest" || true
 
         git tag -f "celine-ontology-$latest"
+        git push --tags -f
         git push -f
