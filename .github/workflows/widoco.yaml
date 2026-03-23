@@ -55,11 +55,12 @@ jobs:
             -includeAnnotationProperties \
             $conf_flag
 
-      - name: Update releases/current symlink
+      - name: Update releases/current
         if: steps.detect.outputs.skip != 'true'
         run: |
           version="${{ steps.detect.outputs.version }}"
-          ln -sfn "$version" releases/current
+          rm -rf releases/current
+          cp -r "releases/$version" releases/current
 
       - name: Commit and push docs
         if: steps.detect.outputs.skip != 'true'

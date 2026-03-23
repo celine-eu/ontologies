@@ -62,7 +62,7 @@ tasks:
         fi
 
   release:ontology:
-    desc: Point specs/current to the latest versioned spec directory
+    desc: Copy latest versioned spec into specs/current
     cmds:
       - |
         set -e
@@ -81,8 +81,9 @@ tasks:
 
         latest=$(basename "$latest_dir")
 
-        ln -sfn "$latest" specs/current
-        echo "Updated symlink: specs/current → $latest"
+        rm -rf specs/current
+        cp -r "specs/$latest" specs/current
+        echo "Copied specs/$latest → specs/current"
 
         git add .
         git commit -m "release ontology $latest"
