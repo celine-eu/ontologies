@@ -1,34 +1,35 @@
-About Widoco output
-===================
-The purpose of Widoco is to reuse and integrate existing tools for documentation, plus the set of features listed below:
-* Separation of the sections of your html page so you can write them independently and replace only those needed.
-* Automatic annotation in RDF-a of the html produced.
-* Association of a provenance page which includes the history of your vocabulary (W3C PROV-O compliant).
-* Metadata extraction from the ontology plus the means to complete it on the fly when generating your ontology.
-* Guidelines on the main sections that your document should have and how to complete them.
+# CELINE Ontology v0.3
 
-Widoco will create 3 different folders:
-|
-|-provenance (a folder including an html and RDF serialization of how the documentation page was created)
-|-resources (folder with the different resources)
-|-sections (folder with the different sections of the documentation, separated for easy editing. Just edit one and the main page will be updated)
+**Namespace**: `https://w3id.org/celine#`
+**IRI**: `https://w3id.org/celine`
+**Version IRI**: `https://w3id.org/celine/v0.3`
 
-Completing ontology metadata.
-===================
-Widoco uses the ontology metadata to update a configuration file. If you complete that configuration file (ended up widoco.conf), the tool will enhance your html with additional details, such as how to cite the document, previous revisions, icons with the licence, etc.
+Consolidation release. Same conceptual model as v0.2, focused on publication quality: streamlined IRI, stable import refs, documentation annotations, and proper ontology metadata.
 
-Browser issues
-==========
-The result of executing Widoco is an html file. We have tested it in Mozilla, IE and Chrome, and when the page is stored in a server all the browsers work correctly. If you view the file locally, we recommend you to use Mozilla Firefox (or Internet Explorer, if you must). Google Chrome will not show the contents correctly, as it doesn't allow  XMLHttpRequest without HTTP. If you want to view the page locally with Google Chrome you have two possibilities:
+## Changes from v0.2
 
-a) Place the file in a server and access it via its URL (for example, put it in dropbox and access through its public url).
+- **IRI simplified**: `https://w3id.org/celine/ontology#` → `https://w3id.org/celine#` (removes the `/ontology` subpath)
+- **Stable import refs**: GitHub `refs/heads/` replaced with pinned commit SHAs
+  - `w3c/sdw` → `dee1bdd3c3`
+  - `BeeGroup-cimne/biggontology` → `776e245668`
+- **`skos:example`** added to every class with a realistic Turtle snippet
+- **`rdfs:isDefinedBy`** added to every class and property, pointing to `<https://w3id.org/celine>`
+- **Ontology metadata** added: `owl:versionIRI`, `owl:priorVersion`, `owl:versionInfo`, `dct:created`, `vann:preferredNamespacePrefix`, `vann:preferredNamespaceUri`
 
-b) Execute Chrome with the following commands :
+## Classes
 
-(WIN) chrome.exe --allow-file-access-from-files,
+| Class | Description |
+|---|---|
+| `celine:CommunityContext` | Binds a PECO Energy Community with assets, datasets and simulations |
+| `celine:Scenario` | Assumptions, temporal scope and configuration for simulations |
+| `celine:Simulation` | Abstract simulation definition |
+| `celine:SimulationRun` | Concrete execution of a Simulation under a Scenario |
+| `celine:DatasetReference` | Reference to an external dataset (input or output) |
+| `celine:KPIEvaluation` | Evaluation of a BIGG KPI in a Scenario or SimulationRun |
 
-(OSX) open /Applications/Google\ Chrome.app/ --args --allow-file-access-from-files
+## Imports
 
-(UNX) /usr/bin/google-chrome --allow-file-access-from-files
-
-Do you have a problem? open an issue at https://github.com/dgarijo/Widoco
+- PECO (`https://purl.org/peco/peco-core`)
+- SAREF core v3.1.1 + SAREF4ENER v1.2.1 (ETSI, versioned)
+- SOSA (W3C `w3c/sdw@dee1bdd3c3`)
+- BIGG ontology + bigg4kpi (`BeeGroup-cimne/biggontology@776e245668`)
