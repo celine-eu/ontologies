@@ -2,6 +2,22 @@
 
 <!-- version list -->
 
+## v1.2.0 (2026-03-24)
+
+### Chores
+
+- Fix md
+  ([`6bd483d`](https://github.com/celine-eu/ontologies/commit/6bd483dbecbbb27beb3ede28c06ff697ade8aeb3))
+
+- Use celine-eu for w3id.org
+  ([`a1bf0b3`](https://github.com/celine-eu/ontologies/commit/a1bf0b3cf1f82ecc5fffc3ffcd75760789bbcfd3))
+
+### Features
+
+- Add settlement model
+  ([`872667d`](https://github.com/celine-eu/ontologies/commit/872667d52661eccbb67cc5cd9b5e91d3831d7e0c))
+
+
 ## v1.1.0 (2026-03-23)
 
 ### Chores
