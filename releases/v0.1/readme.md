@@ -1,6 +1,7 @@
 # CELINE Ontology v0.1
 
 **Namespace**: `https://celine-eu.github.io/ontologies/celine#`
+
 **IRI**: `https://celine-eu.github.io/ontologies/celine/`
 
 Initial release. Broad domain coverage aligned with SAREF, SAREF4ENER, SAREF4CITY, SOSA/SSN, SEAS, BIGG and EM-KPI via direct subclassing.

@@ -1,6 +1,7 @@
 # CELINE Ontology v0.2
 
 **Namespace**: `https://w3id.org/celine/ontology#`
+
 **IRI**: `https://w3id.org/celine/ontology#CELINEOntology`
 
 Major redesign. Replaced broad domain subclassing with a **thin orchestration layer** that connects established standards without redefining their semantics. Introduced the simulation/scenario model and PECO integration.
