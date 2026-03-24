@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://w3id.org/celine-eu/v0.3/celine.schema.json",
+  "$id": "https://w3id.org/celine-eu/v0.4/celine.schema.json",
   "title": "CELINE JSON-LD schema",
   "type": "object",
   "required": [
@@ -72,7 +72,9 @@
             },
             "hasCommunity": { "$ref": "#/$defs/IRI" },
             "usesAsset": { "$ref": "#/$defs/IRIorList" },
-            "hasSimulation": { "$ref": "#/$defs/IRIorList" }
+            "hasSimulation": { "$ref": "#/$defs/IRIorList" },
+            "hasCommitment": { "$ref": "#/$defs/IRIorList" },
+            "hasSettlementRun": { "$ref": "#/$defs/IRIorList" }
           },
           "required": ["hasCommunity"]
         }
@@ -173,6 +175,111 @@
         }
       ]
     },
+    "FlexibilityCommitment": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:FlexibilityCommitment" },
+                { "type": "array", "contains": { "const": "celine:FlexibilityCommitment" } }
+              ]
+            },
+            "committedBy": { "$ref": "#/$defs/IRI" },
+            "onPOD": { "$ref": "#/$defs/IRIorList" },
+            "hasCommitmentMode": { "$ref": "#/$defs/IRI" },
+            "hasFlexibilityDirection": { "$ref": "#/$defs/IRI" },
+            "targetFlexibility": { "type": "number", "exclusiveMinimum": 0 },
+            "hasTimeInterval": { "$ref": "#/$defs/IRI" },
+            "generatesCredit": { "$ref": "#/$defs/IRIorList" }
+          },
+          "required": ["committedBy", "onPOD", "hasCommitmentMode", "hasFlexibilityDirection", "targetFlexibility", "hasTimeInterval"]
+        }
+      ]
+    },
+    "FlexibilityCredit": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:FlexibilityCredit" },
+                { "type": "array", "contains": { "const": "celine:FlexibilityCredit" } }
+              ]
+            },
+            "earnedBy": { "$ref": "#/$defs/IRI" },
+            "creditFor": { "$ref": "#/$defs/IRI" },
+            "creditAmount": { "type": "number", "minimum": 0 },
+            "evidencedBy": { "$ref": "#/$defs/IRIorList" }
+          },
+          "required": ["earnedBy", "creditFor", "creditAmount", "evidencedBy"]
+        }
+      ]
+    },
+    "SettlementRun": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:SettlementRun" },
+                { "type": "array", "contains": { "const": "celine:SettlementRun" } }
+              ]
+            },
+            "settlesContext": { "$ref": "#/$defs/IRI" },
+            "hasTimeInterval": { "$ref": "#/$defs/IRI" },
+            "conversionRate": { "type": "number", "exclusiveMinimum": 0 },
+            "currency": { "type": "string", "minLength": 3, "maxLength": 3 },
+            "hasCostItem": { "$ref": "#/$defs/IRIorList" },
+            "hasRedistributionResult": { "$ref": "#/$defs/IRIorList" }
+          },
+          "required": ["settlesContext", "hasTimeInterval", "conversionRate", "currency", "hasRedistributionResult"]
+        }
+      ]
+    },
+    "CostItem": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:CostItem" },
+                { "type": "array", "contains": { "const": "celine:CostItem" } }
+              ]
+            },
+            "hasCostType": { "$ref": "#/$defs/IRI" },
+            "description": { "type": "string" },
+            "costAmount": { "type": "number", "minimum": 0 }
+          },
+          "required": ["hasCostType", "costAmount"]
+        }
+      ]
+    },
+    "RedistributionResult": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:RedistributionResult" },
+                { "type": "array", "contains": { "const": "celine:RedistributionResult" } }
+              ]
+            },
+            "resultFor": { "$ref": "#/$defs/IRI" },
+            "creditBalance": { "type": "number", "minimum": 0 },
+            "grossAmount": { "type": "number" },
+            "costDeduction": { "type": "number", "minimum": 0 },
+            "netAmount": { "type": "number" }
+          },
+          "required": ["resultFor", "creditBalance", "grossAmount", "costDeduction", "netAmount"]
+        }
+      ]
+    },
     "Node": {
       "anyOf": [
         { "$ref": "#/$defs/CommunityContext" },
@@ -181,6 +288,11 @@
         { "$ref": "#/$defs/SimulationRun" },
         { "$ref": "#/$defs/DatasetReference" },
         { "$ref": "#/$defs/KPIEvaluation" },
+        { "$ref": "#/$defs/FlexibilityCommitment" },
+        { "$ref": "#/$defs/FlexibilityCredit" },
+        { "$ref": "#/$defs/SettlementRun" },
+        { "$ref": "#/$defs/CostItem" },
+        { "$ref": "#/$defs/RedistributionResult" },
         { "$ref": "#/$defs/NodeBase" }
       ]
     }

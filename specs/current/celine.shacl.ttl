@@ -5,6 +5,7 @@
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
 @prefix dct:    <http://purl.org/dc/terms/> .
 @prefix time:   <http://www.w3.org/2006/time#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
 
 @prefix peco:   <https://purl.org/peco/peco-core#> .
 @prefix saref:  <https://saref.etsi.org/core/> .
@@ -36,6 +37,18 @@ celine:CommunityContextShape
         sh:path celine:hasSimulation ;
         sh:nodeKind sh:IRI ;
         sh:class celine:Simulation ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasCommitment ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:FlexibilityCommitment ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasSettlementRun ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:SettlementRun ;
         sh:minCount 0 ;
     ] .
 
@@ -146,7 +159,207 @@ celine:KPIEvaluationShape
     ] .
 
 ################################################################################
-# TIME interval minimal constraints (recommended)
+# Flexibility Commitment shapes  (new in v0.4)
+################################################################################
+
+celine:FlexibilityCommitmentShape
+    a sh:NodeShape ;
+    sh:targetClass celine:FlexibilityCommitment ;
+    rdfs:label "FlexibilityCommitment constraints" ;
+    sh:property [
+        sh:path celine:committedBy ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class peco:Energy_community_member ;
+    ] ;
+    sh:property [
+        sh:path celine:onPOD ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class peco:Electric_POD ;
+    ] ;
+    sh:property [
+        sh:path celine:hasCommitmentMode ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path celine:hasFlexibilityDirection ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path celine:targetFlexibility ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minExclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasTimeInterval ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class time:Interval ;
+    ] ;
+    sh:property [
+        sh:path celine:generatesCredit ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:FlexibilityCredit ;
+    ] .
+
+celine:FlexibilityCreditShape
+    a sh:NodeShape ;
+    sh:targetClass celine:FlexibilityCredit ;
+    rdfs:label "FlexibilityCredit constraints" ;
+    sh:property [
+        sh:path celine:earnedBy ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class peco:Energy_community_member ;
+    ] ;
+    sh:property [
+        sh:path celine:creditFor ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:FlexibilityCommitment ;
+    ] ;
+    sh:property [
+        sh:path celine:creditAmount ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:evidencedBy ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class sosa:Observation ;
+    ] .
+
+################################################################################
+# Settlement shapes  (new in v0.4)
+################################################################################
+
+celine:SettlementRunShape
+    a sh:NodeShape ;
+    sh:targetClass celine:SettlementRun ;
+    rdfs:label "SettlementRun constraints" ;
+    sh:property [
+        sh:path celine:settlesContext ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:CommunityContext ;
+    ] ;
+    sh:property [
+        sh:path celine:hasTimeInterval ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class time:Interval ;
+    ] ;
+    sh:property [
+        sh:path celine:conversionRate ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minExclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:currency ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 3 ;
+        sh:maxLength 3 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasCostItem ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:CostItem ;
+    ] ;
+    sh:property [
+        sh:path celine:hasRedistributionResult ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:RedistributionResult ;
+    ] .
+
+celine:CostItemShape
+    a sh:NodeShape ;
+    sh:targetClass celine:CostItem ;
+    rdfs:label "CostItem constraints" ;
+    sh:property [
+        sh:path celine:hasCostType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path dct:description ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:costAmount ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+    ] .
+
+celine:RedistributionResultShape
+    a sh:NodeShape ;
+    sh:targetClass celine:RedistributionResult ;
+    rdfs:label "RedistributionResult constraints" ;
+    sh:property [
+        sh:path celine:resultFor ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class peco:Energy_community_member ;
+    ] ;
+    sh:property [
+        sh:path celine:creditBalance ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:grossAmount ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+    ] ;
+    sh:property [
+        sh:path celine:costDeduction ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:netAmount ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+    ] .
+
+################################################################################
+# TIME interval minimal constraints (carried from v0.3)
 ################################################################################
 
 celine:TimeIntervalShape
