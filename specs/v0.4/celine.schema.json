@@ -74,7 +74,8 @@
             "usesAsset": { "$ref": "#/$defs/IRIorList" },
             "hasSimulation": { "$ref": "#/$defs/IRIorList" },
             "hasCommitment": { "$ref": "#/$defs/IRIorList" },
-            "hasSettlementRun": { "$ref": "#/$defs/IRIorList" }
+            "hasSettlementRun": { "$ref": "#/$defs/IRIorList" },
+            "hasEnvelope": { "$ref": "#/$defs/IRIorList" }
           },
           "required": ["hasCommunity"]
         }
@@ -192,7 +193,8 @@
             "hasFlexibilityDirection": { "$ref": "#/$defs/IRI" },
             "targetFlexibility": { "type": "number", "exclusiveMinimum": 0 },
             "hasTimeInterval": { "$ref": "#/$defs/IRI" },
-            "generatesCredit": { "$ref": "#/$defs/IRIorList" }
+            "generatesCredit": { "$ref": "#/$defs/IRIorList" },
+            "withinEnvelope": { "$ref": "#/$defs/IRI" }
           },
           "required": ["committedBy", "onPOD", "hasCommitmentMode", "hasFlexibilityDirection", "targetFlexibility", "hasTimeInterval"]
         }
@@ -280,6 +282,50 @@
         }
       ]
     },
+    "FlexibilityEnvelope": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:FlexibilityEnvelope" },
+                { "type": "array", "contains": { "const": "celine:FlexibilityEnvelope" } }
+              ]
+            },
+            "envelopeFor": { "$ref": "#/$defs/IRI" },
+            "maxFlexUp": { "type": "number", "minimum": 0 },
+            "maxFlexDown": { "type": "number", "minimum": 0 },
+            "availableEnergy": { "type": "number", "minimum": 0 },
+            "hasAvailabilityWindow": { "$ref": "#/$defs/IRIorList" },
+            "hasConstraint": { "$ref": "#/$defs/IRIorList" }
+          },
+          "required": ["envelopeFor"]
+        }
+      ]
+    },
+    "FlexibilityConstraint": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:FlexibilityConstraint" },
+                { "type": "array", "contains": { "const": "celine:FlexibilityConstraint" } }
+              ]
+            },
+            "hasConstraintType": { "$ref": "#/$defs/IRI" },
+            "minActivationDuration": { "type": "string" },
+            "maxActivationDuration": { "type": "string" },
+            "minNotificationTime": { "type": "string" },
+            "minRecoveryTime": { "type": "string" },
+            "maxActivationsPerDay": { "type": "integer", "minimum": 1 }
+          },
+          "required": ["hasConstraintType"]
+        }
+      ]
+    },
     "Node": {
       "anyOf": [
         { "$ref": "#/$defs/CommunityContext" },
@@ -293,6 +339,8 @@
         { "$ref": "#/$defs/SettlementRun" },
         { "$ref": "#/$defs/CostItem" },
         { "$ref": "#/$defs/RedistributionResult" },
+        { "$ref": "#/$defs/FlexibilityEnvelope" },
+        { "$ref": "#/$defs/FlexibilityConstraint" },
         { "$ref": "#/$defs/NodeBase" }
       ]
     }

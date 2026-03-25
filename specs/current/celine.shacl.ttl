@@ -50,6 +50,12 @@ celine:CommunityContextShape
         sh:nodeKind sh:IRI ;
         sh:class celine:SettlementRun ;
         sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasEnvelope ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:FlexibilityEnvelope ;
+        sh:minCount 0 ;
     ] .
 
 celine:ScenarioShape
@@ -212,6 +218,13 @@ celine:FlexibilityCommitmentShape
         sh:minCount 0 ;
         sh:nodeKind sh:IRI ;
         sh:class celine:FlexibilityCredit ;
+    ] ;
+    sh:property [
+        sh:path celine:withinEnvelope ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:FlexibilityEnvelope ;
     ] .
 
 celine:FlexibilityCreditShape
@@ -356,6 +369,100 @@ celine:RedistributionResultShape
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:datatype xsd:decimal ;
+    ] .
+
+################################################################################
+# Flexibility Envelope shapes  (new in v0.4)
+################################################################################
+
+celine:FlexibilityEnvelopeShape
+    a sh:NodeShape ;
+    sh:targetClass celine:FlexibilityEnvelope ;
+    rdfs:label "FlexibilityEnvelope constraints" ;
+    sh:property [
+        sh:path celine:envelopeFor ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class peco:Electric_POD ;
+    ] ;
+    sh:property [
+        sh:path celine:maxFlexUp ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:maxFlexDown ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:availableEnergy ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasAvailabilityWindow ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+        sh:class time:Interval ;
+    ] ;
+    sh:property [
+        sh:path celine:hasConstraint ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:FlexibilityConstraint ;
+    ] .
+
+################################################################################
+# Flexibility Constraint shapes  (new in v0.4)
+################################################################################
+
+celine:FlexibilityConstraintShape
+    a sh:NodeShape ;
+    sh:targetClass celine:FlexibilityConstraint ;
+    rdfs:label "FlexibilityConstraint constraints" ;
+    sh:property [
+        sh:path celine:hasConstraintType ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path celine:minActivationDuration ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:duration ;
+    ] ;
+    sh:property [
+        sh:path celine:maxActivationDuration ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:duration ;
+    ] ;
+    sh:property [
+        sh:path celine:minNotificationTime ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:duration ;
+    ] ;
+    sh:property [
+        sh:path celine:minRecoveryTime ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:duration ;
+    ] ;
+    sh:property [
+        sh:path celine:maxActivationsPerDay ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
     ] .
 
 ################################################################################

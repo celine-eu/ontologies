@@ -573,3 +573,210 @@ celine:netAmount
     rdfs:range          xsd:decimal ;
     rdfs:label          "net amount" ;
     rdfs:comment        "Final redistribution amount for this member (grossAmount − costDeduction)." .
+
+################################################################################
+# Flexibility Capability Envelopes  (new in v0.4)
+################################################################################
+
+celine:FlexibilityEnvelope
+    a owl:Class ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:label          "Flexibility Envelope" ;
+    rdfs:comment        """Declared capability of a Point of Delivery (POD) to provide flexibility
+    within a given availability window. Captures the physical bounds — maximum upward and downward
+    power and available energy — that constrain any FlexibilityCommitment drawn from it.
+    Aligned with saref4ener:PowerProfile for device-level scheduling semantics.""" ;
+    rdfs:seeAlso        <https://saref.etsi.org/saref4ener/> ;
+    skos:example        """ex:env_hp a celine:FlexibilityEnvelope ;
+    celine:envelopeFor           ex:pod_rossi_heatpump ;
+    celine:maxFlexUp             "2.0"^^xsd:decimal ;
+    celine:maxFlexDown           "3.0"^^xsd:decimal ;
+    celine:availableEnergy       "6.0"^^xsd:decimal ;
+    celine:hasAvailabilityWindow ex:window_morning ;
+    celine:hasConstraint         ex:constraint_hp .""" .
+
+################################################################################
+# Constraint Representation  (new in v0.4)
+################################################################################
+
+celine:FlexibilityConstraint
+    a owl:Class ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:label          "Flexibility Constraint" ;
+    rdfs:comment        """Operational constraint governing when and how flexibility declared in a
+    FlexibilityEnvelope may be activated. Encodes timing rules (minimum notice period, minimum
+    and maximum activation duration, recovery time between activations) and frequency limits.""" ;
+    skos:example        """ex:constraint_hp a celine:FlexibilityConstraint ;
+    celine:hasConstraintType     celine:DurationConstraint ;
+    celine:minNotificationTime   "PT15M"^^xsd:duration ;
+    celine:minActivationDuration "PT30M"^^xsd:duration ;
+    celine:maxActivationDuration "PT4H"^^xsd:duration ;
+    celine:minRecoveryTime       "PT1H"^^xsd:duration ;
+    celine:maxActivationsPerDay  "3"^^xsd:integer .""" .
+
+################################################################################
+# Controlled Vocabulary — Constraint Type  (new in v0.4)
+################################################################################
+
+celine:ConstraintType
+    a skos:ConceptScheme ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:label          "Constraint Type" ;
+    skos:prefLabel      "Constraint Type" ;
+    dct:description     "Classification of operational constraints on flexibility activation." .
+
+celine:DurationConstraint
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:ConstraintType ;
+    skos:topConceptOf   celine:ConstraintType ;
+    skos:prefLabel      "Duration Constraint" ;
+    rdfs:comment        "Constraint on the minimum or maximum duration of a single flexibility activation event." .
+
+celine:NoticeConstraint
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:ConstraintType ;
+    skos:topConceptOf   celine:ConstraintType ;
+    skos:prefLabel      "Notice Constraint" ;
+    rdfs:comment        "Constraint on the minimum lead time required before activating flexibility." .
+
+celine:RecoveryConstraint
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:ConstraintType ;
+    skos:topConceptOf   celine:ConstraintType ;
+    skos:prefLabel      "Recovery Constraint" ;
+    rdfs:comment        "Constraint on the minimum rest period required between consecutive flexibility activations." .
+
+celine:FrequencyConstraint
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:ConstraintType ;
+    skos:topConceptOf   celine:ConstraintType ;
+    skos:prefLabel      "Frequency Constraint" ;
+    rdfs:comment        "Constraint on the maximum number of flexibility activations permitted within a given period." .
+
+################################################################################
+# Object Properties — Flexibility Envelope  (new in v0.4)
+################################################################################
+
+celine:hasEnvelope
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:CommunityContext ;
+    rdfs:range          celine:FlexibilityEnvelope ;
+    rdfs:label          "has flexibility envelope" ;
+    rdfs:comment        "Links a CommunityContext to the declared flexibility capability envelopes of its PODs." .
+
+celine:envelopeFor
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityEnvelope ;
+    rdfs:range          peco:Electric_POD ;
+    rdfs:label          "envelope for" ;
+    rdfs:comment        "The POD whose physical and operational flexibility is described by this envelope." .
+
+celine:withinEnvelope
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityCommitment ;
+    rdfs:range          celine:FlexibilityEnvelope ;
+    rdfs:label          "within envelope" ;
+    rdfs:comment        "The FlexibilityEnvelope from which this commitment draws; commitment amounts must not exceed envelope bounds." .
+
+celine:hasAvailabilityWindow
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityEnvelope ;
+    rdfs:range          time:Interval ;
+    rdfs:label          "has availability window" ;
+    rdfs:comment        "Time window(s) during which the flexibility declared in this envelope is available for activation." .
+
+celine:hasConstraint
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityEnvelope ;
+    rdfs:range          celine:FlexibilityConstraint ;
+    rdfs:label          "has constraint" ;
+    rdfs:comment        "One or more operational constraints bounding how flexibility in this envelope may be activated." .
+
+celine:hasConstraintType
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityConstraint ;
+    rdfs:range          skos:Concept ;
+    rdfs:label          "has constraint type" ;
+    rdfs:comment        "Expected values: celine:DurationConstraint, celine:NoticeConstraint, celine:RecoveryConstraint, celine:FrequencyConstraint." .
+
+################################################################################
+# Data Properties — Flexibility Envelope  (new in v0.4)
+################################################################################
+
+celine:maxFlexUp
+    a owl:DatatypeProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityEnvelope ;
+    rdfs:range          xsd:decimal ;
+    rdfs:label          "max flex up" ;
+    rdfs:comment        "Maximum upward flexibility available from this envelope (kW). Positive value; represents increase in net load or decrease in local generation." .
+
+celine:maxFlexDown
+    a owl:DatatypeProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityEnvelope ;
+    rdfs:range          xsd:decimal ;
+    rdfs:label          "max flex down" ;
+    rdfs:comment        "Maximum downward flexibility available from this envelope (kW). Positive value; represents decrease in net load or increase in local generation." .
+
+celine:availableEnergy
+    a owl:DatatypeProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityEnvelope ;
+    rdfs:range          xsd:decimal ;
+    rdfs:label          "available energy" ;
+    rdfs:comment        "Total energy available for flexibility delivery within the availability window (kWh)." .
+
+################################################################################
+# Data Properties — Flexibility Constraint  (new in v0.4)
+################################################################################
+
+celine:minActivationDuration
+    a owl:DatatypeProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityConstraint ;
+    rdfs:range          xsd:duration ;
+    rdfs:label          "min activation duration" ;
+    rdfs:comment        "Minimum duration for which a flexibility activation must be sustained once started (ISO 8601 duration, e.g. PT30M)." .
+
+celine:maxActivationDuration
+    a owl:DatatypeProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityConstraint ;
+    rdfs:range          xsd:duration ;
+    rdfs:label          "max activation duration" ;
+    rdfs:comment        "Maximum duration for which a flexibility activation may be maintained (ISO 8601 duration, e.g. PT4H)." .
+
+celine:minNotificationTime
+    a owl:DatatypeProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityConstraint ;
+    rdfs:range          xsd:duration ;
+    rdfs:label          "min notification time" ;
+    rdfs:comment        "Minimum lead time required before a flexibility activation can start (ISO 8601 duration, e.g. PT15M)." .
+
+celine:minRecoveryTime
+    a owl:DatatypeProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityConstraint ;
+    rdfs:range          xsd:duration ;
+    rdfs:label          "min recovery time" ;
+    rdfs:comment        "Minimum rest period required between two consecutive flexibility activations (ISO 8601 duration, e.g. PT1H)." .
+
+celine:maxActivationsPerDay
+    a owl:DatatypeProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityConstraint ;
+    rdfs:range          xsd:integer ;
+    rdfs:label          "max activations per day" ;
+    rdfs:comment        "Maximum number of flexibility activation events permitted within a 24-hour period." .

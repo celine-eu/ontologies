@@ -18,7 +18,13 @@ This ontology has the following classes and properties.</span>
       <a href="#FlexibilityCommitment" title="https://w3id.org/celine-eu#FlexibilityCommitment">Flexibility Commitment</a>
    </li>
    <li>
+      <a href="#FlexibilityConstraint" title="https://w3id.org/celine-eu#FlexibilityConstraint">Flexibility Constraint</a>
+   </li>
+   <li>
       <a href="#FlexibilityCredit" title="https://w3id.org/celine-eu#FlexibilityCredit">Flexibility Credit</a>
+   </li>
+   <li>
+      <a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a>
    </li>
    <li>
       <a href="#KPIEvaluation" title="https://w3id.org/celine-eu#KPIEvaluation">KPI Evaluation</a>
@@ -51,6 +57,9 @@ This ontology has the following classes and properties.</span>
       <a href="#earnedBy" title="https://w3id.org/celine-eu#earnedBy">earned by</a>
    </li>
    <li>
+      <a href="#envelopeFor" title="https://w3id.org/celine-eu#envelopeFor">envelope for</a>
+   </li>
+   <li>
       <a href="#evaluatesKPI" title="https://w3id.org/celine-eu#evaluatesKPI">evaluates KPI</a>
    </li>
    <li>
@@ -60,7 +69,16 @@ This ontology has the following classes and properties.</span>
       <a href="#generatesCredit" title="https://w3id.org/celine-eu#generatesCredit">generates credit</a>
    </li>
    <li>
+      <a href="#hasAvailabilityWindow" title="https://w3id.org/celine-eu#hasAvailabilityWindow">has availability window</a>
+   </li>
+   <li>
       <a href="#hasCommitmentMode" title="https://w3id.org/celine-eu#hasCommitmentMode">has commitment mode</a>
+   </li>
+   <li>
+      <a href="#hasConstraint" title="https://w3id.org/celine-eu#hasConstraint">has constraint</a>
+   </li>
+   <li>
+      <a href="#hasConstraintType" title="https://w3id.org/celine-eu#hasConstraintType">has constraint type</a>
    </li>
    <li>
       <a href="#hasCostItem" title="https://w3id.org/celine-eu#hasCostItem">has cost item</a>
@@ -77,6 +95,9 @@ This ontology has the following classes and properties.</span>
    <li>
       <a href="#hasFlexibilityDirection"
          title="https://w3id.org/celine-eu#hasFlexibilityDirection">has flexibility direction</a>
+   </li>
+   <li>
+      <a href="#hasEnvelope" title="https://w3id.org/celine-eu#hasEnvelope">has flexibility envelope</a>
    </li>
    <li>
       <a href="#hasKPIEvaluation" title="https://w3id.org/celine-eu#hasKPIEvaluation">has KPI evaluation</a>
@@ -121,9 +142,15 @@ This ontology has the following classes and properties.</span>
    <li>
       <a href="#usesObservation" title="https://w3id.org/celine-eu#usesObservation">uses observation</a>
    </li>
+   <li>
+      <a href="#withinEnvelope" title="https://w3id.org/celine-eu#withinEnvelope">within envelope</a>
+   </li>
 </ul><h4>Data Properties</h4><ul xmlns:widoco="https://w3id.org/widoco/vocab#"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     class="hlist">
+   <li>
+      <a href="#availableEnergy" title="https://w3id.org/celine-eu#availableEnergy">available energy</a>
+   </li>
    <li>
       <a href="#conversionRate" title="https://w3id.org/celine-eu#conversionRate">conversion rate</a>
    </li>
@@ -144,6 +171,27 @@ This ontology has the following classes and properties.</span>
    </li>
    <li>
       <a href="#grossAmount" title="https://w3id.org/celine-eu#grossAmount">gross amount</a>
+   </li>
+   <li>
+      <a href="#maxActivationDuration" title="https://w3id.org/celine-eu#maxActivationDuration">max activation duration</a>
+   </li>
+   <li>
+      <a href="#maxActivationsPerDay" title="https://w3id.org/celine-eu#maxActivationsPerDay">max activations per day</a>
+   </li>
+   <li>
+      <a href="#maxFlexDown" title="https://w3id.org/celine-eu#maxFlexDown">max flex down</a>
+   </li>
+   <li>
+      <a href="#maxFlexUp" title="https://w3id.org/celine-eu#maxFlexUp">max flex up</a>
+   </li>
+   <li>
+      <a href="#minActivationDuration" title="https://w3id.org/celine-eu#minActivationDuration">min activation duration</a>
+   </li>
+   <li>
+      <a href="#minNotificationTime" title="https://w3id.org/celine-eu#minNotificationTime">min notification time</a>
+   </li>
+   <li>
+      <a href="#minRecoveryTime" title="https://w3id.org/celine-eu#minRecoveryTime">min recovery time</a>
    </li>
    <li>
       <a href="#netAmount" title="https://w3id.org/celine-eu#netAmount">net amount</a>
@@ -172,10 +220,16 @@ This ontology has the following classes and properties.</span>
       <a href="#CommitmentMode" title="https://w3id.org/celine-eu#CommitmentMode">Commitment Mode</a>
    </li>
    <li>
+      <a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a>
+   </li>
+   <li>
       <a href="#CostType" title="https://w3id.org/celine-eu#CostType">Cost Type</a>
    </li>
    <li>
       <a href="#Debt" title="https://w3id.org/celine-eu#Debt">Debt</a>
+   </li>
+   <li>
+      <a href="#DurationConstraint" title="https://w3id.org/celine-eu#DurationConstraint">Duration Constraint</a>
    </li>
    <li>
       <a href="#Fee" title="https://w3id.org/celine-eu#Fee">Fee</a>
@@ -188,6 +242,15 @@ This ontology has the following classes and properties.</span>
    </li>
    <li>
       <a href="#FlexibilityDirection" title="https://w3id.org/celine-eu#FlexibilityDirection">Flexibility Direction</a>
+   </li>
+   <li>
+      <a href="#FrequencyConstraint" title="https://w3id.org/celine-eu#FrequencyConstraint">Frequency Constraint</a>
+   </li>
+   <li>
+      <a href="#NoticeConstraint" title="https://w3id.org/celine-eu#NoticeConstraint">Notice Constraint</a>
+   </li>
+   <li>
+      <a href="#RecoveryConstraint" title="https://w3id.org/celine-eu#RecoveryConstraint">Recovery Constraint</a>
    </li>
    <li>
       <a href="#Voluntary" title="https://w3id.org/celine-eu#Voluntary">Voluntary</a>

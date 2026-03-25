@@ -7,7 +7,9 @@ This section provides details for each class and property defined by CELINE Core
   <li><a href="#CostItem" title="https://w3id.org/celine-eu#CostItem">Cost Item</a></li>
   <li><a href="#DatasetReference" title="https://w3id.org/celine-eu#DatasetReference">Dataset Reference</a></li>
   <li><a href="#FlexibilityCommitment" title="https://w3id.org/celine-eu#FlexibilityCommitment">Flexibility Commitment</a></li>
+  <li><a href="#FlexibilityConstraint" title="https://w3id.org/celine-eu#FlexibilityConstraint">Flexibility Constraint</a></li>
   <li><a href="#FlexibilityCredit" title="https://w3id.org/celine-eu#FlexibilityCredit">Flexibility Credit</a></li>
+  <li><a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a></li>
   <li><a href="#KPIEvaluation" title="https://w3id.org/celine-eu#KPIEvaluation">KPI Evaluation</a></li>
   <li><a href="#RedistributionResult" title="https://w3id.org/celine-eu#RedistributionResult">Redistribution Result</a></li>
   <li><a href="#Scenario" title="https://w3id.org/celine-eu#Scenario">Scenario</a></li>
@@ -47,7 +49,7 @@ This section provides details for each class and property defined by CELINE Core
     is in domain of
    </dt>
    <dd>
-    <a href="#hasCommunity" title="https://w3id.org/celine-eu#hasCommunity">has energy community</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasCommitment" title="https://w3id.org/celine-eu#hasCommitment">has flexibility commitment</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasSettlementRun" title="https://w3id.org/celine-eu#hasSettlementRun">has settlement run</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasSimulation" title="https://w3id.org/celine-eu#hasSimulation">has simulation</a> <sup class="type-op" title="object property">op</sup>, <a href="#usesAsset" title="https://w3id.org/celine-eu#usesAsset">uses asset</a> <sup class="type-op" title="object property">op</sup>
+    <a href="#hasCommunity" title="https://w3id.org/celine-eu#hasCommunity">has energy community</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasCommitment" title="https://w3id.org/celine-eu#hasCommitment">has flexibility commitment</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasEnvelope" title="https://w3id.org/celine-eu#hasEnvelope">has flexibility envelope</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasSettlementRun" title="https://w3id.org/celine-eu#hasSettlementRun">has settlement run</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasSimulation" title="https://w3id.org/celine-eu#hasSimulation">has simulation</a> <sup class="type-op" title="object property">op</sup>, <a href="#usesAsset" title="https://w3id.org/celine-eu#usesAsset">uses asset</a> <sup class="type-op" title="object property">op</sup>
    </dd>
    <dt>
     is in range of
@@ -169,13 +171,56 @@ ex:cost_platform_fee a celine:CostItem ;
     is in domain of
    </dt>
    <dd>
-    <a href="#committedBy" title="https://w3id.org/celine-eu#committedBy">committed by</a> <sup class="type-op" title="object property">op</sup>, <a href="#generatesCredit" title="https://w3id.org/celine-eu#generatesCredit">generates credit</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasCommitmentMode" title="https://w3id.org/celine-eu#hasCommitmentMode">has commitment mode</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasFlexibilityDirection" title="https://w3id.org/celine-eu#hasFlexibilityDirection">has flexibility direction</a> <sup class="type-op" title="object property">op</sup>, <a href="#onPOD" title="https://w3id.org/celine-eu#onPOD">on POD</a> <sup class="type-op" title="object property">op</sup>, <a href="#targetFlexibility" title="https://w3id.org/celine-eu#targetFlexibility">target flexibility</a> <sup class="type-dp" title="data property">dp</sup>
+    <a href="#committedBy" title="https://w3id.org/celine-eu#committedBy">committed by</a> <sup class="type-op" title="object property">op</sup>, <a href="#generatesCredit" title="https://w3id.org/celine-eu#generatesCredit">generates credit</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasCommitmentMode" title="https://w3id.org/celine-eu#hasCommitmentMode">has commitment mode</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasFlexibilityDirection" title="https://w3id.org/celine-eu#hasFlexibilityDirection">has flexibility direction</a> <sup class="type-op" title="object property">op</sup>, <a href="#onPOD" title="https://w3id.org/celine-eu#onPOD">on POD</a> <sup class="type-op" title="object property">op</sup>, <a href="#targetFlexibility" title="https://w3id.org/celine-eu#targetFlexibility">target flexibility</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#withinEnvelope" title="https://w3id.org/celine-eu#withinEnvelope">within envelope</a> <sup class="type-op" title="object property">op</sup>
    </dd>
    <dt>
     is in range of
    </dt>
    <dd>
     <a href="#creditFor" title="https://w3id.org/celine-eu#creditFor">credit for</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasCommitment" title="https://w3id.org/celine-eu#hasCommitment">has flexibility commitment</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="FlexibilityConstraint">
+  <h3>Flexibility Constraint<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#FlexibilityConstraint</p>
+  <div class="comment">
+   <span class="markdown">Operational constraint governing when and how flexibility declared in a FlexibilityEnvelope may be activated. Encodes timing rules (minimum notice period, minimum and maximum activation duration, recovery time between activations) and frequency limits.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl>
+   <dt>
+    Example
+   </dt>
+   <dd>
+    <pre>ex:constraint_hp a celine:FlexibilityConstraint ;
+    celine:hasConstraintType     celine:DurationConstraint ;
+    celine:minNotificationTime   "PT15M"^^xsd:duration ;
+    celine:minActivationDuration "PT30M"^^xsd:duration ;
+    celine:maxActivationDuration "PT4H"^^xsd:duration ;
+    celine:minRecoveryTime       "PT1H"^^xsd:duration ;
+    celine:maxActivationsPerDay  "3"^^xsd:integer .</pre>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#hasConstraintType" title="https://w3id.org/celine-eu#hasConstraintType">has constraint type</a> <sup class="type-op" title="object property">op</sup>, <a href="#maxActivationDuration" title="https://w3id.org/celine-eu#maxActivationDuration">max activation duration</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#maxActivationsPerDay" title="https://w3id.org/celine-eu#maxActivationsPerDay">max activations per day</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#minActivationDuration" title="https://w3id.org/celine-eu#minActivationDuration">min activation duration</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#minNotificationTime" title="https://w3id.org/celine-eu#minNotificationTime">min notification time</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#minRecoveryTime" title="https://w3id.org/celine-eu#minRecoveryTime">min recovery time</a> <sup class="type-dp" title="data property">dp</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasConstraint" title="https://w3id.org/celine-eu#hasConstraint">has constraint</a> <sup class="type-op" title="object property">op</sup>
    </dd>
   </dl>
  </div>
@@ -217,6 +262,49 @@ ex:cost_platform_fee a celine:CostItem ;
    </dt>
    <dd>
     <a href="#generatesCredit" title="https://w3id.org/celine-eu#generatesCredit">generates credit</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="FlexibilityEnvelope">
+  <h3>Flexibility Envelope<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#FlexibilityEnvelope</p>
+  <div class="comment">
+   <span class="markdown">Declared capability of a Point of Delivery (POD) to provide flexibility within a given availability window. Captures the physical bounds — maximum upward and downward power and available energy — that constrain any FlexibilityCommitment drawn from it. Aligned with saref4ener:PowerProfile for device-level scheduling semantics.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl>
+   <dt>
+    Example
+   </dt>
+   <dd>
+    <pre>ex:env_hp a celine:FlexibilityEnvelope ;
+    celine:envelopeFor           ex:pod_rossi_heatpump ;
+    celine:maxFlexUp             "2.0"^^xsd:decimal ;
+    celine:maxFlexDown           "3.0"^^xsd:decimal ;
+    celine:availableEnergy       "6.0"^^xsd:decimal ;
+    celine:hasAvailabilityWindow ex:window_morning ;
+    celine:hasConstraint         ex:constraint_hp .</pre>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#availableEnergy" title="https://w3id.org/celine-eu#availableEnergy">available energy</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#envelopeFor" title="https://w3id.org/celine-eu#envelopeFor">envelope for</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasAvailabilityWindow" title="https://w3id.org/celine-eu#hasAvailabilityWindow">has availability window</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasConstraint" title="https://w3id.org/celine-eu#hasConstraint">has constraint</a> <sup class="type-op" title="object property">op</sup>, <a href="#maxFlexDown" title="https://w3id.org/celine-eu#maxFlexDown">max flex down</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#maxFlexUp" title="https://w3id.org/celine-eu#maxFlexUp">max flex up</a> <sup class="type-dp" title="data property">dp</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasEnvelope" title="https://w3id.org/celine-eu#hasEnvelope">has flexibility envelope</a> <sup class="type-op" title="object property">op</sup>, <a href="#withinEnvelope" title="https://w3id.org/celine-eu#withinEnvelope">within envelope</a> <sup class="type-op" title="object property">op</sup>
    </dd>
   </dl>
  </div>
@@ -463,15 +551,20 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#committedBy" title="https://w3id.org/celine-eu#committedBy">committed by</a></li>
   <li><a href="#creditFor" title="https://w3id.org/celine-eu#creditFor">credit for</a></li>
   <li><a href="#earnedBy" title="https://w3id.org/celine-eu#earnedBy">earned by</a></li>
+  <li><a href="#envelopeFor" title="https://w3id.org/celine-eu#envelopeFor">envelope for</a></li>
   <li><a href="#evaluatesKPI" title="https://w3id.org/celine-eu#evaluatesKPI">evaluates KPI</a></li>
   <li><a href="#evidencedBy" title="https://w3id.org/celine-eu#evidencedBy">evidenced by</a></li>
   <li><a href="#generatesCredit" title="https://w3id.org/celine-eu#generatesCredit">generates credit</a></li>
+  <li><a href="#hasAvailabilityWindow" title="https://w3id.org/celine-eu#hasAvailabilityWindow">has availability window</a></li>
   <li><a href="#hasCommitmentMode" title="https://w3id.org/celine-eu#hasCommitmentMode">has commitment mode</a></li>
+  <li><a href="#hasConstraint" title="https://w3id.org/celine-eu#hasConstraint">has constraint</a></li>
+  <li><a href="#hasConstraintType" title="https://w3id.org/celine-eu#hasConstraintType">has constraint type</a></li>
   <li><a href="#hasCostItem" title="https://w3id.org/celine-eu#hasCostItem">has cost item</a></li>
   <li><a href="#hasCostType" title="https://w3id.org/celine-eu#hasCostType">has cost type</a></li>
   <li><a href="#hasCommunity" title="https://w3id.org/celine-eu#hasCommunity">has energy community</a></li>
   <li><a href="#hasCommitment" title="https://w3id.org/celine-eu#hasCommitment">has flexibility commitment</a></li>
   <li><a href="#hasFlexibilityDirection" title="https://w3id.org/celine-eu#hasFlexibilityDirection">has flexibility direction</a></li>
+  <li><a href="#hasEnvelope" title="https://w3id.org/celine-eu#hasEnvelope">has flexibility envelope</a></li>
   <li><a href="#hasKPIEvaluation" title="https://w3id.org/celine-eu#hasKPIEvaluation">has KPI evaluation</a></li>
   <li><a href="#hasRedistributionResult" title="https://w3id.org/celine-eu#hasRedistributionResult">has redistribution result</a></li>
   <li><a href="#hasScenario" title="https://w3id.org/celine-eu#hasScenario">has scenario</a></li>
@@ -486,6 +579,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#usesAsset" title="https://w3id.org/celine-eu#usesAsset">uses asset</a></li>
   <li><a href="#usesDataset" title="https://w3id.org/celine-eu#usesDataset">uses dataset</a></li>
   <li><a href="#usesObservation" title="https://w3id.org/celine-eu#usesObservation">uses observation</a></li>
+  <li><a href="#withinEnvelope" title="https://w3id.org/celine-eu#withinEnvelope">within envelope</a></li>
  </ul>
  <div class="entity" id="committedBy">
   <h3>committed by<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
@@ -573,6 +667,37 @@ ex:cost_platform_fee a celine:CostItem ;
     </dt>
     <dd>
      <a href="https://purl.org/peco/peco-core#Energy_community_member" target="_blank" title="https://purl.org/peco/peco-core#Energy_community_member">Energy community member</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="envelopeFor">
+  <h3>envelope for<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#envelopeFor</p>
+  <div class="comment">
+   <span class="markdown">The POD whose physical and operational flexibility is described by this envelope.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="https://purl.org/peco/peco-core#Electric_POD" target="_blank" title="https://purl.org/peco/peco-core#Electric_POD">Electric P O D</a> <sup class="type-c" title="class">c</sup>
     </dd>
    </dl>
   </div>
@@ -670,6 +795,37 @@ ex:cost_platform_fee a celine:CostItem ;
    </dl>
   </div>
  </div>
+ <div class="entity" id="hasAvailabilityWindow">
+  <h3>has availability window<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasAvailabilityWindow</p>
+  <div class="comment">
+   <span class="markdown">Time window(s) during which the flexibility declared in this envelope is available for activation.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2006/time#Interval" target="_blank" title="http://www.w3.org/2006/time#Interval">Time interval</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
  <div class="entity" id="hasCommitmentMode">
   <h3>has commitment mode<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasCommitmentMode</p>
@@ -691,6 +847,68 @@ ex:cost_platform_fee a celine:CostItem ;
     </dt>
     <dd>
      <a href="#FlexibilityCommitment" title="https://w3id.org/celine-eu#FlexibilityCommitment">Flexibility Commitment</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasConstraint">
+  <h3>has constraint<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasConstraint</p>
+  <div class="comment">
+   <span class="markdown">One or more operational constraints bounding how flexibility in this envelope may be activated.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#FlexibilityConstraint" title="https://w3id.org/celine-eu#FlexibilityConstraint">Flexibility Constraint</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasConstraintType">
+  <h3>has constraint type<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasConstraintType</p>
+  <div class="comment">
+   <span class="markdown">Expected values: celine:DurationConstraint, celine:NoticeConstraint, celine:RecoveryConstraint, celine:FrequencyConstraint.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityConstraint" title="https://w3id.org/celine-eu#FlexibilityConstraint">Flexibility Constraint</a> <sup class="type-c" title="class">c</sup>
     </dd>
     <dt>
      has range
@@ -843,6 +1061,37 @@ ex:cost_platform_fee a celine:CostItem ;
     </dt>
     <dd>
      <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasEnvelope">
+  <h3>has flexibility envelope<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasEnvelope</p>
+  <div class="comment">
+   <span class="markdown">Links a CommunityContext to the declared flexibility capability envelopes of its PODs.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#CommunityContext" title="https://w3id.org/celine-eu#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a> <sup class="type-c" title="class">c</sup>
     </dd>
    </dl>
   </div>
@@ -1254,9 +1503,41 @@ ex:cost_platform_fee a celine:CostItem ;
    </dl>
   </div>
  </div>
+ <div class="entity" id="withinEnvelope">
+  <h3>within envelope<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#withinEnvelope</p>
+  <div class="comment">
+   <span class="markdown">The FlexibilityEnvelope from which this commitment draws; commitment amounts must not exceed envelope bounds.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityCommitment" title="https://w3id.org/celine-eu#FlexibilityCommitment">Flexibility Commitment</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
 </div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="dataproperties">
  <h3 id="dataproperties-headline" class="list">Data Properties</h3>
  <ul class="hlist">
+  <li><a href="#availableEnergy" title="https://w3id.org/celine-eu#availableEnergy">available energy</a></li>
   <li><a href="#conversionRate" title="https://w3id.org/celine-eu#conversionRate">conversion rate</a></li>
   <li><a href="#costAmount" title="https://w3id.org/celine-eu#costAmount">cost amount</a></li>
   <li><a href="#costDeduction" title="https://w3id.org/celine-eu#costDeduction">cost deduction</a></li>
@@ -1264,9 +1545,47 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#creditBalance" title="https://w3id.org/celine-eu#creditBalance">credit balance</a></li>
   <li><a href="#currency" title="https://w3id.org/celine-eu#currency">currency</a></li>
   <li><a href="#grossAmount" title="https://w3id.org/celine-eu#grossAmount">gross amount</a></li>
+  <li><a href="#maxActivationDuration" title="https://w3id.org/celine-eu#maxActivationDuration">max activation duration</a></li>
+  <li><a href="#maxActivationsPerDay" title="https://w3id.org/celine-eu#maxActivationsPerDay">max activations per day</a></li>
+  <li><a href="#maxFlexDown" title="https://w3id.org/celine-eu#maxFlexDown">max flex down</a></li>
+  <li><a href="#maxFlexUp" title="https://w3id.org/celine-eu#maxFlexUp">max flex up</a></li>
+  <li><a href="#minActivationDuration" title="https://w3id.org/celine-eu#minActivationDuration">min activation duration</a></li>
+  <li><a href="#minNotificationTime" title="https://w3id.org/celine-eu#minNotificationTime">min notification time</a></li>
+  <li><a href="#minRecoveryTime" title="https://w3id.org/celine-eu#minRecoveryTime">min recovery time</a></li>
   <li><a href="#netAmount" title="https://w3id.org/celine-eu#netAmount">net amount</a></li>
   <li><a href="#targetFlexibility" title="https://w3id.org/celine-eu#targetFlexibility">target flexibility</a></li>
  </ul>
+ <div class="entity" id="availableEnergy">
+  <h3>available energy<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#availableEnergy</p>
+  <div class="comment">
+   <span class="markdown">Total energy available for flexibility delivery within the availability window (kWh).</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#decimal" target="_blank" title="http://www.w3.org/2001/XMLSchema#decimal">decimal</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
  <div class="entity" id="conversionRate">
   <h3>conversion rate<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#conversionRate</p>
@@ -1484,6 +1803,223 @@ ex:cost_platform_fee a celine:CostItem ;
    </dl>
   </div>
  </div>
+ <div class="entity" id="maxActivationDuration">
+  <h3>max activation duration<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#maxActivationDuration</p>
+  <div class="comment">
+   <span class="markdown">Maximum duration for which a flexibility activation may be maintained (ISO 8601 duration, e.g. PT4H).</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityConstraint" title="https://w3id.org/celine-eu#FlexibilityConstraint">Flexibility Constraint</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#duration" target="_blank" title="http://www.w3.org/2001/XMLSchema#duration">duration</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="maxActivationsPerDay">
+  <h3>max activations per day<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#maxActivationsPerDay</p>
+  <div class="comment">
+   <span class="markdown">Maximum number of flexibility activation events permitted within a 24-hour period.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityConstraint" title="https://w3id.org/celine-eu#FlexibilityConstraint">Flexibility Constraint</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#integer" target="_blank" title="http://www.w3.org/2001/XMLSchema#integer">integer</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="maxFlexDown">
+  <h3>max flex down<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#maxFlexDown</p>
+  <div class="comment">
+   <span class="markdown">Maximum downward flexibility available from this envelope (kW). Positive value; represents decrease in net load or increase in local generation.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#decimal" target="_blank" title="http://www.w3.org/2001/XMLSchema#decimal">decimal</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="maxFlexUp">
+  <h3>max flex up<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#maxFlexUp</p>
+  <div class="comment">
+   <span class="markdown">Maximum upward flexibility available from this envelope (kW). Positive value; represents increase in net load or decrease in local generation.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#decimal" target="_blank" title="http://www.w3.org/2001/XMLSchema#decimal">decimal</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="minActivationDuration">
+  <h3>min activation duration<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#minActivationDuration</p>
+  <div class="comment">
+   <span class="markdown">Minimum duration for which a flexibility activation must be sustained once started (ISO 8601 duration, e.g. PT30M).</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityConstraint" title="https://w3id.org/celine-eu#FlexibilityConstraint">Flexibility Constraint</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#duration" target="_blank" title="http://www.w3.org/2001/XMLSchema#duration">duration</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="minNotificationTime">
+  <h3>min notification time<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#minNotificationTime</p>
+  <div class="comment">
+   <span class="markdown">Minimum lead time required before a flexibility activation can start (ISO 8601 duration, e.g. PT15M).</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityConstraint" title="https://w3id.org/celine-eu#FlexibilityConstraint">Flexibility Constraint</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#duration" target="_blank" title="http://www.w3.org/2001/XMLSchema#duration">duration</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="minRecoveryTime">
+  <h3>min recovery time<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#minRecoveryTime</p>
+  <div class="comment">
+   <span class="markdown">Minimum rest period required between two consecutive flexibility activations (ISO 8601 duration, e.g. PT1H).</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityConstraint" title="https://w3id.org/celine-eu#FlexibilityConstraint">Flexibility Constraint</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#duration" target="_blank" title="http://www.w3.org/2001/XMLSchema#duration">duration</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
  <div class="entity" id="netAmount">
   <h3>net amount<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#netAmount</p>
@@ -1561,12 +2097,17 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#AdminCost" title="https://w3id.org/celine-eu#AdminCost">Administrative Cost</a></li>
   <li><a href="#Automated" title="https://w3id.org/celine-eu#Automated">Automated</a></li>
   <li><a href="#CommitmentMode" title="https://w3id.org/celine-eu#CommitmentMode">Commitment Mode</a></li>
+  <li><a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a></li>
   <li><a href="#CostType" title="https://w3id.org/celine-eu#CostType">Cost Type</a></li>
   <li><a href="#Debt" title="https://w3id.org/celine-eu#Debt">Debt</a></li>
+  <li><a href="#DurationConstraint" title="https://w3id.org/celine-eu#DurationConstraint">Duration Constraint</a></li>
   <li><a href="#Fee" title="https://w3id.org/celine-eu#Fee">Fee</a></li>
   <li><a href="#FlexDown" title="https://w3id.org/celine-eu#FlexDown">Flex Down</a></li>
   <li><a href="#FlexUp" title="https://w3id.org/celine-eu#FlexUp">Flex Up</a></li>
   <li><a href="#FlexibilityDirection" title="https://w3id.org/celine-eu#FlexibilityDirection">Flexibility Direction</a></li>
+  <li><a href="#FrequencyConstraint" title="https://w3id.org/celine-eu#FrequencyConstraint">Frequency Constraint</a></li>
+  <li><a href="#NoticeConstraint" title="https://w3id.org/celine-eu#NoticeConstraint">Notice Constraint</a></li>
+  <li><a href="#RecoveryConstraint" title="https://w3id.org/celine-eu#RecoveryConstraint">Recovery Constraint</a></li>
   <li><a href="#Voluntary" title="https://w3id.org/celine-eu#Voluntary">Voluntary</a></li>
  </ul>
  <div class="entity" id="AdminCost">
@@ -1668,6 +2209,35 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
   </dl>
  </div>
+ <div class="entity" id="ConstraintType">
+  <h3>Constraint Type<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#ConstraintType</p>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#ConceptScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#ConceptScheme">Concept Scheme</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://purl.org/dc/terms/description" target="_blank" title="http://purl.org/dc/terms/description">description</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Classification of operational constraints on flexibility activation."</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Constraint Type"</span>
+   </dd>
+  </dl>
+ </div>
  <div class="entity" id="CostType">
   <h3>Cost Type<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#CostType</p>
@@ -1729,6 +2299,41 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
    <dd>
     <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#CostType" title="https://w3id.org/celine-eu#CostType">Cost Type</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="DurationConstraint">
+  <h3>Duration Constraint<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#DurationConstraint</p>
+  <div class="comment">
+   <span class="markdown">Constraint on the minimum or maximum duration of a single flexibility activation event.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-op" title="object property">op</sup> <a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Duration Constraint"</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a> <sup class="type-ni" title="named individual">ni</sup>
    </dd>
   </dl>
  </div>
@@ -1863,6 +2468,111 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
    <dd>
     <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Flexibility Direction"</span>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="FrequencyConstraint">
+  <h3>Frequency Constraint<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#FrequencyConstraint</p>
+  <div class="comment">
+   <span class="markdown">Constraint on the maximum number of flexibility activations permitted within a given period.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-op" title="object property">op</sup> <a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Frequency Constraint"</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="NoticeConstraint">
+  <h3>Notice Constraint<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#NoticeConstraint</p>
+  <div class="comment">
+   <span class="markdown">Constraint on the minimum lead time required before activating flexibility.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-op" title="object property">op</sup> <a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Notice Constraint"</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="RecoveryConstraint">
+  <h3>Recovery Constraint<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#RecoveryConstraint</p>
+  <div class="comment">
+   <span class="markdown">Constraint on the minimum rest period required between consecutive flexibility activations.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-op" title="object property">op</sup> <a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Recovery Constraint"</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a> <sup class="type-ni" title="named individual">ni</sup>
    </dd>
   </dl>
  </div>

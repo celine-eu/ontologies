@@ -161,6 +161,63 @@
     "netAmount": {
       "@id": "celine:netAmount",
       "@type": "xsd:decimal"
+    },
+
+    "hasEnvelope": {
+      "@id": "celine:hasEnvelope",
+      "@type": "@id"
+    },
+    "envelopeFor": {
+      "@id": "celine:envelopeFor",
+      "@type": "@id"
+    },
+    "withinEnvelope": {
+      "@id": "celine:withinEnvelope",
+      "@type": "@id"
+    },
+    "hasAvailabilityWindow": {
+      "@id": "celine:hasAvailabilityWindow",
+      "@type": "@id"
+    },
+    "hasConstraint": {
+      "@id": "celine:hasConstraint",
+      "@type": "@id"
+    },
+    "hasConstraintType": {
+      "@id": "celine:hasConstraintType",
+      "@type": "@id"
+    },
+    "maxFlexUp": {
+      "@id": "celine:maxFlexUp",
+      "@type": "xsd:decimal"
+    },
+    "maxFlexDown": {
+      "@id": "celine:maxFlexDown",
+      "@type": "xsd:decimal"
+    },
+    "availableEnergy": {
+      "@id": "celine:availableEnergy",
+      "@type": "xsd:decimal"
+    },
+    "minActivationDuration": {
+      "@id": "celine:minActivationDuration",
+      "@type": "xsd:duration"
+    },
+    "maxActivationDuration": {
+      "@id": "celine:maxActivationDuration",
+      "@type": "xsd:duration"
+    },
+    "minNotificationTime": {
+      "@id": "celine:minNotificationTime",
+      "@type": "xsd:duration"
+    },
+    "minRecoveryTime": {
+      "@id": "celine:minRecoveryTime",
+      "@type": "xsd:duration"
+    },
+    "maxActivationsPerDay": {
+      "@id": "celine:maxActivationsPerDay",
+      "@type": "xsd:integer"
     }
   },
   "@graph": [
@@ -229,6 +286,31 @@
     { "@id": "celine:creditBalance",     "@type": "owl:DatatypeProperty", "label": "credit balance" },
     { "@id": "celine:grossAmount",       "@type": "owl:DatatypeProperty", "label": "gross amount" },
     { "@id": "celine:costDeduction",     "@type": "owl:DatatypeProperty", "label": "cost deduction" },
-    { "@id": "celine:netAmount",         "@type": "owl:DatatypeProperty", "label": "net amount" }
+    { "@id": "celine:netAmount",         "@type": "owl:DatatypeProperty", "label": "net amount" },
+
+    { "@id": "celine:FlexibilityEnvelope",  "@type": "owl:Class", "label": "Flexibility Envelope" },
+    { "@id": "celine:FlexibilityConstraint","@type": "owl:Class", "label": "Flexibility Constraint" },
+
+    { "@id": "celine:ConstraintType",       "@type": "skos:ConceptScheme", "label": "Constraint Type" },
+    { "@id": "celine:DurationConstraint",   "@type": "skos:Concept", "skos:prefLabel": "Duration Constraint" },
+    { "@id": "celine:NoticeConstraint",     "@type": "skos:Concept", "skos:prefLabel": "Notice Constraint" },
+    { "@id": "celine:RecoveryConstraint",   "@type": "skos:Concept", "skos:prefLabel": "Recovery Constraint" },
+    { "@id": "celine:FrequencyConstraint",  "@type": "skos:Concept", "skos:prefLabel": "Frequency Constraint" },
+
+    { "@id": "celine:hasEnvelope",           "@type": "owl:ObjectProperty", "label": "has flexibility envelope" },
+    { "@id": "celine:envelopeFor",           "@type": "owl:ObjectProperty", "label": "envelope for" },
+    { "@id": "celine:withinEnvelope",        "@type": "owl:ObjectProperty", "label": "within envelope" },
+    { "@id": "celine:hasAvailabilityWindow", "@type": "owl:ObjectProperty", "label": "has availability window" },
+    { "@id": "celine:hasConstraint",         "@type": "owl:ObjectProperty", "label": "has constraint" },
+    { "@id": "celine:hasConstraintType",     "@type": "owl:ObjectProperty", "label": "has constraint type" },
+
+    { "@id": "celine:maxFlexUp",             "@type": "owl:DatatypeProperty", "label": "max flex up" },
+    { "@id": "celine:maxFlexDown",           "@type": "owl:DatatypeProperty", "label": "max flex down" },
+    { "@id": "celine:availableEnergy",       "@type": "owl:DatatypeProperty", "label": "available energy" },
+    { "@id": "celine:minActivationDuration", "@type": "owl:DatatypeProperty", "label": "min activation duration" },
+    { "@id": "celine:maxActivationDuration", "@type": "owl:DatatypeProperty", "label": "max activation duration" },
+    { "@id": "celine:minNotificationTime",   "@type": "owl:DatatypeProperty", "label": "min notification time" },
+    { "@id": "celine:minRecoveryTime",       "@type": "owl:DatatypeProperty", "label": "min recovery time" },
+    { "@id": "celine:maxActivationsPerDay",  "@type": "owl:DatatypeProperty", "label": "max activations per day" }
   ]
 }

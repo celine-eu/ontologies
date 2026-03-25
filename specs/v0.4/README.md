@@ -14,12 +14,18 @@ Adds REC flexibility commitment and settlement modelling on top of the v0.3 orch
   in SOSA observations for auditability
 - **New class layer: Settlement** — `SettlementRun`, `CostItem`, and `RedistributionResult` model
   the full redistribution cycle: credit aggregation → monetary conversion → cost deduction → net payout per member
-- **Three SKOS vocabularies** — `CommitmentMode`, `FlexibilityDirection`, `CostType` with
-  built-in concepts (`Automated`, `Voluntary`, `FlexDown`, `FlexUp`, `AdminCost`, `Fee`, `Debt`)
-- **SHACL shapes** added for all five new classes
+- **New class: FlexibilityEnvelope** — declared capability of a POD (max up/down power, available
+  energy, availability windows); aligned with `saref4ener:PowerProfile` already in scope
+- **New class: FlexibilityConstraint** — operational constraints on flexibility activation
+  (notice period, min/max duration, recovery time, max activations per day)
+- **Four SKOS vocabularies** — `CommitmentMode`, `FlexibilityDirection`, `CostType`, `ConstraintType`
+  with built-in concepts (`Automated`, `Voluntary`, `FlexDown`, `FlexUp`, `AdminCost`, `Fee`, `Debt`,
+  `DurationConstraint`, `NoticeConstraint`, `RecoveryConstraint`, `FrequencyConstraint`)
+- **SHACL shapes** added for all new classes; existing `CommunityContextShape` and
+  `FlexibilityCommitmentShape` extended with `hasEnvelope` and `withinEnvelope`
 - **JSON-LD context** and **JSON Schema** extended with all new terms
-- No new `owl:imports` — new classes connect to existing PECO (`peco:Energy_community_member`,
-  `peco:Electric_POD`) and SOSA (`sosa:Observation`) terms already in scope
+- No new `owl:imports` — new classes connect to existing PECO (`peco:Electric_POD`) and
+  `time:Interval` terms already in scope; envelope semantics aligned via `rdfs:seeAlso` to SAREF4ENER
 
 ## Classes
 
@@ -36,6 +42,8 @@ Adds REC flexibility commitment and settlement modelling on top of the v0.3 orch
 | `celine:SettlementRun` | Redistribution calculation for a settlement period |
 | `celine:CostItem` | Named cost voice within a SettlementRun (fee, admin cost, debt) |
 | `celine:RedistributionResult` | Per-member settlement outcome (credit balance, gross, deductions, net) |
+| `celine:FlexibilityEnvelope` | Declared capability of a POD (max power up/down, available energy, availability windows) |
+| `celine:FlexibilityConstraint` | Operational constraints on flexibility activation (notice, duration, recovery, frequency) |
 
 ## Flexibility data flow
 
@@ -60,6 +68,31 @@ peco:Energy_community_member
                                                                        └─ hasCostItem ──► CostItem
                                                                                               │ hasCostType: AdminCost | Fee | Debt
                                                                                               └─ costAmount (currency)
+```
+
+## Flexibility envelope and constraint data flow
+
+```
+peco:Electric_POD ──► hasEnvelope (via CommunityContext)
+                           │
+                    FlexibilityEnvelope  (≈ saref4ener:PowerProfile)
+                           │ maxFlexUp      (kW)
+                           │ maxFlexDown    (kW)
+                           │ availableEnergy (kWh)
+                           │ hasAvailabilityWindow ──► time:Interval
+                           └─ hasConstraint ──► FlexibilityConstraint
+                                                    │ hasConstraintType: DurationConstraint
+                                                    │                  | NoticeConstraint
+                                                    │                  | RecoveryConstraint
+                                                    │                  | FrequencyConstraint
+                                                    │ minNotificationTime   (xsd:duration)
+                                                    │ minActivationDuration (xsd:duration)
+                                                    │ maxActivationDuration (xsd:duration)
+                                                    │ minRecoveryTime       (xsd:duration)
+                                                    └─ maxActivationsPerDay (xsd:integer)
+
+FlexibilityCommitment ──► withinEnvelope ──► FlexibilityEnvelope
+  (commitment amounts must not exceed envelope maxFlexUp/maxFlexDown bounds)
 ```
 
 ## Imports

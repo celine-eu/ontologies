@@ -112,6 +112,19 @@
     
 
 
+    <!-- https://w3id.org/celine-eu#envelopeFor -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#envelopeFor">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityEnvelope"/>
+        <rdfs:range rdf:resource="https://purl.org/peco/peco-core#Electric_POD"/>
+        <rdfs:comment>The POD whose physical and operational flexibility is described by this envelope.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>envelope for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- https://w3id.org/celine-eu#evaluatesKPI -->
 
 
@@ -145,6 +158,19 @@
         <rdfs:range rdf:resource="https://w3id.org/celine-eu#FlexibilityCredit"/>
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <rdfs:label>generates credit</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine-eu#hasAvailabilityWindow -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#hasAvailabilityWindow">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityEnvelope"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2006/time#Interval"/>
+        <rdfs:comment>Time window(s) during which the flexibility declared in this envelope is available for activation.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>has availability window</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -186,6 +212,32 @@
     
 
 
+    <!-- https://w3id.org/celine-eu#hasConstraint -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#hasConstraint">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityEnvelope"/>
+        <rdfs:range rdf:resource="https://w3id.org/celine-eu#FlexibilityConstraint"/>
+        <rdfs:comment>One or more operational constraints bounding how flexibility in this envelope may be activated.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>has constraint</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine-eu#hasConstraintType -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#hasConstraintType">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityConstraint"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <rdfs:comment>Expected values: celine:DurationConstraint, celine:NoticeConstraint, celine:RecoveryConstraint, celine:FrequencyConstraint.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>has constraint type</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- https://w3id.org/celine-eu#hasCostItem -->
 
 
@@ -207,6 +259,19 @@
         <rdfs:comment>Expected values: celine:AdminCost, celine:Fee, or celine:Debt.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <rdfs:label>has cost type</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine-eu#hasEnvelope -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#hasEnvelope">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#CommunityContext"/>
+        <rdfs:range rdf:resource="https://w3id.org/celine-eu#FlexibilityEnvelope"/>
+        <rdfs:comment>Links a CommunityContext to the declared flexibility capability envelopes of its PODs.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>has flexibility envelope</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -395,6 +460,19 @@
     
 
 
+    <!-- https://w3id.org/celine-eu#withinEnvelope -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#withinEnvelope">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityCommitment"/>
+        <rdfs:range rdf:resource="https://w3id.org/celine-eu#FlexibilityEnvelope"/>
+        <rdfs:comment>The FlexibilityEnvelope from which this commitment draws; commitment amounts must not exceed envelope bounds.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>within envelope</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -404,6 +482,19 @@
      -->
 
 
+    
+
+
+    <!-- https://w3id.org/celine-eu#availableEnergy -->
+
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/celine-eu#availableEnergy">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityEnvelope"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment>Total energy available for flexibility delivery within the availability window (kWh).</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>available energy</rdfs:label>
+    </owl:DatatypeProperty>
     
 
 
@@ -494,6 +585,97 @@
         <rdfs:comment>Monetary value of the member&apos;s credit balance before cost deductions (creditBalance × conversionRate).</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <rdfs:label>gross amount</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/celine-eu#maxActivationDuration -->
+
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/celine-eu#maxActivationDuration">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityConstraint"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#duration"/>
+        <rdfs:comment>Maximum duration for which a flexibility activation may be maintained (ISO 8601 duration, e.g. PT4H).</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>max activation duration</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/celine-eu#maxActivationsPerDay -->
+
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/celine-eu#maxActivationsPerDay">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityConstraint"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>Maximum number of flexibility activation events permitted within a 24-hour period.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>max activations per day</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/celine-eu#maxFlexDown -->
+
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/celine-eu#maxFlexDown">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityEnvelope"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment>Maximum downward flexibility available from this envelope (kW). Positive value; represents decrease in net load or increase in local generation.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>max flex down</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/celine-eu#maxFlexUp -->
+
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/celine-eu#maxFlexUp">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityEnvelope"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment>Maximum upward flexibility available from this envelope (kW). Positive value; represents increase in net load or decrease in local generation.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>max flex up</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/celine-eu#minActivationDuration -->
+
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/celine-eu#minActivationDuration">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityConstraint"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#duration"/>
+        <rdfs:comment>Minimum duration for which a flexibility activation must be sustained once started (ISO 8601 duration, e.g. PT30M).</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>min activation duration</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/celine-eu#minNotificationTime -->
+
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/celine-eu#minNotificationTime">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityConstraint"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#duration"/>
+        <rdfs:comment>Minimum lead time required before a flexibility activation can start (ISO 8601 duration, e.g. PT15M).</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>min notification time</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/celine-eu#minRecoveryTime -->
+
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/celine-eu#minRecoveryTime">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityConstraint"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#duration"/>
+        <rdfs:comment>Minimum rest period required between two consecutive flexibility activations (ISO 8601 duration, e.g. PT1H).</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>min recovery time</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -626,6 +808,26 @@ ex:cost_platform_fee a celine:CostItem ;
     
 
 
+    <!-- https://w3id.org/celine-eu#FlexibilityConstraint -->
+
+
+    <owl:Class rdf:about="https://w3id.org/celine-eu#FlexibilityConstraint">
+        <rdfs:comment>Operational constraint governing when and how flexibility declared in a
+    FlexibilityEnvelope may be activated. Encodes timing rules (minimum notice period, minimum
+    and maximum activation duration, recovery time between activations) and frequency limits.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>Flexibility Constraint</rdfs:label>
+        <skos:example>ex:constraint_hp a celine:FlexibilityConstraint ;
+    celine:hasConstraintType     celine:DurationConstraint ;
+    celine:minNotificationTime   &quot;PT15M&quot;^^xsd:duration ;
+    celine:minActivationDuration &quot;PT30M&quot;^^xsd:duration ;
+    celine:maxActivationDuration &quot;PT4H&quot;^^xsd:duration ;
+    celine:minRecoveryTime       &quot;PT1H&quot;^^xsd:duration ;
+    celine:maxActivationsPerDay  &quot;3&quot;^^xsd:integer .</skos:example>
+    </owl:Class>
+    
+
+
     <!-- https://w3id.org/celine-eu#FlexibilityCredit -->
 
 
@@ -640,6 +842,28 @@ ex:cost_platform_fee a celine:CostItem ;
     celine:creditFor    ex:fc_001 ;
     celine:creditAmount &quot;2.1&quot;^^xsd:decimal ;
     celine:evidencedBy  ex:obs_pod_rossi_20250701T10 .</skos:example>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/celine-eu#FlexibilityEnvelope -->
+
+
+    <owl:Class rdf:about="https://w3id.org/celine-eu#FlexibilityEnvelope">
+        <rdfs:comment>Declared capability of a Point of Delivery (POD) to provide flexibility
+    within a given availability window. Captures the physical bounds — maximum upward and downward
+    power and available energy — that constrain any FlexibilityCommitment drawn from it.
+    Aligned with saref4ener:PowerProfile for device-level scheduling semantics.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>Flexibility Envelope</rdfs:label>
+        <rdfs:seeAlso rdf:resource="https://saref.etsi.org/saref4ener/"/>
+        <skos:example>ex:env_hp a celine:FlexibilityEnvelope ;
+    celine:envelopeFor           ex:pod_rossi_heatpump ;
+    celine:maxFlexUp             &quot;2.0&quot;^^xsd:decimal ;
+    celine:maxFlexDown           &quot;3.0&quot;^^xsd:decimal ;
+    celine:availableEnergy       &quot;6.0&quot;^^xsd:decimal ;
+    celine:hasAvailabilityWindow ex:window_morning ;
+    celine:hasConstraint         ex:constraint_hp .</skos:example>
     </owl:Class>
     
 
@@ -796,6 +1020,19 @@ ex:cost_platform_fee a celine:CostItem ;
     
 
 
+    <!-- https://w3id.org/celine-eu#ConstraintType -->
+
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/celine-eu#ConstraintType">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+        <terms:description>Classification of operational constraints on flexibility activation.</terms:description>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label>Constraint Type</rdfs:label>
+        <skos:prefLabel>Constraint Type</skos:prefLabel>
+    </owl:NamedIndividual>
+    
+
+
     <!-- https://w3id.org/celine-eu#CostType -->
 
 
@@ -819,6 +1056,20 @@ ex:cost_platform_fee a celine:CostItem ;
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <skos:prefLabel>Debt</skos:prefLabel>
         <skos:topConceptOf rdf:resource="https://w3id.org/celine-eu#CostType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/celine-eu#DurationConstraint -->
+
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/celine-eu#DurationConstraint">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:inScheme rdf:resource="https://w3id.org/celine-eu#ConstraintType"/>
+        <rdfs:comment>Constraint on the minimum or maximum duration of a single flexibility activation event.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <skos:prefLabel>Duration Constraint</skos:prefLabel>
+        <skos:topConceptOf rdf:resource="https://w3id.org/celine-eu#ConstraintType"/>
     </owl:NamedIndividual>
     
 
@@ -874,6 +1125,48 @@ ex:cost_platform_fee a celine:CostItem ;
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <rdfs:label>Flexibility Direction</rdfs:label>
         <skos:prefLabel>Flexibility Direction</skos:prefLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/celine-eu#FrequencyConstraint -->
+
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/celine-eu#FrequencyConstraint">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:inScheme rdf:resource="https://w3id.org/celine-eu#ConstraintType"/>
+        <rdfs:comment>Constraint on the maximum number of flexibility activations permitted within a given period.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <skos:prefLabel>Frequency Constraint</skos:prefLabel>
+        <skos:topConceptOf rdf:resource="https://w3id.org/celine-eu#ConstraintType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/celine-eu#NoticeConstraint -->
+
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/celine-eu#NoticeConstraint">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:inScheme rdf:resource="https://w3id.org/celine-eu#ConstraintType"/>
+        <rdfs:comment>Constraint on the minimum lead time required before activating flexibility.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <skos:prefLabel>Notice Constraint</skos:prefLabel>
+        <skos:topConceptOf rdf:resource="https://w3id.org/celine-eu#ConstraintType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/celine-eu#RecoveryConstraint -->
+
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/celine-eu#RecoveryConstraint">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:inScheme rdf:resource="https://w3id.org/celine-eu#ConstraintType"/>
+        <rdfs:comment>Constraint on the minimum rest period required between consecutive flexibility activations.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <skos:prefLabel>Recovery Constraint</skos:prefLabel>
+        <skos:topConceptOf rdf:resource="https://w3id.org/celine-eu#ConstraintType"/>
     </owl:NamedIndividual>
     
 
