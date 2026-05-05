@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.3.0 (2026-05-05)
+
+### Features
+
+- Add v0.5 with generalized KPIs definitions
+  ([`fa9c3cf`](https://github.com/celine-eu/ontologies/commit/fa9c3cffabe591fdb0acd81056944aeb608f9437))
+
+
 ## Ontology v0.5 (2026-05-05)
 
 ### Features
