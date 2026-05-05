@@ -2,6 +2,34 @@
 
 <!-- version list -->
 
+## Ontology v0.5 (2026-05-05)
+
+### Features
+
+- **KPI container**: new `KPIDefinition` class with scope, calculation method, temporal
+  granularity, and unit of measure properties
+- **KPI catalog**: `KPICatalog` SKOS concept scheme with 11 initial REC-relevant KPI entries
+  (SelfConsumptionRate, SelfSufficiencyRate, SharedEnergy, SharedEnergyMemberShare,
+  IncentiveAccrued, IncentiveMemberShare, WithdrawnEnergy, FedInEnergy,
+  LocalGenerationEnergy, PeakReductionAchieved, FlexibilityActivated)
+- **KPI evaluation refactor**: `KPIEvaluation` now links to `KPIDefinition` via
+  `hasKPIDefinition` with mandatory `hasKPIValue`, `hasEvaluationTimeInterval`,
+  `hasEvaluatedScope`; optional `hasInputObservation` and `hasInputKPIEvaluation` for
+  derived KPIs
+- **SKOS vocabularies**: four new concept schemes — `KPIScope`, `KPICalculationMethod`,
+  `KPITemporalGranularity`, `UnitOfMeasure`
+- **SKOS alignment**: class-level `skos:closeMatch` / `skos:relatedMatch` toward
+  SAREF4CITY KeyPerformanceIndicator, BIGG4KPI KPIAssessment
+
+### Breaking Changes
+
+- Removed `owl:imports` for BIGG ontology and BIGG4KPI extension
+- Removed `celine:evaluatesKPI` property (replaced by `celine:hasKPIDefinition`)
+- Removed `bigg:` prefix from JSON-LD context and SHACL shapes
+- `KPIEvaluation` now requires `hasKPIDefinition`, `hasKPIValue`,
+  `hasEvaluationTimeInterval`, `hasEvaluatedScope` (previously only `evaluatesKPI` was
+  required)
+
 ## v1.2.0 (2026-03-24)
 
 ### Chores

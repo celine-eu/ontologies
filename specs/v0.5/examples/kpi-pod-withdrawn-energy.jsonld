@@ -1,0 +1,31 @@
+{
+  "@context": "https://w3id.org/celine-eu/v0.5/celine.jsonld",
+  "@graph": [
+    {
+      "@id": "ex:interval_2025_07",
+      "@type": "time:Interval",
+      "time:hasBeginning": { "@id": "ex:instant_2025_07_01" },
+      "time:hasEnd": { "@id": "ex:instant_2025_07_31" }
+    },
+    {
+      "@id": "ex:kpi_eval_withdrawn_pod01_jul",
+      "@type": "celine:KPIEvaluation",
+      "label": "Withdrawn Energy POD 01 July 2025",
+      "hasKPIDefinition": "celine:WithdrawnEnergy",
+      "hasKPIValue": 412.5,
+      "hasEvaluationTimeInterval": "ex:interval_2025_07",
+      "hasEvaluatedScope": "ex:pod_rossi_main",
+      "hasInputObservation": "ex:obs_pod_rossi_meter_jul"
+    },
+    {
+      "@id": "ex:kpi_eval_fedin_pod01_jul",
+      "@type": "celine:KPIEvaluation",
+      "label": "Fed-In Energy POD 01 July 2025",
+      "hasKPIDefinition": "celine:FedInEnergy",
+      "hasKPIValue": 187.3,
+      "hasEvaluationTimeInterval": "ex:interval_2025_07",
+      "hasEvaluatedScope": "ex:pod_rossi_main",
+      "hasInputObservation": "ex:obs_pod_rossi_meter_jul"
+    }
+  ]
+}

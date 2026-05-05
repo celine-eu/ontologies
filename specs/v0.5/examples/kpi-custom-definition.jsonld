@@ -1,0 +1,41 @@
+{
+  "@context": "https://w3id.org/celine-eu/v0.5/celine.jsonld",
+  "@graph": [
+    {
+      "@id": "ex:kpi_def_co2_avoided",
+      "@type": ["celine:KPIDefinition", "skos:Concept"],
+      "label": "CO2 Avoided",
+      "hasKPIName": "CO2 Avoided",
+      "hasKPIDescription": "Estimated CO2 emissions avoided by consuming locally generated renewable energy instead of grid energy.",
+      "hasKPIFormula": "SharedEnergy * grid_emission_factor",
+      "hasKPIScopeType": "celine:ScopeCommunity",
+      "hasKPICalculationMethod": "celine:MethodDerived",
+      "hasKPITemporalGranularity": "celine:GranularityMonthly"
+    },
+    {
+      "@id": "ex:interval_2025_07",
+      "@type": "time:Interval",
+      "time:hasBeginning": { "@id": "ex:instant_2025_07_01" },
+      "time:hasEnd": { "@id": "ex:instant_2025_07_31" }
+    },
+    {
+      "@id": "ex:kpi_eval_shared_jul",
+      "@type": "celine:KPIEvaluation",
+      "label": "Shared Energy July 2025",
+      "hasKPIDefinition": "celine:SharedEnergy",
+      "hasKPIValue": 1250.0,
+      "hasEvaluationTimeInterval": "ex:interval_2025_07",
+      "hasEvaluatedScope": "ex:ctx_valdarno"
+    },
+    {
+      "@id": "ex:kpi_eval_co2_jul",
+      "@type": "celine:KPIEvaluation",
+      "label": "CO2 Avoided July 2025",
+      "hasKPIDefinition": "ex:kpi_def_co2_avoided",
+      "hasKPIValue": 487.5,
+      "hasEvaluationTimeInterval": "ex:interval_2025_07",
+      "hasEvaluatedScope": "ex:ctx_valdarno",
+      "hasInputKPIEvaluation": "ex:kpi_eval_shared_jul"
+    }
+  ]
+}

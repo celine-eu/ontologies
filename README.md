@@ -7,7 +7,7 @@ Semantic artifacts and mapping tools for the CELINE project, supporting:
 - Demonstrators, KPIs, and evaluation (WP5)
 - mapping from tabular data to RDF / JSON-LD
 
-The CELINE ontology is a **unified ontology profile** — not a standalone domain ontology — that connects PECO, SAREF, SOSA, BIGG and EM-KPI into a coherent semantic target for the CELINE ecosystem.
+The CELINE ontology is a **unified ontology profile** — not a standalone domain ontology — that connects PECO, SAREF, SOSA/SSN into a coherent semantic target for the CELINE ecosystem. Since v0.5, KPI semantics are defined natively via a generic `KPIDefinition` / `KPICatalog` layer, with alignment to external vocabularies expressed through SKOS annotations rather than OWL imports.
 
 **Namespace**: `https://w3id.org/celine-eu#`
 
@@ -19,12 +19,13 @@ The CELINE ontology is a **unified ontology profile** — not a standalone domai
 
 ```
 specs/          Ontology source artifacts (versioned)
-  current/      → symlink to latest version
-  v0.3/
+  current/      → latest version (v0.5)
+  v0.5/
     celine.ttl           OWL/RDF definition (Turtle)
     celine.shacl.ttl     SHACL validation shapes
     celine.jsonld        JSON-LD context
     celine.schema.json   JSON Schema for API validation
+    examples/            JSON-LD instance data examples
 
 releases/       Generated WIDOCO HTML documentation (versioned)
   current/      → symlink to latest version
@@ -130,7 +131,8 @@ WIDOCO docs are also generated automatically in CI on every push that changes a 
 
 ## Design principles
 
-- **Standards first**: reuse ETSI SAREF, W3C SOSA/SSN, BIGG, EM-KPI
+- **Standards first**: reuse ETSI SAREF, W3C SOSA/SSN, PECO for domain semantics
+- **Alignment via SKOS**: external KPI vocabularies (BIGG, SAREF4CITY) are referenced through `skos:closeMatch` / `skos:relatedMatch` annotations, not OWL imports
 - **Thin CELINE layer**: only project-specific glue concepts are defined here
 - **Modular & versionable**: `specs/` and `releases/` evolve independently
 - **Tool-friendly**: compatible with rdflib, JSON-LD processors, SHACL engines
