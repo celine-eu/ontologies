@@ -1,0 +1,30 @@
+{
+  "@context": "https://w3id.org/celine-eu/v0.5/celine.jsonld",
+  "@graph": [
+    {
+      "@id": "ex:ctx_valdarno",
+      "@type": "celine:CommunityContext",
+      "label": "REC Valdarno context",
+      "hasCommunity": "ex:rec_valdarno"
+    },
+    {
+      "@id": "ex:interval_2025_q3",
+      "@type": "time:Interval",
+      "time:hasBeginning": { "@id": "ex:instant_2025_07_01" },
+      "time:hasEnd": { "@id": "ex:instant_2025_09_30" }
+    },
+    {
+      "@id": "ex:kpi_eval_ssr_q3",
+      "@type": "celine:KPIEvaluation",
+      "label": "Self-Sufficiency Rate Q3 2025",
+      "hasKPIDefinition": "celine:SelfSufficiencyRate",
+      "hasKPIValue": 0.72,
+      "hasEvaluationTimeInterval": "ex:interval_2025_q3",
+      "hasEvaluatedScope": "ex:ctx_valdarno",
+      "hasInputObservation": [
+        "ex:obs_meter_001",
+        "ex:obs_meter_002"
+      ]
+    }
+  ]
+}

@@ -2,6 +2,40 @@
 
 <!-- version list -->
 
+## Ontology v0.6 (2026-05-14)
+
+### Features
+
+- **Grid topology**: 6 new classes — `Substation` (abstract), `PrimarySubstation` (HV/MV),
+  `SecondarySubstation` (MV/LV), `PowerTransformer`, `DistributionFeeder`, `RegulatoryZone`
+  (administrative coverage area). All grid equipment classes are `rdfs:subClassOf peco:Asset`;
+  CIM alignment via `skos:closeMatch` to IEC 61968 profile (no `owl:imports`).
+- **Grid actor**: `GridOperator` class (`rdfs:subClassOf peco:Agent`, `skos:closeMatch
+  cim:Company`). DSO specialisation noted in comment; role-based modelling deferred.
+- **Connection point**: `ConnectionPoint` class with `skos:closeMatch cim:UsagePoint`.
+  `peco:Electric_POD` declared `rdfs:subClassOf celine:ConnectionPoint` — the single
+  statement where v0.6 reaches into PECO's namespace.
+- **Asset inventory (presence-only)**: 5 new classes — `PVSystem`, `BatteryStorage`
+  (via `peco:Energy_storage`), `ElectricityMeter`, `EVCharger`, `HeatPump`. SAREF
+  alignment via `skos:closeMatch` only. No technical-attribute datatype properties;
+  specs live in the external rec-registry catalogue.
+- **9 new object properties**: `hasIdentifierScheme`, `operatedBy`, `servedBy`,
+  `inRegulatoryZone`, `hasRegulatoryZone`, `hasTopologyNode`, `hasGridOperator`,
+  `pairedWith` (symmetric), `measures`.
+- **1 new datatype property**: `hasLocalIdentifier` — unified local-ID property for
+  connection points (POD/CUPS/PRM/etc.) and assets (registry lookup key).
+- **SKOS scheme**: `ConnectionPointIdentifierScheme` with 6 concepts — `POD` (Italy),
+  `CUPS` (Spain), `PRM` (France), `MALO` (Germany), `EAN` (Belgium/Netherlands),
+  `MPAN` (United Kingdom).
+- **CommunityContext extended**: gains `hasRegulatoryZone`, `hasTopologyNode`,
+  `hasGridOperator` optional properties.
+
+### Deferred
+
+- Member role/lifecycle enums, asset technical attributes, asset-type sub-classification
+  schemes, generic `Load` class, device metadata, telemetry layer, closed-world absence,
+  SHACL shapes for new classes.
+
 ## v1.3.0 (2026-05-05)
 
 ### Features
