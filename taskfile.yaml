@@ -7,8 +7,8 @@ tasks:
       - git push
       - git push --tags
 
-  docs:widoco:
-    desc: "Generate WIDOCO HTML docs for a spec version (default: latest). Pass version as: task docs:widoco -- vX.X"
+  widoco:docs:
+    desc: "Generate WIDOCO HTML docs for a spec version (default: latest). Pass version as: task widoco:docs -- vX.X"
     vars:
       VERSION:
         sh: |
@@ -69,8 +69,37 @@ tasks:
           echo "Copied specs/$version/README.md → $output/readme.md"
         fi
 
+  widoco:serve:
+    desc: "Serve WIDOCO HTML docs locally (default: latest). Pass version as: task widoco:serve -- vX.X"
+    vars:
+      VERSION:
+        sh: |
+          if [ -n "{{.CLI_ARGS}}" ]; then
+            echo "{{.CLI_ARGS}}"
+          else
+            ls -d releases/*/ 2>/dev/null \
+              | sed 's:/*$::' \
+              | grep -v current \
+              | sort -V \
+              | tail -n 1 \
+              | xargs basename
+          fi
+    cmds:
+      - |
+        set -e
+        version="{{.VERSION}}"
+        docroot="releases/$version"
+
+        if [ ! -d "$docroot" ]; then
+          echo "No docs found at $docroot — run 'task widoco:docs' first"
+          exit 1
+        fi
+
+        echo "Serving $docroot at http://0.0.0.0:9902/"
+        python3 -m http.server 9902 --bind 0.0.0.0 --directory "$docroot"
+
   release:ontology:
-    deps: [docs:widoco]
+    deps: [widoco:docs]
     desc: Copy latest versioned spec into specs/current
     cmds:
       - |
