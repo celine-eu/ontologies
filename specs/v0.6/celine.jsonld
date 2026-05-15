@@ -297,7 +297,15 @@
       "@id": "celine:measures",
       "@type": "@id"
     },
-    "hasLocalIdentifier": "celine:hasLocalIdentifier"
+    "hasLocalIdentifier": "celine:hasLocalIdentifier",
+    "hasMemberRole": {
+      "@id": "celine:hasMemberRole",
+      "@type": "@id"
+    },
+    "hasMemberStatus": {
+      "@id": "celine:hasMemberStatus",
+      "@type": "@id"
+    }
   },
   "@graph": [
     {
@@ -403,6 +411,18 @@
     { "@id": "celine:EAN",   "@type": "skos:Concept", "skos:prefLabel": "EAN" },
     { "@id": "celine:MPAN",  "@type": "skos:Concept", "skos:prefLabel": "MPAN" },
 
+    { "@id": "celine:MemberRole",       "@type": "skos:ConceptScheme", "label": "Member Role" },
+    { "@id": "celine:RoleConsumer",      "@type": "skos:Concept", "skos:prefLabel": "Consumer" },
+    { "@id": "celine:RoleProsumer",      "@type": "skos:Concept", "skos:prefLabel": "Prosumer" },
+    { "@id": "celine:RoleProducer",      "@type": "skos:Concept", "skos:prefLabel": "Producer" },
+    { "@id": "celine:RoleOperator",      "@type": "skos:Concept", "skos:prefLabel": "Operator" },
+    { "@id": "celine:RoleAdmin",         "@type": "skos:Concept", "skos:prefLabel": "Admin" },
+    { "@id": "celine:MemberStatus",      "@type": "skos:ConceptScheme", "label": "Member Status" },
+    { "@id": "celine:StatusPending",     "@type": "skos:Concept", "skos:prefLabel": "Pending" },
+    { "@id": "celine:StatusActive",      "@type": "skos:Concept", "skos:prefLabel": "Active" },
+    { "@id": "celine:StatusSuspended",   "@type": "skos:Concept", "skos:prefLabel": "Suspended" },
+    { "@id": "celine:StatusInactive",    "@type": "skos:Concept", "skos:prefLabel": "Inactive" },
+
     { "@id": "celine:hasCommunity",          "@type": "owl:ObjectProperty", "label": "has energy community" },
     { "@id": "celine:usesAsset",             "@type": "owl:ObjectProperty", "label": "uses asset" },
     { "@id": "celine:hasScenario",           "@type": "owl:ObjectProperty", "label": "has scenario" },
@@ -453,6 +473,8 @@
     { "@id": "celine:hasGridOperator",       "@type": "owl:ObjectProperty", "label": "has grid operator" },
     { "@id": "celine:pairedWith",            "@type": ["owl:ObjectProperty", "owl:SymmetricProperty"], "label": "paired with" },
     { "@id": "celine:measures",              "@type": "owl:ObjectProperty", "label": "measures" },
+    { "@id": "celine:hasMemberRole",         "@type": "owl:ObjectProperty", "label": "has member role" },
+    { "@id": "celine:hasMemberStatus",       "@type": "owl:ObjectProperty", "label": "has member status" },
 
     { "@id": "celine:hasKPIName",            "@type": "owl:DatatypeProperty", "label": "has KPI name" },
     { "@id": "celine:hasKPIDescription",     "@type": "owl:DatatypeProperty", "label": "has KPI description" },

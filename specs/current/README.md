@@ -27,7 +27,7 @@ inventory. CIM alignment via `skos:closeMatch` (IEC 61968 profile); SAREF alignm
 - **`celine:EVCharger`** — electric vehicle charging station
 - **`celine:HeatPump`** — heat pump for heating/cooling
 
-### New object properties (9)
+### New object properties — grid & assets (9)
 
 - **`celine:hasIdentifierScheme`** — ConnectionPoint → skos:Concept (from ConnectionPointIdentifierScheme)
 - **`celine:operatedBy`** — (Substation ∪ PowerTransformer ∪ DistributionFeeder) → GridOperator
@@ -43,10 +43,19 @@ inventory. CIM alignment via `skos:closeMatch` (IEC 61968 profile); SAREF alignm
 
 - **`celine:hasLocalIdentifier`** — (ConnectionPoint ∪ peco:Asset) → xsd:string
 
-### New SKOS concept scheme
+### New object properties — member (2)
+
+- **`celine:hasMemberRole`** — peco:Energy_community_member → skos:Concept (from MemberRole)
+- **`celine:hasMemberStatus`** — peco:Energy_community_member → skos:Concept (from MemberStatus)
+
+### New SKOS concept schemes (3)
 
 - **`celine:ConnectionPointIdentifierScheme`** with 6 concepts: `POD` (Italy), `CUPS` (Spain),
   `PRM` (France), `MALO` (Germany), `EAN` (Belgium/Netherlands), `MPAN` (United Kingdom)
+- **`celine:MemberRole`** with 5 concepts: `RoleConsumer`, `RoleProsumer`, `RoleProducer`,
+  `RoleOperator`, `RoleAdmin`
+- **`celine:MemberStatus`** with 4 concepts: `StatusPending`, `StatusActive`,
+  `StatusSuspended`, `StatusInactive`
 
 ### Modified
 
@@ -71,7 +80,6 @@ inventory. CIM alignment via `skos:closeMatch` (IEC 61968 profile); SAREF alignm
 
 ## Deferred to future versions
 
-- Member role enum (consumer/prosumer/producer/operator/admin) and lifecycle status
 - Asset technical attributes (rated_power, COP, panel_type, battery chemistry, etc.)
 - Asset-type SKOS sub-classification schemes (PanelType, BatteryChemistry, ChargerType)
 - Generic `Load` class — too underspecified; generic loads remain unsubclassed `peco:Asset`

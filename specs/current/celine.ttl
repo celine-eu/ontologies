@@ -37,9 +37,10 @@
     rdfs:comment        """Version 0.6 adds REC-registry-aligned grid topology (Substation,
     PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),
     regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass
-    for PECO Electric_POD, and a presence-only asset inventory (PVSystem, BatteryStorage,
-    ElectricityMeter, EVCharger, HeatPump). CIM alignment via skos:closeMatch to IEC 61968
-    profile; SAREF alignment via skos:closeMatch only — no new owl:imports. Asset technical
+    for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,
+    ElectricityMeter, EVCharger, HeatPump), and member classification vocabularies
+    (MemberRole, MemberStatus). CIM alignment via skos:closeMatch to IEC 61968 profile;
+    SAREF alignment via skos:closeMatch only — no new owl:imports. Asset technical
     attributes are intentionally omitted; specs live in the external rec-registry catalogue,
     addressed by celine:hasLocalIdentifier.""" ;
     dct:license         <https://creativecommons.org/licenses/by/4.0/> ;
@@ -885,6 +886,111 @@ celine:MPAN
     skos:note           "United Kingdom — Meter Point Administration Number. Assigned by the regional distribution network operator."@en .
 
 ################################################################################
+# Controlled Vocabularies — Member Role  (new in v0.6)
+################################################################################
+
+celine:MemberRole
+    a skos:ConceptScheme ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:label          "Member Role"@en ;
+    skos:prefLabel      "Member Role"@en ;
+    dct:description     "Classification of how a member participates in the energy community."@en ;
+    skos:hasTopConcept
+        celine:RoleConsumer ,
+        celine:RoleProsumer ,
+        celine:RoleProducer ,
+        celine:RoleOperator ,
+        celine:RoleAdmin .
+
+celine:RoleConsumer
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:MemberRole ;
+    skos:topConceptOf   celine:MemberRole ;
+    skos:prefLabel      "Consumer"@en ;
+    rdfs:comment        "A member who only withdraws energy from the community."@en .
+
+celine:RoleProsumer
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:MemberRole ;
+    skos:topConceptOf   celine:MemberRole ;
+    skos:prefLabel      "Prosumer"@en ;
+    rdfs:comment        "A member who both produces and consumes energy."@en .
+
+celine:RoleProducer
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:MemberRole ;
+    skos:topConceptOf   celine:MemberRole ;
+    skos:prefLabel      "Producer"@en ;
+    rdfs:comment        "A member who only feeds energy into the community."@en .
+
+celine:RoleOperator
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:MemberRole ;
+    skos:topConceptOf   celine:MemberRole ;
+    skos:prefLabel      "Operator"@en ;
+    rdfs:comment        "A member with operational responsibilities for community infrastructure."@en .
+
+celine:RoleAdmin
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:MemberRole ;
+    skos:topConceptOf   celine:MemberRole ;
+    skos:prefLabel      "Admin"@en ;
+    rdfs:comment        "A member with administrative privileges over the community configuration."@en .
+
+################################################################################
+# Controlled Vocabularies — Member Status  (new in v0.6)
+################################################################################
+
+celine:MemberStatus
+    a skos:ConceptScheme ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:label          "Member Status"@en ;
+    skos:prefLabel      "Member Status"@en ;
+    dct:description     "Lifecycle status of a member within the energy community."@en ;
+    skos:hasTopConcept
+        celine:StatusPending ,
+        celine:StatusActive ,
+        celine:StatusSuspended ,
+        celine:StatusInactive .
+
+celine:StatusPending
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:MemberStatus ;
+    skos:topConceptOf   celine:MemberStatus ;
+    skos:prefLabel      "Pending"@en ;
+    rdfs:comment        "Member has applied but is not yet active in the community."@en .
+
+celine:StatusActive
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:MemberStatus ;
+    skos:topConceptOf   celine:MemberStatus ;
+    skos:prefLabel      "Active"@en ;
+    rdfs:comment        "Member is currently participating in the community."@en .
+
+celine:StatusSuspended
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:MemberStatus ;
+    skos:topConceptOf   celine:MemberStatus ;
+    skos:prefLabel      "Suspended"@en ;
+    rdfs:comment        "Member participation is temporarily suspended."@en .
+
+celine:StatusInactive
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:MemberStatus ;
+    skos:topConceptOf   celine:MemberStatus ;
+    skos:prefLabel      "Inactive"@en ;
+    rdfs:comment        "Member has left the community or membership has been terminated."@en .
+
+################################################################################
 # KPI Catalog  (new in v0.5)
 ################################################################################
 
@@ -1502,6 +1608,26 @@ celine:measures
     rdfs:range          peco:Asset ;
     rdfs:label          "measures"@en ;
     rdfs:comment        "The asset whose energy flows are metered by this electricity meter."@en .
+
+################################################################################
+# Object Properties — Member  (new in v0.6)
+################################################################################
+
+celine:hasMemberRole
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         peco:Energy_community_member ;
+    rdfs:range          skos:Concept ;
+    rdfs:label          "has member role"@en ;
+    rdfs:comment        "The participation role of this member. Expected values from celine:MemberRole."@en .
+
+celine:hasMemberStatus
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         peco:Energy_community_member ;
+    rdfs:range          skos:Concept ;
+    rdfs:label          "has member status"@en ;
+    rdfs:comment        "The lifecycle status of this member. Expected values from celine:MemberStatus."@en .
 
 ################################################################################
 # Data Properties — KPI  (new in v0.5)

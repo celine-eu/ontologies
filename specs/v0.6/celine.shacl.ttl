@@ -12,7 +12,7 @@
 @prefix sosa:   <http://www.w3.org/ns/sosa/> .
 
 ################################################################################
-# CELINE SHACL Profile v0.5
+# CELINE SHACL Profile v0.6
 ################################################################################
 
 celine:CommunityContextShape
@@ -54,6 +54,23 @@ celine:CommunityContextShape
         sh:path celine:hasEnvelope ;
         sh:nodeKind sh:IRI ;
         sh:class celine:FlexibilityEnvelope ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasRegulatoryZone ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:RegulatoryZone ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasTopologyNode ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasGridOperator ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:GridOperator ;
         sh:minCount 0 ;
     ] .
 
@@ -371,6 +388,107 @@ celine:KPICatalogConceptShape
     sh:property [
         sh:path skos:inScheme ;
         sh:hasValue celine:KPICatalog ;
+    ] .
+
+################################################################################
+# Connection Point Identifier Scheme shapes  (new in v0.6)
+################################################################################
+
+celine:ConnectionPointIdentifierSchemeShape
+    a sh:NodeShape ;
+    sh:targetNode celine:ConnectionPointIdentifierScheme ;
+    rdfs:label "ConnectionPointIdentifierScheme constraints" ;
+    sh:property [
+        sh:path skos:hasTopConcept ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] .
+
+celine:ConnectionPointIdentifierConceptShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this WHERE {
+                ?this skos:inScheme <https://w3id.org/celine-eu#ConnectionPointIdentifierScheme> .
+            }
+        """ ;
+    ] ;
+    rdfs:label "ConnectionPointIdentifierScheme concept member constraints" ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:hasValue celine:ConnectionPointIdentifierScheme ;
+    ] .
+
+################################################################################
+# Member Role & Status shapes  (new in v0.6)
+################################################################################
+
+celine:MemberRoleSchemeShape
+    a sh:NodeShape ;
+    sh:targetNode celine:MemberRole ;
+    rdfs:label "MemberRole scheme constraints" ;
+    sh:property [
+        sh:path skos:hasTopConcept ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] .
+
+celine:MemberRoleConceptShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this WHERE {
+                ?this skos:inScheme <https://w3id.org/celine-eu#MemberRole> .
+            }
+        """ ;
+    ] ;
+    rdfs:label "MemberRole concept member constraints" ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:hasValue celine:MemberRole ;
+    ] .
+
+celine:MemberStatusSchemeShape
+    a sh:NodeShape ;
+    sh:targetNode celine:MemberStatus ;
+    rdfs:label "MemberStatus scheme constraints" ;
+    sh:property [
+        sh:path skos:hasTopConcept ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] .
+
+celine:MemberStatusConceptShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this WHERE {
+                ?this skos:inScheme <https://w3id.org/celine-eu#MemberStatus> .
+            }
+        """ ;
+    ] ;
+    rdfs:label "MemberStatus concept member constraints" ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:hasValue celine:MemberStatus ;
     ] .
 
 ################################################################################

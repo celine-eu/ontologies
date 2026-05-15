@@ -29,10 +29,13 @@
   `MPAN` (United Kingdom).
 - **CommunityContext extended**: gains `hasRegulatoryZone`, `hasTopologyNode`,
   `hasGridOperator` optional properties.
+- **Member classification**: `MemberRole` SKOS scheme (Consumer, Prosumer, Producer,
+  Operator, Admin) and `MemberStatus` SKOS scheme (Pending, Active, Suspended, Inactive)
+  with `hasMemberRole` and `hasMemberStatus` properties on `peco:Energy_community_member`.
 
 ### Deferred
 
-- Member role/lifecycle enums, asset technical attributes, asset-type sub-classification
+- Asset technical attributes, asset-type sub-classification
   schemes, generic `Load` class, device metadata, telemetry layer, closed-world absence,
   SHACL shapes for new classes.
 
