@@ -1276,7 +1276,7 @@ celine:PeakReductionAchieved
     skos:definition     "Reduction in peak power demand achieved by the community through flexibility activation during the evaluation period."@en ;
     celine:hasKPIName   "Peak Reduction Achieved" ;
     celine:hasKPIScopeType           celine:ScopeCommunity ;
-    celine:hasKPICalculationMethod   celine:MethodTotal ;
+    celine:hasKPICalculationMethod   celine:MethodDerived ;
     celine:hasKPITemporalGranularity celine:GranularityPeriod ;
     celine:hasKPIUnit                celine:Kilowatt .
 
@@ -1400,7 +1400,7 @@ celine:hasEvaluatedScope
     rdfs:range          [ a owl:Class ;
                           owl:unionOf ( celine:CommunityContext
                                         peco:Energy_community_member
-                                        peco:Electric_POD ) ] ;
+                                        celine:ConnectionPoint ) ] ;
     rdfs:label          "has evaluated scope"@en ;
     rdfs:comment        "The entity (community, member, or POD) for which this KPI was evaluated."@en .
 
@@ -1480,9 +1480,9 @@ celine:onPOD
     a owl:ObjectProperty ;
     rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
     rdfs:domain         celine:FlexibilityCommitment ;
-    rdfs:range          peco:Electric_POD ;
+    rdfs:range          celine:ConnectionPoint ;
     rdfs:label          "on POD" ;
-    rdfs:comment        "One or more delivery points through which the committed flexibility is provided." .
+    rdfs:comment        "One or more connection points through which the committed flexibility is provided. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD)." .
 
 celine:hasCommitmentMode
     a owl:ObjectProperty ;
@@ -1596,9 +1596,9 @@ celine:envelopeFor
     a owl:ObjectProperty ;
     rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
     rdfs:domain         celine:FlexibilityEnvelope ;
-    rdfs:range          peco:Electric_POD ;
+    rdfs:range          celine:ConnectionPoint ;
     rdfs:label          "envelope for" ;
-    rdfs:comment        "The POD whose physical and operational flexibility is described by this envelope." .
+    rdfs:comment        "The connection point whose physical and operational flexibility is described by this envelope. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD)." .
 
 celine:withinEnvelope
     a owl:ObjectProperty ;
@@ -1731,7 +1731,7 @@ celine:hasMember
                                         celine:SharingGroup ) ] ;
     rdfs:range          peco:Energy_community_member ;
     rdfs:label          "has member"@en ;
-    rdfs:comment        "A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of."@en .
+    rdfs:comment        "A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of. Population rule: every member listed under a SharingGroup SHOULD also be listed under the parent CommunityContext via hasMember; no owl:propertyChainAxiom is asserted — implementors must replicate the membership link explicitly."@en .
 
 celine:hasMemberRole
     a owl:ObjectProperty ;

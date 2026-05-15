@@ -105,7 +105,25 @@
 </li>
 </ul></details><h3 id="changeProp" class="list">Object Properties</h3>
 <details><summary><u>Modified object properties</u></summary>
-<ul><li><a href="#hasFlexibilityDirection">https://w3id.org/celine-eu#hasFlexibilityDirection</a>
+<ul><li><a href="#envelopeFor">https://w3id.org/celine-eu#envelopeFor</a>
+<ul>
+<li>Added: Range https://w3id.org/celine-eu#ConnectionPoint</li>
+<li>Added: rdfs:comment "The connection point whose physical and operational flexibility is described by this envelope. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD)."^^xsd:string</li>
+</ul>
+<ul>
+<li>Deleted: rdfs:comment "The POD whose physical and operational flexibility is described by this envelope."^^xsd:string</li>
+<li>Deleted: Range https://purl.org/peco/peco-core#Electric_POD</li>
+</ul>
+</li>
+<li><a href="#hasEvaluatedScope">https://w3id.org/celine-eu#hasEvaluatedScope</a>
+<ul>
+<li>Added: Range Union of (https://purl.org/peco/peco-core#Energy_community_member, https://w3id.org/celine-eu#CommunityContext, https://w3id.org/celine-eu#ConnectionPoint)</li>
+</ul>
+<ul>
+<li>Deleted: Range Union of (https://purl.org/peco/peco-core#Electric_POD, https://purl.org/peco/peco-core#Energy_community_member, https://w3id.org/celine-eu#CommunityContext)</li>
+</ul>
+</li>
+<li><a href="#hasFlexibilityDirection">https://w3id.org/celine-eu#hasFlexibilityDirection</a>
 <ul>
 <li>Added: domain Union of (https://w3id.org/celine-eu#FlexibilityCommitment, https://w3id.org/celine-eu#FlexibilityRequest)</li>
 <li>Added: rdfs:comment "Expected values: celine:FlexDown or celine:FlexUp."@en</li>
@@ -113,6 +131,16 @@
 <ul>
 <li>Deleted: domain https://w3id.org/celine-eu#FlexibilityCommitment</li>
 <li>Deleted: rdfs:comment "Expected values: celine:FlexDown or celine:FlexUp."^^xsd:string</li>
+</ul>
+</li>
+<li><a href="#onPOD">https://w3id.org/celine-eu#onPOD</a>
+<ul>
+<li>Added: rdfs:comment "One or more connection points through which the committed flexibility is provided. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD)."^^xsd:string</li>
+<li>Added: Range https://w3id.org/celine-eu#ConnectionPoint</li>
+</ul>
+<ul>
+<li>Deleted: rdfs:comment "One or more delivery points through which the committed flexibility is provided."^^xsd:string</li>
+<li>Deleted: Range https://purl.org/peco/peco-core#Electric_POD</li>
 </ul>
 </li>
 </ul></details><details><summary><u>Added object properties</u></summary>

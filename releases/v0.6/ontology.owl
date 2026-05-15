@@ -163,8 +163,8 @@
 
     <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#envelopeFor">
         <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityEnvelope"/>
-        <rdfs:range rdf:resource="https://purl.org/peco/peco-core#Electric_POD"/>
-        <rdfs:comment>The POD whose physical and operational flexibility is described by this envelope.</rdfs:comment>
+        <rdfs:range rdf:resource="https://w3id.org/celine-eu#ConnectionPoint"/>
+        <rdfs:comment>The connection point whose physical and operational flexibility is described by this envelope. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD).</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <rdfs:label>envelope for</rdfs:label>
     </owl:ObjectProperty>
@@ -331,9 +331,9 @@
         <rdfs:range>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://purl.org/peco/peco-core#Electric_POD"/>
                     <rdf:Description rdf:about="https://purl.org/peco/peco-core#Energy_community_member"/>
                     <rdf:Description rdf:about="https://w3id.org/celine-eu#CommunityContext"/>
+                    <rdf:Description rdf:about="https://w3id.org/celine-eu#ConnectionPoint"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:range>
@@ -532,7 +532,7 @@
             </owl:Class>
         </rdfs:domain>
         <rdfs:range rdf:resource="https://purl.org/peco/peco-core#Energy_community_member"/>
-        <rdfs:comment xml:lang="en">A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of.</rdfs:comment>
+        <rdfs:comment xml:lang="en">A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of. Population rule: every member listed under a SharingGroup SHOULD also be listed under the parent CommunityContext via hasMember; no owl:propertyChainAxiom is asserted — implementors must replicate the membership link explicitly.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <rdfs:label xml:lang="en">has member</rdfs:label>
     </owl:ObjectProperty>
@@ -756,8 +756,8 @@
 
     <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#onPOD">
         <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityCommitment"/>
-        <rdfs:range rdf:resource="https://purl.org/peco/peco-core#Electric_POD"/>
-        <rdfs:comment>One or more delivery points through which the committed flexibility is provided.</rdfs:comment>
+        <rdfs:range rdf:resource="https://w3id.org/celine-eu#ConnectionPoint"/>
+        <rdfs:comment>One or more connection points through which the committed flexibility is provided. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD).</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <rdfs:label>on POD</rdfs:label>
     </owl:ObjectProperty>
@@ -2608,7 +2608,7 @@ ex:cost_platform_fee a celine:CostItem ;
     <owl:NamedIndividual rdf:about="https://w3id.org/celine-eu#PeakReductionAchieved">
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <rdf:type rdf:resource="https://w3id.org/celine-eu#KPIDefinition"/>
-        <hasKPICalculationMethod rdf:resource="https://w3id.org/celine-eu#MethodTotal"/>
+        <hasKPICalculationMethod rdf:resource="https://w3id.org/celine-eu#MethodDerived"/>
         <hasKPIScopeType rdf:resource="https://w3id.org/celine-eu#ScopeCommunity"/>
         <hasKPITemporalGranularity rdf:resource="https://w3id.org/celine-eu#GranularityPeriod"/>
         <hasKPIUnit rdf:resource="https://w3id.org/celine-eu#Kilowatt"/>

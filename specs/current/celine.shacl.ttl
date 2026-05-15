@@ -583,6 +583,7 @@ celine:FlexibilityRequestShape
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:nodeKind sh:IRI ;
+        sh:class peco:Agent ;
     ] ;
     sh:property [
         sh:path celine:hasFlexibilityDirection ;
@@ -669,7 +670,7 @@ celine:FlexibilityCommitmentShape
         sh:path celine:onPOD ;
         sh:minCount 1 ;
         sh:nodeKind sh:IRI ;
-        sh:class peco:Electric_POD ;
+        sh:class celine:ConnectionPoint ;
     ] ;
     sh:property [
         sh:path celine:hasCommitmentMode ;
@@ -788,6 +789,7 @@ celine:SettlementRunShape
         sh:datatype xsd:string ;
         sh:minLength 3 ;
         sh:maxLength 3 ;
+        sh:pattern "^[A-Z]{3}$" ;
     ] ;
     sh:property [
         sh:path celine:hasCostItem ;
@@ -876,7 +878,7 @@ celine:FlexibilityEnvelopeShape
         sh:path celine:envelopeFor ;
         sh:minCount 1 ;
         sh:nodeKind sh:IRI ;
-        sh:class peco:Electric_POD ;
+        sh:class celine:ConnectionPoint ;
     ] ;
     sh:property [
         sh:path celine:maxFlexUp ;
@@ -977,4 +979,207 @@ celine:TimeIntervalShape
         sh:nodeKind sh:IRI ;
         sh:minCount 0 ;
         sh:maxCount 1 ;
+    ] ;
+    sh:or (
+        [ sh:property [ sh:path time:hasBeginning ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path time:hasEnd      ; sh:minCount 1 ] ]
+    ) ;
+    rdfs:comment "At least one of time:hasBeginning or time:hasEnd must be present." .
+
+################################################################################
+# SKOS Concept Scheme shapes — Flexibility & Settlement  (back-ported from v0.4)
+#
+# CommitmentMode, FlexibilityDirection, CostType, ConstraintType were carried
+# forward without shapes; adding them here for parity with the v0.5+ pattern.
+################################################################################
+
+celine:CommitmentModeSchemeShape
+    a sh:NodeShape ;
+    sh:targetNode celine:CommitmentMode ;
+    rdfs:label "CommitmentMode scheme constraints" ;
+    sh:property [
+        sh:path skos:hasTopConcept ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] .
+
+celine:CommitmentModeConceptShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this WHERE {
+                ?this skos:inScheme <https://w3id.org/celine-eu#CommitmentMode> .
+            }
+        """ ;
+    ] ;
+    rdfs:label "CommitmentMode concept member constraints" ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:hasValue celine:CommitmentMode ;
+    ] .
+
+celine:FlexibilityDirectionSchemeShape
+    a sh:NodeShape ;
+    sh:targetNode celine:FlexibilityDirection ;
+    rdfs:label "FlexibilityDirection scheme constraints" ;
+    sh:property [
+        sh:path skos:hasTopConcept ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] .
+
+celine:FlexibilityDirectionConceptShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this WHERE {
+                ?this skos:inScheme <https://w3id.org/celine-eu#FlexibilityDirection> .
+            }
+        """ ;
+    ] ;
+    rdfs:label "FlexibilityDirection concept member constraints" ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:hasValue celine:FlexibilityDirection ;
+    ] .
+
+celine:CostTypeSchemeShape
+    a sh:NodeShape ;
+    sh:targetNode celine:CostType ;
+    rdfs:label "CostType scheme constraints" ;
+    sh:property [
+        sh:path skos:hasTopConcept ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] .
+
+celine:CostTypeConceptShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this WHERE {
+                ?this skos:inScheme <https://w3id.org/celine-eu#CostType> .
+            }
+        """ ;
+    ] ;
+    rdfs:label "CostType concept member constraints" ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:hasValue celine:CostType ;
+    ] .
+
+celine:ConstraintTypeSchemeShape
+    a sh:NodeShape ;
+    sh:targetNode celine:ConstraintType ;
+    rdfs:label "ConstraintType scheme constraints" ;
+    sh:property [
+        sh:path skos:hasTopConcept ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] .
+
+celine:ConstraintTypeConceptShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this WHERE {
+                ?this skos:inScheme <https://w3id.org/celine-eu#ConstraintType> .
+            }
+        """ ;
+    ] ;
+    rdfs:label "ConstraintType concept member constraints" ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:hasValue celine:ConstraintType ;
+    ] .
+
+################################################################################
+# SKOS Concept Scheme shapes — Unit of Measure  (back-ported from v0.5)
+################################################################################
+
+celine:UnitOfMeasureSchemeShape
+    a sh:NodeShape ;
+    sh:targetNode celine:UnitOfMeasure ;
+    rdfs:label "UnitOfMeasure scheme constraints" ;
+    sh:property [
+        sh:path skos:hasTopConcept ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] .
+
+celine:UnitOfMeasureConceptShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this WHERE {
+                ?this skos:inScheme <https://w3id.org/celine-eu#UnitOfMeasure> .
+            }
+        """ ;
+    ] ;
+    rdfs:label "UnitOfMeasure concept member constraints" ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:hasValue celine:UnitOfMeasure ;
+    ] .
+
+################################################################################
+# Member extension shape  (new in v0.6)
+#
+# Constrains the three new properties defined on peco:Energy_community_member.
+# hasDeliveryPoint is required by the NoDoubleCountingConstraint SPARQL path.
+################################################################################
+
+celine:CelineMemberShape
+    a sh:NodeShape ;
+    sh:targetClass peco:Energy_community_member ;
+    rdfs:label "CELINE member extension constraints" ;
+    sh:property [
+        sh:path celine:hasMemberRole ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasMemberStatus ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasDeliveryPoint ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:ConnectionPoint ;
+        sh:minCount 0 ;
     ] .

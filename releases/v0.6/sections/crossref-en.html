@@ -124,7 +124,7 @@ This section provides details for each class and property defined by CELINE Core
     is in range of
    </dt>
    <dd>
-    <a href="#hasDeliveryPoint" title="https://w3id.org/celine-eu#hasDeliveryPoint">has delivery point</a> <sup class="type-op" title="object property">op</sup>
+    <a href="#envelopeFor" title="https://w3id.org/celine-eu#envelopeFor">envelope for</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasDeliveryPoint" title="https://w3id.org/celine-eu#hasDeliveryPoint">has delivery point</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasEvaluatedScope" title="https://w3id.org/celine-eu#hasEvaluatedScope">has evaluated scope</a> <sup class="type-op" title="object property">op</sup>, <a href="#onPOD" title="https://w3id.org/celine-eu#onPOD">on POD</a> <sup class="type-op" title="object property">op</sup>
    </dd>
   </dl>
  </div>
@@ -1223,7 +1223,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>envelope for<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#envelopeFor</p>
   <div class="comment">
-   <span class="markdown">The POD whose physical and operational flexibility is described by this envelope.</span>
+   <span class="markdown">The connection point whose physical and operational flexibility is described by this envelope. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD).</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -1245,7 +1245,7 @@ ex:cost_platform_fee a celine:CostItem ;
      has range
     </dt>
     <dd>
-     <a href="https://purl.org/peco/peco-core#Electric_POD" target="_blank" title="https://purl.org/peco/peco-core#Electric_POD">Electric P O D</a> <sup class="type-c" title="class">c</sup>
+     <a href="#ConnectionPoint" title="https://w3id.org/celine-eu#ConnectionPoint">Connection Point</a> <sup class="type-c" title="class">c</sup>
     </dd>
    </dl>
   </div>
@@ -1583,7 +1583,7 @@ ex:cost_platform_fee a celine:CostItem ;
      has range
     </dt>
     <dd>
-     <a href="https://purl.org/peco/peco-core#Electric_POD" target="_blank" title="https://purl.org/peco/peco-core#Electric_POD">Electric P O D</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="https://purl.org/peco/peco-core#Energy_community_member" target="_blank" title="https://purl.org/peco/peco-core#Energy_community_member">Energy community member</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="#CommunityContext" title="https://w3id.org/celine-eu#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup>
+     <a href="https://purl.org/peco/peco-core#Energy_community_member" target="_blank" title="https://purl.org/peco/peco-core#Energy_community_member">Energy community member</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="#CommunityContext" title="https://w3id.org/celine-eu#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="#ConnectionPoint" title="https://w3id.org/celine-eu#ConnectionPoint">Connection Point</a> <sup class="type-c" title="class">c</sup>
     </dd>
    </dl>
   </div>
@@ -2051,7 +2051,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>has member<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasMember</p>
   <div class="comment">
-   <span class="markdown">A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of.</span>
+   <span class="markdown">A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of. Population rule: every member listed under a SharingGroup SHOULD also be listed under the parent CommunityContext via hasMember; no owl:propertyChainAxiom is asserted — implementors must replicate the membership link explicitly.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -2541,7 +2541,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>on POD<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#onPOD</p>
   <div class="comment">
-   <span class="markdown">One or more delivery points through which the committed flexibility is provided.</span>
+   <span class="markdown">One or more connection points through which the committed flexibility is provided. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD).</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -2563,7 +2563,7 @@ ex:cost_platform_fee a celine:CostItem ;
      has range
     </dt>
     <dd>
-     <a href="https://purl.org/peco/peco-core#Electric_POD" target="_blank" title="https://purl.org/peco/peco-core#Electric_POD">Electric P O D</a> <sup class="type-c" title="class">c</sup>
+     <a href="#ConnectionPoint" title="https://w3id.org/celine-eu#ConnectionPoint">Connection Point</a> <sup class="type-c" title="class">c</sup>
     </dd>
    </dl>
   </div>
@@ -6094,7 +6094,7 @@ ex:cost_platform_fee a celine:CostItem ;
     has facts
    </dt>
    <dd>
-    <a href="#hasKPICalculationMethod" title="https://w3id.org/celine-eu#hasKPICalculationMethod">has KPI calculation method</a> <sup class="type-op" title="object property">op</sup> <a href="#MethodTotal" title="https://w3id.org/celine-eu#MethodTotal">Total</a> <sup class="type-ni" title="named individual">ni</sup>
+    <a href="#hasKPICalculationMethod" title="https://w3id.org/celine-eu#hasKPICalculationMethod">has KPI calculation method</a> <sup class="type-op" title="object property">op</sup> <a href="#MethodDerived" title="https://w3id.org/celine-eu#MethodDerived">Derived</a> <sup class="type-ni" title="named individual">ni</sup>
    </dd>
    <dd>
     <a href="#hasKPIScopeType" title="https://w3id.org/celine-eu#hasKPIScopeType">has KPI scope type</a> <sup class="type-op" title="object property">op</sup> <a href="#ScopeCommunity" title="https://w3id.org/celine-eu#ScopeCommunity">Community</a> <sup class="type-ni" title="named individual">ni</sup>

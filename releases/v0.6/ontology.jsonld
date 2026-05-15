@@ -3,11 +3,11 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2002/07/owl#unionOf" : [ {
     "@list" : [ {
-      "@id" : "https://purl.org/peco/peco-core#Electric_POD"
-    }, {
       "@id" : "https://purl.org/peco/peco-core#Energy_community_member"
     }, {
       "@id" : "https://w3id.org/celine-eu#CommunityContext"
+    }, {
+      "@id" : "https://w3id.org/celine-eu#ConnectionPoint"
     } ]
   } ]
 }, {
@@ -1825,7 +1825,7 @@
     "@id" : "https://w3id.org/celine-eu#KPICatalog"
   } ],
   "https://w3id.org/celine-eu#hasKPICalculationMethod" : [ {
-    "@id" : "https://w3id.org/celine-eu#MethodTotal"
+    "@id" : "https://w3id.org/celine-eu#MethodDerived"
   } ],
   "https://w3id.org/celine-eu#hasKPIName" : [ {
     "@value" : "Peak Reduction Achieved"
@@ -2927,7 +2927,7 @@
   "@id" : "https://w3id.org/celine-eu#envelopeFor",
   "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
-    "@value" : "The POD whose physical and operational flexibility is described by this envelope."
+    "@value" : "The connection point whose physical and operational flexibility is described by this envelope. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD)."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
     "@id" : "https://w3id.org/celine-eu#FlexibilityEnvelope"
@@ -2939,7 +2939,7 @@
     "@value" : "envelope for"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#range" : [ {
-    "@id" : "https://purl.org/peco/peco-core#Electric_POD"
+    "@id" : "https://w3id.org/celine-eu#ConnectionPoint"
   } ]
 }, {
   "@id" : "https://w3id.org/celine-eu#evidencedBy",
@@ -3544,7 +3544,7 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
     "@language" : "en",
-    "@value" : "A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of."
+    "@value" : "A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of. Population rule: every member listed under a SharingGroup SHOULD also be listed under the parent CommunityContext via hasMember; no owl:propertyChainAxiom is asserted — implementors must replicate the membership link explicitly."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
     "@id" : "_:genid8"
@@ -3977,7 +3977,7 @@
   "@id" : "https://w3id.org/celine-eu#onPOD",
   "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
-    "@value" : "One or more delivery points through which the committed flexibility is provided."
+    "@value" : "One or more connection points through which the committed flexibility is provided. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD)."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
     "@id" : "https://w3id.org/celine-eu#FlexibilityCommitment"
@@ -3989,7 +3989,7 @@
     "@value" : "on POD"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#range" : [ {
-    "@id" : "https://purl.org/peco/peco-core#Electric_POD"
+    "@id" : "https://w3id.org/celine-eu#ConnectionPoint"
   } ]
 }, {
   "@id" : "https://w3id.org/celine-eu#operatedBy",

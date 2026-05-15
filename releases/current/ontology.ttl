@@ -102,8 +102,8 @@
 ###  https://w3id.org/celine-eu#envelopeFor
 :envelopeFor rdf:type owl:ObjectProperty ;
              rdfs:domain :FlexibilityEnvelope ;
-             rdfs:range <https://purl.org/peco/peco-core#Electric_POD> ;
-             rdfs:comment "The POD whose physical and operational flexibility is described by this envelope." ;
+             rdfs:range :ConnectionPoint ;
+             rdfs:comment "The connection point whose physical and operational flexibility is described by this envelope. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD)." ;
              rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
              rdfs:label "envelope for" .
 
@@ -216,9 +216,9 @@
 :hasEvaluatedScope rdf:type owl:ObjectProperty ;
                    rdfs:domain :KPIEvaluation ;
                    rdfs:range [ rdf:type owl:Class ;
-                                owl:unionOf ( <https://purl.org/peco/peco-core#Electric_POD>
-                                              <https://purl.org/peco/peco-core#Energy_community_member>
+                                owl:unionOf ( <https://purl.org/peco/peco-core#Energy_community_member>
                                               :CommunityContext
+                                              :ConnectionPoint
                                             )
                               ] ;
                    rdfs:comment "The entity (community, member, or POD) for which this KPI was evaluated."@en ;
@@ -354,7 +354,7 @@
                                      )
                        ] ;
            rdfs:range <https://purl.org/peco/peco-core#Energy_community_member> ;
-           rdfs:comment "A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of."@en ;
+           rdfs:comment "A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of. Population rule: every member listed under a SharingGroup SHOULD also be listed under the parent CommunityContext via hasMember; no owl:propertyChainAxiom is asserted — implementors must replicate the membership link explicitly."@en ;
            rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
            rdfs:label "has member"@en .
 
@@ -505,8 +505,8 @@
 ###  https://w3id.org/celine-eu#onPOD
 :onPOD rdf:type owl:ObjectProperty ;
        rdfs:domain :FlexibilityCommitment ;
-       rdfs:range <https://purl.org/peco/peco-core#Electric_POD> ;
-       rdfs:comment "One or more delivery points through which the committed flexibility is provided." ;
+       rdfs:range :ConnectionPoint ;
+       rdfs:comment "One or more connection points through which the committed flexibility is provided. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD)." ;
        rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
        rdfs:label "on POD" .
 
@@ -1848,7 +1848,7 @@ ex:cost_platform_fee a celine:CostItem ;
 :PeakReductionAchieved rdf:type owl:NamedIndividual ,
                                 <http://www.w3.org/2004/02/skos/core#Concept> ,
                                 :KPIDefinition ;
-                       :hasKPICalculationMethod :MethodTotal ;
+                       :hasKPICalculationMethod :MethodDerived ;
                        :hasKPIScopeType :ScopeCommunity ;
                        :hasKPITemporalGranularity :GranularityPeriod ;
                        :hasKPIUnit :Kilowatt ;

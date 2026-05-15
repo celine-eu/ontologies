@@ -79,8 +79,8 @@
 # https://w3id.org/celine-eu#envelopeFor
 <https://w3id.org/celine-eu#envelopeFor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <https://w3id.org/celine-eu#envelopeFor> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/celine-eu#FlexibilityEnvelope> .
-<https://w3id.org/celine-eu#envelopeFor> <http://www.w3.org/2000/01/rdf-schema#range> <https://purl.org/peco/peco-core#Electric_POD> .
-<https://w3id.org/celine-eu#envelopeFor> <http://www.w3.org/2000/01/rdf-schema#comment> "The POD whose physical and operational flexibility is described by this envelope." .
+<https://w3id.org/celine-eu#envelopeFor> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/celine-eu#ConnectionPoint> .
+<https://w3id.org/celine-eu#envelopeFor> <http://www.w3.org/2000/01/rdf-schema#comment> "The connection point whose physical and operational flexibility is described by this envelope. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD)." .
 <https://w3id.org/celine-eu#envelopeFor> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#envelopeFor> <http://www.w3.org/2000/01/rdf-schema#label> "envelope for" .
 # 
@@ -185,11 +185,11 @@ _:genid1 <http://www.w3.org/2002/07/owl#unionOf> _:genid4 .
 _:genid4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid3 .
 _:genid3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid2 .
 _:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-_:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#CommunityContext> .
+_:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#ConnectionPoint> .
 _:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://purl.org/peco/peco-core#Energy_community_member> .
+_:genid3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#CommunityContext> .
 _:genid3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://purl.org/peco/peco-core#Electric_POD> .
+_:genid4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://purl.org/peco/peco-core#Energy_community_member> .
 _:genid4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
 _:genid1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://w3id.org/celine-eu#hasEvaluatedScope> <http://www.w3.org/2000/01/rdf-schema#comment> "The entity (community, member, or POD) for which this KPI was evaluated."@en .
@@ -319,7 +319,7 @@ _:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/c
 _:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
 _:genid8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://w3id.org/celine-eu#hasMember> <http://www.w3.org/2000/01/rdf-schema#range> <https://purl.org/peco/peco-core#Energy_community_member> .
-<https://w3id.org/celine-eu#hasMember> <http://www.w3.org/2000/01/rdf-schema#comment> "A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of."@en .
+<https://w3id.org/celine-eu#hasMember> <http://www.w3.org/2000/01/rdf-schema#comment> "A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of. Population rule: every member listed under a SharingGroup SHOULD also be listed under the parent CommunityContext via hasMember; no owl:propertyChainAxiom is asserted — implementors must replicate the membership link explicitly."@en .
 <https://w3id.org/celine-eu#hasMember> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#hasMember> <http://www.w3.org/2000/01/rdf-schema#label> "has member"@en .
 # 
@@ -470,8 +470,8 @@ _:genid18 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 # https://w3id.org/celine-eu#onPOD
 <https://w3id.org/celine-eu#onPOD> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <https://w3id.org/celine-eu#onPOD> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/celine-eu#FlexibilityCommitment> .
-<https://w3id.org/celine-eu#onPOD> <http://www.w3.org/2000/01/rdf-schema#range> <https://purl.org/peco/peco-core#Electric_POD> .
-<https://w3id.org/celine-eu#onPOD> <http://www.w3.org/2000/01/rdf-schema#comment> "One or more delivery points through which the committed flexibility is provided." .
+<https://w3id.org/celine-eu#onPOD> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/celine-eu#ConnectionPoint> .
+<https://w3id.org/celine-eu#onPOD> <http://www.w3.org/2000/01/rdf-schema#comment> "One or more connection points through which the committed flexibility is provided. Accepts any celine:ConnectionPoint subclass (including peco:Electric_POD)." .
 <https://w3id.org/celine-eu#onPOD> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#onPOD> <http://www.w3.org/2000/01/rdf-schema#label> "on POD" .
 # 
@@ -1602,7 +1602,7 @@ _:genid26 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 <https://w3id.org/celine-eu#PeakReductionAchieved> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
 <https://w3id.org/celine-eu#PeakReductionAchieved> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
 <https://w3id.org/celine-eu#PeakReductionAchieved> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/celine-eu#KPIDefinition> .
-<https://w3id.org/celine-eu#PeakReductionAchieved> <https://w3id.org/celine-eu#hasKPICalculationMethod> <https://w3id.org/celine-eu#MethodTotal> .
+<https://w3id.org/celine-eu#PeakReductionAchieved> <https://w3id.org/celine-eu#hasKPICalculationMethod> <https://w3id.org/celine-eu#MethodDerived> .
 <https://w3id.org/celine-eu#PeakReductionAchieved> <https://w3id.org/celine-eu#hasKPIScopeType> <https://w3id.org/celine-eu#ScopeCommunity> .
 <https://w3id.org/celine-eu#PeakReductionAchieved> <https://w3id.org/celine-eu#hasKPITemporalGranularity> <https://w3id.org/celine-eu#GranularityPeriod> .
 <https://w3id.org/celine-eu#PeakReductionAchieved> <https://w3id.org/celine-eu#hasKPIUnit> <https://w3id.org/celine-eu#Kilowatt> .
