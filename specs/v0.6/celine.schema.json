@@ -78,7 +78,9 @@
             "hasEnvelope": { "$ref": "#/$defs/IRIorList" },
             "hasRegulatoryZone": { "$ref": "#/$defs/IRIorList" },
             "hasTopologyNode": { "$ref": "#/$defs/IRIorList" },
-            "hasGridOperator": { "$ref": "#/$defs/IRIorList" }
+            "hasGridOperator": { "$ref": "#/$defs/IRIorList" },
+            "hasFlexibilityRequest": { "$ref": "#/$defs/IRIorList" },
+            "hasMember": { "$ref": "#/$defs/IRIorList" }
           },
           "required": ["hasCommunity"]
         }
@@ -219,7 +221,8 @@
             "targetFlexibility": { "type": "number", "exclusiveMinimum": 0 },
             "hasTimeInterval": { "$ref": "#/$defs/IRI" },
             "generatesCredit": { "$ref": "#/$defs/IRIorList" },
-            "withinEnvelope": { "$ref": "#/$defs/IRI" }
+            "withinEnvelope": { "$ref": "#/$defs/IRI" },
+            "inResponseTo": { "$ref": "#/$defs/IRI" }
           },
           "required": ["committedBy", "onPOD", "hasCommitmentMode", "hasFlexibilityDirection", "targetFlexibility", "hasTimeInterval"]
         }
@@ -348,6 +351,28 @@
             "maxActivationsPerDay": { "type": "integer", "minimum": 1 }
           },
           "required": ["hasConstraintType"]
+        }
+      ]
+    },
+    "FlexibilityRequest": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:FlexibilityRequest" },
+                { "type": "array", "contains": { "const": "celine:FlexibilityRequest" } }
+              ]
+            },
+            "requestedBy": { "$ref": "#/$defs/IRI" },
+            "hasFlexibilityDirection": { "$ref": "#/$defs/IRI" },
+            "requestedFlexibility": { "type": "number", "exclusiveMinimum": 0 },
+            "hasTimeInterval": { "$ref": "#/$defs/IRI" },
+            "hasRequestStatus": { "$ref": "#/$defs/IRI" },
+            "resultsInCommitment": { "$ref": "#/$defs/IRIorList" }
+          },
+          "required": ["requestedBy", "hasFlexibilityDirection", "requestedFlexibility", "hasTimeInterval"]
         }
       ]
     },
@@ -485,6 +510,7 @@
         { "$ref": "#/$defs/RedistributionResult" },
         { "$ref": "#/$defs/FlexibilityEnvelope" },
         { "$ref": "#/$defs/FlexibilityConstraint" },
+        { "$ref": "#/$defs/FlexibilityRequest" },
         { "$ref": "#/$defs/Substation" },
         { "$ref": "#/$defs/PowerTransformer" },
         { "$ref": "#/$defs/DistributionFeeder" },

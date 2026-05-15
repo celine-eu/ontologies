@@ -298,6 +298,10 @@
       "@type": "@id"
     },
     "hasLocalIdentifier": "celine:hasLocalIdentifier",
+    "hasMember": {
+      "@id": "celine:hasMember",
+      "@type": "@id"
+    },
     "hasMemberRole": {
       "@id": "celine:hasMemberRole",
       "@type": "@id"
@@ -305,6 +309,30 @@
     "hasMemberStatus": {
       "@id": "celine:hasMemberStatus",
       "@type": "@id"
+    },
+    "hasFlexibilityRequest": {
+      "@id": "celine:hasFlexibilityRequest",
+      "@type": "@id"
+    },
+    "requestedBy": {
+      "@id": "celine:requestedBy",
+      "@type": "@id"
+    },
+    "hasRequestStatus": {
+      "@id": "celine:hasRequestStatus",
+      "@type": "@id"
+    },
+    "resultsInCommitment": {
+      "@id": "celine:resultsInCommitment",
+      "@type": "@id"
+    },
+    "inResponseTo": {
+      "@id": "celine:inResponseTo",
+      "@type": "@id"
+    },
+    "requestedFlexibility": {
+      "@id": "celine:requestedFlexibility",
+      "@type": "xsd:decimal"
     }
   },
   "@graph": [
@@ -329,6 +357,7 @@
     { "@id": "celine:RedistributionResult",  "@type": "owl:Class", "label": "Redistribution Result" },
     { "@id": "celine:FlexibilityEnvelope",   "@type": "owl:Class", "label": "Flexibility Envelope" },
     { "@id": "celine:FlexibilityConstraint", "@type": "owl:Class", "label": "Flexibility Constraint" },
+    { "@id": "celine:FlexibilityRequest",    "@type": "owl:Class", "label": "Flexibility Request" },
 
     { "@id": "celine:Substation",          "@type": "owl:Class", "label": "Substation" },
     { "@id": "celine:PrimarySubstation",   "@type": "owl:Class", "label": "Primary Substation" },
@@ -403,6 +432,13 @@
     { "@id": "celine:RecoveryConstraint",   "@type": "skos:Concept", "skos:prefLabel": "Recovery Constraint" },
     { "@id": "celine:FrequencyConstraint",  "@type": "skos:Concept", "skos:prefLabel": "Frequency Constraint" },
 
+    { "@id": "celine:RequestStatus",       "@type": "skos:ConceptScheme", "label": "Request Status" },
+    { "@id": "celine:RequestOpen",         "@type": "skos:Concept", "skos:prefLabel": "Open" },
+    { "@id": "celine:RequestFulfilled",    "@type": "skos:Concept", "skos:prefLabel": "Fulfilled" },
+    { "@id": "celine:RequestPartial",      "@type": "skos:Concept", "skos:prefLabel": "Partially Fulfilled" },
+    { "@id": "celine:RequestExpired",      "@type": "skos:Concept", "skos:prefLabel": "Expired" },
+    { "@id": "celine:RequestCancelled",    "@type": "skos:Concept", "skos:prefLabel": "Cancelled" },
+
     { "@id": "celine:ConnectionPointIdentifierScheme", "@type": "skos:ConceptScheme", "label": "Connection Point Identifier Scheme" },
     { "@id": "celine:POD",   "@type": "skos:Concept", "skos:prefLabel": "POD" },
     { "@id": "celine:CUPS",  "@type": "skos:Concept", "skos:prefLabel": "CUPS" },
@@ -473,8 +509,14 @@
     { "@id": "celine:hasGridOperator",       "@type": "owl:ObjectProperty", "label": "has grid operator" },
     { "@id": "celine:pairedWith",            "@type": ["owl:ObjectProperty", "owl:SymmetricProperty"], "label": "paired with" },
     { "@id": "celine:measures",              "@type": "owl:ObjectProperty", "label": "measures" },
+    { "@id": "celine:hasMember",              "@type": "owl:ObjectProperty", "label": "has member" },
     { "@id": "celine:hasMemberRole",         "@type": "owl:ObjectProperty", "label": "has member role" },
     { "@id": "celine:hasMemberStatus",       "@type": "owl:ObjectProperty", "label": "has member status" },
+    { "@id": "celine:hasFlexibilityRequest", "@type": "owl:ObjectProperty", "label": "has flexibility request" },
+    { "@id": "celine:requestedBy",           "@type": "owl:ObjectProperty", "label": "requested by" },
+    { "@id": "celine:hasRequestStatus",      "@type": "owl:ObjectProperty", "label": "has request status" },
+    { "@id": "celine:resultsInCommitment",   "@type": "owl:ObjectProperty", "label": "results in commitment" },
+    { "@id": "celine:inResponseTo",          "@type": "owl:ObjectProperty", "label": "in response to" },
 
     { "@id": "celine:hasKPIName",            "@type": "owl:DatatypeProperty", "label": "has KPI name" },
     { "@id": "celine:hasKPIDescription",     "@type": "owl:DatatypeProperty", "label": "has KPI description" },
@@ -497,6 +539,7 @@
     { "@id": "celine:minNotificationTime",   "@type": "owl:DatatypeProperty", "label": "min notification time" },
     { "@id": "celine:minRecoveryTime",       "@type": "owl:DatatypeProperty", "label": "min recovery time" },
     { "@id": "celine:maxActivationsPerDay",  "@type": "owl:DatatypeProperty", "label": "max activations per day" },
-    { "@id": "celine:hasLocalIdentifier",    "@type": "owl:DatatypeProperty", "label": "has local identifier" }
+    { "@id": "celine:hasLocalIdentifier",    "@type": "owl:DatatypeProperty", "label": "has local identifier" },
+    { "@id": "celine:requestedFlexibility",  "@type": "owl:DatatypeProperty", "label": "requested flexibility" }
   ]
 }

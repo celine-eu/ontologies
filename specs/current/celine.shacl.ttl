@@ -72,6 +72,12 @@ celine:CommunityContextShape
         sh:nodeKind sh:IRI ;
         sh:class celine:GridOperator ;
         sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasFlexibilityRequest ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:FlexibilityRequest ;
+        sh:minCount 0 ;
     ] .
 
 celine:ScenarioShape
@@ -492,6 +498,86 @@ celine:MemberStatusConceptShape
     ] .
 
 ################################################################################
+# Flexibility Request shapes  (new in v0.6)
+################################################################################
+
+celine:FlexibilityRequestShape
+    a sh:NodeShape ;
+    sh:targetClass celine:FlexibilityRequest ;
+    rdfs:label "FlexibilityRequest constraints" ;
+    sh:property [
+        sh:path celine:requestedBy ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+    sh:property [
+        sh:path celine:hasFlexibilityDirection ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path celine:requestedFlexibility ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minExclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasTimeInterval ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class time:Interval ;
+    ] ;
+    sh:property [
+        sh:path celine:hasRequestStatus ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path celine:resultsInCommitment ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:FlexibilityCommitment ;
+    ] .
+
+celine:RequestStatusSchemeShape
+    a sh:NodeShape ;
+    sh:targetNode celine:RequestStatus ;
+    rdfs:label "RequestStatus scheme constraints" ;
+    sh:property [
+        sh:path skos:hasTopConcept ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class skos:Concept ;
+    ] .
+
+celine:RequestStatusConceptShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this WHERE {
+                ?this skos:inScheme <https://w3id.org/celine-eu#RequestStatus> .
+            }
+        """ ;
+    ] ;
+    rdfs:label "RequestStatus concept member constraints" ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue skos:Concept ;
+    ] ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:hasValue celine:RequestStatus ;
+    ] .
+
+################################################################################
 # Flexibility Commitment shapes  (carried from v0.4)
 ################################################################################
 
@@ -552,6 +638,13 @@ celine:FlexibilityCommitmentShape
         sh:maxCount 1 ;
         sh:nodeKind sh:IRI ;
         sh:class celine:FlexibilityEnvelope ;
+    ] ;
+    sh:property [
+        sh:path celine:inResponseTo ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:FlexibilityRequest ;
     ] .
 
 celine:FlexibilityCreditShape

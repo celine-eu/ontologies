@@ -20,6 +20,7 @@ inventory. CIM alignment via `skos:closeMatch` (IEC 61968 profile); SAREF alignm
 - **`celine:DistributionFeeder`** — feeder line from substation to downstream connection points
 - **`celine:RegulatoryZone`** — administrative coverage area (e.g. GSE primary-substation service zone)
 - **`celine:GridOperator`** — grid infrastructure operator, typically a DSO (`rdfs:subClassOf peco:Agent`)
+- **`celine:FlexibilityRequest`** — demand signal requesting members to activate flexibility
 - **`celine:ConnectionPoint`** — generalised grid connection point; `peco:Electric_POD` is declared as subclass
 - **`celine:PVSystem`** — photovoltaic system (presence-only)
 - **`celine:BatteryStorage`** — battery energy storage system (`rdfs:subClassOf peco:Energy_storage`)
@@ -43,6 +44,18 @@ inventory. CIM alignment via `skos:closeMatch` (IEC 61968 profile); SAREF alignm
 
 - **`celine:hasLocalIdentifier`** — (ConnectionPoint ∪ peco:Asset) → xsd:string
 
+### New object properties — flexibility request (5)
+
+- **`celine:hasFlexibilityRequest`** — CommunityContext → FlexibilityRequest
+- **`celine:requestedBy`** — FlexibilityRequest → peco:Agent
+- **`celine:hasRequestStatus`** — FlexibilityRequest → skos:Concept (from RequestStatus)
+- **`celine:resultsInCommitment`** — FlexibilityRequest → FlexibilityCommitment
+- **`celine:inResponseTo`** — FlexibilityCommitment → FlexibilityRequest (inverse of resultsInCommitment)
+
+### New datatype property — flexibility request (1)
+
+- **`celine:requestedFlexibility`** — FlexibilityRequest → xsd:decimal (target kWh, positive)
+
 ### New object properties — member (2)
 
 - **`celine:hasMemberRole`** — peco:Energy_community_member → skos:Concept (from MemberRole)
@@ -56,14 +69,20 @@ inventory. CIM alignment via `skos:closeMatch` (IEC 61968 profile); SAREF alignm
   `RoleOperator`, `RoleAdmin`
 - **`celine:MemberStatus`** with 4 concepts: `StatusPending`, `StatusActive`,
   `StatusSuspended`, `StatusInactive`
+- **`celine:RequestStatus`** with 5 concepts: `RequestOpen`, `RequestFulfilled`,
+  `RequestPartial`, `RequestExpired`, `RequestCancelled`
 
 ### Modified
 
 - **`peco:Electric_POD`** — declared `rdfs:subClassOf celine:ConnectionPoint`. This is the single
   statement where v0.6 reaches into PECO's namespace. Existing POD queries continue to work;
   new queries can use `ConnectionPoint` for country-portable code.
-- **`celine:CommunityContext`** — gains three new optional properties: `hasRegulatoryZone`,
-  `hasTopologyNode`, `hasGridOperator`.
+- **`celine:CommunityContext`** — gains four new optional properties: `hasRegulatoryZone`,
+  `hasTopologyNode`, `hasGridOperator`, `hasFlexibilityRequest`.
+- **`celine:FlexibilityCommitment`** — gains optional `inResponseTo` linking back to the
+  triggering FlexibilityRequest.
+- **`celine:hasFlexibilityDirection`** — domain widened from FlexibilityCommitment to
+  union of FlexibilityCommitment and FlexibilityRequest.
 
 ### Alignment policy
 
@@ -106,6 +125,7 @@ inventory. CIM alignment via `skos:closeMatch` (IEC 61968 profile); SAREF alignm
 | `celine:RedistributionResult` | Per-member settlement outcome (credit balance, gross, deductions, net) |
 | `celine:FlexibilityEnvelope` | Declared capability of a POD (max power up/down, available energy, availability windows) |
 | `celine:FlexibilityConstraint` | Operational constraints on flexibility activation (notice, duration, recovery, frequency) |
+| `celine:FlexibilityRequest` | **New in v0.6** — Demand signal requesting members to activate flexibility |
 | `celine:Substation` | **New in v0.6** — Abstract superclass for electrical substations |
 | `celine:PrimarySubstation` | **New in v0.6** — HV/MV substation |
 | `celine:SecondarySubstation` | **New in v0.6** — MV/LV substation |

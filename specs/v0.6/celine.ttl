@@ -38,8 +38,8 @@
     PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),
     regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass
     for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,
-    ElectricityMeter, EVCharger, HeatPump), and member classification vocabularies
-    (MemberRole, MemberStatus). CIM alignment via skos:closeMatch to IEC 61968 profile;
+    ElectricityMeter, EVCharger, HeatPump), and member modeling (hasMember linkage, MemberRole and MemberStatus
+    vocabularies). CIM alignment via skos:closeMatch to IEC 61968 profile;
     SAREF alignment via skos:closeMatch only — no new owl:imports. Asset technical
     attributes are intentionally omitted; specs live in the external rec-registry catalogue,
     addressed by celine:hasLocalIdentifier.""" ;
@@ -67,9 +67,13 @@ celine:CommunityContext
     rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
     rdfs:label          "Community Context" ;
     rdfs:comment        """Operational context binding a PECO Energy Community
-    with assets, datasets, simulations and flexibility commitments.""" ;
+    with assets, datasets, simulations and flexibility commitments. Member
+    participation in this context is enumerated via celine:hasMember; each
+    member is linked to the wrapped peco:Energy_community via
+    peco:is_member_of (PECO predicate, reused as-is).""" ;
     skos:example        """ex:ctx1 a celine:CommunityContext ;
     celine:hasCommunity    ex:rec_valdarno ;
+    celine:hasMember       ex:member_001 , ex:member_002 ;
     celine:usesAsset       ex:pv_panel_01 ;
     celine:hasSimulation   ex:sim_baseline ;
     celine:hasCommitment   ex:fc_001 ;
@@ -410,6 +414,26 @@ celine:FlexibilityConstraint
     celine:maxActivationsPerDay  "3"^^xsd:integer .""" .
 
 ################################################################################
+# Flexibility Request  (new in v0.6)
+################################################################################
+
+celine:FlexibilityRequest
+    a owl:Class ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:label          "Flexibility Request"@en ;
+    rdfs:comment        """A demand signal issued by a community operator or automated system
+    requesting members to activate flexibility within a given time window. Specifies the
+    desired direction (FlexDown/FlexUp) and target amount. One request may result in zero,
+    one, or many FlexibilityCommitments from different members."""@en ;
+    skos:example        """ex:req_001 a celine:FlexibilityRequest ;
+    celine:requestedBy              ex:dso_enel ;
+    celine:hasFlexibilityDirection  celine:FlexDown ;
+    celine:requestedFlexibility     "10.0"^^xsd:decimal ;
+    celine:hasTimeInterval          ex:interval_2025_07_01_peak ;
+    celine:hasRequestStatus         celine:RequestFulfilled ;
+    celine:resultsInCommitment      ex:fc_001 , ex:fc_002 .""" .
+
+################################################################################
 # Controlled Vocabularies — Flexibility & Settlement  (carried from v0.4)
 ################################################################################
 
@@ -528,6 +552,63 @@ celine:FrequencyConstraint
     skos:topConceptOf   celine:ConstraintType ;
     skos:prefLabel      "Frequency Constraint" ;
     rdfs:comment        "Constraint on the maximum number of flexibility activations permitted within a given period." .
+
+################################################################################
+# Controlled Vocabularies — Request Status  (new in v0.6)
+################################################################################
+
+celine:RequestStatus
+    a skos:ConceptScheme ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:label          "Request Status"@en ;
+    skos:prefLabel      "Request Status"@en ;
+    dct:description     "Lifecycle status of a flexibility request."@en ;
+    skos:hasTopConcept
+        celine:RequestOpen ,
+        celine:RequestFulfilled ,
+        celine:RequestPartial ,
+        celine:RequestExpired ,
+        celine:RequestCancelled .
+
+celine:RequestOpen
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:RequestStatus ;
+    skos:topConceptOf   celine:RequestStatus ;
+    skos:prefLabel      "Open"@en ;
+    rdfs:comment        "Request has been issued and is awaiting commitments."@en .
+
+celine:RequestFulfilled
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:RequestStatus ;
+    skos:topConceptOf   celine:RequestStatus ;
+    skos:prefLabel      "Fulfilled"@en ;
+    rdfs:comment        "Sufficient commitments received to meet the requested target."@en .
+
+celine:RequestPartial
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:RequestStatus ;
+    skos:topConceptOf   celine:RequestStatus ;
+    skos:prefLabel      "Partially Fulfilled"@en ;
+    rdfs:comment        "Some commitments received but total falls below the requested target."@en .
+
+celine:RequestExpired
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:RequestStatus ;
+    skos:topConceptOf   celine:RequestStatus ;
+    skos:prefLabel      "Expired"@en ;
+    rdfs:comment        "Activation window passed without sufficient response."@en .
+
+celine:RequestCancelled
+    a skos:Concept ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    skos:inScheme       celine:RequestStatus ;
+    skos:topConceptOf   celine:RequestStatus ;
+    skos:prefLabel      "Cancelled"@en ;
+    rdfs:comment        "Request withdrawn before the activation window."@en .
 
 ################################################################################
 # Controlled Vocabularies — KPI Scope  (new in v0.5)
@@ -1390,10 +1471,12 @@ celine:hasCommitmentMode
 celine:hasFlexibilityDirection
     a owl:ObjectProperty ;
     rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
-    rdfs:domain         celine:FlexibilityCommitment ;
+    rdfs:domain         [ a owl:Class ;
+                          owl:unionOf ( celine:FlexibilityCommitment
+                                        celine:FlexibilityRequest ) ] ;
     rdfs:range          skos:Concept ;
     rdfs:label          "has flexibility direction" ;
-    rdfs:comment        "Expected values: celine:FlexDown or celine:FlexUp." .
+    rdfs:comment        "Expected values: celine:FlexDown or celine:FlexUp."@en .
 
 celine:generatesCredit
     a owl:ObjectProperty ;
@@ -1613,13 +1696,21 @@ celine:measures
 # Object Properties — Member  (new in v0.6)
 ################################################################################
 
+celine:hasMember
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:CommunityContext ;
+    rdfs:range          peco:Energy_community_member ;
+    rdfs:label          "has member"@en ;
+    rdfs:comment        "A member participating in this community context. Mirrors the rec-registry's per-community member list. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of."@en .
+
 celine:hasMemberRole
     a owl:ObjectProperty ;
     rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
     rdfs:domain         peco:Energy_community_member ;
     rdfs:range          skos:Concept ;
     rdfs:label          "has member role"@en ;
-    rdfs:comment        "The participation role of this member. Expected values from celine:MemberRole."@en .
+    rdfs:comment        "The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the rec-registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope for v0.6."@en .
 
 celine:hasMemberStatus
     a owl:ObjectProperty ;
@@ -1627,7 +1718,52 @@ celine:hasMemberStatus
     rdfs:domain         peco:Energy_community_member ;
     rdfs:range          skos:Concept ;
     rdfs:label          "has member status"@en ;
-    rdfs:comment        "The lifecycle status of this member. Expected values from celine:MemberStatus."@en .
+    rdfs:comment        "The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the rec-registry conceptual model, a member has exactly one status per community."@en .
+
+################################################################################
+# Object Properties — Flexibility Request  (new in v0.6)
+################################################################################
+
+celine:hasFlexibilityRequest
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:CommunityContext ;
+    rdfs:range          celine:FlexibilityRequest ;
+    rdfs:label          "has flexibility request"@en ;
+    rdfs:comment        "A flexibility request issued within this community context."@en .
+
+celine:requestedBy
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityRequest ;
+    rdfs:range          peco:Agent ;
+    rdfs:label          "requested by"@en ;
+    rdfs:comment        "The operator or automated system that issued this flexibility request."@en .
+
+celine:hasRequestStatus
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityRequest ;
+    rdfs:range          skos:Concept ;
+    rdfs:label          "has request status"@en ;
+    rdfs:comment        "Expected values from celine:RequestStatus."@en .
+
+celine:resultsInCommitment
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityRequest ;
+    rdfs:range          celine:FlexibilityCommitment ;
+    rdfs:label          "results in commitment"@en ;
+    rdfs:comment        "FlexibilityCommitment(s) created in response to this request."@en .
+
+celine:inResponseTo
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityCommitment ;
+    rdfs:range          celine:FlexibilityRequest ;
+    rdfs:label          "in response to"@en ;
+    rdfs:comment        "The flexibility request that triggered this commitment."@en ;
+    owl:inverseOf       celine:resultsInCommitment .
 
 ################################################################################
 # Data Properties — KPI  (new in v0.5)
@@ -1816,6 +1952,18 @@ celine:maxActivationsPerDay
     rdfs:range          xsd:integer ;
     rdfs:label          "max activations per day" ;
     rdfs:comment        "Maximum number of flexibility activation events permitted within a 24-hour period." .
+
+################################################################################
+# Data Properties — Flexibility Request  (new in v0.6)
+################################################################################
+
+celine:requestedFlexibility
+    a owl:DatatypeProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         celine:FlexibilityRequest ;
+    rdfs:range          xsd:decimal ;
+    rdfs:label          "requested flexibility"@en ;
+    rdfs:comment        "Target flexibility amount in kWh. Positive value; direction is expressed by hasFlexibilityDirection."@en .
 
 ################################################################################
 # Data Properties — Grid & Asset Identity  (new in v0.6)
