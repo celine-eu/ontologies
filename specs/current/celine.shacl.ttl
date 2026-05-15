@@ -78,6 +78,79 @@ celine:CommunityContextShape
         sh:nodeKind sh:IRI ;
         sh:class celine:FlexibilityRequest ;
         sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasPartition ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:SharingGroup ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasMember ;
+        sh:nodeKind sh:IRI ;
+        sh:class peco:Energy_community_member ;
+        sh:minCount 0 ;
+    ] .
+
+################################################################################
+# Sharing Group shapes  (new in v0.6)
+################################################################################
+
+celine:SharingGroupShape
+    a sh:NodeShape ;
+    sh:targetClass celine:SharingGroup ;
+    rdfs:label "SharingGroup constraints" ;
+    sh:property [
+        sh:path celine:partitionOf ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:CommunityContext ;
+    ] ;
+    sh:property [
+        sh:path celine:inRegulatoryZone ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:class celine:RegulatoryZone ;
+    ] ;
+    sh:property [
+        sh:path celine:hasMember ;
+        sh:nodeKind sh:IRI ;
+        sh:class peco:Energy_community_member ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path celine:hasTopologyNode ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 0 ;
+    ] .
+
+################################################################################
+# No-double-counting constraint  (new in v0.6)
+#
+# A connection point MUST NOT be reachable from more than one SharingGroup
+# via hasMember / hasDeliveryPoint.  This is a cross-graph uniqueness check
+# that cannot be expressed in OWL — SHACL SPARQL constraint is used.
+################################################################################
+
+celine:NoDoubleCountingConstraint
+    a sh:NodeShape ;
+    sh:targetClass celine:ConnectionPoint ;
+    rdfs:label "No-double-counting constraint" ;
+    rdfs:comment "Each connection point must belong to at most one SharingGroup (via hasMember/hasDeliveryPoint)." ;
+    sh:sparql [
+        sh:message "Connection point {$this} is reachable from more than one SharingGroup — double-counting violation." ;
+        sh:select """
+            SELECT $this (COUNT(DISTINCT ?group) AS ?groupCount)
+            WHERE {
+                ?group a <https://w3id.org/celine-eu#SharingGroup> .
+                ?group <https://w3id.org/celine-eu#hasMember> ?member .
+                ?member <https://w3id.org/celine-eu#hasDeliveryPoint> $this .
+            }
+            GROUP BY $this
+            HAVING (COUNT(DISTINCT ?group) > 1)
+        """ ;
     ] .
 
 celine:ScenarioShape

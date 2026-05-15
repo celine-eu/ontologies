@@ -27,11 +27,14 @@
     PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),
     regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass
     for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,
-    ElectricityMeter, EVCharger, HeatPump), and member modeling (hasMember linkage, MemberRole and MemberStatus
-    vocabularies). CIM alignment via skos:closeMatch to IEC 61968 profile;
-    SAREF alignment via skos:closeMatch only — no new owl:imports. Asset technical
-    attributes are intentionally omitted; specs live in the external rec-registry catalogue,
-    addressed by celine:hasLocalIdentifier.""" ;
+    ElectricityMeter, EVCharger, HeatPump), member modeling (hasMember linkage, MemberRole
+    and MemberStatus vocabularies, hasDeliveryPoint for member-to-POD linkage), and
+    SharingGroup — a community partition for shared self-consumption accounting within a
+    regulatory zone, aligned with the RED II (2018/2001) double-counting prohibition.
+    CIM alignment via skos:closeMatch to IEC 61968 profile; SAREF alignment via
+    skos:closeMatch only — no new owl:imports. Asset technical attributes are intentionally
+    omitted; specs live in the external rec-registry catalogue, addressed by
+    celine:hasLocalIdentifier.""" ;
                               rdfs:label "CELINE Core Ontology" ;
                               rdfs:seeAlso <https://celine-eu.github.io/> ,
                                            <https://github.com/celine-eu> ,
@@ -191,6 +194,15 @@
              rdfs:label "has cost type" .
 
 
+###  https://w3id.org/celine-eu#hasDeliveryPoint
+:hasDeliveryPoint rdf:type owl:ObjectProperty ;
+                  rdfs:domain <https://purl.org/peco/peco-core#Energy_community_member> ;
+                  rdfs:range :ConnectionPoint ;
+                  rdfs:comment "A connection point (POD, CUPS, PRM, etc.) through which this member withdraws or injects energy. Mirrors the rec-registry's member.delivery_points list."@en ;
+                  rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+                  rdfs:label "has delivery point"@en .
+
+
 ###  https://w3id.org/celine-eu#hasEnvelope
 :hasEnvelope rdf:type owl:ObjectProperty ;
              rdfs:domain :CommunityContext ;
@@ -336,9 +348,13 @@
 
 ###  https://w3id.org/celine-eu#hasMember
 :hasMember rdf:type owl:ObjectProperty ;
-           rdfs:domain :CommunityContext ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :CommunityContext
+                                       :SharingGroup
+                                     )
+                       ] ;
            rdfs:range <https://purl.org/peco/peco-core#Energy_community_member> ;
-           rdfs:comment "A member participating in this community context. Mirrors the rec-registry's per-community member list. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of."@en ;
+           rdfs:comment "A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of."@en ;
            rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
            rdfs:label "has member"@en .
 
@@ -359,6 +375,15 @@
                  rdfs:comment "The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the rec-registry conceptual model, a member has exactly one status per community."@en ;
                  rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
                  rdfs:label "has member status"@en .
+
+
+###  https://w3id.org/celine-eu#hasPartition
+:hasPartition rdf:type owl:ObjectProperty ;
+              rdfs:domain :CommunityContext ;
+              rdfs:range :SharingGroup ;
+              rdfs:comment "A sharing group partition within this community context. Each partition covers one regulatory zone and enumerates the members whose energy flows are accounted together for shared self-consumption."@en ;
+              rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+              rdfs:label "has partition"@en .
 
 
 ###  https://w3id.org/celine-eu#hasRedistributionResult
@@ -428,14 +453,18 @@
 
 ###  https://w3id.org/celine-eu#hasTopologyNode
 :hasTopologyNode rdf:type owl:ObjectProperty ;
-                 rdfs:domain :CommunityContext ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( :CommunityContext
+                                             :SharingGroup
+                                           )
+                             ] ;
                  rdfs:range [ rdf:type owl:Class ;
                               owl:unionOf ( :DistributionFeeder
                                             :PowerTransformer
                                             :Substation
                                           )
                             ] ;
-                 rdfs:comment "A grid topology element associated with this community context."@en ;
+                 rdfs:comment "A grid topology element associated with this community context or sharing group."@en ;
                  rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
                  rdfs:label "has topology node"@en .
 
@@ -445,10 +474,11 @@
                   rdfs:domain [ rdf:type owl:Class ;
                                 owl:unionOf ( <https://purl.org/peco/peco-core#Energy_community_member>
                                               :ConnectionPoint
+                                              :SharingGroup
                                             )
                               ] ;
                   rdfs:range :RegulatoryZone ;
-                  rdfs:comment "The regulatory zone to which this member or connection point belongs."@en ;
+                  rdfs:comment "The regulatory zone to which this member, connection point, or sharing group belongs."@en ;
                   rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
                   rdfs:label "in regulatory zone"@en .
 
@@ -503,6 +533,16 @@
             rdfs:comment "Symmetric link between co-located or functionally coupled assets (e.g. PV system paired with battery storage)."@en ;
             rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
             rdfs:label "paired with"@en .
+
+
+###  https://w3id.org/celine-eu#partitionOf
+:partitionOf rdf:type owl:ObjectProperty ;
+             owl:inverseOf :hasPartition ;
+             rdfs:domain :SharingGroup ;
+             rdfs:range :CommunityContext ;
+             rdfs:comment "The community context to which this sharing group belongs."@en ;
+             rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+             rdfs:label "partition of"@en .
 
 
 ###  https://w3id.org/celine-eu#producesDataset
@@ -1139,6 +1179,24 @@ ex:cost_platform_fee a celine:CostItem ;
     celine:currency                 \"EUR\" ;
     celine:hasCostItem              ex:cost_admin, ex:cost_platform_fee ;
     celine:hasRedistributionResult  ex:result_rossi, ex:result_bianchi .""" .
+
+
+###  https://w3id.org/celine-eu#SharingGroup
+:SharingGroup rdf:type owl:Class ;
+              rdfs:comment """A subset of community members whose energy flows are accounted together
+    for shared self-consumption within a single regulatory zone. Maps to the Italian
+    'configurazione' under Decreto 199/2021, the French 'périmètre ACC', and analogous
+    groupings in other EU member states. A connection point MUST NOT belong to more than
+    one SharingGroup across all communities — the double-counting prohibition derives from
+    RED II (2018/2001, Art. 22) and the Electricity Market Directive (2019/944, Art. 16)."""@en ;
+              rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+              rdfs:label "Sharing Group"@en ;
+              <http://www.w3.org/2004/02/skos/core#example> """ex:group_north a celine:SharingGroup ;
+    rdfs:label              \"Northern area\" ;
+    celine:partitionOf      ex:ctx1 ;
+    celine:inRegulatoryZone ex:zone_cp_nord ;
+    celine:hasTopologyNode  ex:ss_AC221E00020 ;
+    celine:hasMember        ex:member_001 , ex:member_002 .""" .
 
 
 ###  https://w3id.org/celine-eu#Simulation

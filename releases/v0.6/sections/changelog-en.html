@@ -96,6 +96,8 @@
 <li>Added: SubClass of https://w3id.org/celine-eu#Substation</li>
 </ul>
 </li>
+<li><a href="#SharingGroup">https://w3id.org/celine-eu#SharingGroup</a>
+</li>
 <li><a href="#Substation">https://w3id.org/celine-eu#Substation</a>
 <ul>
 <li>Added: SubClass of https://purl.org/peco/peco-core#Asset</li>
@@ -114,7 +116,13 @@
 </ul>
 </li>
 </ul></details><details><summary><u>Added object properties</u></summary>
-<ul><li><a href="#hasFlexibilityRequest">https://w3id.org/celine-eu#hasFlexibilityRequest</a>
+<ul><li><a href="#hasDeliveryPoint">https://w3id.org/celine-eu#hasDeliveryPoint</a>
+<ul>
+<li>Added: domain https://purl.org/peco/peco-core#Energy_community_member</li>
+<li>Added: Range https://w3id.org/celine-eu#ConnectionPoint</li>
+</ul>
+</li>
+<li><a href="#hasFlexibilityRequest">https://w3id.org/celine-eu#hasFlexibilityRequest</a>
 <ul>
 <li>Added: domain https://w3id.org/celine-eu#CommunityContext</li>
 <li>Added: Range https://w3id.org/celine-eu#FlexibilityRequest</li>
@@ -135,7 +143,7 @@
 <li><a href="#hasMember">https://w3id.org/celine-eu#hasMember</a>
 <ul>
 <li>Added: Range https://purl.org/peco/peco-core#Energy_community_member</li>
-<li>Added: domain https://w3id.org/celine-eu#CommunityContext</li>
+<li>Added: domain Union of (https://w3id.org/celine-eu#CommunityContext, https://w3id.org/celine-eu#SharingGroup)</li>
 </ul>
 </li>
 <li><a href="#hasMemberRole">https://w3id.org/celine-eu#hasMemberRole</a>
@@ -148,6 +156,13 @@
 <ul>
 <li>Added: domain https://purl.org/peco/peco-core#Energy_community_member</li>
 <li>Added: Range http://www.w3.org/2004/02/skos/core#Concept</li>
+</ul>
+</li>
+<li><a href="#hasPartition">https://w3id.org/celine-eu#hasPartition</a>
+<ul>
+<li>Added: domain https://w3id.org/celine-eu#CommunityContext</li>
+<li>Added: InverseObjectProperties InverseObjectProperties(&lt;https://w3id.org/celine-eu#partitionOf&gt; &lt;https://w3id.org/celine-eu#hasPartition&gt;)</li>
+<li>Added: Range https://w3id.org/celine-eu#SharingGroup</li>
 </ul>
 </li>
 <li><a href="#hasRegulatoryZone">https://w3id.org/celine-eu#hasRegulatoryZone</a>
@@ -164,14 +179,14 @@
 </li>
 <li><a href="#hasTopologyNode">https://w3id.org/celine-eu#hasTopologyNode</a>
 <ul>
-<li>Added: domain https://w3id.org/celine-eu#CommunityContext</li>
+<li>Added: domain Union of (https://w3id.org/celine-eu#CommunityContext, https://w3id.org/celine-eu#SharingGroup)</li>
 <li>Added: Range Union of (https://w3id.org/celine-eu#DistributionFeeder, https://w3id.org/celine-eu#PowerTransformer, https://w3id.org/celine-eu#Substation)</li>
 </ul>
 </li>
 <li><a href="#inRegulatoryZone">https://w3id.org/celine-eu#inRegulatoryZone</a>
 <ul>
-<li>Added: domain Union of (https://purl.org/peco/peco-core#Energy_community_member, https://w3id.org/celine-eu#ConnectionPoint)</li>
 <li>Added: Range https://w3id.org/celine-eu#RegulatoryZone</li>
+<li>Added: domain Union of (https://purl.org/peco/peco-core#Energy_community_member, https://w3id.org/celine-eu#ConnectionPoint, https://w3id.org/celine-eu#SharingGroup)</li>
 </ul>
 </li>
 <li><a href="#inResponseTo">https://w3id.org/celine-eu#inResponseTo</a>
@@ -198,6 +213,13 @@
 <li>Added: domain https://purl.org/peco/peco-core#Asset</li>
 <li>Added: Range https://purl.org/peco/peco-core#Asset</li>
 <li>Added: SymmetricObjectProperty SymmetricObjectProperty(&lt;https://w3id.org/celine-eu#pairedWith&gt;)</li>
+</ul>
+</li>
+<li><a href="#partitionOf">https://w3id.org/celine-eu#partitionOf</a>
+<ul>
+<li>Added: domain https://w3id.org/celine-eu#SharingGroup</li>
+<li>Added: InverseObjectProperties InverseObjectProperties(&lt;https://w3id.org/celine-eu#partitionOf&gt; &lt;https://w3id.org/celine-eu#hasPartition&gt;)</li>
+<li>Added: Range https://w3id.org/celine-eu#CommunityContext</li>
 </ul>
 </li>
 <li><a href="#requestedBy">https://w3id.org/celine-eu#requestedBy</a>

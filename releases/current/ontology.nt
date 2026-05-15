@@ -11,7 +11,7 @@
 <https://w3id.org/celine-eu> <http://purl.org/dc/terms/title> "CELINE Core Ontology" .
 <https://w3id.org/celine-eu> <http://purl.org/vocab/vann/preferredNamespacePrefix> "celine" .
 <https://w3id.org/celine-eu> <http://purl.org/vocab/vann/preferredNamespaceUri> "https://w3id.org/celine-eu#" .
-<https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#comment> "Version 0.6 adds REC-registry-aligned grid topology (Substation,\n    PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),\n    regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass\n    for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,\n    ElectricityMeter, EVCharger, HeatPump), and member modeling (hasMember linkage, MemberRole and MemberStatus\n    vocabularies). CIM alignment via skos:closeMatch to IEC 61968 profile;\n    SAREF alignment via skos:closeMatch only — no new owl:imports. Asset technical\n    attributes are intentionally omitted; specs live in the external rec-registry catalogue,\n    addressed by celine:hasLocalIdentifier." .
+<https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#comment> "Version 0.6 adds REC-registry-aligned grid topology (Substation,\n    PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),\n    regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass\n    for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,\n    ElectricityMeter, EVCharger, HeatPump), member modeling (hasMember linkage, MemberRole\n    and MemberStatus vocabularies, hasDeliveryPoint for member-to-POD linkage), and\n    SharingGroup — a community partition for shared self-consumption accounting within a\n    regulatory zone, aligned with the RED II (2018/2001) double-counting prohibition.\n    CIM alignment via skos:closeMatch to IEC 61968 profile; SAREF alignment via\n    skos:closeMatch only — no new owl:imports. Asset technical attributes are intentionally\n    omitted; specs live in the external rec-registry catalogue, addressed by\n    celine:hasLocalIdentifier." .
 <https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#label> "CELINE Core Ontology" .
 <https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <https://celine-eu.github.io/> .
 <https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <https://github.com/celine-eu> .
@@ -161,6 +161,14 @@
 <https://w3id.org/celine-eu#hasCostType> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#hasCostType> <http://www.w3.org/2000/01/rdf-schema#label> "has cost type" .
 # 
+# https://w3id.org/celine-eu#hasDeliveryPoint
+<https://w3id.org/celine-eu#hasDeliveryPoint> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://w3id.org/celine-eu#hasDeliveryPoint> <http://www.w3.org/2000/01/rdf-schema#domain> <https://purl.org/peco/peco-core#Energy_community_member> .
+<https://w3id.org/celine-eu#hasDeliveryPoint> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/celine-eu#ConnectionPoint> .
+<https://w3id.org/celine-eu#hasDeliveryPoint> <http://www.w3.org/2000/01/rdf-schema#comment> "A connection point (POD, CUPS, PRM, etc.) through which this member withdraws or injects energy. Mirrors the rec-registry's member.delivery_points list."@en .
+<https://w3id.org/celine-eu#hasDeliveryPoint> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#hasDeliveryPoint> <http://www.w3.org/2000/01/rdf-schema#label> "has delivery point"@en .
+# 
 # https://w3id.org/celine-eu#hasEnvelope
 <https://w3id.org/celine-eu#hasEnvelope> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <https://w3id.org/celine-eu#hasEnvelope> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/celine-eu#CommunityContext> .
@@ -301,9 +309,17 @@ _:genid5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/20
 # 
 # https://w3id.org/celine-eu#hasMember
 <https://w3id.org/celine-eu#hasMember> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
-<https://w3id.org/celine-eu#hasMember> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/celine-eu#CommunityContext> .
+<https://w3id.org/celine-eu#hasMember> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid8 .
+_:genid8 <http://www.w3.org/2002/07/owl#unionOf> _:genid10 .
+_:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid9 .
+_:genid9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#SharingGroup> .
+_:genid9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#CommunityContext> .
+_:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://w3id.org/celine-eu#hasMember> <http://www.w3.org/2000/01/rdf-schema#range> <https://purl.org/peco/peco-core#Energy_community_member> .
-<https://w3id.org/celine-eu#hasMember> <http://www.w3.org/2000/01/rdf-schema#comment> "A member participating in this community context. Mirrors the rec-registry's per-community member list. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of."@en .
+<https://w3id.org/celine-eu#hasMember> <http://www.w3.org/2000/01/rdf-schema#comment> "A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of."@en .
 <https://w3id.org/celine-eu#hasMember> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#hasMember> <http://www.w3.org/2000/01/rdf-schema#label> "has member"@en .
 # 
@@ -322,6 +338,14 @@ _:genid5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/20
 <https://w3id.org/celine-eu#hasMemberStatus> <http://www.w3.org/2000/01/rdf-schema#comment> "The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the rec-registry conceptual model, a member has exactly one status per community."@en .
 <https://w3id.org/celine-eu#hasMemberStatus> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#hasMemberStatus> <http://www.w3.org/2000/01/rdf-schema#label> "has member status"@en .
+# 
+# https://w3id.org/celine-eu#hasPartition
+<https://w3id.org/celine-eu#hasPartition> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://w3id.org/celine-eu#hasPartition> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/celine-eu#CommunityContext> .
+<https://w3id.org/celine-eu#hasPartition> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/celine-eu#SharingGroup> .
+<https://w3id.org/celine-eu#hasPartition> <http://www.w3.org/2000/01/rdf-schema#comment> "A sharing group partition within this community context. Each partition covers one regulatory zone and enumerates the members whose energy flows are accounted together for shared self-consumption."@en .
+<https://w3id.org/celine-eu#hasPartition> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#hasPartition> <http://www.w3.org/2000/01/rdf-schema#label> "has partition"@en .
 # 
 # https://w3id.org/celine-eu#hasRedistributionResult
 <https://w3id.org/celine-eu#hasRedistributionResult> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
@@ -382,36 +406,47 @@ _:genid5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/20
 # 
 # https://w3id.org/celine-eu#hasTopologyNode
 <https://w3id.org/celine-eu#hasTopologyNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
-<https://w3id.org/celine-eu#hasTopologyNode> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/celine-eu#CommunityContext> .
-<https://w3id.org/celine-eu#hasTopologyNode> <http://www.w3.org/2000/01/rdf-schema#range> _:genid8 .
-_:genid8 <http://www.w3.org/2002/07/owl#unionOf> _:genid11 .
-_:genid11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid10 .
-_:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid9 .
-_:genid9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-_:genid9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#Substation> .
-_:genid9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#PowerTransformer> .
-_:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#DistributionFeeder> .
-_:genid11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
-<https://w3id.org/celine-eu#hasTopologyNode> <http://www.w3.org/2000/01/rdf-schema#comment> "A grid topology element associated with this community context."@en .
+<https://w3id.org/celine-eu#hasTopologyNode> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid11 .
+_:genid11 <http://www.w3.org/2002/07/owl#unionOf> _:genid13 .
+_:genid13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid12 .
+_:genid12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#SharingGroup> .
+_:genid12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#CommunityContext> .
+_:genid13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://w3id.org/celine-eu#hasTopologyNode> <http://www.w3.org/2000/01/rdf-schema#range> _:genid14 .
+_:genid14 <http://www.w3.org/2002/07/owl#unionOf> _:genid17 .
+_:genid17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid16 .
+_:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid15 .
+_:genid15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#Substation> .
+_:genid15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#PowerTransformer> .
+_:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#DistributionFeeder> .
+_:genid17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://w3id.org/celine-eu#hasTopologyNode> <http://www.w3.org/2000/01/rdf-schema#comment> "A grid topology element associated with this community context or sharing group."@en .
 <https://w3id.org/celine-eu#hasTopologyNode> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#hasTopologyNode> <http://www.w3.org/2000/01/rdf-schema#label> "has topology node"@en .
 # 
 # https://w3id.org/celine-eu#inRegulatoryZone
 <https://w3id.org/celine-eu#inRegulatoryZone> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
-<https://w3id.org/celine-eu#inRegulatoryZone> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid12 .
-_:genid12 <http://www.w3.org/2002/07/owl#unionOf> _:genid14 .
-_:genid14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid13 .
-_:genid13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-_:genid13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#ConnectionPoint> .
-_:genid13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://purl.org/peco/peco-core#Energy_community_member> .
-_:genid14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://w3id.org/celine-eu#inRegulatoryZone> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid18 .
+_:genid18 <http://www.w3.org/2002/07/owl#unionOf> _:genid21 .
+_:genid21 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid20 .
+_:genid20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid19 .
+_:genid19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#SharingGroup> .
+_:genid19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#ConnectionPoint> .
+_:genid20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid21 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://purl.org/peco/peco-core#Energy_community_member> .
+_:genid21 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid18 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://w3id.org/celine-eu#inRegulatoryZone> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/celine-eu#RegulatoryZone> .
-<https://w3id.org/celine-eu#inRegulatoryZone> <http://www.w3.org/2000/01/rdf-schema#comment> "The regulatory zone to which this member or connection point belongs."@en .
+<https://w3id.org/celine-eu#inRegulatoryZone> <http://www.w3.org/2000/01/rdf-schema#comment> "The regulatory zone to which this member, connection point, or sharing group belongs."@en .
 <https://w3id.org/celine-eu#inRegulatoryZone> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#inRegulatoryZone> <http://www.w3.org/2000/01/rdf-schema#label> "in regulatory zone"@en .
 # 
@@ -442,18 +477,18 @@ _:genid12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 # 
 # https://w3id.org/celine-eu#operatedBy
 <https://w3id.org/celine-eu#operatedBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
-<https://w3id.org/celine-eu#operatedBy> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid15 .
-_:genid15 <http://www.w3.org/2002/07/owl#unionOf> _:genid18 .
-_:genid18 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid17 .
-_:genid17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid16 .
-_:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-_:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#Substation> .
-_:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#PowerTransformer> .
-_:genid17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid18 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#DistributionFeeder> .
-_:genid18 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://w3id.org/celine-eu#operatedBy> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid22 .
+_:genid22 <http://www.w3.org/2002/07/owl#unionOf> _:genid25 .
+_:genid25 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid24 .
+_:genid24 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid23 .
+_:genid23 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid23 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#Substation> .
+_:genid23 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid24 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#PowerTransformer> .
+_:genid24 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid25 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#DistributionFeeder> .
+_:genid25 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid22 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://w3id.org/celine-eu#operatedBy> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/celine-eu#GridOperator> .
 <https://w3id.org/celine-eu#operatedBy> <http://www.w3.org/2000/01/rdf-schema#comment> "The grid operator responsible for this infrastructure element."@en .
 <https://w3id.org/celine-eu#operatedBy> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
@@ -467,6 +502,15 @@ _:genid15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 <https://w3id.org/celine-eu#pairedWith> <http://www.w3.org/2000/01/rdf-schema#comment> "Symmetric link between co-located or functionally coupled assets (e.g. PV system paired with battery storage)."@en .
 <https://w3id.org/celine-eu#pairedWith> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#pairedWith> <http://www.w3.org/2000/01/rdf-schema#label> "paired with"@en .
+# 
+# https://w3id.org/celine-eu#partitionOf
+<https://w3id.org/celine-eu#partitionOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://w3id.org/celine-eu#partitionOf> <http://www.w3.org/2002/07/owl#inverseOf> <https://w3id.org/celine-eu#hasPartition> .
+<https://w3id.org/celine-eu#partitionOf> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/celine-eu#SharingGroup> .
+<https://w3id.org/celine-eu#partitionOf> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/celine-eu#CommunityContext> .
+<https://w3id.org/celine-eu#partitionOf> <http://www.w3.org/2000/01/rdf-schema#comment> "The community context to which this sharing group belongs."@en .
+<https://w3id.org/celine-eu#partitionOf> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#partitionOf> <http://www.w3.org/2000/01/rdf-schema#label> "partition of"@en .
 # 
 # https://w3id.org/celine-eu#producesDataset
 <https://w3id.org/celine-eu#producesDataset> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
@@ -652,15 +696,15 @@ _:genid15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 # 
 # https://w3id.org/celine-eu#hasLocalIdentifier
 <https://w3id.org/celine-eu#hasLocalIdentifier> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
-<https://w3id.org/celine-eu#hasLocalIdentifier> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid19 .
-_:genid19 <http://www.w3.org/2002/07/owl#unionOf> _:genid21 .
-_:genid21 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid20 .
-_:genid20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-_:genid20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#ConnectionPoint> .
-_:genid20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid21 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://purl.org/peco/peco-core#Asset> .
-_:genid21 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://w3id.org/celine-eu#hasLocalIdentifier> <http://www.w3.org/2000/01/rdf-schema#domain> _:genid26 .
+_:genid26 <http://www.w3.org/2002/07/owl#unionOf> _:genid28 .
+_:genid28 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid27 .
+_:genid27 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid27 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/celine-eu#ConnectionPoint> .
+_:genid27 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid28 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://purl.org/peco/peco-core#Asset> .
+_:genid28 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid26 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://w3id.org/celine-eu#hasLocalIdentifier> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
 <https://w3id.org/celine-eu#hasLocalIdentifier> <http://www.w3.org/2000/01/rdf-schema#comment> "Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into the external rec-registry catalogue."@en .
 <https://w3id.org/celine-eu#hasLocalIdentifier> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
@@ -953,6 +997,13 @@ _:genid19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 <https://w3id.org/celine-eu#SettlementRun> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#SettlementRun> <http://www.w3.org/2000/01/rdf-schema#label> "Settlement Run" .
 <https://w3id.org/celine-eu#SettlementRun> <http://www.w3.org/2004/02/skos/core#example> "ex:sr_2025_q3 a celine:SettlementRun ;\n    celine:settlesContext           ex:ctx1 ;\n    celine:hasTimeInterval          ex:interval_q3_2025 ;\n    celine:conversionRate           \"0.12\"^^xsd:decimal ;\n    celine:currency                 \"EUR\" ;\n    celine:hasCostItem              ex:cost_admin, ex:cost_platform_fee ;\n    celine:hasRedistributionResult  ex:result_rossi, ex:result_bianchi ." .
+# 
+# https://w3id.org/celine-eu#SharingGroup
+<https://w3id.org/celine-eu#SharingGroup> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://w3id.org/celine-eu#SharingGroup> <http://www.w3.org/2000/01/rdf-schema#comment> "A subset of community members whose energy flows are accounted together\n    for shared self-consumption within a single regulatory zone. Maps to the Italian\n    'configurazione' under Decreto 199/2021, the French 'périmètre ACC', and analogous\n    groupings in other EU member states. A connection point MUST NOT belong to more than\n    one SharingGroup across all communities — the double-counting prohibition derives from\n    RED II (2018/2001, Art. 22) and the Electricity Market Directive (2019/944, Art. 16)."@en .
+<https://w3id.org/celine-eu#SharingGroup> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#SharingGroup> <http://www.w3.org/2000/01/rdf-schema#label> "Sharing Group"@en .
+<https://w3id.org/celine-eu#SharingGroup> <http://www.w3.org/2004/02/skos/core#example> "ex:group_north a celine:SharingGroup ;\n    rdfs:label              \"Northern area\" ;\n    celine:partitionOf      ex:ctx1 ;\n    celine:inRegulatoryZone ex:zone_cp_nord ;\n    celine:hasTopologyNode  ex:ss_AC221E00020 ;\n    celine:hasMember        ex:member_001 , ex:member_002 ." .
 # 
 # https://w3id.org/celine-eu#Simulation
 <https://w3id.org/celine-eu#Simulation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .

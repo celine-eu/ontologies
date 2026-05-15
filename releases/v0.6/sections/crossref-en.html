@@ -28,6 +28,7 @@ This section provides details for each class and property defined by CELINE Core
   <li><a href="#Scenario" title="https://w3id.org/celine-eu#Scenario">Scenario</a></li>
   <li><a href="#SecondarySubstation" title="https://w3id.org/celine-eu#SecondarySubstation">Secondary Substation</a></li>
   <li><a href="#SettlementRun" title="https://w3id.org/celine-eu#SettlementRun">Settlement Run</a></li>
+  <li><a href="#SharingGroup" title="https://w3id.org/celine-eu#SharingGroup">Sharing Group</a></li>
   <li><a href="#Simulation" title="https://w3id.org/celine-eu#Simulation">Simulation</a></li>
   <li><a href="#SimulationRun" title="https://w3id.org/celine-eu#SimulationRun">Simulation Run</a></li>
   <li><a href="#Substation" title="https://w3id.org/celine-eu#Substation">Substation</a></li>
@@ -88,13 +89,13 @@ This section provides details for each class and property defined by CELINE Core
     is in domain of
    </dt>
    <dd>
-    <a href="#hasCommunity" title="https://w3id.org/celine-eu#hasCommunity">has energy community</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasCommitment" title="https://w3id.org/celine-eu#hasCommitment">has flexibility commitment</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasEnvelope" title="https://w3id.org/celine-eu#hasEnvelope">has flexibility envelope</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasFlexibilityRequest" title="https://w3id.org/celine-eu#hasFlexibilityRequest">has flexibility request</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasGridOperator" title="https://w3id.org/celine-eu#hasGridOperator">has grid operator</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasMember" title="https://w3id.org/celine-eu#hasMember">has member</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasRegulatoryZone" title="https://w3id.org/celine-eu#hasRegulatoryZone">has regulatory zone</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasSettlementRun" title="https://w3id.org/celine-eu#hasSettlementRun">has settlement run</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasSimulation" title="https://w3id.org/celine-eu#hasSimulation">has simulation</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasTopologyNode" title="https://w3id.org/celine-eu#hasTopologyNode">has topology node</a> <sup class="type-op" title="object property">op</sup>, <a href="#usesAsset" title="https://w3id.org/celine-eu#usesAsset">uses asset</a> <sup class="type-op" title="object property">op</sup>
+    <a href="#hasCommunity" title="https://w3id.org/celine-eu#hasCommunity">has energy community</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasCommitment" title="https://w3id.org/celine-eu#hasCommitment">has flexibility commitment</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasEnvelope" title="https://w3id.org/celine-eu#hasEnvelope">has flexibility envelope</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasFlexibilityRequest" title="https://w3id.org/celine-eu#hasFlexibilityRequest">has flexibility request</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasGridOperator" title="https://w3id.org/celine-eu#hasGridOperator">has grid operator</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasMember" title="https://w3id.org/celine-eu#hasMember">has member</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasPartition" title="https://w3id.org/celine-eu#hasPartition">has partition</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasRegulatoryZone" title="https://w3id.org/celine-eu#hasRegulatoryZone">has regulatory zone</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasSettlementRun" title="https://w3id.org/celine-eu#hasSettlementRun">has settlement run</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasSimulation" title="https://w3id.org/celine-eu#hasSimulation">has simulation</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasTopologyNode" title="https://w3id.org/celine-eu#hasTopologyNode">has topology node</a> <sup class="type-op" title="object property">op</sup>, <a href="#usesAsset" title="https://w3id.org/celine-eu#usesAsset">uses asset</a> <sup class="type-op" title="object property">op</sup>
    </dd>
    <dt>
     is in range of
    </dt>
    <dd>
-    <a href="#hasEvaluatedScope" title="https://w3id.org/celine-eu#hasEvaluatedScope">has evaluated scope</a> <sup class="type-op" title="object property">op</sup>, <a href="#settlesContext" title="https://w3id.org/celine-eu#settlesContext">settles context</a> <sup class="type-op" title="object property">op</sup>
+    <a href="#hasEvaluatedScope" title="https://w3id.org/celine-eu#hasEvaluatedScope">has evaluated scope</a> <sup class="type-op" title="object property">op</sup>, <a href="#partitionOf" title="https://w3id.org/celine-eu#partitionOf">partition of</a> <sup class="type-op" title="object property">op</sup>, <a href="#settlesContext" title="https://w3id.org/celine-eu#settlesContext">settles context</a> <sup class="type-op" title="object property">op</sup>
    </dd>
   </dl>
  </div>
@@ -118,6 +119,12 @@ This section provides details for each class and property defined by CELINE Core
    </dt>
    <dd>
     <a href="#hasIdentifierScheme" title="https://w3id.org/celine-eu#hasIdentifierScheme">has identifier scheme</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasLocalIdentifier" title="https://w3id.org/celine-eu#hasLocalIdentifier">has local identifier</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#inRegulatoryZone" title="https://w3id.org/celine-eu#inRegulatoryZone">in regulatory zone</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasDeliveryPoint" title="https://w3id.org/celine-eu#hasDeliveryPoint">has delivery point</a> <sup class="type-op" title="object property">op</sup>
    </dd>
   </dl>
  </div>
@@ -896,6 +903,48 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
   </dl>
  </div>
+ <div class="entity" id="SharingGroup">
+  <h3>Sharing Group<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#SharingGroup</p>
+  <div class="comment">
+   <span class="markdown">A subset of community members whose energy flows are accounted together for shared self-consumption within a single regulatory zone. Maps to the Italian 'configurazione' under Decreto 199/2021, the French 'périmètre ACC', and analogous groupings in other EU member states. A connection point MUST NOT belong to more than one SharingGroup across all communities — the double-counting prohibition derives from RED II (2018/2001, Art. 22) and the Electricity Market Directive (2019/944, Art. 16).</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl>
+   <dt>
+    Example
+   </dt>
+   <dd>
+    <pre>ex:group_north a celine:SharingGroup ;
+    rdfs:label              "Northern area" ;
+    celine:partitionOf      ex:ctx1 ;
+    celine:inRegulatoryZone ex:zone_cp_nord ;
+    celine:hasTopologyNode  ex:ss_AC221E00020 ;
+    celine:hasMember        ex:member_001 , ex:member_002 .</pre>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#hasMember" title="https://w3id.org/celine-eu#hasMember">has member</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasTopologyNode" title="https://w3id.org/celine-eu#hasTopologyNode">has topology node</a> <sup class="type-op" title="object property">op</sup>, <a href="#inRegulatoryZone" title="https://w3id.org/celine-eu#inRegulatoryZone">in regulatory zone</a> <sup class="type-op" title="object property">op</sup>, <a href="#partitionOf" title="https://w3id.org/celine-eu#partitionOf">partition of</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasPartition" title="https://w3id.org/celine-eu#hasPartition">has partition</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
  <div class="entity" id="Simulation">
   <h3>Simulation<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#Simulation</p>
@@ -1031,6 +1080,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#hasConstraintType" title="https://w3id.org/celine-eu#hasConstraintType">has constraint type</a></li>
   <li><a href="#hasCostItem" title="https://w3id.org/celine-eu#hasCostItem">has cost item</a></li>
   <li><a href="#hasCostType" title="https://w3id.org/celine-eu#hasCostType">has cost type</a></li>
+  <li><a href="#hasDeliveryPoint" title="https://w3id.org/celine-eu#hasDeliveryPoint">has delivery point</a></li>
   <li><a href="#hasCommunity" title="https://w3id.org/celine-eu#hasCommunity">has energy community</a></li>
   <li><a href="#hasEvaluatedScope" title="https://w3id.org/celine-eu#hasEvaluatedScope">has evaluated scope</a></li>
   <li><a href="#hasEvaluationTimeInterval" title="https://w3id.org/celine-eu#hasEvaluationTimeInterval">has evaluation time interval</a></li>
@@ -1051,6 +1101,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#hasMember" title="https://w3id.org/celine-eu#hasMember">has member</a></li>
   <li><a href="#hasMemberRole" title="https://w3id.org/celine-eu#hasMemberRole">has member role</a></li>
   <li><a href="#hasMemberStatus" title="https://w3id.org/celine-eu#hasMemberStatus">has member status</a></li>
+  <li><a href="#hasPartition" title="https://w3id.org/celine-eu#hasPartition">has partition</a></li>
   <li><a href="#hasRedistributionResult" title="https://w3id.org/celine-eu#hasRedistributionResult">has redistribution result</a></li>
   <li><a href="#hasRegulatoryZone" title="https://w3id.org/celine-eu#hasRegulatoryZone">has regulatory zone</a></li>
   <li><a href="#hasRequestStatus" title="https://w3id.org/celine-eu#hasRequestStatus">has request status</a></li>
@@ -1066,6 +1117,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#onPOD" title="https://w3id.org/celine-eu#onPOD">on POD</a></li>
   <li><a href="#operatedBy" title="https://w3id.org/celine-eu#operatedBy">operated by</a></li>
   <li><a href="#pairedWith" title="https://w3id.org/celine-eu#pairedWith">paired with</a></li>
+  <li><a href="#partitionOf" title="https://w3id.org/celine-eu#partitionOf">partition of</a></li>
   <li><a href="#producesDataset" title="https://w3id.org/celine-eu#producesDataset">produces dataset</a></li>
   <li><a href="#requestedBy" title="https://w3id.org/celine-eu#requestedBy">requested by</a></li>
   <li><a href="#resultFor" title="https://w3id.org/celine-eu#resultFor">result for</a></li>
@@ -1442,6 +1494,37 @@ ex:cost_platform_fee a celine:CostItem ;
     </dt>
     <dd>
      <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasDeliveryPoint">
+  <h3>has delivery point<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasDeliveryPoint</p>
+  <div class="comment">
+   <span class="markdown">A connection point (POD, CUPS, PRM, etc.) through which this member withdraws or injects energy. Mirrors the rec-registry's member.delivery_points list.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://purl.org/peco/peco-core#Energy_community_member" target="_blank" title="https://purl.org/peco/peco-core#Energy_community_member">Energy community member</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#ConnectionPoint" title="https://w3id.org/celine-eu#ConnectionPoint">Connection Point</a> <sup class="type-c" title="class">c</sup>
     </dd>
    </dl>
   </div>
@@ -1968,7 +2051,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>has member<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasMember</p>
   <div class="comment">
-   <span class="markdown">A member participating in this community context. Mirrors the rec-registry's per-community member list. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of.</span>
+   <span class="markdown">A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -1984,7 +2067,7 @@ ex:cost_platform_fee a celine:CostItem ;
      has domain
     </dt>
     <dd>
-     <a href="#CommunityContext" title="https://w3id.org/celine-eu#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup>
+     <a href="#CommunityContext" title="https://w3id.org/celine-eu#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="#SharingGroup" title="https://w3id.org/celine-eu#SharingGroup">Sharing Group</a> <sup class="type-c" title="class">c</sup>
     </dd>
     <dt>
      has range
@@ -2053,6 +2136,43 @@ ex:cost_platform_fee a celine:CostItem ;
     </dt>
     <dd>
      <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasPartition">
+  <h3>has partition<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasPartition</p>
+  <div class="comment">
+   <span class="markdown">A sharing group partition within this community context. Each partition covers one regulatory zone and enumerates the members whose energy flows are accounted together for shared self-consumption.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#CommunityContext" title="https://w3id.org/celine-eu#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#SharingGroup" title="https://w3id.org/celine-eu#SharingGroup">Sharing Group</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#partitionOf" title="https://w3id.org/celine-eu#partitionOf">partition of</a> <sup class="type-op" title="object property">op</sup>
     </dd>
    </dl>
   </div>
@@ -2291,7 +2411,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>has topology node<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasTopologyNode</p>
   <div class="comment">
-   <span class="markdown">A grid topology element associated with this community context.</span>
+   <span class="markdown">A grid topology element associated with this community context or sharing group.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -2307,7 +2427,7 @@ ex:cost_platform_fee a celine:CostItem ;
      has domain
     </dt>
     <dd>
-     <a href="#CommunityContext" title="https://w3id.org/celine-eu#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup>
+     <a href="#CommunityContext" title="https://w3id.org/celine-eu#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="#SharingGroup" title="https://w3id.org/celine-eu#SharingGroup">Sharing Group</a> <sup class="type-c" title="class">c</sup>
     </dd>
     <dt>
      has range
@@ -2322,7 +2442,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>in regulatory zone<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#inRegulatoryZone</p>
   <div class="comment">
-   <span class="markdown">The regulatory zone to which this member or connection point belongs.</span>
+   <span class="markdown">The regulatory zone to which this member, connection point, or sharing group belongs.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -2338,7 +2458,7 @@ ex:cost_platform_fee a celine:CostItem ;
      has domain
     </dt>
     <dd>
-     <a href="https://purl.org/peco/peco-core#Energy_community_member" target="_blank" title="https://purl.org/peco/peco-core#Energy_community_member">Energy community member</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="#ConnectionPoint" title="https://w3id.org/celine-eu#ConnectionPoint">Connection Point</a> <sup class="type-c" title="class">c</sup>
+     <a href="https://purl.org/peco/peco-core#Energy_community_member" target="_blank" title="https://purl.org/peco/peco-core#Energy_community_member">Energy community member</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="#ConnectionPoint" title="https://w3id.org/celine-eu#ConnectionPoint">Connection Point</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="#SharingGroup" title="https://w3id.org/celine-eu#SharingGroup">Sharing Group</a> <sup class="type-c" title="class">c</sup>
     </dd>
     <dt>
      has range
@@ -2507,6 +2627,43 @@ ex:cost_platform_fee a celine:CostItem ;
     </dt>
     <dd>
      <a href="https://purl.org/peco/peco-core#Asset" target="_blank" title="https://purl.org/peco/peco-core#Asset">Asset</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="partitionOf">
+  <h3>partition of<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#partitionOf</p>
+  <div class="comment">
+   <span class="markdown">The community context to which this sharing group belongs.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#SharingGroup" title="https://w3id.org/celine-eu#SharingGroup">Sharing Group</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#CommunityContext" title="https://w3id.org/celine-eu#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#hasPartition" title="https://w3id.org/celine-eu#hasPartition">has partition</a> <sup class="type-op" title="object property">op</sup>
     </dd>
    </dl>
   </div>
