@@ -26,9 +26,10 @@
                               rdfs:comment """Version 0.6 adds REC-registry-aligned grid topology (Substation,
     PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),
     regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass
-    for PECO Electric_POD, and a presence-only asset inventory (PVSystem, BatteryStorage,
-    ElectricityMeter, EVCharger, HeatPump). CIM alignment via skos:closeMatch to IEC 61968
-    profile; SAREF alignment via skos:closeMatch only — no new owl:imports. Asset technical
+    for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,
+    ElectricityMeter, EVCharger, HeatPump), and member classification vocabularies
+    (MemberRole, MemberStatus). CIM alignment via skos:closeMatch to IEC 61968 profile;
+    SAREF alignment via skos:closeMatch only — no new owl:imports. Asset technical
     attributes are intentionally omitted; specs live in the external rec-registry catalogue,
     addressed by celine:hasLocalIdentifier.""" ;
                               rdfs:label "CELINE Core Ontology" ;
@@ -318,6 +319,24 @@
             rdfs:comment "Unit of measure for the KPI value. Expected values from celine:UnitOfMeasure concept scheme."@en ;
             rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
             rdfs:label "has KPI unit"@en .
+
+
+###  https://w3id.org/celine-eu#hasMemberRole
+:hasMemberRole rdf:type owl:ObjectProperty ;
+               rdfs:domain <https://purl.org/peco/peco-core#Energy_community_member> ;
+               rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+               rdfs:comment "The participation role of this member. Expected values from celine:MemberRole."@en ;
+               rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+               rdfs:label "has member role"@en .
+
+
+###  https://w3id.org/celine-eu#hasMemberStatus
+:hasMemberStatus rdf:type owl:ObjectProperty ;
+                 rdfs:domain <https://purl.org/peco/peco-core#Energy_community_member> ;
+                 rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+                 rdfs:comment "The lifecycle status of this member. Expected values from celine:MemberStatus."@en ;
+                 rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+                 rdfs:label "has member status"@en .
 
 
 ###  https://w3id.org/celine-eu#hasRedistributionResult
@@ -1533,6 +1552,33 @@ ex:cost_platform_fee a celine:CostItem ;
       <http://www.w3.org/2004/02/skos/core#topConceptOf> :ConnectionPointIdentifierScheme .
 
 
+###  https://w3id.org/celine-eu#MemberRole
+:MemberRole rdf:type owl:NamedIndividual ,
+                     <http://www.w3.org/2004/02/skos/core#ConceptScheme> ;
+            <http://purl.org/dc/terms/description> "Classification of how a member participates in the energy community."@en ;
+            rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+            rdfs:label "Member Role"@en ;
+            <http://www.w3.org/2004/02/skos/core#hasTopConcept> :RoleAdmin ,
+                                                                :RoleConsumer ,
+                                                                :RoleOperator ,
+                                                                :RoleProducer ,
+                                                                :RoleProsumer ;
+            <http://www.w3.org/2004/02/skos/core#prefLabel> "Member Role"@en .
+
+
+###  https://w3id.org/celine-eu#MemberStatus
+:MemberStatus rdf:type owl:NamedIndividual ,
+                       <http://www.w3.org/2004/02/skos/core#ConceptScheme> ;
+              <http://purl.org/dc/terms/description> "Lifecycle status of a member within the energy community."@en ;
+              rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+              rdfs:label "Member Status"@en ;
+              <http://www.w3.org/2004/02/skos/core#hasTopConcept> :StatusActive ,
+                                                                  :StatusInactive ,
+                                                                  :StatusPending ,
+                                                                  :StatusSuspended ;
+              <http://www.w3.org/2004/02/skos/core#prefLabel> "Member Status"@en .
+
+
 ###  https://w3id.org/celine-eu#MethodAverage
 :MethodAverage rdf:type owl:NamedIndividual ,
                         <http://www.w3.org/2004/02/skos/core#Concept> ;
@@ -1678,6 +1724,56 @@ ex:cost_platform_fee a celine:CostItem ;
                     <http://www.w3.org/2004/02/skos/core#topConceptOf> :ConstraintType .
 
 
+###  https://w3id.org/celine-eu#RoleAdmin
+:RoleAdmin rdf:type owl:NamedIndividual ,
+                    <http://www.w3.org/2004/02/skos/core#Concept> ;
+           rdfs:comment "A member with administrative privileges over the community configuration."@en ;
+           rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+           <http://www.w3.org/2004/02/skos/core#inScheme> :MemberRole ;
+           <http://www.w3.org/2004/02/skos/core#prefLabel> "Admin"@en ;
+           <http://www.w3.org/2004/02/skos/core#topConceptOf> :MemberRole .
+
+
+###  https://w3id.org/celine-eu#RoleConsumer
+:RoleConsumer rdf:type owl:NamedIndividual ,
+                       <http://www.w3.org/2004/02/skos/core#Concept> ;
+              rdfs:comment "A member who only withdraws energy from the community."@en ;
+              rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+              <http://www.w3.org/2004/02/skos/core#inScheme> :MemberRole ;
+              <http://www.w3.org/2004/02/skos/core#prefLabel> "Consumer"@en ;
+              <http://www.w3.org/2004/02/skos/core#topConceptOf> :MemberRole .
+
+
+###  https://w3id.org/celine-eu#RoleOperator
+:RoleOperator rdf:type owl:NamedIndividual ,
+                       <http://www.w3.org/2004/02/skos/core#Concept> ;
+              rdfs:comment "A member with operational responsibilities for community infrastructure."@en ;
+              rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+              <http://www.w3.org/2004/02/skos/core#inScheme> :MemberRole ;
+              <http://www.w3.org/2004/02/skos/core#prefLabel> "Operator"@en ;
+              <http://www.w3.org/2004/02/skos/core#topConceptOf> :MemberRole .
+
+
+###  https://w3id.org/celine-eu#RoleProducer
+:RoleProducer rdf:type owl:NamedIndividual ,
+                       <http://www.w3.org/2004/02/skos/core#Concept> ;
+              rdfs:comment "A member who only feeds energy into the community."@en ;
+              rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+              <http://www.w3.org/2004/02/skos/core#inScheme> :MemberRole ;
+              <http://www.w3.org/2004/02/skos/core#prefLabel> "Producer"@en ;
+              <http://www.w3.org/2004/02/skos/core#topConceptOf> :MemberRole .
+
+
+###  https://w3id.org/celine-eu#RoleProsumer
+:RoleProsumer rdf:type owl:NamedIndividual ,
+                       <http://www.w3.org/2004/02/skos/core#Concept> ;
+              rdfs:comment "A member who both produces and consumes energy."@en ;
+              rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+              <http://www.w3.org/2004/02/skos/core#inScheme> :MemberRole ;
+              <http://www.w3.org/2004/02/skos/core#prefLabel> "Prosumer"@en ;
+              <http://www.w3.org/2004/02/skos/core#topConceptOf> :MemberRole .
+
+
 ###  https://w3id.org/celine-eu#ScopeAsset
 :ScopeAsset rdf:type owl:NamedIndividual ,
                      <http://www.w3.org/2004/02/skos/core#Concept> ;
@@ -1810,6 +1906,46 @@ ex:cost_platform_fee a celine:CostItem ;
                          <http://www.w3.org/2004/02/skos/core#definition> "Share of the community's shared energy attributed to an individual member during the evaluation period."@en ;
                          <http://www.w3.org/2004/02/skos/core#inScheme> :KPICatalog ;
                          <http://www.w3.org/2004/02/skos/core#topConceptOf> :KPICatalog .
+
+
+###  https://w3id.org/celine-eu#StatusActive
+:StatusActive rdf:type owl:NamedIndividual ,
+                       <http://www.w3.org/2004/02/skos/core#Concept> ;
+              rdfs:comment "Member is currently participating in the community."@en ;
+              rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+              <http://www.w3.org/2004/02/skos/core#inScheme> :MemberStatus ;
+              <http://www.w3.org/2004/02/skos/core#prefLabel> "Active"@en ;
+              <http://www.w3.org/2004/02/skos/core#topConceptOf> :MemberStatus .
+
+
+###  https://w3id.org/celine-eu#StatusInactive
+:StatusInactive rdf:type owl:NamedIndividual ,
+                         <http://www.w3.org/2004/02/skos/core#Concept> ;
+                rdfs:comment "Member has left the community or membership has been terminated."@en ;
+                rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+                <http://www.w3.org/2004/02/skos/core#inScheme> :MemberStatus ;
+                <http://www.w3.org/2004/02/skos/core#prefLabel> "Inactive"@en ;
+                <http://www.w3.org/2004/02/skos/core#topConceptOf> :MemberStatus .
+
+
+###  https://w3id.org/celine-eu#StatusPending
+:StatusPending rdf:type owl:NamedIndividual ,
+                        <http://www.w3.org/2004/02/skos/core#Concept> ;
+               rdfs:comment "Member has applied but is not yet active in the community."@en ;
+               rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+               <http://www.w3.org/2004/02/skos/core#inScheme> :MemberStatus ;
+               <http://www.w3.org/2004/02/skos/core#prefLabel> "Pending"@en ;
+               <http://www.w3.org/2004/02/skos/core#topConceptOf> :MemberStatus .
+
+
+###  https://w3id.org/celine-eu#StatusSuspended
+:StatusSuspended rdf:type owl:NamedIndividual ,
+                          <http://www.w3.org/2004/02/skos/core#Concept> ;
+                 rdfs:comment "Member participation is temporarily suspended."@en ;
+                 rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+                 <http://www.w3.org/2004/02/skos/core#inScheme> :MemberStatus ;
+                 <http://www.w3.org/2004/02/skos/core#prefLabel> "Suspended"@en ;
+                 <http://www.w3.org/2004/02/skos/core#topConceptOf> :MemberStatus .
 
 
 ###  https://w3id.org/celine-eu#UnitOfMeasure

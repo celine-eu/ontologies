@@ -11,7 +11,7 @@
 <https://w3id.org/celine-eu> <http://purl.org/dc/terms/title> "CELINE Core Ontology" .
 <https://w3id.org/celine-eu> <http://purl.org/vocab/vann/preferredNamespacePrefix> "celine" .
 <https://w3id.org/celine-eu> <http://purl.org/vocab/vann/preferredNamespaceUri> "https://w3id.org/celine-eu#" .
-<https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#comment> "Version 0.6 adds REC-registry-aligned grid topology (Substation,\n    PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),\n    regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass\n    for PECO Electric_POD, and a presence-only asset inventory (PVSystem, BatteryStorage,\n    ElectricityMeter, EVCharger, HeatPump). CIM alignment via skos:closeMatch to IEC 61968\n    profile; SAREF alignment via skos:closeMatch only — no new owl:imports. Asset technical\n    attributes are intentionally omitted; specs live in the external rec-registry catalogue,\n    addressed by celine:hasLocalIdentifier." .
+<https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#comment> "Version 0.6 adds REC-registry-aligned grid topology (Substation,\n    PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),\n    regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass\n    for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,\n    ElectricityMeter, EVCharger, HeatPump), and member classification vocabularies\n    (MemberRole, MemberStatus). CIM alignment via skos:closeMatch to IEC 61968 profile;\n    SAREF alignment via skos:closeMatch only — no new owl:imports. Asset technical\n    attributes are intentionally omitted; specs live in the external rec-registry catalogue,\n    addressed by celine:hasLocalIdentifier." .
 <https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#label> "CELINE Core Ontology" .
 <https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <https://celine-eu.github.io/> .
 <https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <https://github.com/celine-eu> .
@@ -282,6 +282,22 @@ _:genid1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/20
 <https://w3id.org/celine-eu#hasKPIUnit> <http://www.w3.org/2000/01/rdf-schema#comment> "Unit of measure for the KPI value. Expected values from celine:UnitOfMeasure concept scheme."@en .
 <https://w3id.org/celine-eu#hasKPIUnit> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#hasKPIUnit> <http://www.w3.org/2000/01/rdf-schema#label> "has KPI unit"@en .
+# 
+# https://w3id.org/celine-eu#hasMemberRole
+<https://w3id.org/celine-eu#hasMemberRole> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://w3id.org/celine-eu#hasMemberRole> <http://www.w3.org/2000/01/rdf-schema#domain> <https://purl.org/peco/peco-core#Energy_community_member> .
+<https://w3id.org/celine-eu#hasMemberRole> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2004/02/skos/core#Concept> .
+<https://w3id.org/celine-eu#hasMemberRole> <http://www.w3.org/2000/01/rdf-schema#comment> "The participation role of this member. Expected values from celine:MemberRole."@en .
+<https://w3id.org/celine-eu#hasMemberRole> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#hasMemberRole> <http://www.w3.org/2000/01/rdf-schema#label> "has member role"@en .
+# 
+# https://w3id.org/celine-eu#hasMemberStatus
+<https://w3id.org/celine-eu#hasMemberStatus> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://w3id.org/celine-eu#hasMemberStatus> <http://www.w3.org/2000/01/rdf-schema#domain> <https://purl.org/peco/peco-core#Energy_community_member> .
+<https://w3id.org/celine-eu#hasMemberStatus> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2004/02/skos/core#Concept> .
+<https://w3id.org/celine-eu#hasMemberStatus> <http://www.w3.org/2000/01/rdf-schema#comment> "The lifecycle status of this member. Expected values from celine:MemberStatus."@en .
+<https://w3id.org/celine-eu#hasMemberStatus> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#hasMemberStatus> <http://www.w3.org/2000/01/rdf-schema#label> "has member status"@en .
 # 
 # https://w3id.org/celine-eu#hasRedistributionResult
 <https://w3id.org/celine-eu#hasRedistributionResult> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
@@ -1328,6 +1344,31 @@ _:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 <https://w3id.org/celine-eu#MPAN> <http://www.w3.org/2004/02/skos/core#prefLabel> "MPAN"@en .
 <https://w3id.org/celine-eu#MPAN> <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://w3id.org/celine-eu#ConnectionPointIdentifierScheme> .
 # 
+# https://w3id.org/celine-eu#MemberRole
+<https://w3id.org/celine-eu#MemberRole> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://w3id.org/celine-eu#MemberRole> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#ConceptScheme> .
+<https://w3id.org/celine-eu#MemberRole> <http://purl.org/dc/terms/description> "Classification of how a member participates in the energy community."@en .
+<https://w3id.org/celine-eu#MemberRole> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#MemberRole> <http://www.w3.org/2000/01/rdf-schema#label> "Member Role"@en .
+<https://w3id.org/celine-eu#MemberRole> <http://www.w3.org/2004/02/skos/core#hasTopConcept> <https://w3id.org/celine-eu#RoleAdmin> .
+<https://w3id.org/celine-eu#MemberRole> <http://www.w3.org/2004/02/skos/core#hasTopConcept> <https://w3id.org/celine-eu#RoleConsumer> .
+<https://w3id.org/celine-eu#MemberRole> <http://www.w3.org/2004/02/skos/core#hasTopConcept> <https://w3id.org/celine-eu#RoleOperator> .
+<https://w3id.org/celine-eu#MemberRole> <http://www.w3.org/2004/02/skos/core#hasTopConcept> <https://w3id.org/celine-eu#RoleProducer> .
+<https://w3id.org/celine-eu#MemberRole> <http://www.w3.org/2004/02/skos/core#hasTopConcept> <https://w3id.org/celine-eu#RoleProsumer> .
+<https://w3id.org/celine-eu#MemberRole> <http://www.w3.org/2004/02/skos/core#prefLabel> "Member Role"@en .
+# 
+# https://w3id.org/celine-eu#MemberStatus
+<https://w3id.org/celine-eu#MemberStatus> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://w3id.org/celine-eu#MemberStatus> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#ConceptScheme> .
+<https://w3id.org/celine-eu#MemberStatus> <http://purl.org/dc/terms/description> "Lifecycle status of a member within the energy community."@en .
+<https://w3id.org/celine-eu#MemberStatus> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#MemberStatus> <http://www.w3.org/2000/01/rdf-schema#label> "Member Status"@en .
+<https://w3id.org/celine-eu#MemberStatus> <http://www.w3.org/2004/02/skos/core#hasTopConcept> <https://w3id.org/celine-eu#StatusActive> .
+<https://w3id.org/celine-eu#MemberStatus> <http://www.w3.org/2004/02/skos/core#hasTopConcept> <https://w3id.org/celine-eu#StatusInactive> .
+<https://w3id.org/celine-eu#MemberStatus> <http://www.w3.org/2004/02/skos/core#hasTopConcept> <https://w3id.org/celine-eu#StatusPending> .
+<https://w3id.org/celine-eu#MemberStatus> <http://www.w3.org/2004/02/skos/core#hasTopConcept> <https://w3id.org/celine-eu#StatusSuspended> .
+<https://w3id.org/celine-eu#MemberStatus> <http://www.w3.org/2004/02/skos/core#prefLabel> "Member Status"@en .
+# 
 # https://w3id.org/celine-eu#MethodAverage
 <https://w3id.org/celine-eu#MethodAverage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
 <https://w3id.org/celine-eu#MethodAverage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
@@ -1459,6 +1500,51 @@ _:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 <https://w3id.org/celine-eu#RecoveryConstraint> <http://www.w3.org/2004/02/skos/core#prefLabel> "Recovery Constraint" .
 <https://w3id.org/celine-eu#RecoveryConstraint> <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://w3id.org/celine-eu#ConstraintType> .
 # 
+# https://w3id.org/celine-eu#RoleAdmin
+<https://w3id.org/celine-eu#RoleAdmin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://w3id.org/celine-eu#RoleAdmin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<https://w3id.org/celine-eu#RoleAdmin> <http://www.w3.org/2000/01/rdf-schema#comment> "A member with administrative privileges over the community configuration."@en .
+<https://w3id.org/celine-eu#RoleAdmin> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#RoleAdmin> <http://www.w3.org/2004/02/skos/core#inScheme> <https://w3id.org/celine-eu#MemberRole> .
+<https://w3id.org/celine-eu#RoleAdmin> <http://www.w3.org/2004/02/skos/core#prefLabel> "Admin"@en .
+<https://w3id.org/celine-eu#RoleAdmin> <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://w3id.org/celine-eu#MemberRole> .
+# 
+# https://w3id.org/celine-eu#RoleConsumer
+<https://w3id.org/celine-eu#RoleConsumer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://w3id.org/celine-eu#RoleConsumer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<https://w3id.org/celine-eu#RoleConsumer> <http://www.w3.org/2000/01/rdf-schema#comment> "A member who only withdraws energy from the community."@en .
+<https://w3id.org/celine-eu#RoleConsumer> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#RoleConsumer> <http://www.w3.org/2004/02/skos/core#inScheme> <https://w3id.org/celine-eu#MemberRole> .
+<https://w3id.org/celine-eu#RoleConsumer> <http://www.w3.org/2004/02/skos/core#prefLabel> "Consumer"@en .
+<https://w3id.org/celine-eu#RoleConsumer> <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://w3id.org/celine-eu#MemberRole> .
+# 
+# https://w3id.org/celine-eu#RoleOperator
+<https://w3id.org/celine-eu#RoleOperator> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://w3id.org/celine-eu#RoleOperator> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<https://w3id.org/celine-eu#RoleOperator> <http://www.w3.org/2000/01/rdf-schema#comment> "A member with operational responsibilities for community infrastructure."@en .
+<https://w3id.org/celine-eu#RoleOperator> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#RoleOperator> <http://www.w3.org/2004/02/skos/core#inScheme> <https://w3id.org/celine-eu#MemberRole> .
+<https://w3id.org/celine-eu#RoleOperator> <http://www.w3.org/2004/02/skos/core#prefLabel> "Operator"@en .
+<https://w3id.org/celine-eu#RoleOperator> <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://w3id.org/celine-eu#MemberRole> .
+# 
+# https://w3id.org/celine-eu#RoleProducer
+<https://w3id.org/celine-eu#RoleProducer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://w3id.org/celine-eu#RoleProducer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<https://w3id.org/celine-eu#RoleProducer> <http://www.w3.org/2000/01/rdf-schema#comment> "A member who only feeds energy into the community."@en .
+<https://w3id.org/celine-eu#RoleProducer> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#RoleProducer> <http://www.w3.org/2004/02/skos/core#inScheme> <https://w3id.org/celine-eu#MemberRole> .
+<https://w3id.org/celine-eu#RoleProducer> <http://www.w3.org/2004/02/skos/core#prefLabel> "Producer"@en .
+<https://w3id.org/celine-eu#RoleProducer> <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://w3id.org/celine-eu#MemberRole> .
+# 
+# https://w3id.org/celine-eu#RoleProsumer
+<https://w3id.org/celine-eu#RoleProsumer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://w3id.org/celine-eu#RoleProsumer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<https://w3id.org/celine-eu#RoleProsumer> <http://www.w3.org/2000/01/rdf-schema#comment> "A member who both produces and consumes energy."@en .
+<https://w3id.org/celine-eu#RoleProsumer> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#RoleProsumer> <http://www.w3.org/2004/02/skos/core#inScheme> <https://w3id.org/celine-eu#MemberRole> .
+<https://w3id.org/celine-eu#RoleProsumer> <http://www.w3.org/2004/02/skos/core#prefLabel> "Prosumer"@en .
+<https://w3id.org/celine-eu#RoleProsumer> <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://w3id.org/celine-eu#MemberRole> .
+# 
 # https://w3id.org/celine-eu#ScopeAsset
 <https://w3id.org/celine-eu#ScopeAsset> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
 <https://w3id.org/celine-eu#ScopeAsset> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
@@ -1579,6 +1665,42 @@ _:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 <https://w3id.org/celine-eu#SharedEnergyMemberShare> <http://www.w3.org/2004/02/skos/core#definition> "Share of the community's shared energy attributed to an individual member during the evaluation period."@en .
 <https://w3id.org/celine-eu#SharedEnergyMemberShare> <http://www.w3.org/2004/02/skos/core#inScheme> <https://w3id.org/celine-eu#KPICatalog> .
 <https://w3id.org/celine-eu#SharedEnergyMemberShare> <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://w3id.org/celine-eu#KPICatalog> .
+# 
+# https://w3id.org/celine-eu#StatusActive
+<https://w3id.org/celine-eu#StatusActive> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://w3id.org/celine-eu#StatusActive> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<https://w3id.org/celine-eu#StatusActive> <http://www.w3.org/2000/01/rdf-schema#comment> "Member is currently participating in the community."@en .
+<https://w3id.org/celine-eu#StatusActive> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#StatusActive> <http://www.w3.org/2004/02/skos/core#inScheme> <https://w3id.org/celine-eu#MemberStatus> .
+<https://w3id.org/celine-eu#StatusActive> <http://www.w3.org/2004/02/skos/core#prefLabel> "Active"@en .
+<https://w3id.org/celine-eu#StatusActive> <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://w3id.org/celine-eu#MemberStatus> .
+# 
+# https://w3id.org/celine-eu#StatusInactive
+<https://w3id.org/celine-eu#StatusInactive> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://w3id.org/celine-eu#StatusInactive> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<https://w3id.org/celine-eu#StatusInactive> <http://www.w3.org/2000/01/rdf-schema#comment> "Member has left the community or membership has been terminated."@en .
+<https://w3id.org/celine-eu#StatusInactive> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#StatusInactive> <http://www.w3.org/2004/02/skos/core#inScheme> <https://w3id.org/celine-eu#MemberStatus> .
+<https://w3id.org/celine-eu#StatusInactive> <http://www.w3.org/2004/02/skos/core#prefLabel> "Inactive"@en .
+<https://w3id.org/celine-eu#StatusInactive> <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://w3id.org/celine-eu#MemberStatus> .
+# 
+# https://w3id.org/celine-eu#StatusPending
+<https://w3id.org/celine-eu#StatusPending> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://w3id.org/celine-eu#StatusPending> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<https://w3id.org/celine-eu#StatusPending> <http://www.w3.org/2000/01/rdf-schema#comment> "Member has applied but is not yet active in the community."@en .
+<https://w3id.org/celine-eu#StatusPending> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#StatusPending> <http://www.w3.org/2004/02/skos/core#inScheme> <https://w3id.org/celine-eu#MemberStatus> .
+<https://w3id.org/celine-eu#StatusPending> <http://www.w3.org/2004/02/skos/core#prefLabel> "Pending"@en .
+<https://w3id.org/celine-eu#StatusPending> <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://w3id.org/celine-eu#MemberStatus> .
+# 
+# https://w3id.org/celine-eu#StatusSuspended
+<https://w3id.org/celine-eu#StatusSuspended> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://w3id.org/celine-eu#StatusSuspended> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<https://w3id.org/celine-eu#StatusSuspended> <http://www.w3.org/2000/01/rdf-schema#comment> "Member participation is temporarily suspended."@en .
+<https://w3id.org/celine-eu#StatusSuspended> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#StatusSuspended> <http://www.w3.org/2004/02/skos/core#inScheme> <https://w3id.org/celine-eu#MemberStatus> .
+<https://w3id.org/celine-eu#StatusSuspended> <http://www.w3.org/2004/02/skos/core#prefLabel> "Suspended"@en .
+<https://w3id.org/celine-eu#StatusSuspended> <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://w3id.org/celine-eu#MemberStatus> .
 # 
 # https://w3id.org/celine-eu#UnitOfMeasure
 <https://w3id.org/celine-eu#UnitOfMeasure> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .

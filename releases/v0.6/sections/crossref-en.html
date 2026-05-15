@@ -1002,6 +1002,8 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#hasKPIScopeType" title="https://w3id.org/celine-eu#hasKPIScopeType">has KPI scope type</a></li>
   <li><a href="#hasKPITemporalGranularity" title="https://w3id.org/celine-eu#hasKPITemporalGranularity">has KPI temporal granularity</a></li>
   <li><a href="#hasKPIUnit" title="https://w3id.org/celine-eu#hasKPIUnit">has KPI unit</a></li>
+  <li><a href="#hasMemberRole" title="https://w3id.org/celine-eu#hasMemberRole">has member role</a></li>
+  <li><a href="#hasMemberStatus" title="https://w3id.org/celine-eu#hasMemberStatus">has member status</a></li>
   <li><a href="#hasRedistributionResult" title="https://w3id.org/celine-eu#hasRedistributionResult">has redistribution result</a></li>
   <li><a href="#hasRegulatoryZone" title="https://w3id.org/celine-eu#hasRegulatoryZone">has regulatory zone</a></li>
   <li><a href="#hasScenario" title="https://w3id.org/celine-eu#hasScenario">has scenario</a></li>
@@ -1870,6 +1872,68 @@ ex:cost_platform_fee a celine:CostItem ;
     </dt>
     <dd>
      <a href="#KPIDefinition" title="https://w3id.org/celine-eu#KPIDefinition">KPI Definition</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasMemberRole">
+  <h3>has member role<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasMemberRole</p>
+  <div class="comment">
+   <span class="markdown">The participation role of this member. Expected values from celine:MemberRole.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://purl.org/peco/peco-core#Energy_community_member" target="_blank" title="https://purl.org/peco/peco-core#Energy_community_member">Energy community member</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasMemberStatus">
+  <h3>has member status<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasMemberStatus</p>
+  <div class="comment">
+   <span class="markdown">The lifecycle status of this member. Expected values from celine:MemberStatus.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://purl.org/peco/peco-core#Energy_community_member" target="_blank" title="https://purl.org/peco/peco-core#Energy_community_member">Energy community member</a> <sup class="type-c" title="class">c</sup>
     </dd>
     <dt>
      has range
@@ -3253,6 +3317,8 @@ ex:cost_platform_fee a celine:CostItem ;
 </div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="namedindividuals">
  <h3 id="namedindividuals" class="list">Named Individuals</h3>
  <ul class="hlist">
+  <li><a href="#StatusActive" title="https://w3id.org/celine-eu#StatusActive">Active</a></li>
+  <li><a href="#RoleAdmin" title="https://w3id.org/celine-eu#RoleAdmin">Admin</a></li>
   <li><a href="#AdminCost" title="https://w3id.org/celine-eu#AdminCost">Administrative Cost</a></li>
   <li><a href="#ScopeAsset" title="https://w3id.org/celine-eu#ScopeAsset">Asset</a></li>
   <li><a href="#Automated" title="https://w3id.org/celine-eu#Automated">Automated</a></li>
@@ -3262,6 +3328,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#ScopeCommunity" title="https://w3id.org/celine-eu#ScopeCommunity">Community</a></li>
   <li><a href="#ConnectionPointIdentifierScheme" title="https://w3id.org/celine-eu#ConnectionPointIdentifierScheme">Connection Point Identifier Scheme</a></li>
   <li><a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a></li>
+  <li><a href="#RoleConsumer" title="https://w3id.org/celine-eu#RoleConsumer">Consumer</a></li>
   <li><a href="#CostType" title="https://w3id.org/celine-eu#CostType">Cost Type</a></li>
   <li><a href="#CUPS" title="https://w3id.org/celine-eu#CUPS">CUPS</a></li>
   <li><a href="#GranularityDaily" title="https://w3id.org/celine-eu#GranularityDaily">Daily</a></li>
@@ -3279,6 +3346,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#FlexibilityDirection" title="https://w3id.org/celine-eu#FlexibilityDirection">Flexibility Direction</a></li>
   <li><a href="#FrequencyConstraint" title="https://w3id.org/celine-eu#FrequencyConstraint">Frequency Constraint</a></li>
   <li><a href="#GranularityHourly" title="https://w3id.org/celine-eu#GranularityHourly">Hourly</a></li>
+  <li><a href="#StatusInactive" title="https://w3id.org/celine-eu#StatusInactive">Inactive</a></li>
   <li><a href="#IncentiveAccrued" title="https://w3id.org/celine-eu#IncentiveAccrued">Incentive Accrued</a></li>
   <li><a href="#IncentiveMemberShare" title="https://w3id.org/celine-eu#IncentiveMemberShare">Incentive Member Share</a></li>
   <li><a href="#MethodInstantaneous" title="https://w3id.org/celine-eu#MethodInstantaneous">Instantaneous</a></li>
@@ -3292,17 +3360,23 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#MALO" title="https://w3id.org/celine-eu#MALO">MALO</a></li>
   <li><a href="#MethodMaximum" title="https://w3id.org/celine-eu#MethodMaximum">Maximum</a></li>
   <li><a href="#ScopeMember" title="https://w3id.org/celine-eu#ScopeMember">Member</a></li>
+  <li><a href="#MemberRole" title="https://w3id.org/celine-eu#MemberRole">Member Role</a></li>
+  <li><a href="#MemberStatus" title="https://w3id.org/celine-eu#MemberStatus">Member Status</a></li>
   <li><a href="#MethodMinimum" title="https://w3id.org/celine-eu#MethodMinimum">Minimum</a></li>
   <li><a href="#GranularityMonthly" title="https://w3id.org/celine-eu#GranularityMonthly">Monthly</a></li>
   <li><a href="#MPAN" title="https://w3id.org/celine-eu#MPAN">MPAN</a></li>
   <li><a href="#NoticeConstraint" title="https://w3id.org/celine-eu#NoticeConstraint">Notice Constraint</a></li>
+  <li><a href="#RoleOperator" title="https://w3id.org/celine-eu#RoleOperator">Operator</a></li>
   <li><a href="#MethodOther" title="https://w3id.org/celine-eu#MethodOther">Other</a></li>
   <li><a href="#ScopeOther" title="https://w3id.org/celine-eu#ScopeOther">Other</a></li>
   <li><a href="#PeakReductionAchieved" title="https://w3id.org/celine-eu#PeakReductionAchieved">Peak Reduction Achieved</a></li>
+  <li><a href="#StatusPending" title="https://w3id.org/celine-eu#StatusPending">Pending</a></li>
   <li><a href="#GranularityPeriod" title="https://w3id.org/celine-eu#GranularityPeriod">Period</a></li>
   <li><a href="#POD" title="https://w3id.org/celine-eu#POD">POD</a></li>
   <li><a href="#ScopePOD" title="https://w3id.org/celine-eu#ScopePOD">POD</a></li>
   <li><a href="#PRM" title="https://w3id.org/celine-eu#PRM">PRM</a></li>
+  <li><a href="#RoleProducer" title="https://w3id.org/celine-eu#RoleProducer">Producer</a></li>
+  <li><a href="#RoleProsumer" title="https://w3id.org/celine-eu#RoleProsumer">Prosumer</a></li>
   <li><a href="#GranularityQuarterly" title="https://w3id.org/celine-eu#GranularityQuarterly">Quarterly</a></li>
   <li><a href="#MethodRatio" title="https://w3id.org/celine-eu#MethodRatio">Ratio</a></li>
   <li><a href="#GranularityRealtime" title="https://w3id.org/celine-eu#GranularityRealtime">Realtime</a></li>
@@ -3311,6 +3385,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#SelfSufficiencyRate" title="https://w3id.org/celine-eu#SelfSufficiencyRate">Self-Sufficiency Rate</a></li>
   <li><a href="#SharedEnergy" title="https://w3id.org/celine-eu#SharedEnergy">Shared Energy</a></li>
   <li><a href="#SharedEnergyMemberShare" title="https://w3id.org/celine-eu#SharedEnergyMemberShare">Shared Energy Member Share</a></li>
+  <li><a href="#StatusSuspended" title="https://w3id.org/celine-eu#StatusSuspended">Suspended</a></li>
   <li><a href="#MethodTotal" title="https://w3id.org/celine-eu#MethodTotal">Total</a></li>
   <li><a href="#UnitOfMeasure" title="https://w3id.org/celine-eu#UnitOfMeasure">Unit of Measure</a></li>
   <li><a href="#Voluntary" title="https://w3id.org/celine-eu#Voluntary">Voluntary</a></li>
@@ -3318,6 +3393,76 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#WithdrawnEnergy" title="https://w3id.org/celine-eu#WithdrawnEnergy">Withdrawn Energy</a></li>
   <li><a href="#GranularityYearly" title="https://w3id.org/celine-eu#GranularityYearly">Yearly</a></li>
  </ul>
+ <div class="entity" id="StatusActive">
+  <h3>Active<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#StatusActive</p>
+  <div class="comment">
+   <span class="markdown">Member is currently participating in the community.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberStatus" title="https://w3id.org/celine-eu#MemberStatus">Member Status</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Active"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberStatus" title="https://w3id.org/celine-eu#MemberStatus">Member Status</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="RoleAdmin">
+  <h3>Admin<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#RoleAdmin</p>
+  <div class="comment">
+   <span class="markdown">A member with administrative privileges over the community configuration.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberRole" title="https://w3id.org/celine-eu#MemberRole">Member Role</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Admin"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberRole" title="https://w3id.org/celine-eu#MemberRole">Member Role</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
  <div class="entity" id="AdminCost">
   <h3>Administrative Cost<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#AdminCost</p>
@@ -3642,6 +3787,41 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
    <dd>
     <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Constraint Type"</span>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="RoleConsumer">
+  <h3>Consumer<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#RoleConsumer</p>
+  <div class="comment">
+   <span class="markdown">A member who only withdraws energy from the community.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberRole" title="https://w3id.org/celine-eu#MemberRole">Member Role</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Consumer"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberRole" title="https://w3id.org/celine-eu#MemberRole">Member Role</a> <sup class="type-ni" title="named individual">ni</sup>
    </dd>
   </dl>
  </div>
@@ -4285,6 +4465,41 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
   </dl>
  </div>
+ <div class="entity" id="StatusInactive">
+  <h3>Inactive<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#StatusInactive</p>
+  <div class="comment">
+   <span class="markdown">Member has left the community or membership has been terminated.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberStatus" title="https://w3id.org/celine-eu#MemberStatus">Member Status</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Inactive"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberStatus" title="https://w3id.org/celine-eu#MemberStatus">Member Status</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
  <div class="entity" id="IncentiveAccrued">
   <h3>Incentive Accrued<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#IncentiveAccrued</p>
@@ -4890,6 +5105,91 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
   </dl>
  </div>
+ <div class="entity" id="MemberRole">
+  <h3>Member Role<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#MemberRole</p>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#ConceptScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#ConceptScheme">Concept Scheme</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://purl.org/dc/terms/description" target="_blank" title="http://purl.org/dc/terms/description">description</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Classification of how a member participates in the energy community."@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RoleAdmin" title="https://w3id.org/celine-eu#RoleAdmin">Admin</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RoleConsumer" title="https://w3id.org/celine-eu#RoleConsumer">Consumer</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RoleOperator" title="https://w3id.org/celine-eu#RoleOperator">Operator</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RoleProducer" title="https://w3id.org/celine-eu#RoleProducer">Producer</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RoleProsumer" title="https://w3id.org/celine-eu#RoleProsumer">Prosumer</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Member Role"@en</span>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="MemberStatus">
+  <h3>Member Status<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#MemberStatus</p>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#ConceptScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#ConceptScheme">Concept Scheme</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://purl.org/dc/terms/description" target="_blank" title="http://purl.org/dc/terms/description">description</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Lifecycle status of a member within the energy community."@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#StatusActive" title="https://w3id.org/celine-eu#StatusActive">Active</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#StatusInactive" title="https://w3id.org/celine-eu#StatusInactive">Inactive</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#StatusPending" title="https://w3id.org/celine-eu#StatusPending">Pending</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#StatusSuspended" title="https://w3id.org/celine-eu#StatusSuspended">Suspended</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Member Status"@en</span>
+   </dd>
+  </dl>
+ </div>
  <div class="entity" id="MethodMinimum">
   <h3>Minimum<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#MethodMinimum</p>
@@ -5036,6 +5336,41 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
   </dl>
  </div>
+ <div class="entity" id="RoleOperator">
+  <h3>Operator<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#RoleOperator</p>
+  <div class="comment">
+   <span class="markdown">A member with operational responsibilities for community infrastructure.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberRole" title="https://w3id.org/celine-eu#MemberRole">Member Role</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Operator"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberRole" title="https://w3id.org/celine-eu#MemberRole">Member Role</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
  <div class="entity" id="MethodOther">
   <h3>Other<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#MethodOther</p>
@@ -5162,6 +5497,41 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
    <dd>
     <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#KPICatalog" title="https://w3id.org/celine-eu#KPICatalog">KPI Catalog</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="StatusPending">
+  <h3>Pending<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#StatusPending</p>
+  <div class="comment">
+   <span class="markdown">Member has applied but is not yet active in the community.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberStatus" title="https://w3id.org/celine-eu#MemberStatus">Member Status</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Pending"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberStatus" title="https://w3id.org/celine-eu#MemberStatus">Member Status</a> <sup class="type-ni" title="named individual">ni</sup>
    </dd>
   </dl>
  </div>
@@ -5308,6 +5678,76 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
    <dd>
     <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#ConnectionPointIdentifierScheme" title="https://w3id.org/celine-eu#ConnectionPointIdentifierScheme">Connection Point Identifier Scheme</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="RoleProducer">
+  <h3>Producer<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#RoleProducer</p>
+  <div class="comment">
+   <span class="markdown">A member who only feeds energy into the community.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberRole" title="https://w3id.org/celine-eu#MemberRole">Member Role</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Producer"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberRole" title="https://w3id.org/celine-eu#MemberRole">Member Role</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="RoleProsumer">
+  <h3>Prosumer<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#RoleProsumer</p>
+  <div class="comment">
+   <span class="markdown">A member who both produces and consumes energy.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberRole" title="https://w3id.org/celine-eu#MemberRole">Member Role</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Prosumer"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberRole" title="https://w3id.org/celine-eu#MemberRole">Member Role</a> <sup class="type-ni" title="named individual">ni</sup>
    </dd>
   </dl>
  </div>
@@ -5669,6 +6109,41 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
    <dd>
     <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#KPICatalog" title="https://w3id.org/celine-eu#KPICatalog">KPI Catalog</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="StatusSuspended">
+  <h3>Suspended<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#StatusSuspended</p>
+  <div class="comment">
+   <span class="markdown">Member participation is temporarily suspended.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberStatus" title="https://w3id.org/celine-eu#MemberStatus">Member Status</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Suspended"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#MemberStatus" title="https://w3id.org/celine-eu#MemberStatus">Member Status</a> <sup class="type-ni" title="named individual">ni</sup>
    </dd>
   </dl>
  </div>
