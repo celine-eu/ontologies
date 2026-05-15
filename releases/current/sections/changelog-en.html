@@ -1,0 +1,141 @@
+<div id="changelog">
+<h2 id="changes" class="list">Changes from last version</h2>
+<h3 id="changeClass" class="list">Classes</h3>
+<details><summary><u>Modified classes</u></summary>
+<ul><li><a href="#https://purl.org/peco/peco-core#Electric_POD">https://purl.org/peco/peco-core#Electric_POD</a>
+<ul>
+<li>Added: SubClass of https://w3id.org/celine-eu#ConnectionPoint</li>
+</ul>
+</li>
+</ul></details><details><summary><u>Added classes</u></summary>
+<ul><li><a href="#https://purl.org/peco/peco-core#Agent">https://purl.org/peco/peco-core#Agent</a>
+</li>
+<li><a href="#https://purl.org/peco/peco-core#Asset">https://purl.org/peco/peco-core#Asset</a>
+</li>
+<li><a href="#https://purl.org/peco/peco-core#Energy_storage">https://purl.org/peco/peco-core#Energy_storage</a>
+</li>
+<li><a href="#BatteryStorage">https://w3id.org/celine-eu#BatteryStorage</a>
+<ul>
+<li>Added: SubClass of https://purl.org/peco/peco-core#Energy_storage</li>
+</ul>
+</li>
+<li><a href="#ConnectionPoint">https://w3id.org/celine-eu#ConnectionPoint</a>
+</li>
+<li><a href="#DistributionFeeder">https://w3id.org/celine-eu#DistributionFeeder</a>
+<ul>
+<li>Added: SubClass of https://purl.org/peco/peco-core#Asset</li>
+</ul>
+</li>
+<li><a href="#EVCharger">https://w3id.org/celine-eu#EVCharger</a>
+<ul>
+<li>Added: SubClass of https://purl.org/peco/peco-core#Asset</li>
+</ul>
+</li>
+<li><a href="#ElectricityMeter">https://w3id.org/celine-eu#ElectricityMeter</a>
+<ul>
+<li>Added: SubClass of https://purl.org/peco/peco-core#Asset</li>
+</ul>
+</li>
+<li><a href="#GridOperator">https://w3id.org/celine-eu#GridOperator</a>
+<ul>
+<li>Added: SubClass of https://purl.org/peco/peco-core#Agent</li>
+</ul>
+</li>
+<li><a href="#HeatPump">https://w3id.org/celine-eu#HeatPump</a>
+<ul>
+<li>Added: SubClass of https://purl.org/peco/peco-core#Asset</li>
+</ul>
+</li>
+<li><a href="#PVSystem">https://w3id.org/celine-eu#PVSystem</a>
+<ul>
+<li>Added: SubClass of https://purl.org/peco/peco-core#Asset</li>
+</ul>
+</li>
+<li><a href="#PowerTransformer">https://w3id.org/celine-eu#PowerTransformer</a>
+<ul>
+<li>Added: SubClass of https://purl.org/peco/peco-core#Asset</li>
+</ul>
+</li>
+<li><a href="#PrimarySubstation">https://w3id.org/celine-eu#PrimarySubstation</a>
+<ul>
+<li>Added: SubClass of https://w3id.org/celine-eu#Substation</li>
+</ul>
+</li>
+<li><a href="#RegulatoryZone">https://w3id.org/celine-eu#RegulatoryZone</a>
+</li>
+<li><a href="#SecondarySubstation">https://w3id.org/celine-eu#SecondarySubstation</a>
+<ul>
+<li>Added: SubClass of https://w3id.org/celine-eu#Substation</li>
+</ul>
+</li>
+<li><a href="#Substation">https://w3id.org/celine-eu#Substation</a>
+<ul>
+<li>Added: SubClass of https://purl.org/peco/peco-core#Asset</li>
+</ul>
+</li>
+</ul></details><h3 id="changeProp" class="list">Object Properties</h3>
+<details><summary><u>Added object properties</u></summary>
+<ul><li><a href="#hasGridOperator">https://w3id.org/celine-eu#hasGridOperator</a>
+<ul>
+<li>Added: Range https://w3id.org/celine-eu#GridOperator</li>
+<li>Added: domain https://w3id.org/celine-eu#CommunityContext</li>
+</ul>
+</li>
+<li><a href="#hasIdentifierScheme">https://w3id.org/celine-eu#hasIdentifierScheme</a>
+<ul>
+<li>Added: domain https://w3id.org/celine-eu#ConnectionPoint</li>
+<li>Added: Range http://www.w3.org/2004/02/skos/core#Concept</li>
+</ul>
+</li>
+<li><a href="#hasRegulatoryZone">https://w3id.org/celine-eu#hasRegulatoryZone</a>
+<ul>
+<li>Added: Range https://w3id.org/celine-eu#RegulatoryZone</li>
+<li>Added: domain https://w3id.org/celine-eu#CommunityContext</li>
+</ul>
+</li>
+<li><a href="#hasTopologyNode">https://w3id.org/celine-eu#hasTopologyNode</a>
+<ul>
+<li>Added: domain https://w3id.org/celine-eu#CommunityContext</li>
+<li>Added: Range Union of (https://w3id.org/celine-eu#DistributionFeeder, https://w3id.org/celine-eu#PowerTransformer, https://w3id.org/celine-eu#Substation)</li>
+</ul>
+</li>
+<li><a href="#inRegulatoryZone">https://w3id.org/celine-eu#inRegulatoryZone</a>
+<ul>
+<li>Added: domain Union of (https://purl.org/peco/peco-core#Energy_community_member, https://w3id.org/celine-eu#ConnectionPoint)</li>
+<li>Added: Range https://w3id.org/celine-eu#RegulatoryZone</li>
+</ul>
+</li>
+<li><a href="#measures">https://w3id.org/celine-eu#measures</a>
+<ul>
+<li>Added: domain https://w3id.org/celine-eu#ElectricityMeter</li>
+<li>Added: Range https://purl.org/peco/peco-core#Asset</li>
+</ul>
+</li>
+<li><a href="#operatedBy">https://w3id.org/celine-eu#operatedBy</a>
+<ul>
+<li>Added: Range https://w3id.org/celine-eu#GridOperator</li>
+<li>Added: domain Union of (https://w3id.org/celine-eu#DistributionFeeder, https://w3id.org/celine-eu#PowerTransformer, https://w3id.org/celine-eu#Substation)</li>
+</ul>
+</li>
+<li><a href="#pairedWith">https://w3id.org/celine-eu#pairedWith</a>
+<ul>
+<li>Added: domain https://purl.org/peco/peco-core#Asset</li>
+<li>Added: Range https://purl.org/peco/peco-core#Asset</li>
+<li>Added: SymmetricObjectProperty SymmetricObjectProperty(&lt;https://w3id.org/celine-eu#pairedWith&gt;)</li>
+</ul>
+</li>
+<li><a href="#servedBy">https://w3id.org/celine-eu#servedBy</a>
+<ul>
+<li>Added: Range https://w3id.org/celine-eu#Substation</li>
+<li>Added: domain https://w3id.org/celine-eu#RegulatoryZone</li>
+</ul>
+</li>
+</ul></details><h3 id="changeDataProp" class="list">Data Properties</h3>
+<details><summary><u>Added data properties</u></summary>
+<ul><li><a href="#hasLocalIdentifier">https://w3id.org/celine-eu#hasLocalIdentifier</a>
+<ul>
+<li>Added: Domain Union of (https://purl.org/peco/peco-core#Asset, https://w3id.org/celine-eu#ConnectionPoint)</li>
+<li>Added: Range http://www.w3.org/2001/XMLSchema#string</li>
+</ul>
+</li>
+</ul></details></div>
