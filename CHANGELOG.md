@@ -32,6 +32,11 @@
 - **Member classification**: `MemberRole` SKOS scheme (Consumer, Prosumer, Producer,
   Operator, Admin) and `MemberStatus` SKOS scheme (Pending, Active, Suspended, Inactive)
   with `hasMemberRole` and `hasMemberStatus` properties on `peco:Energy_community_member`.
+- **Flexibility request**: `FlexibilityRequest` class — demand signal from operator/system
+  requesting members to activate flexibility. Linked to `FlexibilityCommitment` via
+  `resultsInCommitment` / `inResponseTo` (inverse pair). `RequestStatus` SKOS scheme
+  (Open, Fulfilled, Partially Fulfilled, Expired, Cancelled). `hasFlexibilityDirection`
+  domain widened to cover both commitments and requests.
 
 ### Deferred
 

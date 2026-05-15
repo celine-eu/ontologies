@@ -15,6 +15,7 @@ This section provides details for each class and property defined by CELINE Core
   <li><a href="#FlexibilityConstraint" title="https://w3id.org/celine-eu#FlexibilityConstraint">Flexibility Constraint</a></li>
   <li><a href="#FlexibilityCredit" title="https://w3id.org/celine-eu#FlexibilityCredit">Flexibility Credit</a></li>
   <li><a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a></li>
+  <li><a href="#FlexibilityRequest" title="https://w3id.org/celine-eu#FlexibilityRequest">Flexibility Request</a></li>
   <li><a href="#GridOperator" title="https://w3id.org/celine-eu#GridOperator">Grid Operator</a></li>
   <li><a href="#HeatPump" title="https://w3id.org/celine-eu#HeatPump">Heat Pump</a></li>
   <li><a href="#KPIDefinition" title="https://w3id.org/celine-eu#KPIDefinition">KPI Definition</a></li>
@@ -58,7 +59,7 @@ This section provides details for each class and property defined by CELINE Core
   <h3>Community Context<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#CommunityContext</p>
   <div class="comment">
-   <span class="markdown">Operational context binding a PECO Energy Community with assets, datasets, simulations and flexibility commitments.</span>
+   <span class="markdown">Operational context binding a PECO Energy Community with assets, datasets, simulations and flexibility commitments. Member participation in this context is enumerated via celine:hasMember; each member is linked to the wrapped peco:Energy_community via peco:is_member_of (PECO predicate, reused as-is).</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -75,6 +76,7 @@ This section provides details for each class and property defined by CELINE Core
    <dd>
     <pre>ex:ctx1 a celine:CommunityContext ;
     celine:hasCommunity    ex:rec_valdarno ;
+    celine:hasMember       ex:member_001 , ex:member_002 ;
     celine:usesAsset       ex:pv_panel_01 ;
     celine:hasSimulation   ex:sim_baseline ;
     celine:hasCommitment   ex:fc_001 ;
@@ -86,7 +88,7 @@ This section provides details for each class and property defined by CELINE Core
     is in domain of
    </dt>
    <dd>
-    <a href="#hasCommunity" title="https://w3id.org/celine-eu#hasCommunity">has energy community</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasCommitment" title="https://w3id.org/celine-eu#hasCommitment">has flexibility commitment</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasEnvelope" title="https://w3id.org/celine-eu#hasEnvelope">has flexibility envelope</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasGridOperator" title="https://w3id.org/celine-eu#hasGridOperator">has grid operator</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasRegulatoryZone" title="https://w3id.org/celine-eu#hasRegulatoryZone">has regulatory zone</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasSettlementRun" title="https://w3id.org/celine-eu#hasSettlementRun">has settlement run</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasSimulation" title="https://w3id.org/celine-eu#hasSimulation">has simulation</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasTopologyNode" title="https://w3id.org/celine-eu#hasTopologyNode">has topology node</a> <sup class="type-op" title="object property">op</sup>, <a href="#usesAsset" title="https://w3id.org/celine-eu#usesAsset">uses asset</a> <sup class="type-op" title="object property">op</sup>
+    <a href="#hasCommunity" title="https://w3id.org/celine-eu#hasCommunity">has energy community</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasCommitment" title="https://w3id.org/celine-eu#hasCommitment">has flexibility commitment</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasEnvelope" title="https://w3id.org/celine-eu#hasEnvelope">has flexibility envelope</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasFlexibilityRequest" title="https://w3id.org/celine-eu#hasFlexibilityRequest">has flexibility request</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasGridOperator" title="https://w3id.org/celine-eu#hasGridOperator">has grid operator</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasMember" title="https://w3id.org/celine-eu#hasMember">has member</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasRegulatoryZone" title="https://w3id.org/celine-eu#hasRegulatoryZone">has regulatory zone</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasSettlementRun" title="https://w3id.org/celine-eu#hasSettlementRun">has settlement run</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasSimulation" title="https://w3id.org/celine-eu#hasSimulation">has simulation</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasTopologyNode" title="https://w3id.org/celine-eu#hasTopologyNode">has topology node</a> <sup class="type-op" title="object property">op</sup>, <a href="#usesAsset" title="https://w3id.org/celine-eu#usesAsset">uses asset</a> <sup class="type-op" title="object property">op</sup>
    </dd>
    <dt>
     is in range of
@@ -318,13 +320,13 @@ ex:cost_platform_fee a celine:CostItem ;
     is in domain of
    </dt>
    <dd>
-    <a href="#committedBy" title="https://w3id.org/celine-eu#committedBy">committed by</a> <sup class="type-op" title="object property">op</sup>, <a href="#generatesCredit" title="https://w3id.org/celine-eu#generatesCredit">generates credit</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasCommitmentMode" title="https://w3id.org/celine-eu#hasCommitmentMode">has commitment mode</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasFlexibilityDirection" title="https://w3id.org/celine-eu#hasFlexibilityDirection">has flexibility direction</a> <sup class="type-op" title="object property">op</sup>, <a href="#onPOD" title="https://w3id.org/celine-eu#onPOD">on POD</a> <sup class="type-op" title="object property">op</sup>, <a href="#targetFlexibility" title="https://w3id.org/celine-eu#targetFlexibility">target flexibility</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#withinEnvelope" title="https://w3id.org/celine-eu#withinEnvelope">within envelope</a> <sup class="type-op" title="object property">op</sup>
+    <a href="#committedBy" title="https://w3id.org/celine-eu#committedBy">committed by</a> <sup class="type-op" title="object property">op</sup>, <a href="#generatesCredit" title="https://w3id.org/celine-eu#generatesCredit">generates credit</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasCommitmentMode" title="https://w3id.org/celine-eu#hasCommitmentMode">has commitment mode</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasFlexibilityDirection" title="https://w3id.org/celine-eu#hasFlexibilityDirection">has flexibility direction</a> <sup class="type-op" title="object property">op</sup>, <a href="#inResponseTo" title="https://w3id.org/celine-eu#inResponseTo">in response to</a> <sup class="type-op" title="object property">op</sup>, <a href="#onPOD" title="https://w3id.org/celine-eu#onPOD">on POD</a> <sup class="type-op" title="object property">op</sup>, <a href="#targetFlexibility" title="https://w3id.org/celine-eu#targetFlexibility">target flexibility</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#withinEnvelope" title="https://w3id.org/celine-eu#withinEnvelope">within envelope</a> <sup class="type-op" title="object property">op</sup>
    </dd>
    <dt>
     is in range of
    </dt>
    <dd>
-    <a href="#creditFor" title="https://w3id.org/celine-eu#creditFor">credit for</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasCommitment" title="https://w3id.org/celine-eu#hasCommitment">has flexibility commitment</a> <sup class="type-op" title="object property">op</sup>
+    <a href="#creditFor" title="https://w3id.org/celine-eu#creditFor">credit for</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasCommitment" title="https://w3id.org/celine-eu#hasCommitment">has flexibility commitment</a> <sup class="type-op" title="object property">op</sup>, <a href="#resultsInCommitment" title="https://w3id.org/celine-eu#resultsInCommitment">results in commitment</a> <sup class="type-op" title="object property">op</sup>
    </dd>
   </dl>
  </div>
@@ -452,6 +454,49 @@ ex:cost_platform_fee a celine:CostItem ;
    </dt>
    <dd>
     <a href="#hasEnvelope" title="https://w3id.org/celine-eu#hasEnvelope">has flexibility envelope</a> <sup class="type-op" title="object property">op</sup>, <a href="#withinEnvelope" title="https://w3id.org/celine-eu#withinEnvelope">within envelope</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="FlexibilityRequest">
+  <h3>Flexibility Request<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#FlexibilityRequest</p>
+  <div class="comment">
+   <span class="markdown">A demand signal issued by a community operator or automated system requesting members to activate flexibility within a given time window. Specifies the desired direction (FlexDown/FlexUp) and target amount. One request may result in zero, one, or many FlexibilityCommitments from different members.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl>
+   <dt>
+    Example
+   </dt>
+   <dd>
+    <pre>ex:req_001 a celine:FlexibilityRequest ;
+    celine:requestedBy              ex:dso_enel ;
+    celine:hasFlexibilityDirection  celine:FlexDown ;
+    celine:requestedFlexibility     "10.0"^^xsd:decimal ;
+    celine:hasTimeInterval          ex:interval_2025_07_01_peak ;
+    celine:hasRequestStatus         celine:RequestFulfilled ;
+    celine:resultsInCommitment      ex:fc_001 , ex:fc_002 .</pre>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#hasFlexibilityDirection" title="https://w3id.org/celine-eu#hasFlexibilityDirection">has flexibility direction</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasRequestStatus" title="https://w3id.org/celine-eu#hasRequestStatus">has request status</a> <sup class="type-op" title="object property">op</sup>, <a href="#requestedBy" title="https://w3id.org/celine-eu#requestedBy">requested by</a> <sup class="type-op" title="object property">op</sup>, <a href="#requestedFlexibility" title="https://w3id.org/celine-eu#requestedFlexibility">requested flexibility</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#resultsInCommitment" title="https://w3id.org/celine-eu#resultsInCommitment">results in commitment</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasFlexibilityRequest" title="https://w3id.org/celine-eu#hasFlexibilityRequest">has flexibility request</a> <sup class="type-op" title="object property">op</sup>, <a href="#inResponseTo" title="https://w3id.org/celine-eu#inResponseTo">in response to</a> <sup class="type-op" title="object property">op</sup>
    </dd>
   </dl>
  </div>
@@ -992,6 +1037,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#hasCommitment" title="https://w3id.org/celine-eu#hasCommitment">has flexibility commitment</a></li>
   <li><a href="#hasFlexibilityDirection" title="https://w3id.org/celine-eu#hasFlexibilityDirection">has flexibility direction</a></li>
   <li><a href="#hasEnvelope" title="https://w3id.org/celine-eu#hasEnvelope">has flexibility envelope</a></li>
+  <li><a href="#hasFlexibilityRequest" title="https://w3id.org/celine-eu#hasFlexibilityRequest">has flexibility request</a></li>
   <li><a href="#hasGridOperator" title="https://w3id.org/celine-eu#hasGridOperator">has grid operator</a></li>
   <li><a href="#hasIdentifierScheme" title="https://w3id.org/celine-eu#hasIdentifierScheme">has identifier scheme</a></li>
   <li><a href="#hasInputKPIEvaluation" title="https://w3id.org/celine-eu#hasInputKPIEvaluation">has input KPI evaluation</a></li>
@@ -1002,10 +1048,12 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#hasKPIScopeType" title="https://w3id.org/celine-eu#hasKPIScopeType">has KPI scope type</a></li>
   <li><a href="#hasKPITemporalGranularity" title="https://w3id.org/celine-eu#hasKPITemporalGranularity">has KPI temporal granularity</a></li>
   <li><a href="#hasKPIUnit" title="https://w3id.org/celine-eu#hasKPIUnit">has KPI unit</a></li>
+  <li><a href="#hasMember" title="https://w3id.org/celine-eu#hasMember">has member</a></li>
   <li><a href="#hasMemberRole" title="https://w3id.org/celine-eu#hasMemberRole">has member role</a></li>
   <li><a href="#hasMemberStatus" title="https://w3id.org/celine-eu#hasMemberStatus">has member status</a></li>
   <li><a href="#hasRedistributionResult" title="https://w3id.org/celine-eu#hasRedistributionResult">has redistribution result</a></li>
   <li><a href="#hasRegulatoryZone" title="https://w3id.org/celine-eu#hasRegulatoryZone">has regulatory zone</a></li>
+  <li><a href="#hasRequestStatus" title="https://w3id.org/celine-eu#hasRequestStatus">has request status</a></li>
   <li><a href="#hasScenario" title="https://w3id.org/celine-eu#hasScenario">has scenario</a></li>
   <li><a href="#hasSettlementRun" title="https://w3id.org/celine-eu#hasSettlementRun">has settlement run</a></li>
   <li><a href="#hasSimulation" title="https://w3id.org/celine-eu#hasSimulation">has simulation</a></li>
@@ -1013,12 +1061,15 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#hasTimeInterval" title="https://w3id.org/celine-eu#hasTimeInterval">has time interval</a></li>
   <li><a href="#hasTopologyNode" title="https://w3id.org/celine-eu#hasTopologyNode">has topology node</a></li>
   <li><a href="#inRegulatoryZone" title="https://w3id.org/celine-eu#inRegulatoryZone">in regulatory zone</a></li>
+  <li><a href="#inResponseTo" title="https://w3id.org/celine-eu#inResponseTo">in response to</a></li>
   <li><a href="#measures" title="https://w3id.org/celine-eu#measures">measures</a></li>
   <li><a href="#onPOD" title="https://w3id.org/celine-eu#onPOD">on POD</a></li>
   <li><a href="#operatedBy" title="https://w3id.org/celine-eu#operatedBy">operated by</a></li>
   <li><a href="#pairedWith" title="https://w3id.org/celine-eu#pairedWith">paired with</a></li>
   <li><a href="#producesDataset" title="https://w3id.org/celine-eu#producesDataset">produces dataset</a></li>
+  <li><a href="#requestedBy" title="https://w3id.org/celine-eu#requestedBy">requested by</a></li>
   <li><a href="#resultFor" title="https://w3id.org/celine-eu#resultFor">result for</a></li>
+  <li><a href="#resultsInCommitment" title="https://w3id.org/celine-eu#resultsInCommitment">results in commitment</a></li>
   <li><a href="#servedBy" title="https://w3id.org/celine-eu#servedBy">served by</a></li>
   <li><a href="#settlesContext" title="https://w3id.org/celine-eu#settlesContext">settles context</a></li>
   <li><a href="#usesAsset" title="https://w3id.org/celine-eu#usesAsset">uses asset</a></li>
@@ -1533,7 +1584,7 @@ ex:cost_platform_fee a celine:CostItem ;
      has domain
     </dt>
     <dd>
-     <a href="#FlexibilityCommitment" title="https://w3id.org/celine-eu#FlexibilityCommitment">Flexibility Commitment</a> <sup class="type-c" title="class">c</sup>
+     <a href="#FlexibilityCommitment" title="https://w3id.org/celine-eu#FlexibilityCommitment">Flexibility Commitment</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="#FlexibilityRequest" title="https://w3id.org/celine-eu#FlexibilityRequest">Flexibility Request</a> <sup class="type-c" title="class">c</sup>
     </dd>
     <dt>
      has range
@@ -1571,6 +1622,37 @@ ex:cost_platform_fee a celine:CostItem ;
     </dt>
     <dd>
      <a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasFlexibilityRequest">
+  <h3>has flexibility request<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasFlexibilityRequest</p>
+  <div class="comment">
+   <span class="markdown">A flexibility request issued within this community context.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#CommunityContext" title="https://w3id.org/celine-eu#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#FlexibilityRequest" title="https://w3id.org/celine-eu#FlexibilityRequest">Flexibility Request</a> <sup class="type-c" title="class">c</sup>
     </dd>
    </dl>
   </div>
@@ -1882,11 +1964,42 @@ ex:cost_platform_fee a celine:CostItem ;
    </dl>
   </div>
  </div>
+ <div class="entity" id="hasMember">
+  <h3>has member<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasMember</p>
+  <div class="comment">
+   <span class="markdown">A member participating in this community context. Mirrors the rec-registry's per-community member list. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#CommunityContext" title="https://w3id.org/celine-eu#CommunityContext">Community Context</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="https://purl.org/peco/peco-core#Energy_community_member" target="_blank" title="https://purl.org/peco/peco-core#Energy_community_member">Energy community member</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
  <div class="entity" id="hasMemberRole">
   <h3>has member role<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasMemberRole</p>
   <div class="comment">
-   <span class="markdown">The participation role of this member. Expected values from celine:MemberRole.</span>
+   <span class="markdown">The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the rec-registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope for v0.6.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -1917,7 +2030,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>has member status<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasMemberStatus</p>
   <div class="comment">
-   <span class="markdown">The lifecycle status of this member. Expected values from celine:MemberStatus.</span>
+   <span class="markdown">The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the rec-registry conceptual model, a member has exactly one status per community.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -1999,6 +2112,37 @@ ex:cost_platform_fee a celine:CostItem ;
     </dt>
     <dd>
      <a href="#RegulatoryZone" title="https://w3id.org/celine-eu#RegulatoryZone">Regulatory Zone</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasRequestStatus">
+  <h3>has request status<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasRequestStatus</p>
+  <div class="comment">
+   <span class="markdown">Expected values from celine:RequestStatus.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityRequest" title="https://w3id.org/celine-eu#FlexibilityRequest">Flexibility Request</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
     </dd>
    </dl>
   </div>
@@ -2205,6 +2349,43 @@ ex:cost_platform_fee a celine:CostItem ;
    </dl>
   </div>
  </div>
+ <div class="entity" id="inResponseTo">
+  <h3>in response to<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#inResponseTo</p>
+  <div class="comment">
+   <span class="markdown">The flexibility request that triggered this commitment.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityCommitment" title="https://w3id.org/celine-eu#FlexibilityCommitment">Flexibility Commitment</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#FlexibilityRequest" title="https://w3id.org/celine-eu#FlexibilityRequest">Flexibility Request</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#resultsInCommitment" title="https://w3id.org/celine-eu#resultsInCommitment">results in commitment</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
  <div class="entity" id="measures">
   <h3>measures<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#measures</p>
@@ -2358,6 +2539,37 @@ ex:cost_platform_fee a celine:CostItem ;
    </dl>
   </div>
  </div>
+ <div class="entity" id="requestedBy">
+  <h3>requested by<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#requestedBy</p>
+  <div class="comment">
+   <span class="markdown">The operator or automated system that issued this flexibility request.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityRequest" title="https://w3id.org/celine-eu#FlexibilityRequest">Flexibility Request</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="https://purl.org/peco/peco-core#Agent" target="_blank" title="https://purl.org/peco/peco-core#Agent">Agent</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
  <div class="entity" id="resultFor">
   <h3>result for<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#resultFor</p>
@@ -2382,6 +2594,43 @@ ex:cost_platform_fee a celine:CostItem ;
     </dt>
     <dd>
      <a href="https://purl.org/peco/peco-core#Energy_community_member" target="_blank" title="https://purl.org/peco/peco-core#Energy_community_member">Energy community member</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="resultsInCommitment">
+  <h3>results in commitment<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#resultsInCommitment</p>
+  <div class="comment">
+   <span class="markdown">FlexibilityCommitment(s) created in response to this request.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityRequest" title="https://w3id.org/celine-eu#FlexibilityRequest">Flexibility Request</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#FlexibilityCommitment" title="https://w3id.org/celine-eu#FlexibilityCommitment">Flexibility Commitment</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#inResponseTo" title="https://w3id.org/celine-eu#inResponseTo">in response to</a> <sup class="type-op" title="object property">op</sup>
     </dd>
    </dl>
   </div>
@@ -2596,6 +2845,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#minNotificationTime" title="https://w3id.org/celine-eu#minNotificationTime">min notification time</a></li>
   <li><a href="#minRecoveryTime" title="https://w3id.org/celine-eu#minRecoveryTime">min recovery time</a></li>
   <li><a href="#netAmount" title="https://w3id.org/celine-eu#netAmount">net amount</a></li>
+  <li><a href="#requestedFlexibility" title="https://w3id.org/celine-eu#requestedFlexibility">requested flexibility</a></li>
   <li><a href="#targetFlexibility" title="https://w3id.org/celine-eu#targetFlexibility">target flexibility</a></li>
  </ul>
  <div class="entity" id="availableEnergy">
@@ -3249,6 +3499,37 @@ ex:cost_platform_fee a celine:CostItem ;
    </dl>
   </div>
  </div>
+ <div class="entity" id="requestedFlexibility">
+  <h3>requested flexibility<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#requestedFlexibility</p>
+  <div class="comment">
+   <span class="markdown">Target flexibility amount in kWh. Positive value; direction is expressed by hasFlexibilityDirection.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#FlexibilityRequest" title="https://w3id.org/celine-eu#FlexibilityRequest">Flexibility Request</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#decimal" target="_blank" title="http://www.w3.org/2001/XMLSchema#decimal">decimal</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
  <div class="entity" id="targetFlexibility">
   <h3>target flexibility<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#targetFlexibility</p>
@@ -3324,6 +3605,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#Automated" title="https://w3id.org/celine-eu#Automated">Automated</a></li>
   <li><a href="#MethodAverage" title="https://w3id.org/celine-eu#MethodAverage">Average</a></li>
   <li><a href="#ScopeBuilding" title="https://w3id.org/celine-eu#ScopeBuilding">Building</a></li>
+  <li><a href="#RequestCancelled" title="https://w3id.org/celine-eu#RequestCancelled">Cancelled</a></li>
   <li><a href="#CommitmentMode" title="https://w3id.org/celine-eu#CommitmentMode">Commitment Mode</a></li>
   <li><a href="#ScopeCommunity" title="https://w3id.org/celine-eu#ScopeCommunity">Community</a></li>
   <li><a href="#ConnectionPointIdentifierScheme" title="https://w3id.org/celine-eu#ConnectionPointIdentifierScheme">Connection Point Identifier Scheme</a></li>
@@ -3338,6 +3620,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#DurationConstraint" title="https://w3id.org/celine-eu#DurationConstraint">Duration Constraint</a></li>
   <li><a href="#EAN" title="https://w3id.org/celine-eu#EAN">EAN</a></li>
   <li><a href="#Euro" title="https://w3id.org/celine-eu#Euro">Euro</a></li>
+  <li><a href="#RequestExpired" title="https://w3id.org/celine-eu#RequestExpired">Expired</a></li>
   <li><a href="#FedInEnergy" title="https://w3id.org/celine-eu#FedInEnergy">Fed-In Energy</a></li>
   <li><a href="#Fee" title="https://w3id.org/celine-eu#Fee">Fee</a></li>
   <li><a href="#FlexDown" title="https://w3id.org/celine-eu#FlexDown">Flex Down</a></li>
@@ -3345,6 +3628,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#FlexibilityActivated" title="https://w3id.org/celine-eu#FlexibilityActivated">Flexibility Activated</a></li>
   <li><a href="#FlexibilityDirection" title="https://w3id.org/celine-eu#FlexibilityDirection">Flexibility Direction</a></li>
   <li><a href="#FrequencyConstraint" title="https://w3id.org/celine-eu#FrequencyConstraint">Frequency Constraint</a></li>
+  <li><a href="#RequestFulfilled" title="https://w3id.org/celine-eu#RequestFulfilled">Fulfilled</a></li>
   <li><a href="#GranularityHourly" title="https://w3id.org/celine-eu#GranularityHourly">Hourly</a></li>
   <li><a href="#StatusInactive" title="https://w3id.org/celine-eu#StatusInactive">Inactive</a></li>
   <li><a href="#IncentiveAccrued" title="https://w3id.org/celine-eu#IncentiveAccrued">Incentive Accrued</a></li>
@@ -3366,9 +3650,11 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#GranularityMonthly" title="https://w3id.org/celine-eu#GranularityMonthly">Monthly</a></li>
   <li><a href="#MPAN" title="https://w3id.org/celine-eu#MPAN">MPAN</a></li>
   <li><a href="#NoticeConstraint" title="https://w3id.org/celine-eu#NoticeConstraint">Notice Constraint</a></li>
+  <li><a href="#RequestOpen" title="https://w3id.org/celine-eu#RequestOpen">Open</a></li>
   <li><a href="#RoleOperator" title="https://w3id.org/celine-eu#RoleOperator">Operator</a></li>
   <li><a href="#MethodOther" title="https://w3id.org/celine-eu#MethodOther">Other</a></li>
   <li><a href="#ScopeOther" title="https://w3id.org/celine-eu#ScopeOther">Other</a></li>
+  <li><a href="#RequestPartial" title="https://w3id.org/celine-eu#RequestPartial">Partially Fulfilled</a></li>
   <li><a href="#PeakReductionAchieved" title="https://w3id.org/celine-eu#PeakReductionAchieved">Peak Reduction Achieved</a></li>
   <li><a href="#StatusPending" title="https://w3id.org/celine-eu#StatusPending">Pending</a></li>
   <li><a href="#GranularityPeriod" title="https://w3id.org/celine-eu#GranularityPeriod">Period</a></li>
@@ -3381,6 +3667,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#MethodRatio" title="https://w3id.org/celine-eu#MethodRatio">Ratio</a></li>
   <li><a href="#GranularityRealtime" title="https://w3id.org/celine-eu#GranularityRealtime">Realtime</a></li>
   <li><a href="#RecoveryConstraint" title="https://w3id.org/celine-eu#RecoveryConstraint">Recovery Constraint</a></li>
+  <li><a href="#RequestStatus" title="https://w3id.org/celine-eu#RequestStatus">Request Status</a></li>
   <li><a href="#SelfConsumptionRate" title="https://w3id.org/celine-eu#SelfConsumptionRate">Self-Consumption Rate</a></li>
   <li><a href="#SelfSufficiencyRate" title="https://w3id.org/celine-eu#SelfSufficiencyRate">Self-Sufficiency Rate</a></li>
   <li><a href="#SharedEnergy" title="https://w3id.org/celine-eu#SharedEnergy">Shared Energy</a></li>
@@ -3644,6 +3931,41 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
    <dd>
     <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#KPIScope" title="https://w3id.org/celine-eu#KPIScope">KPI Scope</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="RequestCancelled">
+  <h3>Cancelled<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#RequestCancelled</p>
+  <div class="comment">
+   <span class="markdown">Request withdrawn before the activation window.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestStatus" title="https://w3id.org/celine-eu#RequestStatus">Request Status</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Cancelled"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestStatus" title="https://w3id.org/celine-eu#RequestStatus">Request Status</a> <sup class="type-ni" title="named individual">ni</sup>
    </dd>
   </dl>
  </div>
@@ -4152,6 +4474,41 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
   </dl>
  </div>
+ <div class="entity" id="RequestExpired">
+  <h3>Expired<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#RequestExpired</p>
+  <div class="comment">
+   <span class="markdown">Activation window passed without sufficient response.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestStatus" title="https://w3id.org/celine-eu#RequestStatus">Request Status</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Expired"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestStatus" title="https://w3id.org/celine-eu#RequestStatus">Request Status</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
  <div class="entity" id="FedInEnergy">
   <h3>Fed-In Energy<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#FedInEnergy</p>
@@ -4424,6 +4781,41 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
    <dd>
     <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="RequestFulfilled">
+  <h3>Fulfilled<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#RequestFulfilled</p>
+  <div class="comment">
+   <span class="markdown">Sufficient commitments received to meet the requested target.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestStatus" title="https://w3id.org/celine-eu#RequestStatus">Request Status</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Fulfilled"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestStatus" title="https://w3id.org/celine-eu#RequestStatus">Request Status</a> <sup class="type-ni" title="named individual">ni</sup>
    </dd>
   </dl>
  </div>
@@ -5336,6 +5728,41 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
   </dl>
  </div>
+ <div class="entity" id="RequestOpen">
+  <h3>Open<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#RequestOpen</p>
+  <div class="comment">
+   <span class="markdown">Request has been issued and is awaiting commitments.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestStatus" title="https://w3id.org/celine-eu#RequestStatus">Request Status</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Open"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestStatus" title="https://w3id.org/celine-eu#RequestStatus">Request Status</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
  <div class="entity" id="RoleOperator">
   <h3>Operator<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#RoleOperator</p>
@@ -5444,6 +5871,41 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
    <dd>
     <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#KPIScope" title="https://w3id.org/celine-eu#KPIScope">KPI Scope</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="RequestPartial">
+  <h3>Partially Fulfilled<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#RequestPartial</p>
+  <div class="comment">
+   <span class="markdown">Some commitments received but total falls below the requested target.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#Concept" target="_blank" title="http://www.w3.org/2004/02/skos/core#Concept">Concept</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#inScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#inScheme">in Scheme</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestStatus" title="https://w3id.org/celine-eu#RequestStatus">Request Status</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Partially Fulfilled"@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestStatus" title="https://w3id.org/celine-eu#RequestStatus">Request Status</a> <sup class="type-ni" title="named individual">ni</sup>
    </dd>
   </dl>
  </div>
@@ -5897,6 +6359,50 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
    <dd>
     <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="RequestStatus">
+  <h3>Request Status<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#RequestStatus</p>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#ConceptScheme" target="_blank" title="http://www.w3.org/2004/02/skos/core#ConceptScheme">Concept Scheme</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://purl.org/dc/terms/description" target="_blank" title="http://purl.org/dc/terms/description">description</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Lifecycle status of a flexibility request."@en</span>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestCancelled" title="https://w3id.org/celine-eu#RequestCancelled">Cancelled</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestExpired" title="https://w3id.org/celine-eu#RequestExpired">Expired</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestFulfilled" title="https://w3id.org/celine-eu#RequestFulfilled">Fulfilled</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestOpen" title="https://w3id.org/celine-eu#RequestOpen">Open</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#hasTopConcept" target="_blank" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">has Top Concept</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#RequestPartial" title="https://w3id.org/celine-eu#RequestPartial">Partially Fulfilled</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Request Status"@en</span>
    </dd>
   </dl>
  </div>

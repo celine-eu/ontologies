@@ -7,6 +7,32 @@
 <li>Added: SubClass of https://w3id.org/celine-eu#ConnectionPoint</li>
 </ul>
 </li>
+<li><a href="#CommunityContext">https://w3id.org/celine-eu#CommunityContext</a>
+<ul>
+<li>Added: <http://www.w3.org/2004/02/skos/core#example> "ex:ctx1 a celine:CommunityContext ;
+    celine:hasCommunity    ex:rec_valdarno ;
+    celine:hasMember       ex:member_001 , ex:member_002 ;
+    celine:usesAsset       ex:pv_panel_01 ;
+    celine:hasSimulation   ex:sim_baseline ;
+    celine:hasCommitment   ex:fc_001 ;
+    celine:hasSettlementRun ex:sr_2025_q3 ."^^xsd:string</li>
+<li>Added: rdfs:comment "Operational context binding a PECO Energy Community
+    with assets, datasets, simulations and flexibility commitments. Member
+    participation in this context is enumerated via celine:hasMember; each
+    member is linked to the wrapped peco:Energy_community via
+    peco:is_member_of (PECO predicate, reused as-is)."^^xsd:string</li>
+</ul>
+<ul>
+<li>Deleted: rdfs:comment "Operational context binding a PECO Energy Community
+    with assets, datasets, simulations and flexibility commitments."^^xsd:string</li>
+<li>Deleted: <http://www.w3.org/2004/02/skos/core#example> "ex:ctx1 a celine:CommunityContext ;
+    celine:hasCommunity    ex:rec_valdarno ;
+    celine:usesAsset       ex:pv_panel_01 ;
+    celine:hasSimulation   ex:sim_baseline ;
+    celine:hasCommitment   ex:fc_001 ;
+    celine:hasSettlementRun ex:sr_2025_q3 ."^^xsd:string</li>
+</ul>
+</li>
 </ul></details><details><summary><u>Added classes</u></summary>
 <ul><li><a href="#https://purl.org/peco/peco-core#Agent">https://purl.org/peco/peco-core#Agent</a>
 </li>
@@ -35,6 +61,8 @@
 <ul>
 <li>Added: SubClass of https://purl.org/peco/peco-core#Asset</li>
 </ul>
+</li>
+<li><a href="#FlexibilityRequest">https://w3id.org/celine-eu#FlexibilityRequest</a>
 </li>
 <li><a href="#GridOperator">https://w3id.org/celine-eu#GridOperator</a>
 <ul>
@@ -74,8 +102,25 @@
 </ul>
 </li>
 </ul></details><h3 id="changeProp" class="list">Object Properties</h3>
-<details><summary><u>Added object properties</u></summary>
-<ul><li><a href="#hasGridOperator">https://w3id.org/celine-eu#hasGridOperator</a>
+<details><summary><u>Modified object properties</u></summary>
+<ul><li><a href="#hasFlexibilityDirection">https://w3id.org/celine-eu#hasFlexibilityDirection</a>
+<ul>
+<li>Added: domain Union of (https://w3id.org/celine-eu#FlexibilityCommitment, https://w3id.org/celine-eu#FlexibilityRequest)</li>
+<li>Added: rdfs:comment "Expected values: celine:FlexDown or celine:FlexUp."@en</li>
+</ul>
+<ul>
+<li>Deleted: domain https://w3id.org/celine-eu#FlexibilityCommitment</li>
+<li>Deleted: rdfs:comment "Expected values: celine:FlexDown or celine:FlexUp."^^xsd:string</li>
+</ul>
+</li>
+</ul></details><details><summary><u>Added object properties</u></summary>
+<ul><li><a href="#hasFlexibilityRequest">https://w3id.org/celine-eu#hasFlexibilityRequest</a>
+<ul>
+<li>Added: domain https://w3id.org/celine-eu#CommunityContext</li>
+<li>Added: Range https://w3id.org/celine-eu#FlexibilityRequest</li>
+</ul>
+</li>
+<li><a href="#hasGridOperator">https://w3id.org/celine-eu#hasGridOperator</a>
 <ul>
 <li>Added: Range https://w3id.org/celine-eu#GridOperator</li>
 <li>Added: domain https://w3id.org/celine-eu#CommunityContext</li>
@@ -85,6 +130,12 @@
 <ul>
 <li>Added: domain https://w3id.org/celine-eu#ConnectionPoint</li>
 <li>Added: Range http://www.w3.org/2004/02/skos/core#Concept</li>
+</ul>
+</li>
+<li><a href="#hasMember">https://w3id.org/celine-eu#hasMember</a>
+<ul>
+<li>Added: Range https://purl.org/peco/peco-core#Energy_community_member</li>
+<li>Added: domain https://w3id.org/celine-eu#CommunityContext</li>
 </ul>
 </li>
 <li><a href="#hasMemberRole">https://w3id.org/celine-eu#hasMemberRole</a>
@@ -105,6 +156,12 @@
 <li>Added: domain https://w3id.org/celine-eu#CommunityContext</li>
 </ul>
 </li>
+<li><a href="#hasRequestStatus">https://w3id.org/celine-eu#hasRequestStatus</a>
+<ul>
+<li>Added: domain https://w3id.org/celine-eu#FlexibilityRequest</li>
+<li>Added: Range http://www.w3.org/2004/02/skos/core#Concept</li>
+</ul>
+</li>
 <li><a href="#hasTopologyNode">https://w3id.org/celine-eu#hasTopologyNode</a>
 <ul>
 <li>Added: domain https://w3id.org/celine-eu#CommunityContext</li>
@@ -115,6 +172,13 @@
 <ul>
 <li>Added: domain Union of (https://purl.org/peco/peco-core#Energy_community_member, https://w3id.org/celine-eu#ConnectionPoint)</li>
 <li>Added: Range https://w3id.org/celine-eu#RegulatoryZone</li>
+</ul>
+</li>
+<li><a href="#inResponseTo">https://w3id.org/celine-eu#inResponseTo</a>
+<ul>
+<li>Added: InverseObjectProperties InverseObjectProperties(&lt;https://w3id.org/celine-eu#inResponseTo&gt; &lt;https://w3id.org/celine-eu#resultsInCommitment&gt;)</li>
+<li>Added: domain https://w3id.org/celine-eu#FlexibilityCommitment</li>
+<li>Added: Range https://w3id.org/celine-eu#FlexibilityRequest</li>
 </ul>
 </li>
 <li><a href="#measures">https://w3id.org/celine-eu#measures</a>
@@ -136,6 +200,19 @@
 <li>Added: SymmetricObjectProperty SymmetricObjectProperty(&lt;https://w3id.org/celine-eu#pairedWith&gt;)</li>
 </ul>
 </li>
+<li><a href="#requestedBy">https://w3id.org/celine-eu#requestedBy</a>
+<ul>
+<li>Added: domain https://w3id.org/celine-eu#FlexibilityRequest</li>
+<li>Added: Range https://purl.org/peco/peco-core#Agent</li>
+</ul>
+</li>
+<li><a href="#resultsInCommitment">https://w3id.org/celine-eu#resultsInCommitment</a>
+<ul>
+<li>Added: domain https://w3id.org/celine-eu#FlexibilityRequest</li>
+<li>Added: Range https://w3id.org/celine-eu#FlexibilityCommitment</li>
+<li>Added: InverseObjectProperties InverseObjectProperties(&lt;https://w3id.org/celine-eu#inResponseTo&gt; &lt;https://w3id.org/celine-eu#resultsInCommitment&gt;)</li>
+</ul>
+</li>
 <li><a href="#servedBy">https://w3id.org/celine-eu#servedBy</a>
 <ul>
 <li>Added: Range https://w3id.org/celine-eu#Substation</li>
@@ -148,6 +225,12 @@
 <ul>
 <li>Added: Domain Union of (https://purl.org/peco/peco-core#Asset, https://w3id.org/celine-eu#ConnectionPoint)</li>
 <li>Added: Range http://www.w3.org/2001/XMLSchema#string</li>
+</ul>
+</li>
+<li><a href="#requestedFlexibility">https://w3id.org/celine-eu#requestedFlexibility</a>
+<ul>
+<li>Added: Range http://www.w3.org/2001/XMLSchema#decimal</li>
+<li>Added: Domain https://w3id.org/celine-eu#FlexibilityRequest</li>
 </ul>
 </li>
 </ul></details></div>

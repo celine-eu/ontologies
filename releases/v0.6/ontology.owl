@@ -37,8 +37,8 @@
     PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),
     regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass
     for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,
-    ElectricityMeter, EVCharger, HeatPump), and member classification vocabularies
-    (MemberRole, MemberStatus). CIM alignment via skos:closeMatch to IEC 61968 profile;
+    ElectricityMeter, EVCharger, HeatPump), and member modeling (hasMember linkage, MemberRole and MemberStatus
+    vocabularies). CIM alignment via skos:closeMatch to IEC 61968 profile;
     SAREF alignment via skos:closeMatch only — no new owl:imports. Asset technical
     attributes are intentionally omitted; specs live in the external rec-registry catalogue,
     addressed by celine:hasLocalIdentifier.</rdfs:comment>
@@ -345,11 +345,31 @@
 
 
     <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#hasFlexibilityDirection">
-        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityCommitment"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://w3id.org/celine-eu#FlexibilityCommitment"/>
+                    <rdf:Description rdf:about="https://w3id.org/celine-eu#FlexibilityRequest"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
         <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <rdfs:comment>Expected values: celine:FlexDown or celine:FlexUp.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Expected values: celine:FlexDown or celine:FlexUp.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <rdfs:label>has flexibility direction</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine-eu#hasFlexibilityRequest -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#hasFlexibilityRequest">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#CommunityContext"/>
+        <rdfs:range rdf:resource="https://w3id.org/celine-eu#FlexibilityRequest"/>
+        <rdfs:comment xml:lang="en">A flexibility request issued within this community context.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label xml:lang="en">has flexibility request</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -483,13 +503,26 @@
     
 
 
+    <!-- https://w3id.org/celine-eu#hasMember -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#hasMember">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#CommunityContext"/>
+        <rdfs:range rdf:resource="https://purl.org/peco/peco-core#Energy_community_member"/>
+        <rdfs:comment xml:lang="en">A member participating in this community context. Mirrors the rec-registry&apos;s per-community member list. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label xml:lang="en">has member</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- https://w3id.org/celine-eu#hasMemberRole -->
 
 
     <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#hasMemberRole">
         <rdfs:domain rdf:resource="https://purl.org/peco/peco-core#Energy_community_member"/>
         <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <rdfs:comment xml:lang="en">The participation role of this member. Expected values from celine:MemberRole.</rdfs:comment>
+        <rdfs:comment xml:lang="en">The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the rec-registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope for v0.6.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <rdfs:label xml:lang="en">has member role</rdfs:label>
     </owl:ObjectProperty>
@@ -502,7 +535,7 @@
     <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#hasMemberStatus">
         <rdfs:domain rdf:resource="https://purl.org/peco/peco-core#Energy_community_member"/>
         <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <rdfs:comment xml:lang="en">The lifecycle status of this member. Expected values from celine:MemberStatus.</rdfs:comment>
+        <rdfs:comment xml:lang="en">The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the rec-registry conceptual model, a member has exactly one status per community.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <rdfs:label xml:lang="en">has member status</rdfs:label>
     </owl:ObjectProperty>
@@ -530,6 +563,19 @@
         <rdfs:comment xml:lang="en">The regulatory zone(s) covered by this community context.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <rdfs:label xml:lang="en">has regulatory zone</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine-eu#hasRequestStatus -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#hasRequestStatus">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityRequest"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <rdfs:comment xml:lang="en">Expected values from celine:RequestStatus.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label xml:lang="en">has request status</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -634,6 +680,20 @@
     
 
 
+    <!-- https://w3id.org/celine-eu#inResponseTo -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#inResponseTo">
+        <owl:inverseOf rdf:resource="https://w3id.org/celine-eu#resultsInCommitment"/>
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityCommitment"/>
+        <rdfs:range rdf:resource="https://w3id.org/celine-eu#FlexibilityRequest"/>
+        <rdfs:comment xml:lang="en">The flexibility request that triggered this commitment.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label xml:lang="en">in response to</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- https://w3id.org/celine-eu#measures -->
 
 
@@ -707,6 +767,19 @@
     
 
 
+    <!-- https://w3id.org/celine-eu#requestedBy -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#requestedBy">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityRequest"/>
+        <rdfs:range rdf:resource="https://purl.org/peco/peco-core#Agent"/>
+        <rdfs:comment xml:lang="en">The operator or automated system that issued this flexibility request.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label xml:lang="en">requested by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- https://w3id.org/celine-eu#resultFor -->
 
 
@@ -715,6 +788,19 @@
         <rdfs:range rdf:resource="https://purl.org/peco/peco-core#Energy_community_member"/>
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <rdfs:label>result for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/celine-eu#resultsInCommitment -->
+
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/celine-eu#resultsInCommitment">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityRequest"/>
+        <rdfs:range rdf:resource="https://w3id.org/celine-eu#FlexibilityCommitment"/>
+        <rdfs:comment xml:lang="en">FlexibilityCommitment(s) created in response to this request.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label xml:lang="en">results in commitment</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -1088,6 +1174,19 @@
     
 
 
+    <!-- https://w3id.org/celine-eu#requestedFlexibility -->
+
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/celine-eu#requestedFlexibility">
+        <rdfs:domain rdf:resource="https://w3id.org/celine-eu#FlexibilityRequest"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment xml:lang="en">Target flexibility amount in kWh. Positive value; direction is expressed by hasFlexibilityDirection.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label xml:lang="en">requested flexibility</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- https://w3id.org/celine-eu#targetFlexibility -->
 
 
@@ -1154,11 +1253,15 @@
 
     <owl:Class rdf:about="https://w3id.org/celine-eu#CommunityContext">
         <rdfs:comment>Operational context binding a PECO Energy Community
-    with assets, datasets, simulations and flexibility commitments.</rdfs:comment>
+    with assets, datasets, simulations and flexibility commitments. Member
+    participation in this context is enumerated via celine:hasMember; each
+    member is linked to the wrapped peco:Energy_community via
+    peco:is_member_of (PECO predicate, reused as-is).</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
         <rdfs:label>Community Context</rdfs:label>
         <skos:example>ex:ctx1 a celine:CommunityContext ;
     celine:hasCommunity    ex:rec_valdarno ;
+    celine:hasMember       ex:member_001 , ex:member_002 ;
     celine:usesAsset       ex:pv_panel_01 ;
     celine:hasSimulation   ex:sim_baseline ;
     celine:hasCommitment   ex:fc_001 ;
@@ -1332,6 +1435,27 @@ ex:cost_platform_fee a celine:CostItem ;
     celine:availableEnergy       &quot;6.0&quot;^^xsd:decimal ;
     celine:hasAvailabilityWindow ex:window_morning ;
     celine:hasConstraint         ex:constraint_hp .</skos:example>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/celine-eu#FlexibilityRequest -->
+
+
+    <owl:Class rdf:about="https://w3id.org/celine-eu#FlexibilityRequest">
+        <rdfs:comment xml:lang="en">A demand signal issued by a community operator or automated system
+    requesting members to activate flexibility within a given time window. Specifies the
+    desired direction (FlexDown/FlexUp) and target amount. One request may result in zero,
+    one, or many FlexibilityCommitments from different members.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label xml:lang="en">Flexibility Request</rdfs:label>
+        <skos:example>ex:req_001 a celine:FlexibilityRequest ;
+    celine:requestedBy              ex:dso_enel ;
+    celine:hasFlexibilityDirection  celine:FlexDown ;
+    celine:requestedFlexibility     &quot;10.0&quot;^^xsd:decimal ;
+    celine:hasTimeInterval          ex:interval_2025_07_01_peak ;
+    celine:hasRequestStatus         celine:RequestFulfilled ;
+    celine:resultsInCommitment      ex:fc_001 , ex:fc_002 .</skos:example>
     </owl:Class>
     
 
@@ -2429,6 +2553,94 @@ ex:cost_platform_fee a celine:CostItem ;
         <skos:inScheme rdf:resource="https://w3id.org/celine-eu#ConstraintType"/>
         <skos:prefLabel>Recovery Constraint</skos:prefLabel>
         <skos:topConceptOf rdf:resource="https://w3id.org/celine-eu#ConstraintType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/celine-eu#RequestCancelled -->
+
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/celine-eu#RequestCancelled">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <rdfs:comment xml:lang="en">Request withdrawn before the activation window.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <skos:inScheme rdf:resource="https://w3id.org/celine-eu#RequestStatus"/>
+        <skos:prefLabel xml:lang="en">Cancelled</skos:prefLabel>
+        <skos:topConceptOf rdf:resource="https://w3id.org/celine-eu#RequestStatus"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/celine-eu#RequestExpired -->
+
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/celine-eu#RequestExpired">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <rdfs:comment xml:lang="en">Activation window passed without sufficient response.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <skos:inScheme rdf:resource="https://w3id.org/celine-eu#RequestStatus"/>
+        <skos:prefLabel xml:lang="en">Expired</skos:prefLabel>
+        <skos:topConceptOf rdf:resource="https://w3id.org/celine-eu#RequestStatus"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/celine-eu#RequestFulfilled -->
+
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/celine-eu#RequestFulfilled">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <rdfs:comment xml:lang="en">Sufficient commitments received to meet the requested target.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <skos:inScheme rdf:resource="https://w3id.org/celine-eu#RequestStatus"/>
+        <skos:prefLabel xml:lang="en">Fulfilled</skos:prefLabel>
+        <skos:topConceptOf rdf:resource="https://w3id.org/celine-eu#RequestStatus"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/celine-eu#RequestOpen -->
+
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/celine-eu#RequestOpen">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <rdfs:comment xml:lang="en">Request has been issued and is awaiting commitments.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <skos:inScheme rdf:resource="https://w3id.org/celine-eu#RequestStatus"/>
+        <skos:prefLabel xml:lang="en">Open</skos:prefLabel>
+        <skos:topConceptOf rdf:resource="https://w3id.org/celine-eu#RequestStatus"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/celine-eu#RequestPartial -->
+
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/celine-eu#RequestPartial">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <rdfs:comment xml:lang="en">Some commitments received but total falls below the requested target.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <skos:inScheme rdf:resource="https://w3id.org/celine-eu#RequestStatus"/>
+        <skos:prefLabel xml:lang="en">Partially Fulfilled</skos:prefLabel>
+        <skos:topConceptOf rdf:resource="https://w3id.org/celine-eu#RequestStatus"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/celine-eu#RequestStatus -->
+
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/celine-eu#RequestStatus">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+        <terms:description xml:lang="en">Lifecycle status of a flexibility request.</terms:description>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/celine-eu"/>
+        <rdfs:label xml:lang="en">Request Status</rdfs:label>
+        <skos:hasTopConcept rdf:resource="https://w3id.org/celine-eu#RequestCancelled"/>
+        <skos:hasTopConcept rdf:resource="https://w3id.org/celine-eu#RequestExpired"/>
+        <skos:hasTopConcept rdf:resource="https://w3id.org/celine-eu#RequestFulfilled"/>
+        <skos:hasTopConcept rdf:resource="https://w3id.org/celine-eu#RequestOpen"/>
+        <skos:hasTopConcept rdf:resource="https://w3id.org/celine-eu#RequestPartial"/>
+        <skos:prefLabel xml:lang="en">Request Status</skos:prefLabel>
     </owl:NamedIndividual>
     
 

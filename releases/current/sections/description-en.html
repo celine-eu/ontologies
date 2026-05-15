@@ -1,7 +1,17 @@
 <h2 id="desc" class="list">CELINE Core Ontology: Description <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
 
-<span class="markdown">The CELINE Core Ontology is a lightweight orchestration profile for
-    Renewable Energy Communities (RECs) and Digital Twin workflows. It connects established
-    standards — PECO, SAREF, SAREF4ENER, SOSA/SSN — without redefining their domain
-    semantics, providing a minimal coordination layer for simulation scenarios, dataset
-    references, KPI definition and evaluation, and REC flexibility commitment and settlement.</span>
+<span class="markdown">The ontology defines the following concept groups:
+
+**Core context and simulation** -- CommunityContext binds a PECO EnergyCommunity to its members, assets, datasets and simulations. Scenario captures assumptions and temporal scope; Simulation and SimulationRun model abstract definitions and concrete executions. DatasetReference is a lightweight pointer to external datasets.
+
+**KPI layer** -- KPIDefinition captures named, typed KPI metrics with scope, calculation method, temporal granularity and unit of measure. KPIEvaluation records the computed value for a specific scope entity and time interval. A KPICatalog provides 11 initial REC-relevant KPI entries.
+
+**Flexibility and settlement** -- FlexibilityRequest is the demand signal; FlexibilityCommitment is a member's pledge to deliver flexibility on specific PODs; FlexibilityCredit is the metered credit earned. FlexibilityEnvelope declares POD-level capability bounds; FlexibilityConstraint encodes activation rules. SettlementRun aggregates credits, applies costs (CostItem), and produces per-member RedistributionResults.
+
+**Grid topology** -- Substation (Primary/Secondary), PowerTransformer, DistributionFeeder model the distribution network. RegulatoryZone represents administrative coverage areas. GridOperator models the DSO. ConnectionPoint generalises the PECO Electric_POD for multi-country portability.
+
+**Asset inventory** -- PVSystem, BatteryStorage, ElectricityMeter, EVCharger, HeatPump are presence-only typed classes. Technical specifications are deliberately omitted; they live in the rec-registry external catalogue, linked via celine:hasLocalIdentifier.
+
+**Member classification** -- MemberRole and MemberStatus SKOS vocabularies classify members within their energy community, following the rec-registry single-community-per-member model.
+
+All cross-domain links to PECO, SAREF, SOSA and IEC CIM are expressed via skos:closeMatch annotations or lightweight object properties -- no external ontology is subclassed or redefined beyond PECO predicates already imported.</span>

@@ -1,3 +1,21 @@
 <h2 id="intro" class="list">Introduction <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
-<span class="markdown">
-This is a place holder text for the introduction. The introduction should briefly describe the ontology, its motivation, state of the art and goals.</span>
+<span class="markdown">CELINE (Cross-sectorial integrated digital services Enabling energy Localized INnovation and community Empowerment) is a Horizon Europe research project (Grant Agreement No. 101160667) that develops a Digital Toolbox for households, energy communities and cooperative organisations to optimise energy management and support investment decisions around photovoltaic systems, battery storage, electric vehicles and heat pumps. The project validates its solutions across three European demonstration sites in Spain, Finland and Italy.
+
+The CELINE Core Ontology supports the semantic layer of this toolbox. It is a thin orchestration profile -- not a standalone domain ontology -- that binds together existing standards into a coherent semantic target for the CELINE ecosystem:
+
+- **PECO** (https://purl.org/peco) models the Energy Community structure, members, PODs and assets.
+- **SAREF / SAREF4ENER** (ETSI) covers smart devices and energy assets.
+- **SOSA/SSN** (W3C) covers sensor observations and measurements.
+- **IEC CIM** (IEC 61968) provides the reference model for grid topology, aligned via skos:closeMatch.
+
+Version 0.6 extends the ontology with:
+
+- **Grid topology**: Substation hierarchy (Primary/Secondary), PowerTransformer, DistributionFeeder, RegulatoryZone, and the GridOperator actor, aligned to the IEC CIM profile via skos:closeMatch.
+- **Connection points**: A generalised ConnectionPoint superclass for PECO Electric_POD, with a ConnectionPointIdentifierScheme vocabulary covering six European national metering-point standards (POD, CUPS, PRM, MALO, EAN, MPAN).
+- **Presence-only asset inventory**: PVSystem, BatteryStorage, ElectricityMeter, EVCharger, HeatPump -- typed classes with no technical-attribute properties. Asset specifications live in the external rec-registry catalogue, addressed by celine:hasLocalIdentifier.
+- **Member classification**: MemberRole (Consumer, Prosumer, Producer, Operator, Admin) and MemberStatus (Pending, Active, Suspended, Inactive) vocabularies with hasMember linkage from CommunityContext.
+- **Flexibility request**: FlexibilityRequest class closing the demand-response loop -- a demand signal from operator/system that triggers FlexibilityCommitments, with RequestStatus lifecycle tracking.
+
+Project website: https://www.celineproject.eu/
+Source code and issues: https://github.com/celine-eu
+Documentation: https://celine-eu.github.io/</span>

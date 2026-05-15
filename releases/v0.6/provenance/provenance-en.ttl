@@ -5,6 +5,7 @@
 <https://w3id.org/celine-eu/v0.6> a prov:Entity;
 	 dc:title "CELINE Core Ontology";
 	 prov:wasAttributedTo <https://github.com/dgarijo/Widoco/>,<http://www.essepuntato.it/lode/>;
+	 prov:specializationOf <https://w3id.org/celine-eu>;
 	 prov:wasRevisionOf <https://w3id.org/celine-eu/v0.5>;
-	 prov:wasGeneratedAt "2026-03-24";
+	 prov:wasGeneratedAt "Date created";
 .

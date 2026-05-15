@@ -15,6 +15,16 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2002/07/owl#unionOf" : [ {
     "@list" : [ {
+      "@id" : "https://purl.org/peco/peco-core#Energy_community_member"
+    }, {
+      "@id" : "https://w3id.org/celine-eu#ConnectionPoint"
+    } ]
+  } ]
+}, {
+  "@id" : "_:genid15",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2002/07/owl#unionOf" : [ {
+    "@list" : [ {
       "@id" : "https://w3id.org/celine-eu#DistributionFeeder"
     }, {
       "@id" : "https://w3id.org/celine-eu#PowerTransformer"
@@ -23,7 +33,7 @@
     } ]
   } ]
 }, {
-  "@id" : "_:genid16",
+  "@id" : "_:genid19",
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2002/07/owl#unionOf" : [ {
     "@list" : [ {
@@ -37,21 +47,21 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2002/07/owl#unionOf" : [ {
     "@list" : [ {
+      "@id" : "https://w3id.org/celine-eu#FlexibilityCommitment"
+    }, {
+      "@id" : "https://w3id.org/celine-eu#FlexibilityRequest"
+    } ]
+  } ]
+}, {
+  "@id" : "_:genid8",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2002/07/owl#unionOf" : [ {
+    "@list" : [ {
       "@id" : "https://w3id.org/celine-eu#DistributionFeeder"
     }, {
       "@id" : "https://w3id.org/celine-eu#PowerTransformer"
     }, {
       "@id" : "https://w3id.org/celine-eu#Substation"
-    } ]
-  } ]
-}, {
-  "@id" : "_:genid9",
-  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
-  "http://www.w3.org/2002/07/owl#unionOf" : [ {
-    "@list" : [ {
-      "@id" : "https://purl.org/peco/peco-core#Energy_community_member"
-    }, {
-      "@id" : "https://w3id.org/celine-eu#ConnectionPoint"
     } ]
   } ]
 }, {
@@ -110,7 +120,7 @@
     "@value" : "https://w3id.org/celine-eu#"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
-    "@value" : "Version 0.6 adds REC-registry-aligned grid topology (Substation,\n    PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),\n    regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass\n    for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,\n    ElectricityMeter, EVCharger, HeatPump), and member classification vocabularies\n    (MemberRole, MemberStatus). CIM alignment via skos:closeMatch to IEC 61968 profile;\n    SAREF alignment via skos:closeMatch only — no new owl:imports. Asset technical\n    attributes are intentionally omitted; specs live in the external rec-registry catalogue,\n    addressed by celine:hasLocalIdentifier."
+    "@value" : "Version 0.6 adds REC-registry-aligned grid topology (Substation,\n    PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),\n    regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass\n    for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,\n    ElectricityMeter, EVCharger, HeatPump), and member modeling (hasMember linkage, MemberRole and MemberStatus\n    vocabularies). CIM alignment via skos:closeMatch to IEC 61968 profile;\n    SAREF alignment via skos:closeMatch only — no new owl:imports. Asset technical\n    attributes are intentionally omitted; specs live in the external rec-registry catalogue,\n    addressed by celine:hasLocalIdentifier."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#label" : [ {
     "@value" : "CELINE Core Ontology"
@@ -238,7 +248,7 @@
   "@id" : "https://w3id.org/celine-eu#CommunityContext",
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
-    "@value" : "Operational context binding a PECO Energy Community\n    with assets, datasets, simulations and flexibility commitments."
+    "@value" : "Operational context binding a PECO Energy Community\n    with assets, datasets, simulations and flexibility commitments. Member\n    participation in this context is enumerated via celine:hasMember; each\n    member is linked to the wrapped peco:Energy_community via\n    peco:is_member_of (PECO predicate, reused as-is)."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -247,7 +257,7 @@
     "@value" : "Community Context"
   } ],
   "http://www.w3.org/2004/02/skos/core#example" : [ {
-    "@value" : "ex:ctx1 a celine:CommunityContext ;\n    celine:hasCommunity    ex:rec_valdarno ;\n    celine:usesAsset       ex:pv_panel_01 ;\n    celine:hasSimulation   ex:sim_baseline ;\n    celine:hasCommitment   ex:fc_001 ;\n    celine:hasSettlementRun ex:sr_2025_q3 ."
+    "@value" : "ex:ctx1 a celine:CommunityContext ;\n    celine:hasCommunity    ex:rec_valdarno ;\n    celine:hasMember       ex:member_001 , ex:member_002 ;\n    celine:usesAsset       ex:pv_panel_01 ;\n    celine:hasSimulation   ex:sim_baseline ;\n    celine:hasCommitment   ex:fc_001 ;\n    celine:hasSettlementRun ex:sr_2025_q3 ."
   } ]
 }, {
   "@id" : "https://w3id.org/celine-eu#ConnectionPoint",
@@ -750,6 +760,23 @@
   } ],
   "http://www.w3.org/2004/02/skos/core#example" : [ {
     "@value" : "ex:env_hp a celine:FlexibilityEnvelope ;\n    celine:envelopeFor           ex:pod_rossi_heatpump ;\n    celine:maxFlexUp             \"2.0\"^^xsd:decimal ;\n    celine:maxFlexDown           \"3.0\"^^xsd:decimal ;\n    celine:availableEnergy       \"6.0\"^^xsd:decimal ;\n    celine:hasAvailabilityWindow ex:window_morning ;\n    celine:hasConstraint         ex:constraint_hp ."
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine-eu#FlexibilityRequest",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "A demand signal issued by a community operator or automated system\n    requesting members to activate flexibility within a given time window. Specifies the\n    desired direction (FlexDown/FlexUp) and target amount. One request may result in zero,\n    one, or many FlexibilityCommitments from different members."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "Flexibility Request"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#example" : [ {
+    "@value" : "ex:req_001 a celine:FlexibilityRequest ;\n    celine:requestedBy              ex:dso_enel ;\n    celine:hasFlexibilityDirection  celine:FlexDown ;\n    celine:requestedFlexibility     \"10.0\"^^xsd:decimal ;\n    celine:hasTimeInterval          ex:interval_2025_07_01_peak ;\n    celine:hasRequestStatus         celine:RequestFulfilled ;\n    celine:resultsInCommitment      ex:fc_001 , ex:fc_002 ."
   } ]
 }, {
   "@id" : "https://w3id.org/celine-eu#FrequencyConstraint",
@@ -1878,6 +1905,138 @@
     "@value" : "Regulatory Zone"
   } ]
 }, {
+  "@id" : "https://w3id.org/celine-eu#RequestCancelled",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://www.w3.org/2004/02/skos/core#Concept" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "Request withdrawn before the activation window."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#inScheme" : [ {
+    "@id" : "https://w3id.org/celine-eu#RequestStatus"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#prefLabel" : [ {
+    "@language" : "en",
+    "@value" : "Cancelled"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#topConceptOf" : [ {
+    "@id" : "https://w3id.org/celine-eu#RequestStatus"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine-eu#RequestExpired",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://www.w3.org/2004/02/skos/core#Concept" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "Activation window passed without sufficient response."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#inScheme" : [ {
+    "@id" : "https://w3id.org/celine-eu#RequestStatus"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#prefLabel" : [ {
+    "@language" : "en",
+    "@value" : "Expired"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#topConceptOf" : [ {
+    "@id" : "https://w3id.org/celine-eu#RequestStatus"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine-eu#RequestFulfilled",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://www.w3.org/2004/02/skos/core#Concept" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "Sufficient commitments received to meet the requested target."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#inScheme" : [ {
+    "@id" : "https://w3id.org/celine-eu#RequestStatus"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#prefLabel" : [ {
+    "@language" : "en",
+    "@value" : "Fulfilled"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#topConceptOf" : [ {
+    "@id" : "https://w3id.org/celine-eu#RequestStatus"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine-eu#RequestOpen",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://www.w3.org/2004/02/skos/core#Concept" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "Request has been issued and is awaiting commitments."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#inScheme" : [ {
+    "@id" : "https://w3id.org/celine-eu#RequestStatus"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#prefLabel" : [ {
+    "@language" : "en",
+    "@value" : "Open"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#topConceptOf" : [ {
+    "@id" : "https://w3id.org/celine-eu#RequestStatus"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine-eu#RequestPartial",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://www.w3.org/2004/02/skos/core#Concept" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "Some commitments received but total falls below the requested target."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#inScheme" : [ {
+    "@id" : "https://w3id.org/celine-eu#RequestStatus"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#prefLabel" : [ {
+    "@language" : "en",
+    "@value" : "Partially Fulfilled"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#topConceptOf" : [ {
+    "@id" : "https://w3id.org/celine-eu#RequestStatus"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine-eu#RequestStatus",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://purl.org/dc/terms/description" : [ {
+    "@language" : "en",
+    "@value" : "Lifecycle status of a flexibility request."
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/2004/02/skos/core#ConceptScheme"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "Request Status"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#hasTopConcept" : [ {
+    "@id" : "https://w3id.org/celine-eu#RequestCancelled"
+  }, {
+    "@id" : "https://w3id.org/celine-eu#RequestExpired"
+  }, {
+    "@id" : "https://w3id.org/celine-eu#RequestFulfilled"
+  }, {
+    "@id" : "https://w3id.org/celine-eu#RequestOpen"
+  }, {
+    "@id" : "https://w3id.org/celine-eu#RequestPartial"
+  } ],
+  "http://www.w3.org/2004/02/skos/core#prefLabel" : [ {
+    "@language" : "en",
+    "@value" : "Request Status"
+  } ]
+}, {
   "@id" : "https://w3id.org/celine-eu#RoleAdmin",
   "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://www.w3.org/2004/02/skos/core#Concept" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
@@ -2991,10 +3150,11 @@
   "@id" : "https://w3id.org/celine-eu#hasFlexibilityDirection",
   "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
     "@value" : "Expected values: celine:FlexDown or celine:FlexUp."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
-    "@id" : "https://w3id.org/celine-eu#FlexibilityCommitment"
+    "@id" : "_:genid5"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -3004,6 +3164,26 @@
   } ],
   "http://www.w3.org/2000/01/rdf-schema#range" : [ {
     "@id" : "http://www.w3.org/2004/02/skos/core#Concept"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine-eu#hasFlexibilityRequest",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "A flexibility request issued within this community context."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine-eu#CommunityContext"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "has flexibility request"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://w3id.org/celine-eu#FlexibilityRequest"
   } ]
 }, {
   "@id" : "https://w3id.org/celine-eu#hasGridOperator",
@@ -3288,7 +3468,7 @@
     "@value" : "Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into the external rec-registry catalogue."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
-    "@id" : "_:genid16"
+    "@id" : "_:genid19"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -3301,11 +3481,31 @@
     "@id" : "http://www.w3.org/2001/XMLSchema#string"
   } ]
 }, {
+  "@id" : "https://w3id.org/celine-eu#hasMember",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "A member participating in this community context. Mirrors the rec-registry's per-community member list. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine-eu#CommunityContext"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "has member"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://purl.org/peco/peco-core#Energy_community_member"
+  } ]
+}, {
   "@id" : "https://w3id.org/celine-eu#hasMemberRole",
   "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
     "@language" : "en",
-    "@value" : "The participation role of this member. Expected values from celine:MemberRole."
+    "@value" : "The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the rec-registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope for v0.6."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
     "@id" : "https://purl.org/peco/peco-core#Energy_community_member"
@@ -3325,7 +3525,7 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
     "@language" : "en",
-    "@value" : "The lifecycle status of this member. Expected values from celine:MemberStatus."
+    "@value" : "The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the rec-registry conceptual model, a member has exactly one status per community."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
     "@id" : "https://purl.org/peco/peco-core#Energy_community_member"
@@ -3374,6 +3574,26 @@
   } ],
   "http://www.w3.org/2000/01/rdf-schema#range" : [ {
     "@id" : "https://w3id.org/celine-eu#RegulatoryZone"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine-eu#hasRequestStatus",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "Expected values from celine:RequestStatus."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine-eu#FlexibilityRequest"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "has request status"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://www.w3.org/2004/02/skos/core#Concept"
   } ]
 }, {
   "@id" : "https://w3id.org/celine-eu#hasScenario",
@@ -3465,7 +3685,7 @@
     "@value" : "has topology node"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#range" : [ {
-    "@id" : "_:genid5"
+    "@id" : "_:genid8"
   } ]
 }, {
   "@id" : "https://w3id.org/celine-eu#inRegulatoryZone",
@@ -3475,7 +3695,7 @@
     "@value" : "The regulatory zone to which this member or connection point belongs."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
-    "@id" : "_:genid9"
+    "@id" : "_:genid12"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -3486,6 +3706,29 @@
   } ],
   "http://www.w3.org/2000/01/rdf-schema#range" : [ {
     "@id" : "https://w3id.org/celine-eu#RegulatoryZone"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine-eu#inResponseTo",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The flexibility request that triggered this commitment."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine-eu#FlexibilityCommitment"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "in response to"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://w3id.org/celine-eu#FlexibilityRequest"
+  } ],
+  "http://www.w3.org/2002/07/owl#inverseOf" : [ {
+    "@id" : "https://w3id.org/celine-eu#resultsInCommitment"
   } ]
 }, {
   "@id" : "https://w3id.org/celine-eu#maxActivationDuration",
@@ -3677,7 +3920,7 @@
     "@value" : "The grid operator responsible for this infrastructure element."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
-    "@id" : "_:genid12"
+    "@id" : "_:genid15"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -3725,6 +3968,46 @@
     "@id" : "https://w3id.org/celine-eu#DatasetReference"
   } ]
 }, {
+  "@id" : "https://w3id.org/celine-eu#requestedBy",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The operator or automated system that issued this flexibility request."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine-eu#FlexibilityRequest"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "requested by"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://purl.org/peco/peco-core#Agent"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine-eu#requestedFlexibility",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "Target flexibility amount in kWh. Positive value; direction is expressed by hasFlexibilityDirection."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine-eu#FlexibilityRequest"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "requested flexibility"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://www.w3.org/2001/XMLSchema#decimal"
+  } ]
+}, {
   "@id" : "https://w3id.org/celine-eu#resultFor",
   "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
@@ -3738,6 +4021,26 @@
   } ],
   "http://www.w3.org/2000/01/rdf-schema#range" : [ {
     "@id" : "https://purl.org/peco/peco-core#Energy_community_member"
+  } ]
+}, {
+  "@id" : "https://w3id.org/celine-eu#resultsInCommitment",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "FlexibilityCommitment(s) created in response to this request."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "https://w3id.org/celine-eu#FlexibilityRequest"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "results in commitment"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://w3id.org/celine-eu#FlexibilityCommitment"
   } ]
 }, {
   "@id" : "https://w3id.org/celine-eu#servedBy",
