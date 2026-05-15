@@ -80,7 +80,8 @@
             "hasTopologyNode": { "$ref": "#/$defs/IRIorList" },
             "hasGridOperator": { "$ref": "#/$defs/IRIorList" },
             "hasFlexibilityRequest": { "$ref": "#/$defs/IRIorList" },
-            "hasMember": { "$ref": "#/$defs/IRIorList" }
+            "hasMember": { "$ref": "#/$defs/IRIorList" },
+            "hasPartition": { "$ref": "#/$defs/IRIorList" }
           },
           "required": ["hasCommunity"]
         }
@@ -476,6 +477,26 @@
         }
       ]
     },
+    "SharingGroup": {
+      "allOf": [
+        { "$ref": "#/$defs/NodeBase" },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                { "const": "celine:SharingGroup" },
+                { "type": "array", "contains": { "const": "celine:SharingGroup" } }
+              ]
+            },
+            "partitionOf": { "$ref": "#/$defs/IRI" },
+            "inRegulatoryZone": { "$ref": "#/$defs/IRI" },
+            "hasMember": { "$ref": "#/$defs/IRIorList" },
+            "hasTopologyNode": { "$ref": "#/$defs/IRIorList" }
+          },
+          "required": ["partitionOf", "inRegulatoryZone"]
+        }
+      ]
+    },
     "AssetInstance": {
       "allOf": [
         { "$ref": "#/$defs/NodeBase" },
@@ -517,6 +538,7 @@
         { "$ref": "#/$defs/RegulatoryZone" },
         { "$ref": "#/$defs/GridOperator" },
         { "$ref": "#/$defs/ConnectionPoint" },
+        { "$ref": "#/$defs/SharingGroup" },
         { "$ref": "#/$defs/AssetInstance" },
         { "$ref": "#/$defs/NodeBase" }
       ]

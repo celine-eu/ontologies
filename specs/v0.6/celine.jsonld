@@ -302,6 +302,18 @@
       "@id": "celine:hasMember",
       "@type": "@id"
     },
+    "hasDeliveryPoint": {
+      "@id": "celine:hasDeliveryPoint",
+      "@type": "@id"
+    },
+    "hasPartition": {
+      "@id": "celine:hasPartition",
+      "@type": "@id"
+    },
+    "partitionOf": {
+      "@id": "celine:partitionOf",
+      "@type": "@id"
+    },
     "hasMemberRole": {
       "@id": "celine:hasMemberRole",
       "@type": "@id"
@@ -367,6 +379,7 @@
     { "@id": "celine:RegulatoryZone",      "@type": "owl:Class", "label": "Regulatory Zone" },
     { "@id": "celine:GridOperator",        "@type": "owl:Class", "label": "Grid Operator" },
     { "@id": "celine:ConnectionPoint",     "@type": "owl:Class", "label": "Connection Point" },
+    { "@id": "celine:SharingGroup",       "@type": "owl:Class", "label": "Sharing Group" },
     { "@id": "celine:PVSystem",            "@type": "owl:Class", "label": "PV System" },
     { "@id": "celine:BatteryStorage",      "@type": "owl:Class", "label": "Battery Storage" },
     { "@id": "celine:ElectricityMeter",    "@type": "owl:Class", "label": "Electricity Meter" },
@@ -510,8 +523,11 @@
     { "@id": "celine:pairedWith",            "@type": ["owl:ObjectProperty", "owl:SymmetricProperty"], "label": "paired with" },
     { "@id": "celine:measures",              "@type": "owl:ObjectProperty", "label": "measures" },
     { "@id": "celine:hasMember",              "@type": "owl:ObjectProperty", "label": "has member" },
+    { "@id": "celine:hasDeliveryPoint",      "@type": "owl:ObjectProperty", "label": "has delivery point" },
     { "@id": "celine:hasMemberRole",         "@type": "owl:ObjectProperty", "label": "has member role" },
     { "@id": "celine:hasMemberStatus",       "@type": "owl:ObjectProperty", "label": "has member status" },
+    { "@id": "celine:hasPartition",          "@type": "owl:ObjectProperty", "label": "has partition" },
+    { "@id": "celine:partitionOf",           "@type": "owl:ObjectProperty", "label": "partition of" },
     { "@id": "celine:hasFlexibilityRequest", "@type": "owl:ObjectProperty", "label": "has flexibility request" },
     { "@id": "celine:requestedBy",           "@type": "owl:ObjectProperty", "label": "requested by" },
     { "@id": "celine:hasRequestStatus",      "@type": "owl:ObjectProperty", "label": "has request status" },
