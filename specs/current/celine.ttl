@@ -3,6 +3,7 @@
 @prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat:   <http://www.w3.org/ns/dcat#> .
 @prefix dct:    <http://purl.org/dc/terms/> .
 @prefix time:   <http://www.w3.org/2006/time#> .
 @prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
@@ -24,9 +25,9 @@
 
 <https://w3id.org/celine-eu>
     a owl:Ontology ;
-    owl:versionIRI      <https://w3id.org/celine-eu/v0.6> ;
-    owl:priorVersion    <https://w3id.org/celine-eu/v0.5> ;
-    owl:versionInfo     "0.6.0" ;
+    owl:versionIRI      <https://w3id.org/celine-eu/v0.7> ;
+    owl:priorVersion    <https://w3id.org/celine-eu/v0.6> ;
+    owl:versionInfo     "0.7.0" ;
     rdfs:label          "CELINE Core Ontology" ;
     dct:title           "CELINE Core Ontology" ;
     dct:description     """The CELINE Core Ontology is a lightweight orchestration profile for
@@ -34,7 +35,7 @@
     standards — PECO, SAREF, SAREF4ENER, SOSA/SSN — without redefining their domain
     semantics, providing a minimal coordination layer for simulation scenarios, dataset
     references, KPI definition and evaluation, and REC flexibility commitment and settlement.""" ;
-    rdfs:comment        """Version 0.6 adds REC-registry-aligned grid topology (Substation,
+    rdfs:comment        """Version 0.6 adds registry-aligned grid topology (Substation,
     PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),
     regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass
     for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,
@@ -44,11 +45,14 @@
     regulatory zone, aligned with the RED II (2018/2001) double-counting prohibition.
     CIM alignment via skos:closeMatch to IEC 61968 profile; SAREF alignment via
     skos:closeMatch only — no new owl:imports. Asset technical attributes are intentionally
-    omitted; specs live in the external rec-registry catalogue, addressed by
-    celine:hasLocalIdentifier.""" ;
+    omitted; specs live in an external catalogue, addressed by celine:hasLocalIdentifier.
+    Version 0.7 adds hasDataset (asset/connection-point → DatasetReference) as the
+    operational counterpart to the SimulationRun-scoped usesDataset/producesDataset;
+    clarifies DatasetReference self-description via DCAT/DCT terms; generalises
+    external-catalogue wording to remove implementation-specific naming.""" ;
     dct:license         <https://creativecommons.org/licenses/by/4.0/> ;
     dct:created         "2026-03-24"^^xsd:date ;
-    dct:modified        "2026-05-14"^^xsd:date ;
+    dct:modified        "2026-05-27"^^xsd:date ;
     vann:preferredNamespacePrefix "celine" ;
     vann:preferredNamespaceUri    "https://w3id.org/celine-eu#" ;
     rdfs:seeAlso
@@ -121,10 +125,14 @@ celine:DatasetReference
     rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
     rdfs:label          "Dataset Reference" ;
     rdfs:comment        """Reference to an external dataset used as input or produced as output.
-    CELINE does not define dataset schemas.""" ;
+    CELINE does not define dataset schemas. Instances SHOULD declare their type or
+    conformance target (via dct:conformsTo), format (via dct:format), and an access
+    location (via dcat:accessURL or dct:source), using DCAT / Dublin Core terms.""" ;
     skos:example        """ex:ds_irradiance a celine:DatasetReference ;
     dct:identifier  "irradiance-2025-07" ;
-    dct:source      <https://data.example.org/weather/irradiance> .""" .
+    dct:conformsTo  <https://example.org/some-dataset-profile> ;
+    dct:format      "application/json" ;
+    dcat:accessURL  <https://data.example.org/weather/irradiance> .""" .
 
 ################################################################################
 # Grid Topology Classes  (new in v0.6)
@@ -232,7 +240,7 @@ celine:PVSystem
     rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
     rdfs:subClassOf     peco:Asset ;
     rdfs:label          "PV System"@en ;
-    rdfs:comment        "A photovoltaic system. Technical attributes (rated power, panel type, etc.) live in the external rec-registry catalogue, addressed by celine:hasLocalIdentifier."@en ;
+    rdfs:comment        "A photovoltaic system. Technical attributes (rated power, panel type, etc.) live in an external catalogue, addressed by celine:hasLocalIdentifier."@en ;
     skos:closeMatch     saref:Device .
 
 celine:BatteryStorage
@@ -240,7 +248,7 @@ celine:BatteryStorage
     rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
     rdfs:subClassOf     peco:Energy_storage ;
     rdfs:label          "Battery Storage"@en ;
-    rdfs:comment        "A battery energy storage system. Technical attributes live in the external rec-registry catalogue."@en ;
+    rdfs:comment        "A battery energy storage system. Technical attributes live in an external catalogue."@en ;
     skos:closeMatch     saref:Device .
 
 celine:ElectricityMeter
@@ -256,7 +264,7 @@ celine:EVCharger
     rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
     rdfs:subClassOf     peco:Asset ;
     rdfs:label          "EV Charger"@en ;
-    rdfs:comment        "An electric vehicle charging station. Technical attributes live in the external rec-registry catalogue."@en ;
+    rdfs:comment        "An electric vehicle charging station. Technical attributes live in an external catalogue."@en ;
     skos:closeMatch     saref:Device .
 
 celine:HeatPump
@@ -264,7 +272,7 @@ celine:HeatPump
     rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
     rdfs:subClassOf     peco:Asset ;
     rdfs:label          "Heat Pump"@en ;
-    rdfs:comment        "A heat pump for space heating, cooling, or hot water. Technical attributes live in the external rec-registry catalogue."@en ;
+    rdfs:comment        "A heat pump for space heating, cooling, or hot water. Technical attributes live in an external catalogue."@en ;
     skos:closeMatch     s4bldg:HeatPump .
 
 ################################################################################
@@ -1720,6 +1728,20 @@ celine:measures
     rdfs:comment        "The asset whose energy flows are metered by this electricity meter."@en .
 
 ################################################################################
+# Object Properties — Dataset Linking  (new in v0.7)
+################################################################################
+
+celine:hasDataset
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy    <https://w3id.org/celine-eu> ;
+    rdfs:domain         [ a owl:Class ;
+                          owl:unionOf ( celine:ConnectionPoint
+                                        peco:Asset ) ] ;
+    rdfs:range          celine:DatasetReference ;
+    rdfs:label          "has dataset"@en ;
+    rdfs:comment        "Links an asset or connection point to an external, self-describing datasource carrying its data (e.g. metered time-series). CELINE does not define the datasource schema; the referenced dataset declares its own conformance via dct:conformsTo. Operational counterpart to the SimulationRun-scoped usesDataset/producesDataset."@en .
+
+################################################################################
 # Object Properties — Member  (new in v0.6)
 ################################################################################
 
@@ -1739,7 +1761,7 @@ celine:hasMemberRole
     rdfs:domain         peco:Energy_community_member ;
     rdfs:range          skos:Concept ;
     rdfs:label          "has member role"@en ;
-    rdfs:comment        "The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the rec-registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope for v0.6."@en .
+    rdfs:comment        "The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the upstream registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope."@en .
 
 celine:hasMemberStatus
     a owl:ObjectProperty ;
@@ -1747,7 +1769,7 @@ celine:hasMemberStatus
     rdfs:domain         peco:Energy_community_member ;
     rdfs:range          skos:Concept ;
     rdfs:label          "has member status"@en ;
-    rdfs:comment        "The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the rec-registry conceptual model, a member has exactly one status per community."@en .
+    rdfs:comment        "The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the upstream registry conceptual model, a member has exactly one status per community."@en .
 
 celine:hasDeliveryPoint
     a owl:ObjectProperty ;
@@ -1755,7 +1777,7 @@ celine:hasDeliveryPoint
     rdfs:domain         peco:Energy_community_member ;
     rdfs:range          celine:ConnectionPoint ;
     rdfs:label          "has delivery point"@en ;
-    rdfs:comment        "A connection point (POD, CUPS, PRM, etc.) through which this member withdraws or injects energy. Mirrors the rec-registry's member.delivery_points list."@en .
+    rdfs:comment        "A connection point (POD, CUPS, PRM, etc.) through which this member withdraws or injects energy. Mirrors the upstream registry's member delivery-points list."@en .
 
 ################################################################################
 # Object Properties — Sharing Group  (new in v0.6)
@@ -2035,4 +2057,4 @@ celine:hasLocalIdentifier
                                         peco:Asset ) ] ;
     rdfs:range          xsd:string ;
     rdfs:label          "has local identifier"@en ;
-    rdfs:comment        "Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into the external rec-registry catalogue."@en .
+    rdfs:comment        "Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into an external catalogue."@en .

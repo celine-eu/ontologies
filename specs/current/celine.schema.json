@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://w3id.org/celine-eu/v0.6/celine.schema.json",
+  "$id": "https://w3id.org/celine-eu/v0.7/celine.schema.json",
   "title": "CELINE JSON-LD schema",
   "type": "object",
   "required": [
@@ -153,6 +153,9 @@
               ]
             },
             "identifier": { "type": "string" },
+            "conformsTo": { "$ref": "#/$defs/IRI" },
+            "format": { "type": "string" },
+            "accessURL": { "$ref": "#/$defs/IRI" },
             "source": { "$ref": "#/$defs/IRI" }
           },
           "required": ["identifier"]
@@ -389,7 +392,8 @@
               ]
             },
             "operatedBy": { "$ref": "#/$defs/IRI" },
-            "hasLocalIdentifier": { "type": "string" }
+            "hasLocalIdentifier": { "type": "string" },
+            "hasDataset": { "$ref": "#/$defs/IRIorList" }
           }
         }
       ]
@@ -406,7 +410,8 @@
               ]
             },
             "operatedBy": { "$ref": "#/$defs/IRI" },
-            "hasLocalIdentifier": { "type": "string" }
+            "hasLocalIdentifier": { "type": "string" },
+            "hasDataset": { "$ref": "#/$defs/IRIorList" }
           }
         }
       ]
@@ -423,7 +428,8 @@
               ]
             },
             "operatedBy": { "$ref": "#/$defs/IRI" },
-            "hasLocalIdentifier": { "type": "string" }
+            "hasLocalIdentifier": { "type": "string" },
+            "hasDataset": { "$ref": "#/$defs/IRIorList" }
           }
         }
       ]
@@ -472,6 +478,7 @@
             },
             "hasIdentifierScheme": { "$ref": "#/$defs/IRI" },
             "hasLocalIdentifier": { "type": "string" },
+            "hasDataset": { "$ref": "#/$defs/IRIorList" },
             "inRegulatoryZone": { "$ref": "#/$defs/IRI" }
           }
         }
@@ -509,6 +516,7 @@
               ]
             },
             "hasLocalIdentifier": { "type": "string" },
+            "hasDataset": { "$ref": "#/$defs/IRIorList" },
             "pairedWith": { "$ref": "#/$defs/IRIorList" },
             "measures": { "$ref": "#/$defs/IRIorList" }
           }

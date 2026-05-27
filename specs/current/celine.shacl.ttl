@@ -11,8 +11,10 @@
 @prefix saref:  <https://saref.etsi.org/core/> .
 @prefix sosa:   <http://www.w3.org/ns/sosa/> .
 
+@prefix dcat:   <http://www.w3.org/ns/dcat#> .
+
 ################################################################################
-# CELINE SHACL Profile v0.6
+# CELINE SHACL Profile v0.7
 ################################################################################
 
 celine:CommunityContextShape
@@ -231,6 +233,21 @@ celine:DatasetReferenceShape
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path dct:conformsTo ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path dct:format ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path dcat:accessURL ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 0 ;
     ] ;
     sh:property [
         sh:path dct:source ;

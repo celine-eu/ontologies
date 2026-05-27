@@ -1,13 +1,37 @@
-# CELINE Ontology v0.6
+# CELINE Ontology v0.7
 
 **Namespace**: `https://w3id.org/celine-eu#`
 **IRI**: `https://w3id.org/celine-eu`
-**Version IRI**: `https://w3id.org/celine-eu/v0.6`
+**Version IRI**: `https://w3id.org/celine-eu/v0.7`
 
-Additively extends v0.5 with REC-registry-aligned grid topology, regulatory zones, the
-GridOperator actor, a generalised ConnectionPoint superclass, and a presence-only asset
-inventory. CIM alignment via `skos:closeMatch` (IEC 61968 profile); SAREF alignment via
-`skos:closeMatch` only — no new `owl:imports`.
+Additively extends v0.6 with a generic `hasDataset` property linking assets and connection
+points to external datasources, clarified `DatasetReference` self-description via DCAT/DCT
+terms, and generalised external-catalogue wording to remove implementation-specific naming.
+Non-breaking, additive change.
+
+## Changes from v0.6
+
+### New object property (1)
+
+- **`celine:hasDataset`** — (ConnectionPoint ∪ peco:Asset) → DatasetReference. Links an asset
+  or connection point to an external, self-describing datasource. Operational counterpart to
+  the SimulationRun-scoped `usesDataset`/`producesDataset`.
+
+### Modified
+
+- **`celine:DatasetReference`** — comment updated to note that instances SHOULD declare
+  conformance target (`dct:conformsTo`), format (`dct:format`), and access location
+  (`dcat:accessURL` or `dct:source`) using DCAT/Dublin Core terms. Example updated with
+  generic placeholder conformance URI.
+- **Comment-text generalisation** — all references to "rec-registry catalogue" replaced with
+  neutral "external catalogue" wording across: ontology header, `PVSystem`, `BatteryStorage`,
+  `EVCharger`, `HeatPump`, `hasMemberRole`, `hasMemberStatus`, `hasDeliveryPoint`, and
+  `hasLocalIdentifier` comments. No domain/range changes.
+
+### New prefix
+
+- **`dcat:`** (`http://www.w3.org/ns/dcat#`) — prefix-only declaration (no `owl:imports`),
+  consistent with the ontology's align-by-reference discipline.
 
 ## Changes from v0.5
 
@@ -97,8 +121,8 @@ inventory. CIM alignment via `skos:closeMatch` (IEC 61968 profile); SAREF alignm
 ### Design notes
 
 - **Presence-only asset inventory** — asset classes carry no technical-attribute datatype
-  properties. Specs (rated power, COP, panel type, etc.) live in the external rec-registry
-  catalogue, looked up via `celine:hasLocalIdentifier`.
+  properties. Specs (rated power, COP, panel type, etc.) live in an external catalogue,
+  looked up via `celine:hasLocalIdentifier`.
 - **Open-world absence** — "no battery" = no battery instance in the graph. No inventory-complete flag.
 
 ## Deferred to future versions
@@ -109,7 +133,7 @@ inventory. CIM alignment via `skos:closeMatch` (IEC 61968 profile); SAREF alignm
 - Device block (manufacturer, model, serial, MAC, firmware)
 - Telemetry / time-series measurement layer
 - Closed-world absence assertions (inventory-complete flag)
-- SHACL shapes for the new classes
+- SHACL shapes for the new v0.6 classes
 
 ## Classes
 
@@ -208,6 +232,14 @@ celine:KPIDefinition  (typed + SKOS concept in KPICatalog)
 | `PeakReductionAchieved` | Community | Derived | Period | kW |
 | `FlexibilityActivated` | Community | Total | Period | kWh |
 
+## Migration from v0.6
+
+1. **Additive only** — no v0.6 classes or properties are removed or retyped.
+2. New `celine:hasDataset` property is optional — existing data validates without it.
+3. `DatasetReference` gains recommended self-description slots (`dct:conformsTo`,
+   `dct:format`, `dcat:accessURL`) — existing instances without them remain valid.
+4. Comment-text changes are cosmetic; no domain/range/class changes to existing terms.
+
 ## Migration from v0.5
 
 1. **Additive only** — no v0.5 classes or properties are removed or retyped.
@@ -216,8 +248,8 @@ celine:KPIDefinition  (typed + SKOS concept in KPICatalog)
 3. Existing instance data continues to validate against v0.5 SHACL shapes.
 4. To use new classes: type grid topology as CIM-aligned CELINE classes; assert asset-type
    instances on members via `peco:owns`.
-5. Use `celine:hasLocalIdentifier` on connection points and assets as the lookup key into the
-   external rec-registry catalogue.
+5. Use `celine:hasLocalIdentifier` on connection points and assets as the lookup key into an
+   external catalogue.
 
 ## Imports
 

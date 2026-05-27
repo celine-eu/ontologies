@@ -7,7 +7,7 @@
 @base <https://w3id.org/celine-eu#> .
 
 <https://w3id.org/celine-eu> rdf:type owl:Ontology ;
-                              owl:versionIRI <https://w3id.org/celine-eu/v0.6> ;
+                              owl:versionIRI <https://w3id.org/celine-eu/v0.7> ;
                               owl:imports <https://purl.org/peco/peco-core> ,
                                           <https://raw.githubusercontent.com/w3c/sdw/dee1bdd3c339d8a0ab512c7f9bc97a08912ad7d6/ssn/integrated/sosa.ttl> ,
                                           <https://saref.etsi.org/core/v3.1.1/saref.ttl> ,
@@ -19,11 +19,11 @@
     semantics, providing a minimal coordination layer for simulation scenarios, dataset
     references, KPI definition and evaluation, and REC flexibility commitment and settlement.""" ;
                               <http://purl.org/dc/terms/license> <https://creativecommons.org/licenses/by/4.0/> ;
-                              <http://purl.org/dc/terms/modified> "2026-05-14"^^xsd:date ;
+                              <http://purl.org/dc/terms/modified> "2026-05-27"^^xsd:date ;
                               <http://purl.org/dc/terms/title> "CELINE Core Ontology" ;
                               <http://purl.org/vocab/vann/preferredNamespacePrefix> "celine" ;
                               <http://purl.org/vocab/vann/preferredNamespaceUri> "https://w3id.org/celine-eu#" ;
-                              rdfs:comment """Version 0.6 adds REC-registry-aligned grid topology (Substation,
+                              rdfs:comment """Version 0.6 adds registry-aligned grid topology (Substation,
     PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),
     regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass
     for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,
@@ -33,14 +33,17 @@
     regulatory zone, aligned with the RED II (2018/2001) double-counting prohibition.
     CIM alignment via skos:closeMatch to IEC 61968 profile; SAREF alignment via
     skos:closeMatch only — no new owl:imports. Asset technical attributes are intentionally
-    omitted; specs live in the external rec-registry catalogue, addressed by
-    celine:hasLocalIdentifier.""" ;
+    omitted; specs live in an external catalogue, addressed by celine:hasLocalIdentifier.
+    Version 0.7 adds hasDataset (asset/connection-point → DatasetReference) as the
+    operational counterpart to the SimulationRun-scoped usesDataset/producesDataset;
+    clarifies DatasetReference self-description via DCAT/DCT terms; generalises
+    external-catalogue wording to remove implementation-specific naming.""" ;
                               rdfs:label "CELINE Core Ontology" ;
                               rdfs:seeAlso <https://celine-eu.github.io/> ,
                                            <https://github.com/celine-eu> ,
                                            <https://www.celineproject.eu/> ;
-                              owl:priorVersion <https://w3id.org/celine-eu/v0.5> ;
-                              owl:versionInfo "0.6.0" .
+                              owl:priorVersion <https://w3id.org/celine-eu/v0.6> ;
+                              owl:versionInfo "0.7.0" .
 
 #################################################################
 #    Annotation properties
@@ -194,11 +197,24 @@
              rdfs:label "has cost type" .
 
 
+###  https://w3id.org/celine-eu#hasDataset
+:hasDataset rdf:type owl:ObjectProperty ;
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( <https://purl.org/peco/peco-core#Asset>
+                                        :ConnectionPoint
+                                      )
+                        ] ;
+            rdfs:range :DatasetReference ;
+            rdfs:comment "Links an asset or connection point to an external, self-describing datasource carrying its data (e.g. metered time-series). CELINE does not define the datasource schema; the referenced dataset declares its own conformance via dct:conformsTo. Operational counterpart to the SimulationRun-scoped usesDataset/producesDataset."@en ;
+            rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+            rdfs:label "has dataset"@en .
+
+
 ###  https://w3id.org/celine-eu#hasDeliveryPoint
 :hasDeliveryPoint rdf:type owl:ObjectProperty ;
                   rdfs:domain <https://purl.org/peco/peco-core#Energy_community_member> ;
                   rdfs:range :ConnectionPoint ;
-                  rdfs:comment "A connection point (POD, CUPS, PRM, etc.) through which this member withdraws or injects energy. Mirrors the rec-registry's member.delivery_points list."@en ;
+                  rdfs:comment "A connection point (POD, CUPS, PRM, etc.) through which this member withdraws or injects energy. Mirrors the upstream registry's member delivery-points list."@en ;
                   rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
                   rdfs:label "has delivery point"@en .
 
@@ -363,7 +379,7 @@
 :hasMemberRole rdf:type owl:ObjectProperty ;
                rdfs:domain <https://purl.org/peco/peco-core#Energy_community_member> ;
                rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
-               rdfs:comment "The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the rec-registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope for v0.6."@en ;
+               rdfs:comment "The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the upstream registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope."@en ;
                rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
                rdfs:label "has member role"@en .
 
@@ -372,7 +388,7 @@
 :hasMemberStatus rdf:type owl:ObjectProperty ;
                  rdfs:domain <https://purl.org/peco/peco-core#Energy_community_member> ;
                  rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
-                 rdfs:comment "The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the rec-registry conceptual model, a member has exactly one status per community."@en ;
+                 rdfs:comment "The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the upstream registry conceptual model, a member has exactly one status per community."@en ;
                  rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
                  rdfs:label "has member status"@en .
 
@@ -752,7 +768,7 @@
                                               )
                                 ] ;
                     rdfs:range xsd:string ;
-                    rdfs:comment "Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into the external rec-registry catalogue."@en ;
+                    rdfs:comment "Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into an external catalogue."@en ;
                     rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
                     rdfs:label "has local identifier"@en .
 
@@ -866,7 +882,7 @@
 ###  https://w3id.org/celine-eu#BatteryStorage
 :BatteryStorage rdf:type owl:Class ;
                 rdfs:subClassOf <https://purl.org/peco/peco-core#Energy_storage> ;
-                rdfs:comment "A battery energy storage system. Technical attributes live in the external rec-registry catalogue."@en ;
+                rdfs:comment "A battery energy storage system. Technical attributes live in an external catalogue."@en ;
                 rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
                 rdfs:label "Battery Storage"@en ;
                 <http://www.w3.org/2004/02/skos/core#closeMatch> <https://saref.etsi.org/core/Device> .
@@ -919,12 +935,16 @@ ex:cost_platform_fee a celine:CostItem ;
 ###  https://w3id.org/celine-eu#DatasetReference
 :DatasetReference rdf:type owl:Class ;
                   rdfs:comment """Reference to an external dataset used as input or produced as output.
-    CELINE does not define dataset schemas.""" ;
+    CELINE does not define dataset schemas. Instances SHOULD declare their type or
+    conformance target (via dct:conformsTo), format (via dct:format), and an access
+    location (via dcat:accessURL or dct:source), using DCAT / Dublin Core terms.""" ;
                   rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
                   rdfs:label "Dataset Reference" ;
                   <http://www.w3.org/2004/02/skos/core#example> """ex:ds_irradiance a celine:DatasetReference ;
     dct:identifier  \"irradiance-2025-07\" ;
-    dct:source      <https://data.example.org/weather/irradiance> .""" .
+    dct:conformsTo  <https://example.org/some-dataset-profile> ;
+    dct:format      \"application/json\" ;
+    dcat:accessURL  <https://data.example.org/weather/irradiance> .""" .
 
 
 ###  https://w3id.org/celine-eu#DistributionFeeder
@@ -939,7 +959,7 @@ ex:cost_platform_fee a celine:CostItem ;
 ###  https://w3id.org/celine-eu#EVCharger
 :EVCharger rdf:type owl:Class ;
            rdfs:subClassOf <https://purl.org/peco/peco-core#Asset> ;
-           rdfs:comment "An electric vehicle charging station. Technical attributes live in the external rec-registry catalogue."@en ;
+           rdfs:comment "An electric vehicle charging station. Technical attributes live in an external catalogue."@en ;
            rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
            rdfs:label "EV Charger"@en ;
            <http://www.w3.org/2004/02/skos/core#closeMatch> <https://saref.etsi.org/core/Device> .
@@ -1048,7 +1068,7 @@ ex:cost_platform_fee a celine:CostItem ;
 ###  https://w3id.org/celine-eu#HeatPump
 :HeatPump rdf:type owl:Class ;
           rdfs:subClassOf <https://purl.org/peco/peco-core#Asset> ;
-          rdfs:comment "A heat pump for space heating, cooling, or hot water. Technical attributes live in the external rec-registry catalogue."@en ;
+          rdfs:comment "A heat pump for space heating, cooling, or hot water. Technical attributes live in an external catalogue."@en ;
           rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
           rdfs:label "Heat Pump"@en ;
           <http://www.w3.org/2004/02/skos/core#closeMatch> <https://saref.etsi.org/saref4bldg/HeatPump> .
@@ -1097,7 +1117,7 @@ ex:cost_platform_fee a celine:CostItem ;
 ###  https://w3id.org/celine-eu#PVSystem
 :PVSystem rdf:type owl:Class ;
           rdfs:subClassOf <https://purl.org/peco/peco-core#Asset> ;
-          rdfs:comment "A photovoltaic system. Technical attributes (rated power, panel type, etc.) live in the external rec-registry catalogue, addressed by celine:hasLocalIdentifier."@en ;
+          rdfs:comment "A photovoltaic system. Technical attributes (rated power, panel type, etc.) live in an external catalogue, addressed by celine:hasLocalIdentifier."@en ;
           rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
           rdfs:label "PV System"@en ;
           <http://www.w3.org/2004/02/skos/core#closeMatch> <https://saref.etsi.org/core/Device> .

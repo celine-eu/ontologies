@@ -37,7 +37,7 @@ This section provides details for each class and property defined by CELINE Core
   <h3>Battery Storage<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#BatteryStorage</p>
   <div class="comment">
-   <span class="markdown">A battery energy storage system. Technical attributes live in the external rec-registry catalogue.</span>
+   <span class="markdown">A battery energy storage system. Technical attributes live in an external catalogue.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -118,7 +118,7 @@ This section provides details for each class and property defined by CELINE Core
     is in domain of
    </dt>
    <dd>
-    <a href="#hasIdentifierScheme" title="https://w3id.org/celine-eu#hasIdentifierScheme">has identifier scheme</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasLocalIdentifier" title="https://w3id.org/celine-eu#hasLocalIdentifier">has local identifier</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#inRegulatoryZone" title="https://w3id.org/celine-eu#inRegulatoryZone">in regulatory zone</a> <sup class="type-op" title="object property">op</sup>
+    <a href="#hasDataset" title="https://w3id.org/celine-eu#hasDataset">has dataset</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasIdentifierScheme" title="https://w3id.org/celine-eu#hasIdentifierScheme">has identifier scheme</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasLocalIdentifier" title="https://w3id.org/celine-eu#hasLocalIdentifier">has local identifier</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#inRegulatoryZone" title="https://w3id.org/celine-eu#inRegulatoryZone">in regulatory zone</a> <sup class="type-op" title="object property">op</sup>
    </dd>
    <dt>
     is in range of
@@ -177,7 +177,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>Dataset Reference<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#DatasetReference</p>
   <div class="comment">
-   <span class="markdown">Reference to an external dataset used as input or produced as output. CELINE does not define dataset schemas.</span>
+   <span class="markdown">Reference to an external dataset used as input or produced as output. CELINE does not define dataset schemas. Instances SHOULD declare their type or conformance target (via dct:conformsTo), format (via dct:format), and an access location (via dcat:accessURL or dct:source), using DCAT / Dublin Core terms.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -194,7 +194,9 @@ ex:cost_platform_fee a celine:CostItem ;
    <dd>
     <pre>ex:ds_irradiance a celine:DatasetReference ;
     dct:identifier  "irradiance-2025-07" ;
-    dct:source      &lt;https://data.example.org/weather/irradiance&gt; .</pre>
+    dct:conformsTo  &lt;https://example.org/some-dataset-profile&gt; ;
+    dct:format      "application/json" ;
+    dcat:accessURL  &lt;https://data.example.org/weather/irradiance&gt; .</pre>
    </dd>
   </dl>
   <dl class="description">
@@ -202,7 +204,7 @@ ex:cost_platform_fee a celine:CostItem ;
     is in range of
    </dt>
    <dd>
-    <a href="#producesDataset" title="https://w3id.org/celine-eu#producesDataset">produces dataset</a> <sup class="type-op" title="object property">op</sup>, <a href="#usesDataset" title="https://w3id.org/celine-eu#usesDataset">uses dataset</a> <sup class="type-op" title="object property">op</sup>
+    <a href="#hasDataset" title="https://w3id.org/celine-eu#hasDataset">has dataset</a> <sup class="type-op" title="object property">op</sup>, <a href="#producesDataset" title="https://w3id.org/celine-eu#producesDataset">produces dataset</a> <sup class="type-op" title="object property">op</sup>, <a href="#usesDataset" title="https://w3id.org/celine-eu#usesDataset">uses dataset</a> <sup class="type-op" title="object property">op</sup>
    </dd>
   </dl>
  </div>
@@ -274,7 +276,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>EV Charger<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#EVCharger</p>
   <div class="comment">
-   <span class="markdown">An electric vehicle charging station. Technical attributes live in the external rec-registry catalogue.</span>
+   <span class="markdown">An electric vehicle charging station. Technical attributes live in an external catalogue.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -540,7 +542,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>Heat Pump<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#HeatPump</p>
   <div class="comment">
-   <span class="markdown">A heat pump for space heating, cooling, or hot water. Technical attributes live in the external rec-registry catalogue.</span>
+   <span class="markdown">A heat pump for space heating, cooling, or hot water. Technical attributes live in an external catalogue.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -713,7 +715,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>PV System<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#PVSystem</p>
   <div class="comment">
-   <span class="markdown">A photovoltaic system. Technical attributes (rated power, panel type, etc.) live in the external rec-registry catalogue, addressed by celine:hasLocalIdentifier.</span>
+   <span class="markdown">A photovoltaic system. Technical attributes (rated power, panel type, etc.) live in an external catalogue, addressed by celine:hasLocalIdentifier.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -1080,6 +1082,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#hasConstraintType" title="https://w3id.org/celine-eu#hasConstraintType">has constraint type</a></li>
   <li><a href="#hasCostItem" title="https://w3id.org/celine-eu#hasCostItem">has cost item</a></li>
   <li><a href="#hasCostType" title="https://w3id.org/celine-eu#hasCostType">has cost type</a></li>
+  <li><a href="#hasDataset" title="https://w3id.org/celine-eu#hasDataset">has dataset</a></li>
   <li><a href="#hasDeliveryPoint" title="https://w3id.org/celine-eu#hasDeliveryPoint">has delivery point</a></li>
   <li><a href="#hasCommunity" title="https://w3id.org/celine-eu#hasCommunity">has energy community</a></li>
   <li><a href="#hasEvaluatedScope" title="https://w3id.org/celine-eu#hasEvaluatedScope">has evaluated scope</a></li>
@@ -1498,11 +1501,42 @@ ex:cost_platform_fee a celine:CostItem ;
    </dl>
   </div>
  </div>
+ <div class="entity" id="hasDataset">
+  <h3>has dataset<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasDataset</p>
+  <div class="comment">
+   <span class="markdown">Links an asset or connection point to an external, self-describing datasource carrying its data (e.g. metered time-series). CELINE does not define the datasource schema; the referenced dataset declares its own conformance via dct:conformsTo. Operational counterpart to the SimulationRun-scoped usesDataset/producesDataset.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://purl.org/peco/peco-core#Asset" target="_blank" title="https://purl.org/peco/peco-core#Asset">Asset</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="#ConnectionPoint" title="https://w3id.org/celine-eu#ConnectionPoint">Connection Point</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#DatasetReference" title="https://w3id.org/celine-eu#DatasetReference">Dataset Reference</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
  <div class="entity" id="hasDeliveryPoint">
   <h3>has delivery point<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasDeliveryPoint</p>
   <div class="comment">
-   <span class="markdown">A connection point (POD, CUPS, PRM, etc.) through which this member withdraws or injects energy. Mirrors the rec-registry's member.delivery_points list.</span>
+   <span class="markdown">A connection point (POD, CUPS, PRM, etc.) through which this member withdraws or injects energy. Mirrors the upstream registry's member delivery-points list.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -2082,7 +2116,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>has member role<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasMemberRole</p>
   <div class="comment">
-   <span class="markdown">The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the rec-registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope for v0.6.</span>
+   <span class="markdown">The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the upstream registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -2113,7 +2147,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>has member status<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasMemberStatus</p>
   <div class="comment">
-   <span class="markdown">The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the rec-registry conceptual model, a member has exactly one status per community.</span>
+   <span class="markdown">The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the upstream registry conceptual model, a member has exactly one status per community.</span>
   </div>
   <dl class="definedBy">
    <dt>
@@ -3381,7 +3415,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <h3>has local identifier<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasLocalIdentifier</p>
   <div class="comment">
-   <span class="markdown">Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into the external rec-registry catalogue.</span>
+   <span class="markdown">Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into an external catalogue.</span>
   </div>
   <dl class="definedBy">
    <dt>

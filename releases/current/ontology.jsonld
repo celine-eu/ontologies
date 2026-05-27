@@ -3,9 +3,7 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2002/07/owl#unionOf" : [ {
     "@list" : [ {
-      "@id" : "https://purl.org/peco/peco-core#Energy_community_member"
-    }, {
-      "@id" : "https://w3id.org/celine-eu#CommunityContext"
+      "@id" : "https://purl.org/peco/peco-core#Asset"
     }, {
       "@id" : "https://w3id.org/celine-eu#ConnectionPoint"
     } ]
@@ -25,6 +23,16 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2002/07/owl#unionOf" : [ {
     "@list" : [ {
+      "@id" : "https://w3id.org/celine-eu#CommunityContext"
+    }, {
+      "@id" : "https://w3id.org/celine-eu#SharingGroup"
+    } ]
+  } ]
+}, {
+  "@id" : "_:genid17",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2002/07/owl#unionOf" : [ {
+    "@list" : [ {
       "@id" : "https://w3id.org/celine-eu#DistributionFeeder"
     }, {
       "@id" : "https://w3id.org/celine-eu#PowerTransformer"
@@ -33,7 +41,7 @@
     } ]
   } ]
 }, {
-  "@id" : "_:genid18",
+  "@id" : "_:genid21",
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2002/07/owl#unionOf" : [ {
     "@list" : [ {
@@ -45,7 +53,7 @@
     } ]
   } ]
 }, {
-  "@id" : "_:genid22",
+  "@id" : "_:genid25",
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2002/07/owl#unionOf" : [ {
     "@list" : [ {
@@ -57,7 +65,7 @@
     } ]
   } ]
 }, {
-  "@id" : "_:genid26",
+  "@id" : "_:genid29",
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2002/07/owl#unionOf" : [ {
     "@list" : [ {
@@ -67,13 +75,15 @@
     } ]
   } ]
 }, {
-  "@id" : "_:genid5",
+  "@id" : "_:genid4",
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2002/07/owl#unionOf" : [ {
     "@list" : [ {
-      "@id" : "https://w3id.org/celine-eu#FlexibilityCommitment"
+      "@id" : "https://purl.org/peco/peco-core#Energy_community_member"
     }, {
-      "@id" : "https://w3id.org/celine-eu#FlexibilityRequest"
+      "@id" : "https://w3id.org/celine-eu#CommunityContext"
+    }, {
+      "@id" : "https://w3id.org/celine-eu#ConnectionPoint"
     } ]
   } ]
 }, {
@@ -81,9 +91,9 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2002/07/owl#unionOf" : [ {
     "@list" : [ {
-      "@id" : "https://w3id.org/celine-eu#CommunityContext"
+      "@id" : "https://w3id.org/celine-eu#FlexibilityCommitment"
     }, {
-      "@id" : "https://w3id.org/celine-eu#SharingGroup"
+      "@id" : "https://w3id.org/celine-eu#FlexibilityRequest"
     } ]
   } ]
 }, {
@@ -130,7 +140,7 @@
   } ],
   "http://purl.org/dc/terms/modified" : [ {
     "@type" : "http://www.w3.org/2001/XMLSchema#date",
-    "@value" : "2026-05-14"
+    "@value" : "2026-05-27"
   } ],
   "http://purl.org/dc/terms/title" : [ {
     "@value" : "CELINE Core Ontology"
@@ -142,7 +152,7 @@
     "@value" : "https://w3id.org/celine-eu#"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
-    "@value" : "Version 0.6 adds REC-registry-aligned grid topology (Substation,\n    PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),\n    regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass\n    for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,\n    ElectricityMeter, EVCharger, HeatPump), member modeling (hasMember linkage, MemberRole\n    and MemberStatus vocabularies, hasDeliveryPoint for member-to-POD linkage), and\n    SharingGroup — a community partition for shared self-consumption accounting within a\n    regulatory zone, aligned with the RED II (2018/2001) double-counting prohibition.\n    CIM alignment via skos:closeMatch to IEC 61968 profile; SAREF alignment via\n    skos:closeMatch only — no new owl:imports. Asset technical attributes are intentionally\n    omitted; specs live in the external rec-registry catalogue, addressed by\n    celine:hasLocalIdentifier."
+    "@value" : "Version 0.6 adds registry-aligned grid topology (Substation,\n    PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),\n    regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass\n    for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,\n    ElectricityMeter, EVCharger, HeatPump), member modeling (hasMember linkage, MemberRole\n    and MemberStatus vocabularies, hasDeliveryPoint for member-to-POD linkage), and\n    SharingGroup — a community partition for shared self-consumption accounting within a\n    regulatory zone, aligned with the RED II (2018/2001) double-counting prohibition.\n    CIM alignment via skos:closeMatch to IEC 61968 profile; SAREF alignment via\n    skos:closeMatch only — no new owl:imports. Asset technical attributes are intentionally\n    omitted; specs live in an external catalogue, addressed by celine:hasLocalIdentifier.\n    Version 0.7 adds hasDataset (asset/connection-point → DatasetReference) as the\n    operational counterpart to the SimulationRun-scoped usesDataset/producesDataset;\n    clarifies DatasetReference self-description via DCAT/DCT terms; generalises\n    external-catalogue wording to remove implementation-specific naming."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#label" : [ {
     "@value" : "CELINE Core Ontology"
@@ -164,13 +174,13 @@
     "@id" : "https://saref.etsi.org/saref4ener/v1.2.1/saref4ener.ttl"
   } ],
   "http://www.w3.org/2002/07/owl#priorVersion" : [ {
-    "@id" : "https://w3id.org/celine-eu/v0.5"
-  } ],
-  "http://www.w3.org/2002/07/owl#versionIRI" : [ {
     "@id" : "https://w3id.org/celine-eu/v0.6"
   } ],
+  "http://www.w3.org/2002/07/owl#versionIRI" : [ {
+    "@id" : "https://w3id.org/celine-eu/v0.7"
+  } ],
   "http://www.w3.org/2002/07/owl#versionInfo" : [ {
-    "@value" : "0.6.0"
+    "@value" : "0.7.0"
   } ]
 }, {
   "@id" : "https://w3id.org/celine-eu#AdminCost",
@@ -213,7 +223,7 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
     "@language" : "en",
-    "@value" : "A battery energy storage system. Technical attributes live in the external rec-registry catalogue."
+    "@value" : "A battery energy storage system. Technical attributes live in an external catalogue."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -387,7 +397,7 @@
   "@id" : "https://w3id.org/celine-eu#DatasetReference",
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
-    "@value" : "Reference to an external dataset used as input or produced as output.\n    CELINE does not define dataset schemas."
+    "@value" : "Reference to an external dataset used as input or produced as output.\n    CELINE does not define dataset schemas. Instances SHOULD declare their type or\n    conformance target (via dct:conformsTo), format (via dct:format), and an access\n    location (via dcat:accessURL or dct:source), using DCAT / Dublin Core terms."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -396,7 +406,7 @@
     "@value" : "Dataset Reference"
   } ],
   "http://www.w3.org/2004/02/skos/core#example" : [ {
-    "@value" : "ex:ds_irradiance a celine:DatasetReference ;\n    dct:identifier  \"irradiance-2025-07\" ;\n    dct:source      <https://data.example.org/weather/irradiance> ."
+    "@value" : "ex:ds_irradiance a celine:DatasetReference ;\n    dct:identifier  \"irradiance-2025-07\" ;\n    dct:conformsTo  <https://example.org/some-dataset-profile> ;\n    dct:format      \"application/json\" ;\n    dcat:accessURL  <https://data.example.org/weather/irradiance> ."
   } ]
 }, {
   "@id" : "https://w3id.org/celine-eu#Debt",
@@ -505,7 +515,7 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
     "@language" : "en",
-    "@value" : "An electric vehicle charging station. Technical attributes live in the external rec-registry catalogue."
+    "@value" : "An electric vehicle charging station. Technical attributes live in an external catalogue."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -1027,7 +1037,7 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
     "@language" : "en",
-    "@value" : "A heat pump for space heating, cooling, or hot water. Technical attributes live in the external rec-registry catalogue."
+    "@value" : "A heat pump for space heating, cooling, or hot water. Technical attributes live in an external catalogue."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -1783,7 +1793,7 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
     "@language" : "en",
-    "@value" : "A photovoltaic system. Technical attributes (rated power, panel type, etc.) live in the external rec-registry catalogue, addressed by celine:hasLocalIdentifier."
+    "@value" : "A photovoltaic system. Technical attributes (rated power, panel type, etc.) live in an external catalogue, addressed by celine:hasLocalIdentifier."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -3128,11 +3138,31 @@
     "@id" : "http://www.w3.org/2004/02/skos/core#Concept"
   } ]
 }, {
+  "@id" : "https://w3id.org/celine-eu#hasDataset",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "Links an asset or connection point to an external, self-describing datasource carrying its data (e.g. metered time-series). CELINE does not define the datasource schema; the referenced dataset declares its own conformance via dct:conformsTo. Operational counterpart to the SimulationRun-scoped usesDataset/producesDataset."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "_:genid1"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
+    "@id" : "https://w3id.org/celine-eu"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "has dataset"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "https://w3id.org/celine-eu#DatasetReference"
+  } ]
+}, {
   "@id" : "https://w3id.org/celine-eu#hasDeliveryPoint",
   "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
     "@language" : "en",
-    "@value" : "A connection point (POD, CUPS, PRM, etc.) through which this member withdraws or injects energy. Mirrors the rec-registry's member.delivery_points list."
+    "@value" : "A connection point (POD, CUPS, PRM, etc.) through which this member withdraws or injects energy. Mirrors the upstream registry's member delivery-points list."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
     "@id" : "https://purl.org/peco/peco-core#Energy_community_member"
@@ -3183,7 +3213,7 @@
     "@value" : "has evaluated scope"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#range" : [ {
-    "@id" : "_:genid1"
+    "@id" : "_:genid4"
   } ]
 }, {
   "@id" : "https://w3id.org/celine-eu#hasEvaluationTimeInterval",
@@ -3213,7 +3243,7 @@
     "@value" : "Expected values: celine:FlexDown or celine:FlexUp."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
-    "@id" : "_:genid5"
+    "@id" : "_:genid8"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -3524,10 +3554,10 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
     "@language" : "en",
-    "@value" : "Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into the external rec-registry catalogue."
+    "@value" : "Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into an external catalogue."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
-    "@id" : "_:genid26"
+    "@id" : "_:genid29"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -3547,7 +3577,7 @@
     "@value" : "A member participating in this community context or sharing group. When used on a SharingGroup, enumerates the members whose energy flows are accounted within that partition. The reciprocal PECO link from the member to the wrapped peco:Energy_community is peco:is_member_of. Population rule: every member listed under a SharingGroup SHOULD also be listed under the parent CommunityContext via hasMember; no owl:propertyChainAxiom is asserted — implementors must replicate the membership link explicitly."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
-    "@id" : "_:genid8"
+    "@id" : "_:genid11"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -3564,7 +3594,7 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
     "@language" : "en",
-    "@value" : "The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the rec-registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope for v0.6."
+    "@value" : "The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the upstream registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
     "@id" : "https://purl.org/peco/peco-core#Energy_community_member"
@@ -3584,7 +3614,7 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
     "@language" : "en",
-    "@value" : "The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the rec-registry conceptual model, a member has exactly one status per community."
+    "@value" : "The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the upstream registry conceptual model, a member has exactly one status per community."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
     "@id" : "https://purl.org/peco/peco-core#Energy_community_member"
@@ -3754,7 +3784,7 @@
     "@value" : "A grid topology element associated with this community context or sharing group."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
-    "@id" : "_:genid11"
+    "@id" : "_:genid14"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -3764,7 +3794,7 @@
     "@value" : "has topology node"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#range" : [ {
-    "@id" : "_:genid14"
+    "@id" : "_:genid17"
   } ]
 }, {
   "@id" : "https://w3id.org/celine-eu#inRegulatoryZone",
@@ -3774,7 +3804,7 @@
     "@value" : "The regulatory zone to which this member, connection point, or sharing group belongs."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
-    "@id" : "_:genid18"
+    "@id" : "_:genid21"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"
@@ -3999,7 +4029,7 @@
     "@value" : "The grid operator responsible for this infrastructure element."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
-    "@id" : "_:genid22"
+    "@id" : "_:genid25"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#isDefinedBy" : [ {
     "@id" : "https://w3id.org/celine-eu"

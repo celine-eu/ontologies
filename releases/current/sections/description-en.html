@@ -2,7 +2,7 @@
 
 <span class="markdown">The ontology defines the following concept groups:
 
-**Core context and simulation** -- CommunityContext binds a PECO EnergyCommunity to its members, assets, datasets and simulations. Scenario captures assumptions and temporal scope; Simulation and SimulationRun model abstract definitions and concrete executions. DatasetReference is a lightweight pointer to external datasets.
+**Core context and simulation** -- CommunityContext binds a PECO EnergyCommunity to its members, assets, datasets and simulations. Scenario captures assumptions and temporal scope; Simulation and SimulationRun model abstract definitions and concrete executions. DatasetReference is a lightweight pointer to external datasets; instances declare their own conformance via dct:conformsTo and provide access details via DCAT/DCT terms.
 
 **KPI layer** -- KPIDefinition captures named, typed KPI metrics with scope, calculation method, temporal granularity and unit of measure. KPIEvaluation records the computed value for a specific scope entity and time interval. A KPICatalog provides 11 initial REC-relevant KPI entries.
 
@@ -10,8 +10,8 @@
 
 **Grid topology** -- Substation (Primary/Secondary), PowerTransformer, DistributionFeeder model the distribution network. RegulatoryZone represents administrative coverage areas. GridOperator models the DSO. ConnectionPoint generalises the PECO Electric_POD for multi-country portability.
 
-**Asset inventory** -- PVSystem, BatteryStorage, ElectricityMeter, EVCharger, HeatPump are presence-only typed classes. Technical specifications are deliberately omitted; they live in the rec-registry external catalogue, linked via celine:hasLocalIdentifier.
+**Asset inventory** -- PVSystem, BatteryStorage, ElectricityMeter, EVCharger, HeatPump are presence-only typed classes. Technical specifications are deliberately omitted; they live in an external catalogue, linked via celine:hasLocalIdentifier. Assets and connection points may reference operational datasources via celine:hasDataset.
 
-**Member classification** -- MemberRole and MemberStatus SKOS vocabularies classify members within their energy community, following the rec-registry single-community-per-member model.
+**Member classification** -- MemberRole and MemberStatus SKOS vocabularies classify members within their energy community, following the upstream registry single-community-per-member model.
 
 All cross-domain links to PECO, SAREF, SOSA and IEC CIM are expressed via skos:closeMatch annotations or lightweight object properties -- no external ontology is subclassed or redefined beyond PECO predicates already imported.</span>
