@@ -1,0 +1,100 @@
+<div id="changelog">
+<h2 id="changes" class="list">Changes from last version</h2>
+<h3 id="changeClass" class="list">Classes</h3>
+<details><summary><u>Modified classes</u></summary>
+<ul><li><a href="#BatteryStorage">https://w3id.org/celine-eu#BatteryStorage</a>
+<ul>
+<li>Added: rdfs:comment "A battery energy storage system. Technical attributes live in an external catalogue."@en</li>
+</ul>
+<ul>
+<li>Deleted: rdfs:comment "A battery energy storage system. Technical attributes live in the external rec-registry catalogue."@en</li>
+</ul>
+</li>
+<li><a href="#DatasetReference">https://w3id.org/celine-eu#DatasetReference</a>
+<ul>
+<li>Added: rdfs:comment "Reference to an external dataset used as input or produced as output.
+    CELINE does not define dataset schemas. Instances SHOULD declare their type or
+    conformance target (via dct:conformsTo), format (via dct:format), and an access
+    location (via dcat:accessURL or dct:source), using DCAT / Dublin Core terms."^^xsd:string</li>
+<li>Added: <http://www.w3.org/2004/02/skos/core#example> "ex:ds_irradiance a celine:DatasetReference ;
+    dct:identifier  \"irradiance-2025-07\" ;
+    dct:conformsTo  <https://example.org/some-dataset-profile> ;
+    dct:format      \"application/json\" ;
+    dcat:accessURL  <https://data.example.org/weather/irradiance> ."^^xsd:string</li>
+</ul>
+<ul>
+<li>Deleted: rdfs:comment "Reference to an external dataset used as input or produced as output.
+    CELINE does not define dataset schemas."^^xsd:string</li>
+<li>Deleted: <http://www.w3.org/2004/02/skos/core#example> "ex:ds_irradiance a celine:DatasetReference ;
+    dct:identifier  \"irradiance-2025-07\" ;
+    dct:source      <https://data.example.org/weather/irradiance> ."^^xsd:string</li>
+</ul>
+</li>
+<li><a href="#EVCharger">https://w3id.org/celine-eu#EVCharger</a>
+<ul>
+<li>Added: rdfs:comment "An electric vehicle charging station. Technical attributes live in an external catalogue."@en</li>
+</ul>
+<ul>
+<li>Deleted: rdfs:comment "An electric vehicle charging station. Technical attributes live in the external rec-registry catalogue."@en</li>
+</ul>
+</li>
+<li><a href="#HeatPump">https://w3id.org/celine-eu#HeatPump</a>
+<ul>
+<li>Added: rdfs:comment "A heat pump for space heating, cooling, or hot water. Technical attributes live in an external catalogue."@en</li>
+</ul>
+<ul>
+<li>Deleted: rdfs:comment "A heat pump for space heating, cooling, or hot water. Technical attributes live in the external rec-registry catalogue."@en</li>
+</ul>
+</li>
+<li><a href="#PVSystem">https://w3id.org/celine-eu#PVSystem</a>
+<ul>
+<li>Added: rdfs:comment "A photovoltaic system. Technical attributes (rated power, panel type, etc.) live in an external catalogue, addressed by celine:hasLocalIdentifier."@en</li>
+</ul>
+<ul>
+<li>Deleted: rdfs:comment "A photovoltaic system. Technical attributes (rated power, panel type, etc.) live in the external rec-registry catalogue, addressed by celine:hasLocalIdentifier."@en</li>
+</ul>
+</li>
+</ul></details><h3 id="changeProp" class="list">Object Properties</h3>
+<details><summary><u>Modified object properties</u></summary>
+<ul><li><a href="#hasDeliveryPoint">https://w3id.org/celine-eu#hasDeliveryPoint</a>
+<ul>
+<li>Added: rdfs:comment "A connection point (POD, CUPS, PRM, etc.) through which this member withdraws or injects energy. Mirrors the upstream registry's member delivery-points list."@en</li>
+</ul>
+<ul>
+<li>Deleted: rdfs:comment "A connection point (POD, CUPS, PRM, etc.) through which this member withdraws or injects energy. Mirrors the rec-registry's member.delivery_points list."@en</li>
+</ul>
+</li>
+<li><a href="#hasMemberRole">https://w3id.org/celine-eu#hasMemberRole</a>
+<ul>
+<li>Added: rdfs:comment "The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the upstream registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope."@en</li>
+</ul>
+<ul>
+<li>Deleted: rdfs:comment "The participation role of this member within their energy community. Expected values from celine:MemberRole. Following the rec-registry conceptual model, a member has exactly one role per community; cross-community role differences are out of scope for v0.6."@en</li>
+</ul>
+</li>
+<li><a href="#hasMemberStatus">https://w3id.org/celine-eu#hasMemberStatus</a>
+<ul>
+<li>Added: rdfs:comment "The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the upstream registry conceptual model, a member has exactly one status per community."@en</li>
+</ul>
+<ul>
+<li>Deleted: rdfs:comment "The lifecycle status of this member within their energy community. Expected values from celine:MemberStatus. Following the rec-registry conceptual model, a member has exactly one status per community."@en</li>
+</ul>
+</li>
+</ul></details><details><summary><u>Added object properties</u></summary>
+<ul><li><a href="#hasDataset">https://w3id.org/celine-eu#hasDataset</a>
+<ul>
+<li>Added: domain Union of (https://purl.org/peco/peco-core#Asset, https://w3id.org/celine-eu#ConnectionPoint)</li>
+<li>Added: Range https://w3id.org/celine-eu#DatasetReference</li>
+</ul>
+</li>
+</ul></details><h3 id="changeDataProp" class="list">Data Properties</h3>
+<details><summary><u>Modified data properties</u></summary>
+<ul><li><a href="#hasLocalIdentifier">https://w3id.org/celine-eu#hasLocalIdentifier</a>
+<ul>
+<li>Added: rdfs:comment "Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into an external catalogue."@en</li>
+</ul>
+<ul>
+<li>Deleted: rdfs:comment "Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into the external rec-registry catalogue."@en</li>
+</ul>
+</li>
+</ul></details></div>

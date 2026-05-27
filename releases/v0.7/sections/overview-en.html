@@ -1,0 +1,646 @@
+<h2 id="overv" class="list">CELINE Core Ontology: Overview <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<span class="markdown">
+This ontology has the following classes and properties.</span>
+<h4>Classes</h4>
+<ul xmlns:widoco="https://w3id.org/widoco/vocab#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    class="hlist">
+   <li>
+      <a href="#BatteryStorage" title="https://w3id.org/celine-eu#BatteryStorage">Battery Storage</a>
+   </li>
+   <li>
+      <a href="#CommunityContext" title="https://w3id.org/celine-eu#CommunityContext">Community Context</a>
+   </li>
+   <li>
+      <a href="#ConnectionPoint" title="https://w3id.org/celine-eu#ConnectionPoint">Connection Point</a>
+   </li>
+   <li>
+      <a href="#CostItem" title="https://w3id.org/celine-eu#CostItem">Cost Item</a>
+   </li>
+   <li>
+      <a href="#DatasetReference" title="https://w3id.org/celine-eu#DatasetReference">Dataset Reference</a>
+   </li>
+   <li>
+      <a href="#DistributionFeeder" title="https://w3id.org/celine-eu#DistributionFeeder">Distribution Feeder</a>
+   </li>
+   <li>
+      <a href="#ElectricityMeter" title="https://w3id.org/celine-eu#ElectricityMeter">Electricity Meter</a>
+   </li>
+   <li>
+      <a href="#EVCharger" title="https://w3id.org/celine-eu#EVCharger">EV Charger</a>
+   </li>
+   <li>
+      <a href="#FlexibilityCommitment"
+         title="https://w3id.org/celine-eu#FlexibilityCommitment">Flexibility Commitment</a>
+   </li>
+   <li>
+      <a href="#FlexibilityConstraint"
+         title="https://w3id.org/celine-eu#FlexibilityConstraint">Flexibility Constraint</a>
+   </li>
+   <li>
+      <a href="#FlexibilityCredit" title="https://w3id.org/celine-eu#FlexibilityCredit">Flexibility Credit</a>
+   </li>
+   <li>
+      <a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a>
+   </li>
+   <li>
+      <a href="#FlexibilityRequest" title="https://w3id.org/celine-eu#FlexibilityRequest">Flexibility Request</a>
+   </li>
+   <li>
+      <a href="#GridOperator" title="https://w3id.org/celine-eu#GridOperator">Grid Operator</a>
+   </li>
+   <li>
+      <a href="#HeatPump" title="https://w3id.org/celine-eu#HeatPump">Heat Pump</a>
+   </li>
+   <li>
+      <a href="#KPIDefinition" title="https://w3id.org/celine-eu#KPIDefinition">KPI Definition</a>
+   </li>
+   <li>
+      <a href="#KPIEvaluation" title="https://w3id.org/celine-eu#KPIEvaluation">KPI Evaluation</a>
+   </li>
+   <li>
+      <a href="#PowerTransformer" title="https://w3id.org/celine-eu#PowerTransformer">Power Transformer</a>
+   </li>
+   <li>
+      <a href="#PrimarySubstation" title="https://w3id.org/celine-eu#PrimarySubstation">Primary Substation</a>
+   </li>
+   <li>
+      <a href="#PVSystem" title="https://w3id.org/celine-eu#PVSystem">PV System</a>
+   </li>
+   <li>
+      <a href="#RedistributionResult" title="https://w3id.org/celine-eu#RedistributionResult">Redistribution Result</a>
+   </li>
+   <li>
+      <a href="#RegulatoryZone" title="https://w3id.org/celine-eu#RegulatoryZone">Regulatory Zone</a>
+   </li>
+   <li>
+      <a href="#Scenario" title="https://w3id.org/celine-eu#Scenario">Scenario</a>
+   </li>
+   <li>
+      <a href="#SecondarySubstation" title="https://w3id.org/celine-eu#SecondarySubstation">Secondary Substation</a>
+   </li>
+   <li>
+      <a href="#SettlementRun" title="https://w3id.org/celine-eu#SettlementRun">Settlement Run</a>
+   </li>
+   <li>
+      <a href="#SharingGroup" title="https://w3id.org/celine-eu#SharingGroup">Sharing Group</a>
+   </li>
+   <li>
+      <a href="#Simulation" title="https://w3id.org/celine-eu#Simulation">Simulation</a>
+   </li>
+   <li>
+      <a href="#SimulationRun" title="https://w3id.org/celine-eu#SimulationRun">Simulation Run</a>
+   </li>
+   <li>
+      <a href="#Substation" title="https://w3id.org/celine-eu#Substation">Substation</a>
+   </li>
+</ul><h4>Object Properties</h4><ul xmlns:widoco="https://w3id.org/widoco/vocab#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    class="hlist">
+   <li>
+      <a href="#committedBy" title="https://w3id.org/celine-eu#committedBy">committed by</a>
+   </li>
+   <li>
+      <a href="#creditFor" title="https://w3id.org/celine-eu#creditFor">credit for</a>
+   </li>
+   <li>
+      <a href="#earnedBy" title="https://w3id.org/celine-eu#earnedBy">earned by</a>
+   </li>
+   <li>
+      <a href="#envelopeFor" title="https://w3id.org/celine-eu#envelopeFor">envelope for</a>
+   </li>
+   <li>
+      <a href="#evidencedBy" title="https://w3id.org/celine-eu#evidencedBy">evidenced by</a>
+   </li>
+   <li>
+      <a href="#generatesCredit" title="https://w3id.org/celine-eu#generatesCredit">generates credit</a>
+   </li>
+   <li>
+      <a href="#hasAvailabilityWindow" title="https://w3id.org/celine-eu#hasAvailabilityWindow">has availability window</a>
+   </li>
+   <li>
+      <a href="#hasCommitmentMode" title="https://w3id.org/celine-eu#hasCommitmentMode">has commitment mode</a>
+   </li>
+   <li>
+      <a href="#hasConstraint" title="https://w3id.org/celine-eu#hasConstraint">has constraint</a>
+   </li>
+   <li>
+      <a href="#hasConstraintType" title="https://w3id.org/celine-eu#hasConstraintType">has constraint type</a>
+   </li>
+   <li>
+      <a href="#hasCostItem" title="https://w3id.org/celine-eu#hasCostItem">has cost item</a>
+   </li>
+   <li>
+      <a href="#hasCostType" title="https://w3id.org/celine-eu#hasCostType">has cost type</a>
+   </li>
+   <li>
+      <a href="#hasDataset" title="https://w3id.org/celine-eu#hasDataset">has dataset</a>
+   </li>
+   <li>
+      <a href="#hasDeliveryPoint" title="https://w3id.org/celine-eu#hasDeliveryPoint">has delivery point</a>
+   </li>
+   <li>
+      <a href="#hasCommunity" title="https://w3id.org/celine-eu#hasCommunity">has energy community</a>
+   </li>
+   <li>
+      <a href="#hasEvaluatedScope" title="https://w3id.org/celine-eu#hasEvaluatedScope">has evaluated scope</a>
+   </li>
+   <li>
+      <a href="#hasEvaluationTimeInterval"
+         title="https://w3id.org/celine-eu#hasEvaluationTimeInterval">has evaluation time interval</a>
+   </li>
+   <li>
+      <a href="#hasCommitment" title="https://w3id.org/celine-eu#hasCommitment">has flexibility commitment</a>
+   </li>
+   <li>
+      <a href="#hasFlexibilityDirection"
+         title="https://w3id.org/celine-eu#hasFlexibilityDirection">has flexibility direction</a>
+   </li>
+   <li>
+      <a href="#hasEnvelope" title="https://w3id.org/celine-eu#hasEnvelope">has flexibility envelope</a>
+   </li>
+   <li>
+      <a href="#hasFlexibilityRequest" title="https://w3id.org/celine-eu#hasFlexibilityRequest">has flexibility request</a>
+   </li>
+   <li>
+      <a href="#hasGridOperator" title="https://w3id.org/celine-eu#hasGridOperator">has grid operator</a>
+   </li>
+   <li>
+      <a href="#hasIdentifierScheme" title="https://w3id.org/celine-eu#hasIdentifierScheme">has identifier scheme</a>
+   </li>
+   <li>
+      <a href="#hasInputKPIEvaluation" title="https://w3id.org/celine-eu#hasInputKPIEvaluation">has input KPI evaluation</a>
+   </li>
+   <li>
+      <a href="#hasInputObservation" title="https://w3id.org/celine-eu#hasInputObservation">has input observation</a>
+   </li>
+   <li>
+      <a href="#hasKPICalculationMethod"
+         title="https://w3id.org/celine-eu#hasKPICalculationMethod">has KPI calculation method</a>
+   </li>
+   <li>
+      <a href="#hasKPIDefinition" title="https://w3id.org/celine-eu#hasKPIDefinition">has KPI definition</a>
+   </li>
+   <li>
+      <a href="#hasKPIEvaluation" title="https://w3id.org/celine-eu#hasKPIEvaluation">has KPI evaluation</a>
+   </li>
+   <li>
+      <a href="#hasKPIScopeType" title="https://w3id.org/celine-eu#hasKPIScopeType">has KPI scope type</a>
+   </li>
+   <li>
+      <a href="#hasKPITemporalGranularity"
+         title="https://w3id.org/celine-eu#hasKPITemporalGranularity">has KPI temporal granularity</a>
+   </li>
+   <li>
+      <a href="#hasKPIUnit" title="https://w3id.org/celine-eu#hasKPIUnit">has KPI unit</a>
+   </li>
+   <li>
+      <a href="#hasMember" title="https://w3id.org/celine-eu#hasMember">has member</a>
+   </li>
+   <li>
+      <a href="#hasMemberRole" title="https://w3id.org/celine-eu#hasMemberRole">has member role</a>
+   </li>
+   <li>
+      <a href="#hasMemberStatus" title="https://w3id.org/celine-eu#hasMemberStatus">has member status</a>
+   </li>
+   <li>
+      <a href="#hasPartition" title="https://w3id.org/celine-eu#hasPartition">has partition</a>
+   </li>
+   <li>
+      <a href="#hasRedistributionResult"
+         title="https://w3id.org/celine-eu#hasRedistributionResult">has redistribution result</a>
+   </li>
+   <li>
+      <a href="#hasRegulatoryZone" title="https://w3id.org/celine-eu#hasRegulatoryZone">has regulatory zone</a>
+   </li>
+   <li>
+      <a href="#hasRequestStatus" title="https://w3id.org/celine-eu#hasRequestStatus">has request status</a>
+   </li>
+   <li>
+      <a href="#hasScenario" title="https://w3id.org/celine-eu#hasScenario">has scenario</a>
+   </li>
+   <li>
+      <a href="#hasSettlementRun" title="https://w3id.org/celine-eu#hasSettlementRun">has settlement run</a>
+   </li>
+   <li>
+      <a href="#hasSimulation" title="https://w3id.org/celine-eu#hasSimulation">has simulation</a>
+   </li>
+   <li>
+      <a href="#hasSimulationRun" title="https://w3id.org/celine-eu#hasSimulationRun">has simulation run</a>
+   </li>
+   <li>
+      <a href="#hasTimeInterval" title="https://w3id.org/celine-eu#hasTimeInterval">has time interval</a>
+   </li>
+   <li>
+      <a href="#hasTopologyNode" title="https://w3id.org/celine-eu#hasTopologyNode">has topology node</a>
+   </li>
+   <li>
+      <a href="#inRegulatoryZone" title="https://w3id.org/celine-eu#inRegulatoryZone">in regulatory zone</a>
+   </li>
+   <li>
+      <a href="#inResponseTo" title="https://w3id.org/celine-eu#inResponseTo">in response to</a>
+   </li>
+   <li>
+      <a href="#measures" title="https://w3id.org/celine-eu#measures">measures</a>
+   </li>
+   <li>
+      <a href="#onPOD" title="https://w3id.org/celine-eu#onPOD">on POD</a>
+   </li>
+   <li>
+      <a href="#operatedBy" title="https://w3id.org/celine-eu#operatedBy">operated by</a>
+   </li>
+   <li>
+      <a href="#pairedWith" title="https://w3id.org/celine-eu#pairedWith">paired with</a>
+   </li>
+   <li>
+      <a href="#partitionOf" title="https://w3id.org/celine-eu#partitionOf">partition of</a>
+   </li>
+   <li>
+      <a href="#producesDataset" title="https://w3id.org/celine-eu#producesDataset">produces dataset</a>
+   </li>
+   <li>
+      <a href="#requestedBy" title="https://w3id.org/celine-eu#requestedBy">requested by</a>
+   </li>
+   <li>
+      <a href="#resultFor" title="https://w3id.org/celine-eu#resultFor">result for</a>
+   </li>
+   <li>
+      <a href="#resultsInCommitment" title="https://w3id.org/celine-eu#resultsInCommitment">results in commitment</a>
+   </li>
+   <li>
+      <a href="#servedBy" title="https://w3id.org/celine-eu#servedBy">served by</a>
+   </li>
+   <li>
+      <a href="#settlesContext" title="https://w3id.org/celine-eu#settlesContext">settles context</a>
+   </li>
+   <li>
+      <a href="#usesAsset" title="https://w3id.org/celine-eu#usesAsset">uses asset</a>
+   </li>
+   <li>
+      <a href="#usesDataset" title="https://w3id.org/celine-eu#usesDataset">uses dataset</a>
+   </li>
+   <li>
+      <a href="#usesObservation" title="https://w3id.org/celine-eu#usesObservation">uses observation</a>
+   </li>
+   <li>
+      <a href="#withinEnvelope" title="https://w3id.org/celine-eu#withinEnvelope">within envelope</a>
+   </li>
+</ul><h4>Data Properties</h4><ul xmlns:widoco="https://w3id.org/widoco/vocab#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    class="hlist">
+   <li>
+      <a href="#availableEnergy" title="https://w3id.org/celine-eu#availableEnergy">available energy</a>
+   </li>
+   <li>
+      <a href="#conversionRate" title="https://w3id.org/celine-eu#conversionRate">conversion rate</a>
+   </li>
+   <li>
+      <a href="#costAmount" title="https://w3id.org/celine-eu#costAmount">cost amount</a>
+   </li>
+   <li>
+      <a href="#costDeduction" title="https://w3id.org/celine-eu#costDeduction">cost deduction</a>
+   </li>
+   <li>
+      <a href="#creditAmount" title="https://w3id.org/celine-eu#creditAmount">credit amount</a>
+   </li>
+   <li>
+      <a href="#creditBalance" title="https://w3id.org/celine-eu#creditBalance">credit balance</a>
+   </li>
+   <li>
+      <a href="#currency" title="https://w3id.org/celine-eu#currency">currency</a>
+   </li>
+   <li>
+      <a href="#grossAmount" title="https://w3id.org/celine-eu#grossAmount">gross amount</a>
+   </li>
+   <li>
+      <a href="#hasKPIDescription" title="https://w3id.org/celine-eu#hasKPIDescription">has KPI description</a>
+   </li>
+   <li>
+      <a href="#hasKPIFormula" title="https://w3id.org/celine-eu#hasKPIFormula">has KPI formula</a>
+   </li>
+   <li>
+      <a href="#hasKPIName" title="https://w3id.org/celine-eu#hasKPIName">has KPI name</a>
+   </li>
+   <li>
+      <a href="#hasKPIValue" title="https://w3id.org/celine-eu#hasKPIValue">has KPI value</a>
+   </li>
+   <li>
+      <a href="#hasLocalIdentifier" title="https://w3id.org/celine-eu#hasLocalIdentifier">has local identifier</a>
+   </li>
+   <li>
+      <a href="#maxActivationDuration"
+         title="https://w3id.org/celine-eu#maxActivationDuration">max activation duration</a>
+   </li>
+   <li>
+      <a href="#maxActivationsPerDay" title="https://w3id.org/celine-eu#maxActivationsPerDay">max activations per day</a>
+   </li>
+   <li>
+      <a href="#maxFlexDown" title="https://w3id.org/celine-eu#maxFlexDown">max flex down</a>
+   </li>
+   <li>
+      <a href="#maxFlexUp" title="https://w3id.org/celine-eu#maxFlexUp">max flex up</a>
+   </li>
+   <li>
+      <a href="#minActivationDuration"
+         title="https://w3id.org/celine-eu#minActivationDuration">min activation duration</a>
+   </li>
+   <li>
+      <a href="#minNotificationTime" title="https://w3id.org/celine-eu#minNotificationTime">min notification time</a>
+   </li>
+   <li>
+      <a href="#minRecoveryTime" title="https://w3id.org/celine-eu#minRecoveryTime">min recovery time</a>
+   </li>
+   <li>
+      <a href="#netAmount" title="https://w3id.org/celine-eu#netAmount">net amount</a>
+   </li>
+   <li>
+      <a href="#requestedFlexibility" title="https://w3id.org/celine-eu#requestedFlexibility">requested flexibility</a>
+   </li>
+   <li>
+      <a href="#targetFlexibility" title="https://w3id.org/celine-eu#targetFlexibility">target flexibility</a>
+   </li>
+</ul><h4>Annotation Properties</h4><ul xmlns:widoco="https://w3id.org/widoco/vocab#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    class="hlist">
+   <li>
+      <a href="#http://www.w3.org/2004/02/skos/core#closeMatch" title="http://www.w3.org/2004/02/skos/core#closeMatch">
+         <span>close Match</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://www.w3.org/2004/02/skos/core#hasTopConcept" title="http://www.w3.org/2004/02/skos/core#hasTopConcept">
+         <span>has Top Concept</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://www.w3.org/2004/02/skos/core#inScheme" title="http://www.w3.org/2004/02/skos/core#inScheme">
+         <span>in Scheme</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://www.w3.org/2004/02/skos/core#notation" title="http://www.w3.org/2004/02/skos/core#notation">
+         <span>notation</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://www.w3.org/2004/02/skos/core#relatedMatch" title="http://www.w3.org/2004/02/skos/core#relatedMatch">
+         <span>related Match</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://www.w3.org/2004/02/skos/core#topConceptOf" title="http://www.w3.org/2004/02/skos/core#topConceptOf">
+         <span>top Concept Of</span>
+      </a>
+   </li>
+</ul><h4>Named Individuals</h4><ul xmlns:widoco="https://w3id.org/widoco/vocab#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    class="hlist">
+   <li>
+      <a href="#StatusActive" title="https://w3id.org/celine-eu#StatusActive">Active</a>
+   </li>
+   <li>
+      <a href="#RoleAdmin" title="https://w3id.org/celine-eu#RoleAdmin">Admin</a>
+   </li>
+   <li>
+      <a href="#AdminCost" title="https://w3id.org/celine-eu#AdminCost">Administrative Cost</a>
+   </li>
+   <li>
+      <a href="#ScopeAsset" title="https://w3id.org/celine-eu#ScopeAsset">Asset</a>
+   </li>
+   <li>
+      <a href="#Automated" title="https://w3id.org/celine-eu#Automated">Automated</a>
+   </li>
+   <li>
+      <a href="#MethodAverage" title="https://w3id.org/celine-eu#MethodAverage">Average</a>
+   </li>
+   <li>
+      <a href="#ScopeBuilding" title="https://w3id.org/celine-eu#ScopeBuilding">Building</a>
+   </li>
+   <li>
+      <a href="#RequestCancelled" title="https://w3id.org/celine-eu#RequestCancelled">Cancelled</a>
+   </li>
+   <li>
+      <a href="#CommitmentMode" title="https://w3id.org/celine-eu#CommitmentMode">Commitment Mode</a>
+   </li>
+   <li>
+      <a href="#ScopeCommunity" title="https://w3id.org/celine-eu#ScopeCommunity">Community</a>
+   </li>
+   <li>
+      <a href="#ConnectionPointIdentifierScheme"
+         title="https://w3id.org/celine-eu#ConnectionPointIdentifierScheme">Connection Point Identifier Scheme</a>
+   </li>
+   <li>
+      <a href="#ConstraintType" title="https://w3id.org/celine-eu#ConstraintType">Constraint Type</a>
+   </li>
+   <li>
+      <a href="#RoleConsumer" title="https://w3id.org/celine-eu#RoleConsumer">Consumer</a>
+   </li>
+   <li>
+      <a href="#CostType" title="https://w3id.org/celine-eu#CostType">Cost Type</a>
+   </li>
+   <li>
+      <a href="#CUPS" title="https://w3id.org/celine-eu#CUPS">CUPS</a>
+   </li>
+   <li>
+      <a href="#GranularityDaily" title="https://w3id.org/celine-eu#GranularityDaily">Daily</a>
+   </li>
+   <li>
+      <a href="#Debt" title="https://w3id.org/celine-eu#Debt">Debt</a>
+   </li>
+   <li>
+      <a href="#MethodDerived" title="https://w3id.org/celine-eu#MethodDerived">Derived</a>
+   </li>
+   <li>
+      <a href="#Dimensionless" title="https://w3id.org/celine-eu#Dimensionless">Dimensionless</a>
+   </li>
+   <li>
+      <a href="#DurationConstraint" title="https://w3id.org/celine-eu#DurationConstraint">Duration Constraint</a>
+   </li>
+   <li>
+      <a href="#EAN" title="https://w3id.org/celine-eu#EAN">EAN</a>
+   </li>
+   <li>
+      <a href="#Euro" title="https://w3id.org/celine-eu#Euro">Euro</a>
+   </li>
+   <li>
+      <a href="#RequestExpired" title="https://w3id.org/celine-eu#RequestExpired">Expired</a>
+   </li>
+   <li>
+      <a href="#FedInEnergy" title="https://w3id.org/celine-eu#FedInEnergy">Fed-In Energy</a>
+   </li>
+   <li>
+      <a href="#Fee" title="https://w3id.org/celine-eu#Fee">Fee</a>
+   </li>
+   <li>
+      <a href="#FlexDown" title="https://w3id.org/celine-eu#FlexDown">Flex Down</a>
+   </li>
+   <li>
+      <a href="#FlexUp" title="https://w3id.org/celine-eu#FlexUp">Flex Up</a>
+   </li>
+   <li>
+      <a href="#FlexibilityActivated" title="https://w3id.org/celine-eu#FlexibilityActivated">Flexibility Activated</a>
+   </li>
+   <li>
+      <a href="#FlexibilityDirection" title="https://w3id.org/celine-eu#FlexibilityDirection">Flexibility Direction</a>
+   </li>
+   <li>
+      <a href="#FrequencyConstraint" title="https://w3id.org/celine-eu#FrequencyConstraint">Frequency Constraint</a>
+   </li>
+   <li>
+      <a href="#RequestFulfilled" title="https://w3id.org/celine-eu#RequestFulfilled">Fulfilled</a>
+   </li>
+   <li>
+      <a href="#GranularityHourly" title="https://w3id.org/celine-eu#GranularityHourly">Hourly</a>
+   </li>
+   <li>
+      <a href="#StatusInactive" title="https://w3id.org/celine-eu#StatusInactive">Inactive</a>
+   </li>
+   <li>
+      <a href="#IncentiveAccrued" title="https://w3id.org/celine-eu#IncentiveAccrued">Incentive Accrued</a>
+   </li>
+   <li>
+      <a href="#IncentiveMemberShare" title="https://w3id.org/celine-eu#IncentiveMemberShare">Incentive Member Share</a>
+   </li>
+   <li>
+      <a href="#MethodInstantaneous" title="https://w3id.org/celine-eu#MethodInstantaneous">Instantaneous</a>
+   </li>
+   <li>
+      <a href="#Kilowatt" title="https://w3id.org/celine-eu#Kilowatt">Kilowatt</a>
+   </li>
+   <li>
+      <a href="#KilowattHour" title="https://w3id.org/celine-eu#KilowattHour">Kilowatt-hour</a>
+   </li>
+   <li>
+      <a href="#KPICalculationMethod" title="https://w3id.org/celine-eu#KPICalculationMethod">KPI Calculation Method</a>
+   </li>
+   <li>
+      <a href="#KPICatalog" title="https://w3id.org/celine-eu#KPICatalog">KPI Catalog</a>
+   </li>
+   <li>
+      <a href="#KPIScope" title="https://w3id.org/celine-eu#KPIScope">KPI Scope</a>
+   </li>
+   <li>
+      <a href="#KPITemporalGranularity"
+         title="https://w3id.org/celine-eu#KPITemporalGranularity">KPI Temporal Granularity</a>
+   </li>
+   <li>
+      <a href="#LocalGenerationEnergy"
+         title="https://w3id.org/celine-eu#LocalGenerationEnergy">Local Generation Energy</a>
+   </li>
+   <li>
+      <a href="#MALO" title="https://w3id.org/celine-eu#MALO">MALO</a>
+   </li>
+   <li>
+      <a href="#MethodMaximum" title="https://w3id.org/celine-eu#MethodMaximum">Maximum</a>
+   </li>
+   <li>
+      <a href="#ScopeMember" title="https://w3id.org/celine-eu#ScopeMember">Member</a>
+   </li>
+   <li>
+      <a href="#MemberRole" title="https://w3id.org/celine-eu#MemberRole">Member Role</a>
+   </li>
+   <li>
+      <a href="#MemberStatus" title="https://w3id.org/celine-eu#MemberStatus">Member Status</a>
+   </li>
+   <li>
+      <a href="#MethodMinimum" title="https://w3id.org/celine-eu#MethodMinimum">Minimum</a>
+   </li>
+   <li>
+      <a href="#GranularityMonthly" title="https://w3id.org/celine-eu#GranularityMonthly">Monthly</a>
+   </li>
+   <li>
+      <a href="#MPAN" title="https://w3id.org/celine-eu#MPAN">MPAN</a>
+   </li>
+   <li>
+      <a href="#NoticeConstraint" title="https://w3id.org/celine-eu#NoticeConstraint">Notice Constraint</a>
+   </li>
+   <li>
+      <a href="#RequestOpen" title="https://w3id.org/celine-eu#RequestOpen">Open</a>
+   </li>
+   <li>
+      <a href="#RoleOperator" title="https://w3id.org/celine-eu#RoleOperator">Operator</a>
+   </li>
+   <li>
+      <a href="#MethodOther" title="https://w3id.org/celine-eu#MethodOther">Other</a>
+   </li>
+   <li>
+      <a href="#ScopeOther" title="https://w3id.org/celine-eu#ScopeOther">Other</a>
+   </li>
+   <li>
+      <a href="#RequestPartial" title="https://w3id.org/celine-eu#RequestPartial">Partially Fulfilled</a>
+   </li>
+   <li>
+      <a href="#PeakReductionAchieved"
+         title="https://w3id.org/celine-eu#PeakReductionAchieved">Peak Reduction Achieved</a>
+   </li>
+   <li>
+      <a href="#StatusPending" title="https://w3id.org/celine-eu#StatusPending">Pending</a>
+   </li>
+   <li>
+      <a href="#GranularityPeriod" title="https://w3id.org/celine-eu#GranularityPeriod">Period</a>
+   </li>
+   <li>
+      <a href="#POD" title="https://w3id.org/celine-eu#POD">POD</a>
+   </li>
+   <li>
+      <a href="#ScopePOD" title="https://w3id.org/celine-eu#ScopePOD">POD</a>
+   </li>
+   <li>
+      <a href="#PRM" title="https://w3id.org/celine-eu#PRM">PRM</a>
+   </li>
+   <li>
+      <a href="#RoleProducer" title="https://w3id.org/celine-eu#RoleProducer">Producer</a>
+   </li>
+   <li>
+      <a href="#RoleProsumer" title="https://w3id.org/celine-eu#RoleProsumer">Prosumer</a>
+   </li>
+   <li>
+      <a href="#GranularityQuarterly" title="https://w3id.org/celine-eu#GranularityQuarterly">Quarterly</a>
+   </li>
+   <li>
+      <a href="#MethodRatio" title="https://w3id.org/celine-eu#MethodRatio">Ratio</a>
+   </li>
+   <li>
+      <a href="#GranularityRealtime" title="https://w3id.org/celine-eu#GranularityRealtime">Realtime</a>
+   </li>
+   <li>
+      <a href="#RecoveryConstraint" title="https://w3id.org/celine-eu#RecoveryConstraint">Recovery Constraint</a>
+   </li>
+   <li>
+      <a href="#RequestStatus" title="https://w3id.org/celine-eu#RequestStatus">Request Status</a>
+   </li>
+   <li>
+      <a href="#SelfConsumptionRate" title="https://w3id.org/celine-eu#SelfConsumptionRate">Self-Consumption Rate</a>
+   </li>
+   <li>
+      <a href="#SelfSufficiencyRate" title="https://w3id.org/celine-eu#SelfSufficiencyRate">Self-Sufficiency Rate</a>
+   </li>
+   <li>
+      <a href="#SharedEnergy" title="https://w3id.org/celine-eu#SharedEnergy">Shared Energy</a>
+   </li>
+   <li>
+      <a href="#SharedEnergyMemberShare"
+         title="https://w3id.org/celine-eu#SharedEnergyMemberShare">Shared Energy Member Share</a>
+   </li>
+   <li>
+      <a href="#StatusSuspended" title="https://w3id.org/celine-eu#StatusSuspended">Suspended</a>
+   </li>
+   <li>
+      <a href="#MethodTotal" title="https://w3id.org/celine-eu#MethodTotal">Total</a>
+   </li>
+   <li>
+      <a href="#UnitOfMeasure" title="https://w3id.org/celine-eu#UnitOfMeasure">Unit of Measure</a>
+   </li>
+   <li>
+      <a href="#Voluntary" title="https://w3id.org/celine-eu#Voluntary">Voluntary</a>
+   </li>
+   <li>
+      <a href="#GranularityWeekly" title="https://w3id.org/celine-eu#GranularityWeekly">Weekly</a>
+   </li>
+   <li>
+      <a href="#WithdrawnEnergy" title="https://w3id.org/celine-eu#WithdrawnEnergy">Withdrawn Energy</a>
+   </li>
+   <li>
+      <a href="#GranularityYearly" title="https://w3id.org/celine-eu#GranularityYearly">Yearly</a>
+   </li>
+</ul>
