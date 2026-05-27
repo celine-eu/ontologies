@@ -2,6 +2,27 @@
 
 <!-- version list -->
 
+## Ontology v0.7 (2026-05-27)
+
+### Features
+
+- **hasDataset property**: new object property `celine:hasDataset` — (ConnectionPoint ∪
+  peco:Asset) → DatasetReference. Links an asset or connection point to an external,
+  self-describing datasource. Operational counterpart to the SimulationRun-scoped
+  `usesDataset`/`producesDataset`.
+- **DatasetReference self-description**: updated comment and example to note that instances
+  SHOULD declare conformance target (`dct:conformsTo`), format (`dct:format`), and access
+  location (`dcat:accessURL` or `dct:source`) via DCAT/Dublin Core terms.
+- **DCAT prefix**: added `dcat:` prefix declaration (no `owl:imports`).
+- **Implementation-neutral wording**: replaced all "rec-registry catalogue" references with
+  neutral "external catalogue" phrasing across ontology header, asset class comments
+  (`PVSystem`, `BatteryStorage`, `EVCharger`, `HeatPump`), member property comments
+  (`hasMemberRole`, `hasMemberStatus`, `hasDeliveryPoint`), and `hasLocalIdentifier`.
+
+### Deferred
+
+- SHACL shapes for v0.6 grid topology and asset classes.
+
 ## Ontology v0.6 (2026-05-14)
 
 ### Features

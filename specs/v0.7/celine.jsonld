@@ -1,0 +1,579 @@
+{
+  "@context": {
+    "celine": "https://w3id.org/celine-eu#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dct": "http://purl.org/dc/terms/",
+    "time": "http://www.w3.org/2006/time#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "peco": "https://purl.org/peco/peco-core#",
+    "saref": "https://saref.etsi.org/core/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "cim": "https://ontology.tno.nl/IEC_CIM/",
+    "s4bldg": "https://saref.etsi.org/saref4bldg/",
+    "s4ener": "https://saref.etsi.org/saref4ener/",
+    "s4city": "https://saref.etsi.org/saref4city/",
+    "bigg": "https://w3id.org/bigg/ontology#",
+    "bigg4kpi": "http://bigg-project.eu/bigg4kpi#",
+    "label": "rdfs:label",
+    "description": "dct:description",
+    "type": "@type",
+    "id": "@id",
+
+    "hasCommunity": {
+      "@id": "celine:hasCommunity",
+      "@type": "@id"
+    },
+    "usesAsset": {
+      "@id": "celine:usesAsset",
+      "@type": "@id"
+    },
+    "hasSimulation": {
+      "@id": "celine:hasSimulation",
+      "@type": "@id"
+    },
+    "hasScenario": {
+      "@id": "celine:hasScenario",
+      "@type": "@id"
+    },
+    "hasSimulationRun": {
+      "@id": "celine:hasSimulationRun",
+      "@type": "@id"
+    },
+    "usesDataset": {
+      "@id": "celine:usesDataset",
+      "@type": "@id"
+    },
+    "producesDataset": {
+      "@id": "celine:producesDataset",
+      "@type": "@id"
+    },
+    "hasKPIEvaluation": {
+      "@id": "celine:hasKPIEvaluation",
+      "@type": "@id"
+    },
+    "hasTimeInterval": {
+      "@id": "celine:hasTimeInterval",
+      "@type": "@id"
+    },
+    "usesObservation": {
+      "@id": "celine:usesObservation",
+      "@type": "@id"
+    },
+    "identifier": "dct:identifier",
+    "source": {
+      "@id": "dct:source",
+      "@type": "@id"
+    },
+    "conformsTo": {
+      "@id": "dct:conformsTo",
+      "@type": "@id"
+    },
+    "format": "dct:format",
+    "accessURL": {
+      "@id": "dcat:accessURL",
+      "@type": "@id"
+    },
+
+    "hasKPIDefinition": {
+      "@id": "celine:hasKPIDefinition",
+      "@type": "@id"
+    },
+    "hasKPIValue": {
+      "@id": "celine:hasKPIValue",
+      "@type": "xsd:decimal"
+    },
+    "hasEvaluationTimeInterval": {
+      "@id": "celine:hasEvaluationTimeInterval",
+      "@type": "@id"
+    },
+    "hasInputObservation": {
+      "@id": "celine:hasInputObservation",
+      "@type": "@id"
+    },
+    "hasInputKPIEvaluation": {
+      "@id": "celine:hasInputKPIEvaluation",
+      "@type": "@id"
+    },
+    "hasEvaluatedScope": {
+      "@id": "celine:hasEvaluatedScope",
+      "@type": "@id"
+    },
+    "hasKPIName": "celine:hasKPIName",
+    "hasKPIDescription": "celine:hasKPIDescription",
+    "hasKPIFormula": "celine:hasKPIFormula",
+    "hasKPIUnit": {
+      "@id": "celine:hasKPIUnit",
+      "@type": "@id"
+    },
+    "hasKPIScopeType": {
+      "@id": "celine:hasKPIScopeType",
+      "@type": "@id"
+    },
+    "hasKPICalculationMethod": {
+      "@id": "celine:hasKPICalculationMethod",
+      "@type": "@id"
+    },
+    "hasKPITemporalGranularity": {
+      "@id": "celine:hasKPITemporalGranularity",
+      "@type": "@id"
+    },
+
+    "hasCommitment": {
+      "@id": "celine:hasCommitment",
+      "@type": "@id"
+    },
+    "committedBy": {
+      "@id": "celine:committedBy",
+      "@type": "@id"
+    },
+    "onPOD": {
+      "@id": "celine:onPOD",
+      "@type": "@id"
+    },
+    "hasCommitmentMode": {
+      "@id": "celine:hasCommitmentMode",
+      "@type": "@id"
+    },
+    "hasFlexibilityDirection": {
+      "@id": "celine:hasFlexibilityDirection",
+      "@type": "@id"
+    },
+    "targetFlexibility": {
+      "@id": "celine:targetFlexibility",
+      "@type": "xsd:decimal"
+    },
+    "generatesCredit": {
+      "@id": "celine:generatesCredit",
+      "@type": "@id"
+    },
+    "creditFor": {
+      "@id": "celine:creditFor",
+      "@type": "@id"
+    },
+    "earnedBy": {
+      "@id": "celine:earnedBy",
+      "@type": "@id"
+    },
+    "creditAmount": {
+      "@id": "celine:creditAmount",
+      "@type": "xsd:decimal"
+    },
+    "evidencedBy": {
+      "@id": "celine:evidencedBy",
+      "@type": "@id"
+    },
+
+    "hasSettlementRun": {
+      "@id": "celine:hasSettlementRun",
+      "@type": "@id"
+    },
+    "settlesContext": {
+      "@id": "celine:settlesContext",
+      "@type": "@id"
+    },
+    "conversionRate": {
+      "@id": "celine:conversionRate",
+      "@type": "xsd:decimal"
+    },
+    "currency": "celine:currency",
+    "hasCostItem": {
+      "@id": "celine:hasCostItem",
+      "@type": "@id"
+    },
+    "hasCostType": {
+      "@id": "celine:hasCostType",
+      "@type": "@id"
+    },
+    "costAmount": {
+      "@id": "celine:costAmount",
+      "@type": "xsd:decimal"
+    },
+    "hasRedistributionResult": {
+      "@id": "celine:hasRedistributionResult",
+      "@type": "@id"
+    },
+    "resultFor": {
+      "@id": "celine:resultFor",
+      "@type": "@id"
+    },
+    "creditBalance": {
+      "@id": "celine:creditBalance",
+      "@type": "xsd:decimal"
+    },
+    "grossAmount": {
+      "@id": "celine:grossAmount",
+      "@type": "xsd:decimal"
+    },
+    "costDeduction": {
+      "@id": "celine:costDeduction",
+      "@type": "xsd:decimal"
+    },
+    "netAmount": {
+      "@id": "celine:netAmount",
+      "@type": "xsd:decimal"
+    },
+
+    "hasEnvelope": {
+      "@id": "celine:hasEnvelope",
+      "@type": "@id"
+    },
+    "envelopeFor": {
+      "@id": "celine:envelopeFor",
+      "@type": "@id"
+    },
+    "withinEnvelope": {
+      "@id": "celine:withinEnvelope",
+      "@type": "@id"
+    },
+    "hasAvailabilityWindow": {
+      "@id": "celine:hasAvailabilityWindow",
+      "@type": "@id"
+    },
+    "hasConstraint": {
+      "@id": "celine:hasConstraint",
+      "@type": "@id"
+    },
+    "hasConstraintType": {
+      "@id": "celine:hasConstraintType",
+      "@type": "@id"
+    },
+    "maxFlexUp": {
+      "@id": "celine:maxFlexUp",
+      "@type": "xsd:decimal"
+    },
+    "maxFlexDown": {
+      "@id": "celine:maxFlexDown",
+      "@type": "xsd:decimal"
+    },
+    "availableEnergy": {
+      "@id": "celine:availableEnergy",
+      "@type": "xsd:decimal"
+    },
+    "minActivationDuration": {
+      "@id": "celine:minActivationDuration",
+      "@type": "xsd:duration"
+    },
+    "maxActivationDuration": {
+      "@id": "celine:maxActivationDuration",
+      "@type": "xsd:duration"
+    },
+    "minNotificationTime": {
+      "@id": "celine:minNotificationTime",
+      "@type": "xsd:duration"
+    },
+    "minRecoveryTime": {
+      "@id": "celine:minRecoveryTime",
+      "@type": "xsd:duration"
+    },
+    "maxActivationsPerDay": {
+      "@id": "celine:maxActivationsPerDay",
+      "@type": "xsd:integer"
+    },
+
+    "hasIdentifierScheme": {
+      "@id": "celine:hasIdentifierScheme",
+      "@type": "@id"
+    },
+    "operatedBy": {
+      "@id": "celine:operatedBy",
+      "@type": "@id"
+    },
+    "servedBy": {
+      "@id": "celine:servedBy",
+      "@type": "@id"
+    },
+    "inRegulatoryZone": {
+      "@id": "celine:inRegulatoryZone",
+      "@type": "@id"
+    },
+    "hasRegulatoryZone": {
+      "@id": "celine:hasRegulatoryZone",
+      "@type": "@id"
+    },
+    "hasTopologyNode": {
+      "@id": "celine:hasTopologyNode",
+      "@type": "@id"
+    },
+    "hasGridOperator": {
+      "@id": "celine:hasGridOperator",
+      "@type": "@id"
+    },
+    "pairedWith": {
+      "@id": "celine:pairedWith",
+      "@type": "@id"
+    },
+    "measures": {
+      "@id": "celine:measures",
+      "@type": "@id"
+    },
+    "hasDataset": {
+      "@id": "celine:hasDataset",
+      "@type": "@id"
+    },
+    "hasLocalIdentifier": "celine:hasLocalIdentifier",
+    "hasMember": {
+      "@id": "celine:hasMember",
+      "@type": "@id"
+    },
+    "hasDeliveryPoint": {
+      "@id": "celine:hasDeliveryPoint",
+      "@type": "@id"
+    },
+    "hasPartition": {
+      "@id": "celine:hasPartition",
+      "@type": "@id"
+    },
+    "partitionOf": {
+      "@id": "celine:partitionOf",
+      "@type": "@id"
+    },
+    "hasMemberRole": {
+      "@id": "celine:hasMemberRole",
+      "@type": "@id"
+    },
+    "hasMemberStatus": {
+      "@id": "celine:hasMemberStatus",
+      "@type": "@id"
+    },
+    "hasFlexibilityRequest": {
+      "@id": "celine:hasFlexibilityRequest",
+      "@type": "@id"
+    },
+    "requestedBy": {
+      "@id": "celine:requestedBy",
+      "@type": "@id"
+    },
+    "hasRequestStatus": {
+      "@id": "celine:hasRequestStatus",
+      "@type": "@id"
+    },
+    "resultsInCommitment": {
+      "@id": "celine:resultsInCommitment",
+      "@type": "@id"
+    },
+    "inResponseTo": {
+      "@id": "celine:inResponseTo",
+      "@type": "@id"
+    },
+    "requestedFlexibility": {
+      "@id": "celine:requestedFlexibility",
+      "@type": "xsd:decimal"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "https://w3id.org/celine-eu",
+      "@type": "owl:Ontology",
+      "label": "CELINE Core Ontology",
+      "description": "Lightweight orchestration ontology for Renewable Energy Communities and Digital Twin workflows. v0.7 adds hasDataset (asset/connection-point → DatasetReference); clarifies DatasetReference self-description via DCAT/DCT terms; generalises external-catalogue wording to remove implementation-specific naming.",
+      "dct:license": { "@id": "https://creativecommons.org/licenses/by/4.0/" }
+    },
+    { "@id": "celine:CommunityContext",  "@type": "owl:Class", "label": "Community Context" },
+    { "@id": "celine:Scenario",          "@type": "owl:Class", "label": "Scenario" },
+    { "@id": "celine:Simulation",        "@type": "owl:Class", "label": "Simulation" },
+    { "@id": "celine:SimulationRun",     "@type": "owl:Class", "label": "Simulation Run" },
+    { "@id": "celine:DatasetReference",  "@type": "owl:Class", "label": "Dataset Reference" },
+    { "@id": "celine:KPIDefinition",     "@type": "owl:Class", "label": "KPI Definition" },
+    { "@id": "celine:KPIEvaluation",     "@type": "owl:Class", "label": "KPI Evaluation" },
+    { "@id": "celine:FlexibilityCommitment", "@type": "owl:Class", "label": "Flexibility Commitment" },
+    { "@id": "celine:FlexibilityCredit",     "@type": "owl:Class", "label": "Flexibility Credit" },
+    { "@id": "celine:SettlementRun",         "@type": "owl:Class", "label": "Settlement Run" },
+    { "@id": "celine:CostItem",              "@type": "owl:Class", "label": "Cost Item" },
+    { "@id": "celine:RedistributionResult",  "@type": "owl:Class", "label": "Redistribution Result" },
+    { "@id": "celine:FlexibilityEnvelope",   "@type": "owl:Class", "label": "Flexibility Envelope" },
+    { "@id": "celine:FlexibilityConstraint", "@type": "owl:Class", "label": "Flexibility Constraint" },
+    { "@id": "celine:FlexibilityRequest",    "@type": "owl:Class", "label": "Flexibility Request" },
+
+    { "@id": "celine:Substation",          "@type": "owl:Class", "label": "Substation" },
+    { "@id": "celine:PrimarySubstation",   "@type": "owl:Class", "label": "Primary Substation" },
+    { "@id": "celine:SecondarySubstation", "@type": "owl:Class", "label": "Secondary Substation" },
+    { "@id": "celine:PowerTransformer",    "@type": "owl:Class", "label": "Power Transformer" },
+    { "@id": "celine:DistributionFeeder",  "@type": "owl:Class", "label": "Distribution Feeder" },
+    { "@id": "celine:RegulatoryZone",      "@type": "owl:Class", "label": "Regulatory Zone" },
+    { "@id": "celine:GridOperator",        "@type": "owl:Class", "label": "Grid Operator" },
+    { "@id": "celine:ConnectionPoint",     "@type": "owl:Class", "label": "Connection Point" },
+    { "@id": "celine:SharingGroup",       "@type": "owl:Class", "label": "Sharing Group" },
+    { "@id": "celine:PVSystem",            "@type": "owl:Class", "label": "PV System" },
+    { "@id": "celine:BatteryStorage",      "@type": "owl:Class", "label": "Battery Storage" },
+    { "@id": "celine:ElectricityMeter",    "@type": "owl:Class", "label": "Electricity Meter" },
+    { "@id": "celine:EVCharger",           "@type": "owl:Class", "label": "EV Charger" },
+    { "@id": "celine:HeatPump",            "@type": "owl:Class", "label": "Heat Pump" },
+
+    { "@id": "celine:KPIScope",                "@type": "skos:ConceptScheme", "label": "KPI Scope" },
+    { "@id": "celine:ScopeCommunity",          "@type": "skos:Concept", "skos:prefLabel": "Community" },
+    { "@id": "celine:ScopeMember",             "@type": "skos:Concept", "skos:prefLabel": "Member" },
+    { "@id": "celine:ScopePOD",                "@type": "skos:Concept", "skos:prefLabel": "POD" },
+    { "@id": "celine:ScopeAsset",              "@type": "skos:Concept", "skos:prefLabel": "Asset" },
+    { "@id": "celine:ScopeBuilding",           "@type": "skos:Concept", "skos:prefLabel": "Building" },
+    { "@id": "celine:ScopeOther",              "@type": "skos:Concept", "skos:prefLabel": "Other" },
+    { "@id": "celine:KPICalculationMethod",    "@type": "skos:ConceptScheme", "label": "KPI Calculation Method" },
+    { "@id": "celine:MethodTotal",             "@type": "skos:Concept", "skos:prefLabel": "Total" },
+    { "@id": "celine:MethodAverage",           "@type": "skos:Concept", "skos:prefLabel": "Average" },
+    { "@id": "celine:MethodInstantaneous",     "@type": "skos:Concept", "skos:prefLabel": "Instantaneous" },
+    { "@id": "celine:MethodRatio",             "@type": "skos:Concept", "skos:prefLabel": "Ratio" },
+    { "@id": "celine:MethodMaximum",           "@type": "skos:Concept", "skos:prefLabel": "Maximum" },
+    { "@id": "celine:MethodMinimum",           "@type": "skos:Concept", "skos:prefLabel": "Minimum" },
+    { "@id": "celine:MethodDerived",           "@type": "skos:Concept", "skos:prefLabel": "Derived" },
+    { "@id": "celine:MethodOther",             "@type": "skos:Concept", "skos:prefLabel": "Other" },
+    { "@id": "celine:KPITemporalGranularity",  "@type": "skos:ConceptScheme", "label": "KPI Temporal Granularity" },
+    { "@id": "celine:GranularityRealtime",     "@type": "skos:Concept", "skos:prefLabel": "Realtime" },
+    { "@id": "celine:GranularityHourly",       "@type": "skos:Concept", "skos:prefLabel": "Hourly" },
+    { "@id": "celine:GranularityDaily",        "@type": "skos:Concept", "skos:prefLabel": "Daily" },
+    { "@id": "celine:GranularityWeekly",       "@type": "skos:Concept", "skos:prefLabel": "Weekly" },
+    { "@id": "celine:GranularityMonthly",      "@type": "skos:Concept", "skos:prefLabel": "Monthly" },
+    { "@id": "celine:GranularityQuarterly",    "@type": "skos:Concept", "skos:prefLabel": "Quarterly" },
+    { "@id": "celine:GranularityYearly",       "@type": "skos:Concept", "skos:prefLabel": "Yearly" },
+    { "@id": "celine:GranularityPeriod",       "@type": "skos:Concept", "skos:prefLabel": "Period" },
+    { "@id": "celine:UnitOfMeasure",           "@type": "skos:ConceptScheme", "label": "Unit of Measure" },
+    { "@id": "celine:KilowattHour",            "@type": "skos:Concept", "skos:prefLabel": "Kilowatt-hour", "skos:notation": "kW.h" },
+    { "@id": "celine:Kilowatt",                "@type": "skos:Concept", "skos:prefLabel": "Kilowatt", "skos:notation": "kW" },
+    { "@id": "celine:Euro",                    "@type": "skos:Concept", "skos:prefLabel": "Euro", "skos:notation": "EUR" },
+    { "@id": "celine:Dimensionless",           "@type": "skos:Concept", "skos:prefLabel": "Dimensionless", "skos:notation": "1" },
+    { "@id": "celine:KPICatalog",              "@type": "skos:ConceptScheme", "label": "KPI Catalog" },
+    { "@id": "celine:SelfConsumptionRate",     "@type": ["skos:Concept", "celine:KPIDefinition"], "label": "Self-Consumption Rate" },
+    { "@id": "celine:SelfSufficiencyRate",     "@type": ["skos:Concept", "celine:KPIDefinition"], "label": "Self-Sufficiency Rate" },
+    { "@id": "celine:SharedEnergy",            "@type": ["skos:Concept", "celine:KPIDefinition"], "label": "Shared Energy" },
+    { "@id": "celine:SharedEnergyMemberShare", "@type": ["skos:Concept", "celine:KPIDefinition"], "label": "Shared Energy Member Share" },
+    { "@id": "celine:IncentiveAccrued",        "@type": ["skos:Concept", "celine:KPIDefinition"], "label": "Incentive Accrued" },
+    { "@id": "celine:IncentiveMemberShare",    "@type": ["skos:Concept", "celine:KPIDefinition"], "label": "Incentive Member Share" },
+    { "@id": "celine:WithdrawnEnergy",         "@type": ["skos:Concept", "celine:KPIDefinition"], "label": "Withdrawn Energy" },
+    { "@id": "celine:FedInEnergy",             "@type": ["skos:Concept", "celine:KPIDefinition"], "label": "Fed-In Energy" },
+    { "@id": "celine:LocalGenerationEnergy",   "@type": ["skos:Concept", "celine:KPIDefinition"], "label": "Local Generation Energy" },
+    { "@id": "celine:PeakReductionAchieved",   "@type": ["skos:Concept", "celine:KPIDefinition"], "label": "Peak Reduction Achieved" },
+    { "@id": "celine:FlexibilityActivated",    "@type": ["skos:Concept", "celine:KPIDefinition"], "label": "Flexibility Activated" },
+
+    { "@id": "celine:CommitmentMode",       "@type": "skos:ConceptScheme", "label": "Commitment Mode" },
+    { "@id": "celine:Automated",            "@type": "skos:Concept", "skos:prefLabel": "Automated" },
+    { "@id": "celine:Voluntary",            "@type": "skos:Concept", "skos:prefLabel": "Voluntary" },
+    { "@id": "celine:FlexibilityDirection", "@type": "skos:ConceptScheme", "label": "Flexibility Direction" },
+    { "@id": "celine:FlexDown",             "@type": "skos:Concept", "skos:prefLabel": "Flex Down" },
+    { "@id": "celine:FlexUp",               "@type": "skos:Concept", "skos:prefLabel": "Flex Up" },
+    { "@id": "celine:CostType",             "@type": "skos:ConceptScheme", "label": "Cost Type" },
+    { "@id": "celine:AdminCost",            "@type": "skos:Concept", "skos:prefLabel": "Administrative Cost" },
+    { "@id": "celine:Fee",                  "@type": "skos:Concept", "skos:prefLabel": "Fee" },
+    { "@id": "celine:Debt",                 "@type": "skos:Concept", "skos:prefLabel": "Debt" },
+    { "@id": "celine:ConstraintType",       "@type": "skos:ConceptScheme", "label": "Constraint Type" },
+    { "@id": "celine:DurationConstraint",   "@type": "skos:Concept", "skos:prefLabel": "Duration Constraint" },
+    { "@id": "celine:NoticeConstraint",     "@type": "skos:Concept", "skos:prefLabel": "Notice Constraint" },
+    { "@id": "celine:RecoveryConstraint",   "@type": "skos:Concept", "skos:prefLabel": "Recovery Constraint" },
+    { "@id": "celine:FrequencyConstraint",  "@type": "skos:Concept", "skos:prefLabel": "Frequency Constraint" },
+
+    { "@id": "celine:RequestStatus",       "@type": "skos:ConceptScheme", "label": "Request Status" },
+    { "@id": "celine:RequestOpen",         "@type": "skos:Concept", "skos:prefLabel": "Open" },
+    { "@id": "celine:RequestFulfilled",    "@type": "skos:Concept", "skos:prefLabel": "Fulfilled" },
+    { "@id": "celine:RequestPartial",      "@type": "skos:Concept", "skos:prefLabel": "Partially Fulfilled" },
+    { "@id": "celine:RequestExpired",      "@type": "skos:Concept", "skos:prefLabel": "Expired" },
+    { "@id": "celine:RequestCancelled",    "@type": "skos:Concept", "skos:prefLabel": "Cancelled" },
+
+    { "@id": "celine:ConnectionPointIdentifierScheme", "@type": "skos:ConceptScheme", "label": "Connection Point Identifier Scheme" },
+    { "@id": "celine:POD",   "@type": "skos:Concept", "skos:prefLabel": "POD" },
+    { "@id": "celine:CUPS",  "@type": "skos:Concept", "skos:prefLabel": "CUPS" },
+    { "@id": "celine:PRM",   "@type": "skos:Concept", "skos:prefLabel": "PRM" },
+    { "@id": "celine:MALO",  "@type": "skos:Concept", "skos:prefLabel": "MALO" },
+    { "@id": "celine:EAN",   "@type": "skos:Concept", "skos:prefLabel": "EAN" },
+    { "@id": "celine:MPAN",  "@type": "skos:Concept", "skos:prefLabel": "MPAN" },
+
+    { "@id": "celine:MemberRole",       "@type": "skos:ConceptScheme", "label": "Member Role" },
+    { "@id": "celine:RoleConsumer",      "@type": "skos:Concept", "skos:prefLabel": "Consumer" },
+    { "@id": "celine:RoleProsumer",      "@type": "skos:Concept", "skos:prefLabel": "Prosumer" },
+    { "@id": "celine:RoleProducer",      "@type": "skos:Concept", "skos:prefLabel": "Producer" },
+    { "@id": "celine:RoleOperator",      "@type": "skos:Concept", "skos:prefLabel": "Operator" },
+    { "@id": "celine:RoleAdmin",         "@type": "skos:Concept", "skos:prefLabel": "Admin" },
+    { "@id": "celine:MemberStatus",      "@type": "skos:ConceptScheme", "label": "Member Status" },
+    { "@id": "celine:StatusPending",     "@type": "skos:Concept", "skos:prefLabel": "Pending" },
+    { "@id": "celine:StatusActive",      "@type": "skos:Concept", "skos:prefLabel": "Active" },
+    { "@id": "celine:StatusSuspended",   "@type": "skos:Concept", "skos:prefLabel": "Suspended" },
+    { "@id": "celine:StatusInactive",    "@type": "skos:Concept", "skos:prefLabel": "Inactive" },
+
+    { "@id": "celine:hasCommunity",          "@type": "owl:ObjectProperty", "label": "has energy community" },
+    { "@id": "celine:usesAsset",             "@type": "owl:ObjectProperty", "label": "uses asset" },
+    { "@id": "celine:hasScenario",           "@type": "owl:ObjectProperty", "label": "has scenario" },
+    { "@id": "celine:hasSimulation",         "@type": "owl:ObjectProperty", "label": "has simulation" },
+    { "@id": "celine:hasSimulationRun",      "@type": "owl:ObjectProperty", "label": "has simulation run" },
+    { "@id": "celine:usesDataset",           "@type": "owl:ObjectProperty", "label": "uses dataset" },
+    { "@id": "celine:producesDataset",       "@type": "owl:ObjectProperty", "label": "produces dataset" },
+    { "@id": "celine:hasKPIEvaluation",      "@type": "owl:ObjectProperty", "label": "has KPI evaluation" },
+    { "@id": "celine:hasKPIDefinition",      "@type": "owl:ObjectProperty", "label": "has KPI definition" },
+    { "@id": "celine:hasEvaluationTimeInterval", "@type": "owl:ObjectProperty", "label": "has evaluation time interval" },
+    { "@id": "celine:hasInputObservation",   "@type": "owl:ObjectProperty", "label": "has input observation" },
+    { "@id": "celine:hasInputKPIEvaluation", "@type": "owl:ObjectProperty", "label": "has input KPI evaluation" },
+    { "@id": "celine:hasEvaluatedScope",     "@type": "owl:ObjectProperty", "label": "has evaluated scope" },
+    { "@id": "celine:hasKPIScopeType",       "@type": "owl:ObjectProperty", "label": "has KPI scope type" },
+    { "@id": "celine:hasKPICalculationMethod","@type": "owl:ObjectProperty", "label": "has KPI calculation method" },
+    { "@id": "celine:hasKPITemporalGranularity","@type": "owl:ObjectProperty", "label": "has KPI temporal granularity" },
+    { "@id": "celine:hasKPIUnit",            "@type": "owl:ObjectProperty", "label": "has KPI unit" },
+    { "@id": "celine:hasTimeInterval",       "@type": "owl:ObjectProperty", "label": "has time interval" },
+    { "@id": "celine:usesObservation",       "@type": "owl:ObjectProperty", "label": "uses observation" },
+    { "@id": "celine:hasCommitment",         "@type": "owl:ObjectProperty", "label": "has flexibility commitment" },
+    { "@id": "celine:committedBy",           "@type": "owl:ObjectProperty", "label": "committed by" },
+    { "@id": "celine:onPOD",                 "@type": "owl:ObjectProperty", "label": "on POD" },
+    { "@id": "celine:hasCommitmentMode",     "@type": "owl:ObjectProperty", "label": "has commitment mode" },
+    { "@id": "celine:hasFlexibilityDirection","@type": "owl:ObjectProperty", "label": "has flexibility direction" },
+    { "@id": "celine:generatesCredit",       "@type": "owl:ObjectProperty", "label": "generates credit" },
+    { "@id": "celine:creditFor",             "@type": "owl:ObjectProperty", "label": "credit for" },
+    { "@id": "celine:earnedBy",              "@type": "owl:ObjectProperty", "label": "earned by" },
+    { "@id": "celine:evidencedBy",           "@type": "owl:ObjectProperty", "label": "evidenced by" },
+    { "@id": "celine:hasSettlementRun",      "@type": "owl:ObjectProperty", "label": "has settlement run" },
+    { "@id": "celine:settlesContext",        "@type": "owl:ObjectProperty", "label": "settles context" },
+    { "@id": "celine:hasCostItem",           "@type": "owl:ObjectProperty", "label": "has cost item" },
+    { "@id": "celine:hasCostType",           "@type": "owl:ObjectProperty", "label": "has cost type" },
+    { "@id": "celine:hasRedistributionResult","@type": "owl:ObjectProperty", "label": "has redistribution result" },
+    { "@id": "celine:resultFor",             "@type": "owl:ObjectProperty", "label": "result for" },
+    { "@id": "celine:hasEnvelope",           "@type": "owl:ObjectProperty", "label": "has flexibility envelope" },
+    { "@id": "celine:envelopeFor",           "@type": "owl:ObjectProperty", "label": "envelope for" },
+    { "@id": "celine:withinEnvelope",        "@type": "owl:ObjectProperty", "label": "within envelope" },
+    { "@id": "celine:hasAvailabilityWindow", "@type": "owl:ObjectProperty", "label": "has availability window" },
+    { "@id": "celine:hasConstraint",         "@type": "owl:ObjectProperty", "label": "has constraint" },
+    { "@id": "celine:hasConstraintType",     "@type": "owl:ObjectProperty", "label": "has constraint type" },
+
+    { "@id": "celine:hasDataset",             "@type": "owl:ObjectProperty", "label": "has dataset" },
+    { "@id": "celine:hasIdentifierScheme",   "@type": "owl:ObjectProperty", "label": "has identifier scheme" },
+    { "@id": "celine:operatedBy",            "@type": "owl:ObjectProperty", "label": "operated by" },
+    { "@id": "celine:servedBy",              "@type": "owl:ObjectProperty", "label": "served by" },
+    { "@id": "celine:inRegulatoryZone",      "@type": "owl:ObjectProperty", "label": "in regulatory zone" },
+    { "@id": "celine:hasRegulatoryZone",     "@type": "owl:ObjectProperty", "label": "has regulatory zone" },
+    { "@id": "celine:hasTopologyNode",       "@type": "owl:ObjectProperty", "label": "has topology node" },
+    { "@id": "celine:hasGridOperator",       "@type": "owl:ObjectProperty", "label": "has grid operator" },
+    { "@id": "celine:pairedWith",            "@type": ["owl:ObjectProperty", "owl:SymmetricProperty"], "label": "paired with" },
+    { "@id": "celine:measures",              "@type": "owl:ObjectProperty", "label": "measures" },
+    { "@id": "celine:hasMember",              "@type": "owl:ObjectProperty", "label": "has member" },
+    { "@id": "celine:hasDeliveryPoint",      "@type": "owl:ObjectProperty", "label": "has delivery point" },
+    { "@id": "celine:hasMemberRole",         "@type": "owl:ObjectProperty", "label": "has member role" },
+    { "@id": "celine:hasMemberStatus",       "@type": "owl:ObjectProperty", "label": "has member status" },
+    { "@id": "celine:hasPartition",          "@type": "owl:ObjectProperty", "label": "has partition" },
+    { "@id": "celine:partitionOf",           "@type": "owl:ObjectProperty", "label": "partition of" },
+    { "@id": "celine:hasFlexibilityRequest", "@type": "owl:ObjectProperty", "label": "has flexibility request" },
+    { "@id": "celine:requestedBy",           "@type": "owl:ObjectProperty", "label": "requested by" },
+    { "@id": "celine:hasRequestStatus",      "@type": "owl:ObjectProperty", "label": "has request status" },
+    { "@id": "celine:resultsInCommitment",   "@type": "owl:ObjectProperty", "label": "results in commitment" },
+    { "@id": "celine:inResponseTo",          "@type": "owl:ObjectProperty", "label": "in response to" },
+
+    { "@id": "celine:hasKPIName",            "@type": "owl:DatatypeProperty", "label": "has KPI name" },
+    { "@id": "celine:hasKPIDescription",     "@type": "owl:DatatypeProperty", "label": "has KPI description" },
+    { "@id": "celine:hasKPIFormula",         "@type": "owl:DatatypeProperty", "label": "has KPI formula" },
+    { "@id": "celine:hasKPIValue",           "@type": "owl:DatatypeProperty", "label": "has KPI value" },
+    { "@id": "celine:targetFlexibility", "@type": "owl:DatatypeProperty", "label": "target flexibility" },
+    { "@id": "celine:creditAmount",      "@type": "owl:DatatypeProperty", "label": "credit amount" },
+    { "@id": "celine:conversionRate",    "@type": "owl:DatatypeProperty", "label": "conversion rate" },
+    { "@id": "celine:currency",          "@type": "owl:DatatypeProperty", "label": "currency" },
+    { "@id": "celine:costAmount",        "@type": "owl:DatatypeProperty", "label": "cost amount" },
+    { "@id": "celine:creditBalance",     "@type": "owl:DatatypeProperty", "label": "credit balance" },
+    { "@id": "celine:grossAmount",       "@type": "owl:DatatypeProperty", "label": "gross amount" },
+    { "@id": "celine:costDeduction",     "@type": "owl:DatatypeProperty", "label": "cost deduction" },
+    { "@id": "celine:netAmount",         "@type": "owl:DatatypeProperty", "label": "net amount" },
+    { "@id": "celine:maxFlexUp",             "@type": "owl:DatatypeProperty", "label": "max flex up" },
+    { "@id": "celine:maxFlexDown",           "@type": "owl:DatatypeProperty", "label": "max flex down" },
+    { "@id": "celine:availableEnergy",       "@type": "owl:DatatypeProperty", "label": "available energy" },
+    { "@id": "celine:minActivationDuration", "@type": "owl:DatatypeProperty", "label": "min activation duration" },
+    { "@id": "celine:maxActivationDuration", "@type": "owl:DatatypeProperty", "label": "max activation duration" },
+    { "@id": "celine:minNotificationTime",   "@type": "owl:DatatypeProperty", "label": "min notification time" },
+    { "@id": "celine:minRecoveryTime",       "@type": "owl:DatatypeProperty", "label": "min recovery time" },
+    { "@id": "celine:maxActivationsPerDay",  "@type": "owl:DatatypeProperty", "label": "max activations per day" },
+    { "@id": "celine:hasLocalIdentifier",    "@type": "owl:DatatypeProperty", "label": "has local identifier" },
+    { "@id": "celine:requestedFlexibility",  "@type": "owl:DatatypeProperty", "label": "requested flexibility" }
+  ]
+}
