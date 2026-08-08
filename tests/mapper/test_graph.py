@@ -10,7 +10,7 @@ from celine.mapper.engine import MappingEngine
 from celine.mapper.graph import CelineGraphBuilder, SHACLResult
 from celine.mapper.spec import MappingSpecLoader
 
-SPECS_DIR = Path(__file__).resolve().parent.parent.parent / "celine" / "mapper" / "specs"
+SPECS_DIR = Path(__file__).resolve().parents[2] / "src" / "celine" / "mapper" / "specs"
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
 _loader = MappingSpecLoader()

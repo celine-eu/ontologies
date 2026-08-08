@@ -11,10 +11,19 @@ import jsonschema
 if TYPE_CHECKING:
     import rdflib
 
-_RELEASES_DIR = Path(__file__).resolve().parent.parent.parent / "releases" / "v0.2"
-_CONTEXT_PATH = _RELEASES_DIR / "celine.jsonld"
-_SHACL_PATH = _RELEASES_DIR / "celine.shacl.ttl"
-_SCHEMA_PATH = _RELEASES_DIR / "celine.schema.json"
+# `specs/current`, not `releases/`: the two trees hold different artifacts.
+# `releases/vN` carries the Widoco build (`ontology.jsonld|ttl|owl|nt`); the
+# `celine.*` files these defaults want are only ever in `specs/`. The previous
+# value — `parent.parent.parent / "releases" / "v0.2"` — was wrong three ways at
+# once: it walked to `src/` rather than the repo root, named a directory holding
+# none of these files, and pinned v0.2 while specs had reached v0.7. Nothing
+# noticed because every failure is a FileNotFoundError at construction, and the
+# only callers that exercise it are this repo's own tests and CLI.
+_SPECS_DIR = Path(__file__).resolve().parents[3] / "specs" / "current"
+_CONTEXT_PATH = _SPECS_DIR / "celine.jsonld"
+_SHACL_PATH = _SPECS_DIR / "celine.shacl.ttl"
+_SCHEMA_PATH = _SPECS_DIR / "celine.schema.json"
+_ONTOLOGY_PATH = _SPECS_DIR / "celine.ttl"
 
 
 def _load_context() -> dict[str, Any]:
@@ -48,9 +57,13 @@ class CelineGraphBuilder:
     """Assembles mapped nodes into a JSON-LD document and validates it.
 
     Args:
-        context_path: Path to celine.jsonld (default: bundled releases/v0.2/).
-        shacl_path: Path to celine.shacl.ttl (default: bundled releases/v0.2/).
-        schema_path: Path to celine.schema.json (default: bundled releases/v0.2/).
+        context_path: Path to celine.jsonld (default: ``specs/current/``).
+        shacl_path: Path to celine.shacl.ttl (default: ``specs/current/``).
+        schema_path: Path to celine.schema.json (default: ``specs/current/``).
+
+    The defaults resolve relative to this repository and therefore only work from
+    a source checkout — ``specs/`` is outside the wheel's ``only-include``. An
+    installed consumer must pass all three explicitly.
     """
 
     def __init__(
@@ -58,8 +71,10 @@ class CelineGraphBuilder:
         context_path: Path = _CONTEXT_PATH,
         shacl_path: Path = _SHACL_PATH,
         schema_path: Path = _SCHEMA_PATH,
+        ontology_path: Path = _ONTOLOGY_PATH,
     ) -> None:
         self._shacl_path = shacl_path
+        self._ontology_path = ontology_path
         with context_path.open() as fh:
             raw = json.load(fh)
         self._context: dict[str, Any] = raw["@context"]
@@ -131,8 +146,31 @@ class CelineGraphBuilder:
         shacl_graph = rdflib.Graph()
         shacl_graph.parse(str(self._shacl_path), format="turtle")
 
+        # The ontology must be validated alongside the data, not just the shapes.
+        # Several scheme constraints are written with `sh:targetNode` (e.g.
+        # celine:MemberRoleSchemeShape targets celine:MemberRole and requires
+        # skos:hasTopConcept minCount 1). A targetNode shape fires against *any*
+        # data graph, whether or not that node appears in it — so without the
+        # vocabulary definitions present, validating a graph of pure instance
+        # data reports a dozen violations about concept schemes the data never
+        # mentions, and no instance document can ever conform.
+        #
+        # pyshacl's `ont_graph=` parameter does *not* solve this: by default it
+        # merges via `inoculate()`, which copies only RDFS/OWL class and property
+        # axioms. SKOS ConceptScheme nodes and their skos:hasTopConcept triples
+        # are dropped, so the scheme shapes keep firing. (The full mixin lives
+        # behind the PYSHACL_USE_FULL_MIXIN env var, read at import time — not
+        # something a library should reach for.) Merging into a copy of the data
+        # graph ourselves is explicit and version-independent; the caller's graph
+        # is left untouched.
+        combined = rdflib.Graph()
+        for prefix, namespace in graph.namespaces():
+            combined.bind(prefix, namespace)
+        combined += graph
+        combined.parse(str(self._ontology_path), format="turtle")
+
         conforms, report_graph, report_text = pyshacl.validate(
-            data_graph=graph,
+            data_graph=combined,
             shacl_graph=shacl_graph,
             inference="none",
             abort_on_first=False,

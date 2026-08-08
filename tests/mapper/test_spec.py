@@ -12,7 +12,7 @@ from celine.mapper.spec import (
     SpecValidationError,
 )
 
-SPECS_DIR = Path(__file__).resolve().parent.parent.parent / "celine" / "mapper" / "specs"
+SPECS_DIR = Path(__file__).resolve().parents[2] / "src" / "celine" / "mapper" / "specs"
 
 
 def _loader() -> MappingSpecLoader:

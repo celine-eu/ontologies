@@ -8,7 +8,7 @@ import pytest
 
 from celine.mapper.output_mapper import OutputMapper
 
-SPECS_DIR = Path(__file__).resolve().parent.parent.parent / "celine" / "mapper" / "specs"
+SPECS_DIR = Path(__file__).resolve().parents[2] / "src" / "celine" / "mapper" / "specs"
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
 

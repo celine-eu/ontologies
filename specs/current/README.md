@@ -1,13 +1,39 @@
-# CELINE Ontology v0.7
+# CELINE Ontology v0.8
 
 **Namespace**: `https://w3id.org/celine-eu#`
 **IRI**: `https://w3id.org/celine-eu`
-**Version IRI**: `https://w3id.org/celine-eu/v0.7`
+**Version IRI**: `https://w3id.org/celine-eu/v0.8`
 
-Additively extends v0.6 with a generic `hasDataset` property linking assets and connection
-points to external datasources, clarified `DatasetReference` self-description via DCAT/DCT
-terms, and generalised external-catalogue wording to remove implementation-specific naming.
-Non-breaking, additive change.
+Conformance fix over v0.7. Four SKOS schemes carried forward from v0.4 —
+`CommitmentMode`, `FlexibilityDirection`, `CostType`, `ConstraintType` — never received the
+`skos:hasTopConcept` assertions that the v0.5+ scheme shapes require, so v0.7 did not
+validate against its own SHACL profile. No new terms; no term is removed or retyped.
+
+## Changes from v0.7
+
+### Fixed — SKOS top concepts (4 schemes)
+
+Each of the four schemes now declares its entry points:
+
+| Scheme | Top concepts |
+|---|---|
+| `celine:CommitmentMode` | `Automated`, `Voluntary` |
+| `celine:FlexibilityDirection` | `FlexDown`, `FlexUp` |
+| `celine:CostType` | `AdminCost`, `Fee`, `Debt` |
+| `celine:ConstraintType` | `DurationConstraint`, `NoticeConstraint`, `RecoveryConstraint`, `FrequencyConstraint` |
+
+The concepts already carried `skos:inScheme` **and** `skos:topConceptOf`; only the
+scheme-side `skos:hasTopConcept` was missing. All four schemes are flat — there is no
+`skos:broader` anywhere in the ontology — so every member is genuinely a top concept. The
+shapes (`celine:CommitmentModeSchemeShape` and the three siblings) are unchanged: they were
+correct, and they are what caught this.
+
+### Modified — language tags
+
+Labels, prefLabels, descriptions and comments in those four scheme blocks gain `@en`,
+matching the nine schemes added in v0.5 and later. Untagged literals and `@en`-tagged ones
+are distinct RDF terms, so consumers matching on a plain string in these four vocabularies
+must now match the tagged form.
 
 ## Changes from v0.6
 
@@ -231,6 +257,19 @@ celine:KPIDefinition  (typed + SKOS concept in KPICatalog)
 | `LocalGenerationEnergy` | Community | Total | Period | kWh |
 | `PeakReductionAchieved` | Community | Derived | Period | kW |
 | `FlexibilityActivated` | Community | Total | Period | kWh |
+
+## Migration from v0.7
+
+1. **No term changes** — nothing is added, removed or retyped. Existing v0.7 instance data
+   validates unchanged against the v0.8 profile.
+2. **The ontology now conforms to its own shapes.** If you validate instance data with the
+   vocabulary merged into the data graph (the recommended setup — `sh:targetNode` shapes
+   fire whether or not the target appears in your data), v0.7 reported 13 scheme violations
+   regardless of your data. v0.8 reports none.
+3. **Language tags** — `celine:Automated`, `celine:FlexDown`, `celine:AdminCost`,
+   `celine:DurationConstraint` and their siblings now carry `@en` on prefLabel and comment,
+   and their schemes on label/prefLabel/description. Code matching these literals as plain
+   untagged strings must match `"…"@en` instead.
 
 ## Migration from v0.6
 

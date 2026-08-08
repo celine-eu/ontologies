@@ -2,6 +2,28 @@
 
 <!-- version list -->
 
+## Ontology v0.8 (2026-08-08)
+
+Conformance fix. No new terms; nothing removed or retyped.
+
+### Fixed
+
+- **SKOS top concepts**: `CommitmentMode`, `FlexibilityDirection`, `CostType` and
+  `ConstraintType` now declare `skos:hasTopConcept`. These four schemes were carried
+  forward from v0.4 without it, so v0.7 failed its own `*SchemeShape` constraints
+  (`skos:hasTopConcept` minCount 1) — 13 violations reported against any data graph,
+  since the shapes use `sh:targetNode`. The concepts already declared `skos:inScheme`
+  and `skos:topConceptOf`; only the scheme-side assertion was missing. All four schemes
+  are flat (no `skos:broader` in the ontology), so every member is a top concept. The
+  shapes are unchanged.
+- **Language tags**: labels, prefLabels, descriptions and comments in those four scheme
+  blocks gain `@en`, matching the nine schemes from v0.5+. Consumers matching these
+  literals as plain untagged strings must match the tagged form.
+
+### Deferred
+
+- SHACL shapes for v0.6 grid topology and asset classes.
+
 ## Ontology v0.7 (2026-05-27)
 
 ### Features
