@@ -2,6 +2,40 @@
 
 <!-- version list -->
 
+## v1.4.0 (2026-08-08)
+
+### Chores
+
+- Add AGENTS.md
+  ([`95e03b6`](https://github.com/celine-eu/ontologies/commit/95e03b6fb5cc9b1116eedb9e4ff4749734264997))
+
+- Add flexibility request, add REC members mapping
+  ([`c2db39e`](https://github.com/celine-eu/ontologies/commit/c2db39e62f2fe95ad7256b99417ef38eb76fe8e1))
+
+- Add member roles and status
+  ([`50d4098`](https://github.com/celine-eu/ontologies/commit/50d40986077266938b5fb4d018ee5021f31afa52))
+
+- Add release
+  ([`5e7f151`](https://github.com/celine-eu/ontologies/commit/5e7f1512461b5f8d82669aeeda6c038a13ce3545))
+
+- Add sharing group for administrative groups in each REC
+  ([`9445ce5`](https://github.com/celine-eu/ontologies/commit/9445ce5f70e820e01c6aca69128f4bc77907df12))
+
+- Add widoco serve
+  ([`25d3928`](https://github.com/celine-eu/ontologies/commit/25d39287956ba044c5b05b70761337cdc75b7cf4))
+
+### Features
+
+- Add rec registry details to ontology
+  ([`7615fc0`](https://github.com/celine-eu/ontologies/commit/7615fc05c6ab8547b8dce33c0a7c116af2280935))
+
+- Add v0.7 generalize dataset references using dcat tags
+  ([`efd5679`](https://github.com/celine-eu/ontologies/commit/efd56793f88bfac9b7e06598e604fe8ee351d6ef))
+
+- Fix shacl bug, add concept to types
+  ([`658067b`](https://github.com/celine-eu/ontologies/commit/658067bb3b108f38b378200c0491f889810f66b4))
+
+
 ## Ontology v0.8 (2026-08-08)
 
 Conformance fix. No new terms; nothing removed or retyped.
