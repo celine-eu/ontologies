@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.7.0 (2026-08-09)
+
+### Features
+
+- Add v0.9 address CIM refs
+  ([`94c16f7`](https://github.com/celine-eu/ontologies/commit/94c16f7bf182153168c2b0fed085d78b28686d7c))
+
+
 ## v1.6.1 (2026-08-09)
 
 ### Bug Fixes
