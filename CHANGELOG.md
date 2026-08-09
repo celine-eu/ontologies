@@ -60,6 +60,36 @@
   ([`658067b`](https://github.com/celine-eu/ontologies/commit/658067bb3b108f38b378200c0491f889810f66b4))
 
 
+## Ontology v0.9 (2026-08-09)
+
+Conformance fix. No new terms; nothing removed or retyped.
+
+### Fixed
+
+- **CIM namespace**: the `cim:` prefix now binds to `http://iec.ch/TC57/CIM100#` in both
+  `celine.ttl` and the `celine.jsonld` `@context`. It previously bound to
+  `https://ontology.tno.nl/IEC_CIM/` — where TNO hosts a copy of CIM, not where CIM mints
+  its terms — so all seven `skos:closeMatch` alignments to CIM expanded to IRIs that do not
+  exist. Consumers that resolved `cim:` through the CELINE context now get different
+  fully-expanded IRIs.
+- **`celine:GridOperator` alignment**: moves from `cim:Company`, which exists in no CIM
+  version, to `cim:Organisation`. `cim:Operator` is a control-room person, not the
+  operating company, and is not the target.
+
+### Notes
+
+- CIM is the one external vocabulary CELINE references on documentary rather than
+  resolvable authority: IEC CIM is a paid standard and its namespace IRIs answer HTTP 403.
+  Alignments are checked against the published CIM100 class documentation. TNO's mirror
+  declares an older CIM (`http://www.iec.ch/TC57/CIM#`) that predates classes CELINE aligns
+  to, so it is not cited as a definitions source.
+- The `cim` entry in `open-repository.yaml` carries the same namespace, prefix and
+  documentation link.
+
+### Deferred
+
+- SHACL shapes for v0.6 grid topology and asset classes.
+
 ## Ontology v0.8 (2026-08-08)
 
 Conformance fix. No new terms; nothing removed or retyped.

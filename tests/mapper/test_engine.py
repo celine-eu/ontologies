@@ -42,12 +42,14 @@ def test_literal_string_field() -> None:
 
 
 def test_literal_decimal_coercion() -> None:
-    eng = _engine("obs_rec_energy.yaml", context={"community_key": "it-folgaria"})
+    eng = _engine("obs_rec_energy.yaml")
     row = {
         "ts": "2024-06-01T00:00:00+00:00",
-        "total_consumption_kw": "12.5",
-        "total_production_kw": "8.3",
-        "self_consumption_kw": "7.1",
+        "rec_id": "it-folgaria",
+        "substation_id": "cp-0421",
+        "total_consumption_kwh": "12.5",
+        "total_production_kwh": "8.3",
+        "self_consumption_kwh": "7.1",
         "self_consumption_ratio": "0.856",
     }
     node = eng.map_one(row)
@@ -114,16 +116,18 @@ def test_nested_list_multiple_items() -> None:
 # ---------------------------------------------------------------------------
 
 def test_constant_injected() -> None:
-    eng = _engine("obs_rec_energy.yaml", context={"community_key": "it-folgaria"})
+    eng = _engine("obs_rec_energy.yaml")
     row = {
         "ts": "2024-06-01T00:00:00+00:00",
-        "total_consumption_kw": 10.0,
-        "total_production_kw": 8.0,
-        "self_consumption_kw": 7.0,
+        "rec_id": "it-folgaria",
+        "substation_id": "cp-0421",
+        "total_consumption_kwh": 10.0,
+        "total_production_kwh": 8.0,
+        "self_consumption_kwh": 7.0,
         "self_consumption_ratio": 0.875,
     }
     node = eng.map_one(row)
-    assert node["sosa:observedProperty"] == "https://w3id.org/celine/property/self-consumption-kw"
+    assert node["sosa:observedProperty"] == "https://w3id.org/celine/property/self-consumption-kwh"
 
 
 # ---------------------------------------------------------------------------
@@ -131,13 +135,28 @@ def test_constant_injected() -> None:
 # ---------------------------------------------------------------------------
 
 def test_id_uses_context_var() -> None:
-    eng = _engine("obs_rec_energy.yaml", context={"community_key": "it-folgaria"})
-    row = {"ts": "2024-06-01T00:00:00+00:00", "self_consumption_kw": 7.0,
-           "total_consumption_kw": 10.0, "total_production_kw": 8.0,
-           "self_consumption_ratio": 0.7}
+    """Moved off obs_rec_energy, which no longer takes one: its rows carry
+    `rec_id` and `substation_id` of their own, so pulling the community from the
+    caller's context was both unnecessary and a way for the two to disagree.
+    obs_pv_forecast still keys on a context variable, so it covers the feature."""
+    eng = _engine("obs_pv_forecast.yaml", context={"community_key": "it-folgaria"})
+    row = {"forecast_time_utc": "2024-06-01T00:00:00+00:00", "run_time_utc": "2024-06-01T00:00:00+00:00",
+           "provider": "acme", "pv_kwh_per_kwp_hourly": 0.4}
     node = eng.map_one(row)
     assert "it-folgaria" in node["@id"]
     assert "2024-06-01" in node["@id"]
+
+
+def test_id_uses_row_columns_for_the_models_full_grain() -> None:
+    """obs_rec_energy is grouped by (ts, rec_id, substation_id). An @id built
+    from fewer of those mints one IRI for several distinct rows."""
+    eng = _engine("obs_rec_energy.yaml")
+    base = {"ts": "2024-06-01T00:00:00+00:00", "rec_id": "it-folgaria",
+            "self_consumption_kwh": 7.0, "total_consumption_kwh": 10.0,
+            "total_production_kwh": 8.0, "self_consumption_ratio": 0.7}
+    a = eng.map_one({**base, "substation_id": "cp-0421"})
+    b = eng.map_one({**base, "substation_id": "cp-0422"})
+    assert a["@id"] != b["@id"]
 
 
 def test_type_set_from_spec() -> None:

@@ -25,12 +25,30 @@ ontologies:
   #   keywords: [buildings, hvac, sensors, buildings, devices]
   #   license: "BSD-3-Clause"
 
-  # - name: CIM (Common Information Model)
-  #   description: IEC standard model for electrical transmission, distribution and market interfaces.
-  #   link: https://www.entsoe.eu/digital/common-information-model
-  #   definitions: []
-  #   keywords: [grid, tso, dso, transmission, distribution, market]
-  #   license: "Proprietary"
+  - name: CIM (Common Information Model)
+    # The namespace is IEC's, not a hosting URL. This entry is the one case in
+    # this file where the namespace could NOT be confirmed by dereferencing it:
+    # every CIM IRI answers HTTP 403, because IEC CIM is a paid standard
+    # (`license: Proprietary`, below). So the reference is the published class
+    # documentation and the namespace is asserted, not verified.
+    #
+    # CIM100 specifically, matching the documentation `link` — the version whose
+    # class list we check terms against. TNO mirrors an OLDER CIM under
+    # https://ontology.tno.nl/IEC_CIM.ttl declaring http://www.iec.ch/TC57/CIM#;
+    # it is machine-readable but predates classes CELINE aligns to (`Feeder` is
+    # absent from it and present in CIM100), so citing it as `definitions` would
+    # point at a different version than the one the terms come from.
+    #
+    # What is NOT the namespace: https://ontology.tno.nl/IEC_CIM/ — that is where
+    # TNO hosts a copy, not where terms are minted. celine.ttl and celine.jsonld
+    # declared it until v0.9, so their skos:closeMatch alignments resolved to
+    # nothing. See .agents/ontologies/cim-namespace.md.
+    prefix: cim
+    namespace: http://iec.ch/TC57/CIM100#
+    description: IEC standard model for electrical transmission, distribution and market interfaces.
+    link: https://zepben.github.io/evolve/docs/cim/cim100/
+    keywords: [grid, tso, dso, transmission, distribution, market]
+    license: "Proprietary"
 
   # - name: CityGML
   #   description: OGC model for 3D city objects, buildings and terrain.

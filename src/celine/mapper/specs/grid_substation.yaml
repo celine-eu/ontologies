@@ -1,0 +1,73 @@
+# Maps rows from ds_dev_gold.grid_substations to cim:Substation nodes.
+#
+# Source columns: dso_id, asset_id, name, label_id, label, line_name, feeder_id,
+#                 parent_substation_name, operational_unit, municipality, geom,
+#                 longitude, latitude, feature_geojson
+#
+# The first CELINE mapping onto a vocabulary CELINE does not own. The grid silver
+# layer is already CIM-shaped (`silver_grid_ac_line_segment` is cim:ACLineSegment),
+# so this states in the catalogue what the modelling already assumed.
+#
+# `cim:` is http://iec.ch/TC57/CIM100# — IEC's namespace, not a hosting URL. It is
+# the one external vocabulary CELINE references on documentary rather than
+# resolvable authority: IEC CIM is a paid standard and its namespace IRIs answer
+# HTTP 403, so terms are checked against the CIM100 class documentation
+# (https://zepben.github.io/evolve/docs/cim/cim100/) instead of being dereferenced.
+#
+# Every term below was checked there rather than inferred from the CIM naming
+# pattern — `cim:Substation.Region` looks plausible and does not exist, while
+# `cim:Substation.SubGeographicalRegion` does.
+version: "1"
+target_type: "cim:Substation"
+id_template: "https://w3id.org/celine/substation/{asset_id}"
+
+fields:
+  - source: asset_id
+    target: "cim:IdentifiedObject.mRID"
+    datatype: xsd:string
+    required: true
+
+  - source: name
+    target: "cim:IdentifiedObject.name"
+    datatype: xsd:string
+
+  # The human-facing label, which CIM models as an alias rather than a second name.
+  - source: label
+    target: "cim:IdentifiedObject.aliasName"
+    datatype: xsd:string
+
+  # cim:Substation.SubGeographicalRegion is the container property CIM defines for
+  # this; the municipality is the region this substation sits in.
+  - source: municipality
+    target: "cim:Substation.SubGeographicalRegion"
+    kind: iri
+    iri_template: "https://w3id.org/celine/region/{value}"
+
+  # Substation-to-substation containment. CIM's Equipment.EquipmentContainer is
+  # for Equipment inside a container, not for one Substation under another, so
+  # this uses the generic Dublin Core relation rather than bending a CIM property
+  # to a shape it does not have.
+  - source: parent_substation_name
+    target: "dct:isPartOf"
+    kind: iri
+    iri_template: "https://w3id.org/celine/substation/{value}"
+
+  # The distribution system operator responsible for the asset.
+  - source: dso_id
+    target: "dct:publisher"
+    kind: iri
+    iri_template: "https://w3id.org/celine/dso/{value}"
+
+  - target: "cim:IdentifiedObject.description"
+    kind: constant
+    value: "Distribution substation published by the CELINE grid pipeline"
+
+# Deliberately unmapped: `geom` (PostGIS binary), `feature_geojson` (a rendering
+# artifact of this pipeline, not a fact about the substation), and
+# `longitude`/`latitude` — CIM models position through
+# cim:PowerSystemResource.Location pointing at a Location object with
+# PositionPoints, which a flat column pair cannot express without inventing that
+# node. `label_id`, `feeder_id`, `line_name` and `operational_unit` are internal
+# identifiers with no CIM counterpart checked. A spec maps what the target
+# ontology actually models; the rest stays out of the context rather than being
+# forced into an approximate term.
