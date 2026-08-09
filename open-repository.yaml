@@ -119,6 +119,11 @@ ontologies:
     license: "W3C"
 
   - name: SEAS Ontology
+    # No prefix/namespace: the definitions URL below answered HTTP 500 when read
+    # (2026-08-09), so the namespace could not be taken from the ontology itself.
+    # `https://w3id.org/seas/` is the widely-cited value but is not verified here,
+    # and a wrong namespace expands every term to a wrong IRI — silently. Nothing
+    # references SEAS yet; fill this in from the source when something does.
     description: Cross-domain ontology for energy systems, IoT, flexibility and grid.
     link: https://ci.mines-stetienne.fr/seas/
     definitions:
@@ -135,6 +140,12 @@ ontologies:
   #   license: "BSD-3-Clause"
 
   - name: EM-KPI
+    # Namespace read from the published ontology (owl:Ontology
+    # http://energy.linkeddata.es/em-kpi/ontology, default namespace `:`). Note
+    # http, not https — that is what it declares. The ontology binds no prefix
+    # name of its own, so `emkpi` is this registry's choice, not the authors'.
+    prefix: emkpi
+    namespace: http://energy.linkeddata.es/em-kpi/ontology#
     description: Energy management KPI ontology for buildings and districts.
     link: https://energy.linkeddata.es/em-kpi/ontology/index-en.html
     definitions:
@@ -229,6 +240,9 @@ ontologies:
     license: "ETSI-Open"
 
   - name: SAREF4EHAW
+    # prefix and namespace as the ontology itself declares them
+    prefix: s4ehaw
+    namespace: https://saref.etsi.org/saref4ehaw/
     description: SAREF extension for home appliances and white goods.
     link: https://saref.etsi.org/saref4ehaw/
     definitions:
