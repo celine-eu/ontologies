@@ -2,6 +2,7 @@
 from celine.mapper.engine import MappingEngine, MappingError
 from celine.mapper.graph import CelineGraphBuilder, SHACLResult
 from celine.mapper.output_mapper import OutputMapper
+from celine.mapper.registry import PrefixError, expand, load_registry, prefix_map
 from celine.mapper.spec import FieldMapping, MappingSpec, MappingSpecLoader, SpecValidationError
 
 __all__ = [
@@ -12,6 +13,10 @@ __all__ = [
     "MappingSpec",
     "MappingSpecLoader",
     "OutputMapper",
+    "PrefixError",
     "SHACLResult",
     "SpecValidationError",
+    "expand",
+    "load_registry",
+    "prefix_map",
 ]

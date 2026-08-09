@@ -14,13 +14,22 @@
           "name",
           "description",
           "link",
-          "src",
           "keywords"
         ],
         "properties": {
           "name": {
             "type": "string",
             "description": "The name of the ontology."
+          },
+          "prefix": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
+            "description": "CURIE prefix for this ontology, e.g. 'sosa'. With `namespace`, makes this file the prefix->namespace authority for consumers that expand CURIEs (dataset-api derives its JSON-LD contexts from it). Optional: an ontology can be catalogued without being addressable by prefix."
+          },
+          "namespace": {
+            "type": "string",
+            "format": "uri",
+            "description": "Namespace IRI the prefix expands to, including its trailing '#' or '/'. Required alongside `prefix` — a prefix without a namespace expands to nothing."
           },
           "description": {
             "type": "string",
@@ -52,7 +61,22 @@
             },
             "minItems": 0
           }
+        },
+        "dependentRequired": {
+          "prefix": ["namespace"],
+          "namespace": ["prefix"]
         }
+      }
+    },
+    "prefixes": {
+      "type": "object",
+      "description": "Base vocabularies that CELINE terms are written against but that are not domain ontologies to catalogue: xsd, rdf, rdfs, dct, owl, skos and the CELINE namespace itself. They belong here rather than in `ontologies` because keywords, license and homepage say nothing useful about xsd, yet a consumer expanding a CURIE still has to resolve it. Kept in this file so there is one prefix authority, not two.",
+      "propertyNames": {
+        "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "format": "uri"
       }
     }
   },

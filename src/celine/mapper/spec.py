@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass, field
+from importlib import resources
 from pathlib import Path
 from typing import Any, Literal
 
@@ -10,6 +11,17 @@ import jsonschema
 import yaml
 
 _SCHEMA_PATH = Path(__file__).parent / "schema" / "mapping_spec.schema.json"
+
+
+def _specs_dir():
+    """Traversable for the packaged ``specs/`` directory.
+
+    Addressed as a subpath of ``celine.mapper`` rather than as the package
+    ``celine.mapper.specs``: the directory has no ``__init__.py``, so naming it
+    directly relies on namespace-package resolution that varies by loader. A
+    joinpath from the parent works the same from a checkout, a wheel and a zip.
+    """
+    return resources.files(__package__).joinpath("specs")
 
 
 @dataclass(frozen=True)
@@ -94,6 +106,45 @@ class MappingSpecLoader:
     def load_from_string(self, text: str, source: str = "<string>") -> MappingSpec:
         data = yaml.safe_load(text)
         return self._parse(data, source=source)
+
+    def load_by_name(self, name: str) -> MappingSpec:
+        """Load one of the packaged specs by name, e.g. ``"obs_rec_energy"``.
+
+        Resolved through ``importlib.resources``, not a filesystem path, so it
+        works from an installed wheel as well as a checkout. Consumers bind a
+        dataset to a spec by *name* (dataset-api stores it in
+        ``DatasetEntry.ontology_path``), and a name is the only form that
+        survives being written into a governance file and read back somewhere
+        else entirely.
+
+        Raises:
+            SpecValidationError: no such spec. The message lists what is
+                available, because the usual cause is a typo in a governance
+                file written in another repository.
+        """
+        resource = _specs_dir().joinpath(f"{name}.yaml")
+        if not resource.is_file():
+            available = sorted(
+                p.name.removesuffix(".yaml")
+                for p in _specs_dir().iterdir()
+                if p.name.endswith(".yaml")
+            )
+            raise SpecValidationError(
+                f"no mapping spec named {name!r}. Available: {', '.join(available)}"
+            )
+        return self._parse(
+            yaml.safe_load(resource.read_text(encoding="utf-8")),
+            source=f"{name}.yaml",
+        )
+
+    @staticmethod
+    def available() -> list[str]:
+        """Names of every packaged spec, for validating a binding before storing it."""
+        return sorted(
+            p.name.removesuffix(".yaml")
+            for p in _specs_dir().iterdir()
+            if p.name.endswith(".yaml")
+        )
 
     def _parse(self, data: Any, source: str) -> MappingSpec:
         try:

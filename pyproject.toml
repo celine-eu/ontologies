@@ -40,6 +40,17 @@ build-backend = "hatchling.build"
 only-include = ["src/celine/mapper", "src/celine/ontologies"]
 sources = {"src" = ""}
 
+# The vocabulary registry is a runtime artifact, not just documentation:
+# consumers expand CURIEs from mapping specs through its prefix->namespace map
+# (dataset-api derives its JSON-LD contexts from it). It sits at the repo root,
+# outside `only-include`, so it needs force-including to reach the wheel.
+#
+# The cost, accepted deliberately: a tagged celine-ontologies release now tracks
+# registry updates. The alternative was fetching it published at startup, which
+# makes a cold boot depend on an external host.
+[tool.hatch.build.targets.wheel.force-include]
+"open-repository.yaml" = "celine/mapper/open-repository.yaml"
+
 [tool.ruff]
 line-length = 100
 target-version = "py310"

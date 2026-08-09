@@ -4,8 +4,14 @@ on:
   push:
     branches:
       - main
+    # `v*`, not `*`: this repo carries two independent tag series. Package
+    # releases are `v1.4.0`; ontology releases are `celine-ontology-v0.8`. Under
+    # `*` an ontology tag ran this workflow too, which rebuilt whatever version
+    # pyproject happened to hold and tried to publish it — PyPI answered
+    # `400 Bad Request` because that version was already uploaded. Ontology tags
+    # do not start with `v`, so this filter separates the two series exactly.
     tags:
-      - "*"
+      - "v*"
 
 permissions:
   contents: write

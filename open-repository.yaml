@@ -59,6 +59,8 @@ ontologies:
   #   license: "LGPL-2.1"
 
   - name: BIGG Ontology
+    prefix: bigg
+    namespace: https://w3id.org/bigg/ontology#
     description: Ontology for climate impacts, energy consumption, KPIs, geospatial layers.
     link: https://github.com/BeeGroup-cimne/biggontology
     definitions:
@@ -69,10 +71,9 @@ ontologies:
       # - https://raw.githubusercontent.com/BeeGroup-cimne/biggontology/refs/heads/main/ontology/SAREF4BLDGAlignment.ttl
       # - https://raw.githubusercontent.com/BeeGroup-cimne/biggontology/refs/heads/main/extensions/bigg4tariff.ttl
       - https://raw.githubusercontent.com/BeeGroup-cimne/biggontology/refs/heads/main/extensions/bigg4kpi.ttl
-
-  #   keywords:
-  #     [energy, climate, weather, kpis, buildings, geospatial, residential]
-  #   license: "GPL-3.0"
+    keywords:
+      [energy, climate, weather, kpis, buildings, geospatial, residential]
+    license: "GPL-3.0"
 
   # - name: DABGEO Ontology
   #   description: Building and geographical ontology from Mondragon University.
@@ -108,6 +109,8 @@ ontologies:
   #   license: "Proprietary"
 
   - name: SSN/SOSA
+    prefix: sosa
+    namespace: http://www.w3.org/ns/sosa/
     description: W3C ontology for sensors, observations and actuations.
     link: https://www.w3.org/TR/vocab-ssn/
     definitions:
@@ -188,6 +191,8 @@ ontologies:
   #   license: "Apache-2.0"
 
   - name: PECO
+    prefix: peco
+    namespace: https://purl.org/peco/peco-core#
     description: PARMENIDES community energy ontology for actors, assets, contracts and roles.
     link: https://parmenides.ait.ac.at/docs/peco-core/index.html
     definitions:
@@ -204,6 +209,8 @@ ontologies:
   #   license: "GPL-3.0"
 
   - name: SAREF
+    prefix: saref
+    namespace: https://saref.etsi.org/core/
     description: ETSI IoT reference ontology for devices, appliances and services.
     link: https://saref.etsi.org
     definitions:
@@ -212,6 +219,8 @@ ontologies:
     license: "ETSI-Open"
 
   - name: SAREF4Building
+    prefix: s4bldg
+    namespace: https://saref.etsi.org/saref4bldg/
     description: SAREF extension for building devices, zones and functions.
     link: https://saref.etsi.org/saref4bldg/
     definitions:
@@ -228,6 +237,8 @@ ontologies:
     license: "ETSI-Open"
 
   - name: SAREF4ENER
+    prefix: s4ener
+    namespace: https://saref.etsi.org/saref4ener/
     description: SAREF energy extension for generation, loads and storage.
     link: https://saref.etsi.org/saref4ener/
     definitions:
@@ -258,3 +269,25 @@ ontologies:
   #     - https://github.com/omerbsezer/IoTSmartHomeOntologySimulator/raw/refs/heads/master/IoTSmartHomeOntology/sho.owl
   #   keywords: [smart-home, devices, automation]
   #   license: "MIT"
+
+# Base vocabularies CELINE terms are written against.
+#
+# These are deliberately not `ontologies:` entries. That list is a curated
+# catalogue of domain ontologies, where keywords, license and homepage carry
+# meaning; for xsd or rdf they carry none. But a consumer expanding a CURIE from
+# a mapping spec still has to resolve `xsd:decimal`, so the mapping has to exist
+# somewhere — and putting it in this file keeps one prefix authority rather than
+# two that can disagree.
+#
+# Values must match `specs/current/celine.jsonld`'s @context, which is where the
+# ontology itself declares them.
+prefixes:
+  celine: https://w3id.org/celine-eu#
+  dcat: http://www.w3.org/ns/dcat#
+  dct: http://purl.org/dc/terms/
+  owl: http://www.w3.org/2002/07/owl#
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  skos: http://www.w3.org/2004/02/skos/core#
+  time: http://www.w3.org/2006/time#
+  xsd: http://www.w3.org/2001/XMLSchema#
