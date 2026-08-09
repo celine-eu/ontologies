@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.6.0 (2026-08-09)
+
+### Features
+
+- Add s4ehaw and emkpi
+  ([`17aaa4e`](https://github.com/celine-eu/ontologies/commit/17aaa4ea03906f42e897865c83adba3d8b57644f))
+
+
 ## v1.5.0 (2026-08-09)
 
 ### Features
