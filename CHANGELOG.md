@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.6.1 (2026-08-09)
+
+### Bug Fixes
+
+- Add seas prefix
+  ([`b132c62`](https://github.com/celine-eu/ontologies/commit/b132c621bec7ac71b3969d2e5444960fa46800c8))
+
+
 ## v1.6.0 (2026-08-09)
 
 ### Features
