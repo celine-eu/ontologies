@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.5.0 (2026-08-09)
+
+### Features
+
+- Add registry, update open repository
+  ([`eed1b34`](https://github.com/celine-eu/ontologies/commit/eed1b34cc38c837a12b339eb8719ba2a74ae3456))
+
+
 ## v1.4.0 (2026-08-08)
 
 ### Chores
