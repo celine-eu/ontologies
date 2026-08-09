@@ -119,15 +119,16 @@ ontologies:
     license: "W3C"
 
   - name: SEAS Ontology
-    # No prefix/namespace: the definitions URL below answered HTTP 500 when read
-    # (2026-08-09), so the namespace could not be taken from the ontology itself.
-    # `https://w3id.org/seas/` is the widely-cited value but is not verified here,
-    # and a wrong namespace expands every term to a wrong IRI — silently. Nothing
-    # references SEAS yet; fill this in from the source when something does.
+    # The namespace is the *latest published version* IRI, not the versioned one:
+    # v1.0 is published at https://w3id.org/seas/seas-1.0, but terms are minted
+    # under https://w3id.org/seas/. Binding the prefix to the versioned IRI would
+    # expand every term to an address that moves at the next release.
+    prefix: seas
+    namespace: https://w3id.org/seas/
     description: Cross-domain ontology for energy systems, IoT, flexibility and grid.
     link: https://ci.mines-stetienne.fr/seas/
     definitions:
-      - https://ci.mines-stetienne.fr/seas/seas-1.0.ttl
+      - https://w3id.org/seas/seas-1.0
     keywords: [energy, IoT, grid, flexibility]
     license: "Apache-2.0"
 
