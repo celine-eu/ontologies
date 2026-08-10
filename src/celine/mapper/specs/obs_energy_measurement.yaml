@@ -1,0 +1,123 @@
+# One energy measurement per row — the shape every CELINE energy producer can
+# publish, and the only observation spec in this directory that a standard
+# actually sanctions.
+#
+# Bound today to three tables, all in `celine-pipelines`:
+#
+#   ds_dev_gold.meters_measurements_15m          (apps/rec_metering)
+#   ds_dev_gold.rec_measurements_15m             (apps/rec_it)
+#   ds_dev_gold.rec_measurements_per_device_15m  (apps/rec_it)
+#
+# Source columns: observation_id, result_time, device_id, rec_id, substation_id,
+#                 feature_iri, sensor_iri, observed_property, value, unit
+#
+# ── Why this exists rather than obs_meter_energy / obs_rec_energy ─────────────
+#
+# Those two map a *wide* row — three or four quantities side by side — onto a
+# single node, which no observation vocabulary permits. sosa:Observation carries
+# exactly one sosa:observedProperty (SSN states it as a cardinality restriction),
+# saref:PropertyValue exactly one saref:hasValue, cim:IntervalReading one value.
+# So the second and third quantities went somewhere they do not belong:
+#
+#     consumption_kwh   → sosa:hasSimpleResult   # the result
+#     production_kwh    → peco:has_quantity      # a spare slot
+#     self_consumed_kwh → rdf:value              # another spare slot
+#
+# peco:has_quantity and rdf:value are not "the second result". Nothing
+# dereferences that reading and no test contradicts it — the same failure class
+# as the cim:Company alignment. One row with N quantities is N observations, in
+# every one of these standards, and that is not a gap in any of them.
+#
+# ── Why SOSA and not SAREF, given CEEDS INT-27 recommends SAREF ───────────────
+#
+# Because SAREF now says so. saref:Measurement is owl:deprecated in SAREF core
+# v3.2.1 — *"in favour of saref:Observation, to generalize to observation of
+# states and convergence with SOSA/SSN"* — and saref:Energy, saref:Power and the
+# unit individuals are deprecated with it. SOSA also supplies
+# sosa:hasSimpleResult, which is the standards-sanctioned way to put a literal
+# result directly on an observation; SAREF has no equivalent and would need an
+# intermediate saref:PropertyValue node that a flat row cannot mint.
+#
+# SAREF is still where the *device* side belongs (see rec_asset.yaml,
+# saref:Device), and CIM is still where the grid side belongs (grid_substation.
+# yaml). This spec is the observation structure, and SAREF's own release notes
+# point at SOSA for it.
+#
+# ── Absolute IRIs in the data, deliberately ──────────────────────────────────
+#
+# `observed_property`, `feature_iri`, `sensor_iri` and `unit` carry **absolute
+# IRIs**, not bare keys or CURIEs. A derived JSON-LD context can only say
+# `"@type": "@id"`; it cannot carry an iri_template, and it declares only the
+# prefixes its *targets* use. So a column holding `unit:KiloW-HR` or a bare
+# `AC221E00014` expands to a **relative** IRI against whatever URL the consumer
+# fetched the context from — silently, and differently per consumer.
+#
+# Every other spec in this directory has that defect (kind: iri + iri_template
+# over a bare-key column). Here it is pushed to the producing side instead: the
+# dbt view emits the full IRI, and the context is correct as served.
+version: "1"
+target_type: "sosa:Observation"
+
+# Keyed on the view's own surrogate, which is an md5 of the full grain. The
+# grain differs per source table — (device_id, ts, property) for metering,
+# (rec_id, substation_id, ts, property) for the community models — so hashing it
+# upstream is what lets one id_template serve all three.
+id_template: "https://w3id.org/celine-eu/id/observation/{observation_id}"
+
+fields:
+  - source: observation_id
+    target: "dct:identifier"
+    datatype: xsd:string
+    required: true
+
+  - source: result_time
+    target: "sosa:resultTime"
+    datatype: xsd:dateTime
+    required: true
+
+  # What was observed: one of the celine: observable properties declared in
+  # ontology v0.10. CELINE terms because no standard has them —
+  # quantitykind:Energy does not tell grid import from grid export, and that
+  # distinction is the entire content of a REC settlement.
+  - source: observed_property
+    target: "sosa:observedProperty"
+    kind: iri
+    required: true
+
+  - source: value
+    target: "sosa:hasSimpleResult"
+    datatype: xsd:decimal
+
+  # QUDT, because a measurement without a unit is a number. saref:isMeasuredIn
+  # would have been the SAREF-native choice and its unit individuals are
+  # deprecated; celine:UnitOfMeasure is a four-concept SKOS scheme that resolves
+  # for nobody outside CELINE.
+  - source: unit
+    target: "qudt:hasUnit"
+    kind: iri
+
+  # The thing the reading is about — a connection point, a device, a community,
+  # a substation. Which of those it is varies by source table, which is why the
+  # view resolves it to an IRI rather than leaving the consumer to guess from
+  # whichever of rec_id / substation_id / device_id happens to be non-null.
+  - source: feature_iri
+    target: "sosa:hasFeatureOfInterest"
+    kind: iri
+
+  # Null at community scope: an aggregate over a substation is made by no single
+  # sensor, and asserting one would be inventing a provenance the data lacks.
+  - source: sensor_iri
+    target: "sosa:madeBySensor"
+    kind: iri
+
+# Deliberately unmapped: `device_id`, `rec_id` and `substation_id`.
+#
+# They are **governance columns, not semantic ones**. `device_id` is what the
+# `rec_registry` row filter matches on, so it has to survive into every view
+# verbatim or the filter silently stops constraining anything — the columns are
+# carried for that reason, and `feature_iri` / `sensor_iri` already state the
+# same facts in the form the ontology wants.
+#
+# Mapping them as well would put two terms in the context for one fact, and the
+# obvious target — dct:identifier — is already the observation's own identifier.
+# A device's identifier is not the observation's.

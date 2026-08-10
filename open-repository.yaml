@@ -279,6 +279,33 @@ ontologies:
     keywords: [energy, generation, storage, loads]
     license: "ETSI-Open"
 
+  - name: QUDT
+    # The *schema* namespace, which is where the properties live — qudt:hasUnit
+    # and qudt:hasQuantityKind. Note the `#` separator and the `http` scheme.
+    # Verified by dereferencing http://qudt.org/vocab/unit/KiloW-HR, which types
+    # itself qudt:Unit and resolves; QUDT is one of the few vocabularies here
+    # that can be checked that way (contrast CIM, whose IRIs answer 403).
+    #
+    # QUDT's units and quantity kinds sit in two further namespaces, declared
+    # under `prefixes:` below rather than here: they hold no terms a mapping
+    # *targets*, only values a column *carries*.
+    #
+    # Registered because a measurement without a unit is a number, and nothing
+    # already in this file supplies one. saref:isMeasuredIn ranges over
+    # saref:UnitOfMeasure, but SAREF's own unit individuals are deprecated as of
+    # v3.2.1; celine:UnitOfMeasure is a four-concept SKOS scheme aligned to UCUM,
+    # which is a CELINE-internal answer to a question the standards already
+    # answer. See `celine-dev/.agents/ontologies/qudt-alignment.md` for the
+    # closeMatch alignment that owes.
+    prefix: qudt
+    namespace: http://qudt.org/schema/qudt#
+    description: Quantities, units, dimensions and datatypes — the unit and quantity-kind authority.
+    link: https://qudt.org
+    definitions:
+      - https://qudt.org/3.1.0/schema/qudt
+    keywords: [units, quantities, measurement, dimensions]
+    license: "CC-BY-4.0"
+
   # - name: SSCO - Solar Soft Cost Ontology
   #   description: Ontology describing soft-cost structures in residential solar PV.
   #   link: https://github.com/RaiResearchGroup/SSCO
@@ -324,3 +351,19 @@ prefixes:
   skos: http://www.w3.org/2004/02/skos/core#
   time: http://www.w3.org/2006/time#
   xsd: http://www.w3.org/2001/XMLSchema#
+
+  # QUDT's two value namespaces, kept here rather than on the QUDT entry above
+  # for the same reason xsd is here: nothing targets a term in them. A mapping
+  # points `qudt:hasUnit` at a column, and that column's *values* are
+  # `unit:KiloW-HR` or `quantitykind:Energy`.
+  #
+  # That distinction has a consequence worth stating, because it is a live
+  # limitation rather than a nicety. A derived JSON-LD context declares only the
+  # prefixes its *targets* use (dataset-api `vocabulary.py:_collect_prefixes`),
+  # so declaring these two here does not put them in a served context. A column
+  # typed `"@type": "@id"` whose value is the CURIE `unit:KiloW-HR` is therefore
+  # a **relative IRI** to a consumer, resolved against whatever URL it fetched
+  # the context from. The fix is on the producing side: emit absolute IRIs in
+  # the column, which is what the measurement views in `celine-pipelines` do.
+  unit: http://qudt.org/vocab/unit/
+  quantitykind: http://qudt.org/vocab/quantitykind/

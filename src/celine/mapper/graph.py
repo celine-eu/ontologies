@@ -169,11 +169,20 @@ class CelineGraphBuilder:
         combined += graph
         combined.parse(str(self._ontology_path), format="turtle")
 
+        # `advanced=True` is required, not optional. A large share of the profile
+        # — every `*ConceptShape`, and the v0.10 `celine:DefinedTermLabelShape`
+        # that guards against one IRI being minted twice — selects its focus
+        # nodes with `sh:target [ a sh:SPARQLTarget ]`. That is a SHACL Advanced
+        # Features construct; with advanced off pyshacl does not report it as
+        # unsupported, it simply finds no focus nodes and those shapes pass
+        # vacuously. The profile then validates everything it was written to
+        # catch.
         conforms, report_graph, report_text = pyshacl.validate(
             data_graph=combined,
             shacl_graph=shacl_graph,
             inference="none",
             abort_on_first=False,
+            advanced=True,
         )
 
         violations: list[str] = []

@@ -68,6 +68,76 @@
   ([`658067b`](https://github.com/celine-eu/ontologies/commit/658067bb3b108f38b378200c0491f889810f66b4))
 
 
+## Ontology v0.10 (2026-08-09)
+
+Additive. Names what a REC energy dataset reports, so `sosa:observedProperty` has a
+target that resolves. Nothing removed or retyped; v0.9 instance data validates unchanged.
+
+### Added
+
+- **Six `sosa:ObservableProperty` individuals**: `celine:GridImportEnergy`,
+  `celine:GridExportEnergy`, `celine:SelfConsumedEnergy`,
+  `celine:CollectivelySharedEnergy`, `celine:VirtualConsumedEnergy` and
+  `celine:SelfConsumptionRatio`, each with a `qudt:hasQuantityKind`. CELINE terms because
+  no standard has them: `quantitykind:Energy` is the right quantity kind for five of the
+  six and is asserted on each, but it does not distinguish energy drawn from the grid from
+  energy fed into it, and that distinction is the whole content of a REC settlement.
+- **QUDT prefixes** `qudt`, `quantitykind` and `unit`, in `celine.ttl` and the
+  `celine.jsonld` `@context`. No `owl:imports` added. Nothing already present supplied a
+  unit: `saref:isMeasuredIn` ranges over `saref:UnitOfMeasure` whose individuals are
+  deprecated as of SAREF core v3.2.1, and `celine:UnitOfMeasure` is a four-concept SKOS
+  scheme that resolves for nobody outside CELINE.
+- **`rdfs:seeAlso` between the new properties and their `celine:KPICatalog` counterparts**
+  (`GridImportEnergy`↔`WithdrawnEnergy`, `GridExportEnergy`↔`FedInEnergy`,
+  `CollectivelySharedEnergy`↔`SharedEnergy`,
+  `VirtualConsumedEnergy`↔`SharedEnergyMemberShare`,
+  `SelfConsumptionRatio`↔`SelfConsumptionRate`). A KPIDefinition is a period total or
+  rate; an ObservableProperty is what one observation measures over one interval. Linked,
+  not merged — `skos:closeMatch` is not used because an ObservableProperty is not a
+  `skos:Concept` here.
+- **`celine:DefinedTermLabelShape`** in `celine.shacl.ttl`: `sh:uniqueLang` on `rdfs:label`
+  and `skos:prefLabel` across every term carrying `rdfs:isDefinedBy <https://w3id.org/celine-eu>`.
+- **JSON-LD `@context` terms** for the observation vocabulary the mapper emits —
+  `observedProperty`, `hasSimpleResult`, `resultTime`, `hasFeatureOfInterest`,
+  `madeBySensor`, `hasUnit`, `hasQuantityKind` — and `@graph` entries for the six
+  individuals. A `sosa:Observation` `$def` is added to `celine.schema.json`.
+
+### Notes
+
+- **Why SOSA and not SAREF**, despite CEEDS INT-27: `saref:Measurement` is `owl:deprecated`
+  in SAREF core v3.2.1 *"in favour of saref:Observation, to generalize to observation of
+  states and convergence with SOSA/SSN"*, taking `saref:Energy` and `saref:Power` with it.
+  SOSA also supplies `sosa:hasSimpleResult`, the sanctioned way to put a literal result on
+  an observation without an intermediate node a flat row cannot mint. SAREF remains correct
+  for the device side, CIM for the grid side.
+- **Why `CollectivelySharedEnergy` and not `SharedEnergy`**: the latter is a KPICatalog
+  concept released in v0.5. The first draft of v0.10 reused the IRI, leaving one node with
+  three `rdf:type`s and two conflicting `rdfs:label`@en. Every existing check passed —
+  Turtle parsed, SHACL validated, tests green — because nothing looked at the labels.
+  `celine:DefinedTermLabelShape` exists to close that gap.
+- **`celine:SelfConsumptionRatio` ≠ `celine:SelfConsumptionRate`.** Different denominators:
+  the property is shared energy over grid export per substation, the KPI is over local
+  production at community scope.
+- Names follow the *meaning* of the dbt columns, not the column names:
+  `total_consumption_kwh` is grid import, `total_production_kwh` is grid export, and
+  `self_consumption_kwh` is collectively shared energy.
+
+### Fixed
+
+- **`pyshacl` advanced mode** in `celine.mapper.graph.CelineGraphBuilder.validate_shacl`.
+  Every `sh:target [ a sh:SPARQLTarget ]` shape in the profile — all the `*ConceptShape`s,
+  and now `DefinedTermLabelShape` — had been finding no focus nodes and passing vacuously,
+  without any warning that the construct was unsupported.
+
+### Deferred
+
+- Forecast observable properties. `obs_meter_forecast`, `obs_pv_forecast` and
+  `obs_rec_forecast` still point `sosa:observedProperty` at undeclared
+  `https://w3id.org/celine/property/*` IRIs; v0.10 mints the measured properties only.
+- `skos:closeMatch` from `celine:UnitOfMeasure` concepts to their QUDT units.
+- A `sosa:Observation` shape in `celine.shacl.ttl`.
+- SHACL shapes for v0.6 grid topology and asset classes.
+
 ## Ontology v0.9 (2026-08-09)
 
 Conformance fix. No new terms; nothing removed or retyped.

@@ -1,3 +1,16 @@
+# ⚠ SUPERSEDED by obs_energy_measurement.yaml — do not bind new datasets to this.
+#
+# This spec maps a wide row onto a single sosa:Observation, which SSN forbids:
+# an Observation carries exactly one sosa:observedProperty. The second and third
+# quantities are therefore parked on `peco:has_quantity` and `rdf:value`, which
+# are not "the second result" — they were reached for because the row had
+# nowhere else to put the numbers. Nothing dereferences that and no test
+# contradicts it.
+#
+# Kept, unbound, because the graph-builder tests and fixtures exercise it. The
+# replacement takes one quantity per row from the `*_measurements_*` views in
+# celine-pipelines. See obs_energy_measurement.yaml for the full reasoning.
+#
 # Maps rows from ds_dev_gold.rec_virtual_consumption_15m (and _hourly, which
 # emits the same columns) to sosa:Observation nodes.
 #
