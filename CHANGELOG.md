@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.8.0 (2026-08-10)
+
+### Features
+
+- Add v0.10
+  ([`83707d8`](https://github.com/celine-eu/ontologies/commit/83707d86c0584138e584ca829cfe76d891179f7e))
+
+
 ## v1.7.0 (2026-08-09)
 
 ### Features
