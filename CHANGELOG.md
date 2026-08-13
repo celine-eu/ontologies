@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.9.0 (2026-08-13)
+
+### Features
+
+- Update utils
+  ([`bcd0634`](https://github.com/celine-eu/ontologies/commit/bcd063495fa38f2e3e1be4fa5b8fbd4152e3d0a8))
+
+
 ## v1.8.0 (2026-08-10)
 
 ### Features
