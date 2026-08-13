@@ -3,7 +3,24 @@ name = "celine-ontologies"
 version = "1.8.0"
 description = "CELINE Ontologies support libraries"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.10"
+
+# The supported range, proven rather than assumed: `test.yml` builds its matrix
+# from these classifiers, so a version listed here is a version CI runs.
+#
+# The floor was `>=3.12` with nothing behind it — the runtime dependencies are
+# `jsonschema` and `pyyaml`, which have supported 3.8 for years, and the extras
+# (`rdflib`, `pyshacl`, `typer`, `httpx`) do not push it either. Dependency
+# resolution succeeds as low as 3.9; 3.10 is chosen to match the rest of the
+# platform rather than because 3.9 fails. The old floor reached `dataset-api`,
+# which had no need of it.
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
 dependencies = [
     "jsonschema>=4.0",
     "pyyaml>=6.0",
@@ -24,9 +41,15 @@ all = [
 ]
 
 [dependency-groups]
-dev = [
-    "python-semantic-release>=10.5.3",
+# `test` is what the CI matrix installs and must work on every supported
+# version; `dev` adds release tooling that only runs on a maintainer's machine.
+# Keeping them apart stops a tool's own floor from dictating the package's.
+test = [
     "pytest>=9.0.2",
+]
+dev = [
+    { include-group = "test" },
+    "python-semantic-release>=10.5.3; python_version >= '3.11'",
 ]
 
 [tool.uv]  # optional, helps uv handle locking
