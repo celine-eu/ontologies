@@ -1,6 +1,6 @@
 [project]
 name = "celine-ontologies"
-version = "1.10.0"
+version = "1.10.1"
 description = "CELINE Ontologies support libraries"
 readme = "README.md"
 requires-python = ">=3.10"

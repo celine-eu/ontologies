@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.10.1 (2026-08-14)
+
+### Bug Fixes
+
+- Update workflow
+  ([`a446ba4`](https://github.com/celine-eu/ontologies/commit/a446ba41f01060c52728285cbfbd3de1d6fdcc6a))
+
+
 ## v1.10.0 (2026-08-14)
 
 ### Chores
