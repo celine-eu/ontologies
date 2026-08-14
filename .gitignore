@@ -7,3 +7,6 @@ dist
 .claude
 plan.md
 .agents
+
+# Agent harness staging area — promoted by hand, never committed
+.harness/
