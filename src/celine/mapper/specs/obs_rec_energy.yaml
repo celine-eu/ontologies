@@ -25,6 +25,14 @@
 # took `community_key` from the caller's context while the rows carry `rec_id` and
 # `substation_id` of their own.
 version: "1"
+
+# The ontology profile whose shapes validate this mapping's output. Pinned,
+# not left to resolve: a dataset bound to this spec asserts conformance
+# against these shapes, and a later ontology release must not decide
+# retroactively that it stopped conforming.
+profile:
+  name: celine
+  version: v0.10
 target_type: "sosa:Observation"
 
 # Keyed on all three of (rec_id, substation_id, ts) because that is the model's

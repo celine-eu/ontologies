@@ -57,6 +57,25 @@ class FieldMapping:
 
 
 @dataclass(frozen=True)
+class ProfilePin:
+    """Which ontology profile, at which version, can validate this mapping.
+
+    ``version`` is optional: an unpinned spec resolves to the newest packaged
+    version of ``name`` at validation time. That is legal and is what every spec
+    did before pins existed, but it is a weaker assertion — the shapes that ran
+    are whatever the deployed library happened to carry — so the two cases stay
+    distinguishable rather than being collapsed to a default.
+    """
+
+    name: str
+    version: str | None = None
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> "ProfilePin":
+        return cls(name=data["name"], version=data.get("version"))
+
+
+@dataclass(frozen=True)
 class MappingSpec:
     """Declarative spec mapping an input dict to a JSON-LD node."""
 
@@ -66,9 +85,14 @@ class MappingSpec:
     fields: tuple[FieldMapping, ...]
     context_vars: tuple[str, ...] = field(default_factory=tuple)
     label_template: str | None = None
+    # The ontology profile, not the spec format version — `version` above is
+    # the format ("1"). The two are unrelated and both are called version by
+    # convention elsewhere, so they are kept apart by name here.
+    profile: ProfilePin | None = None
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "MappingSpec":
+        profile = data.get("profile")
         return cls(
             version=data["version"],
             target_type=data["target_type"],
@@ -76,6 +100,7 @@ class MappingSpec:
             fields=tuple(FieldMapping.from_dict(f) for f in data.get("fields", [])),
             context_vars=tuple(data.get("context_vars", [])),
             label_template=data.get("label_template"),
+            profile=ProfilePin.from_dict(profile) if profile else None,
         )
 
     @classmethod
@@ -105,6 +130,17 @@ class MappingSpecLoader:
 
     def load_from_string(self, text: str, source: str = "<string>") -> MappingSpec:
         data = yaml.safe_load(text)
+        return self._parse(data, source=source)
+
+    def load_from_dict(self, data: dict[str, Any], source: str = "<dict>") -> MappingSpec:
+        """Load an already-parsed mapping document, schema-validated.
+
+        For consumers that store the resolved mapping rather than a file —
+        ``dataset-api`` materializes it into a JSON column at import and has no
+        path to point at. The alternative they would otherwise reach for,
+        ``MappingSpec.from_dict``, skips the schema entirely; this is the same
+        call with the validation left in.
+        """
         return self._parse(data, source=source)
 
     def load_by_name(self, name: str) -> MappingSpec:

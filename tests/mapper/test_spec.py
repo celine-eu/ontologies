@@ -123,3 +123,48 @@ def test_field_mapping_nested_fields() -> None:
     assert fm.kind == "nested"
     assert len(fm.nested_fields) == 1
     assert fm.nested_fields[0].required is True
+
+
+# ---------------------------------------------------------------------------
+# Loading an already-parsed document
+# ---------------------------------------------------------------------------
+
+def test_load_from_dict_validates() -> None:
+    """The point of this entry point is that it keeps the schema check.
+
+    A consumer holding the mapping as a dict — dataset-api stores it in a JSON
+    column — would otherwise reach for `MappingSpec.from_dict`, which skips
+    validation entirely, or round-trip through a temp YAML file.
+    """
+    from celine.mapper.spec import MappingSpecLoader, SpecValidationError
+
+    loader = MappingSpecLoader()
+    spec = loader.load_from_dict(
+        {
+            "version": "1",
+            "target_type": "sosa:Observation",
+            "id_template": "obs/{{ row.id }}",
+            "fields": [],
+            "profile": {"name": "celine", "version": "v0.10"},
+        }
+    )
+    assert spec.profile.name == "celine"
+    assert spec.profile.version == "v0.10"
+
+    with pytest.raises(SpecValidationError):
+        loader.load_from_dict({"version": "1", "target_type": "sosa:Observation"})
+
+
+def test_profile_is_optional() -> None:
+    """Unpinned stays legal — it is what every spec was before pins existed."""
+    from celine.mapper.spec import MappingSpecLoader
+
+    spec = MappingSpecLoader().load_from_dict(
+        {
+            "version": "1",
+            "target_type": "sosa:Observation",
+            "id_template": "obs/{{ row.id }}",
+            "fields": [],
+        }
+    )
+    assert spec.profile is None

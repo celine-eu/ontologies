@@ -19,6 +19,14 @@
 # Corrected 2026-08-09: the model emits kWh, not kW. Energy, not power — and
 # xsd:decimal carries no unit to contradict a wrong reading.
 version: "1"
+
+# The ontology profile whose shapes validate this mapping's output. Pinned,
+# not left to resolve: a dataset bound to this spec asserts conformance
+# against these shapes, and a later ontology release must not decide
+# retroactively that it stopped conforming.
+profile:
+  name: celine
+  version: v0.10
 target_type: "sosa:Observation"
 id_template: "https://w3id.org/celine/obs/meter/{device_id}/{ts}"
 

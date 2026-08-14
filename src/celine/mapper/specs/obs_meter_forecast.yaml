@@ -6,6 +6,14 @@
 #   total_production_lower, total_production_upper,
 #   total_consumption_lower, total_consumption_upper, pct_autoconsumption
 version: "1"
+
+# The ontology profile whose shapes validate this mapping's output. Pinned,
+# not left to resolve: a dataset bound to this spec asserts conformance
+# against these shapes, and a later ontology release must not decide
+# retroactively that it stopped conforming.
+profile:
+  name: celine
+  version: v0.10
 target_type: "peco:Forecast"
 id_template: "https://w3id.org/celine/forecast/meter/{device_id}/{timestamp}"
 

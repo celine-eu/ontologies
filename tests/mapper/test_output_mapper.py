@@ -124,3 +124,26 @@ def test_executor_pattern() -> None:
         assert "@id" in item
         assert "@type" in item
         assert item["@type"] == "sosa:Observation"
+
+
+def test_from_mapping_matches_from_yaml_path() -> None:
+    """The dict entry point is the same mapper, not a second code path.
+
+    dataset-api holds the resolved mapping as a dict and has no file to point
+    at; if the two disagreed, a conformance report would be about a different
+    mapping than the one `/vocabulary` describes.
+    """
+    import yaml
+
+    from celine.mapper.output_mapper import OutputMapper
+
+    spec_path = SPECS_DIR / "obs_rec_energy.yaml"
+    context = {"community_key": "it-folgaria"}
+    with (FIXTURES_DIR / "rec_energy_rows.json").open() as fh:
+        rows = json.load(fh)
+
+    from_path = OutputMapper.from_yaml_path(spec_path, context=context)
+    from_dict = OutputMapper.from_mapping(
+        yaml.safe_load(spec_path.read_text(encoding="utf-8")), context=context
+    )
+    assert from_dict.map_many(rows) == from_path.map_many(rows)

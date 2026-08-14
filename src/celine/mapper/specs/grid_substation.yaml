@@ -18,6 +18,14 @@
 # pattern — `cim:Substation.Region` looks plausible and does not exist, while
 # `cim:Substation.SubGeographicalRegion` does.
 version: "1"
+
+# The ontology profile whose shapes validate this mapping's output. Pinned,
+# not left to resolve: a dataset bound to this spec asserts conformance
+# against these shapes, and a later ontology release must not decide
+# retroactively that it stopped conforming.
+profile:
+  name: celine
+  version: v0.10
 target_type: "cim:Substation"
 id_template: "https://w3id.org/celine/substation/{asset_id}"
 

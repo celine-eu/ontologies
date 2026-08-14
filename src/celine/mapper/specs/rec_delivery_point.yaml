@@ -1,6 +1,14 @@
 # Maps a DeliveryPointSchema dict (from rec-registry get_delivery_point_by_id()
 # or embedded in MemberDetailSchema.delivery_points) to peco:Electric_POD.
 version: "1"
+
+# The ontology profile whose shapes validate this mapping's output. Pinned,
+# not left to resolve: a dataset bound to this spec asserts conformance
+# against these shapes, and a later ontology release must not decide
+# retroactively that it stopped conforming.
+profile:
+  name: celine
+  version: v0.10
 target_type: "peco:Electric_POD"
 id_template: "https://w3id.org/celine/pod/{id}"
 

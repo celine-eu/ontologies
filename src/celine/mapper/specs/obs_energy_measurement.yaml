@@ -56,6 +56,14 @@
 # over a bare-key column). Here it is pushed to the producing side instead: the
 # dbt view emits the full IRI, and the context is correct as served.
 version: "1"
+
+# The ontology profile whose shapes validate this mapping's output. Pinned,
+# not left to resolve: a dataset bound to this spec asserts conformance
+# against these shapes, and a later ontology release must not decide
+# retroactively that it stopped conforming.
+profile:
+  name: celine
+  version: v0.10
 target_type: "sosa:Observation"
 
 # Keyed on the view's own surrogate, which is an md5 of the full grain. The

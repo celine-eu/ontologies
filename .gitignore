@@ -6,3 +6,4 @@ dist
 .pytest_cache
 .claude
 plan.md
+.agents

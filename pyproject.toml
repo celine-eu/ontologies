@@ -71,8 +71,48 @@ sources = {"src" = ""}
 # The cost, accepted deliberately: a tagged celine-ontologies release now tracks
 # registry updates. The alternative was fetching it published at startup, which
 # makes a cold boot depend on an external host.
+#
+# The ontology profiles are force-included for the same reason and at a larger
+# scale: `specs/` sits outside `only-include`, so `CelineGraphBuilder`'s defaults
+# resolved to `<site-packages>/specs/current` — a path that cannot exist in a
+# deployment — and every installed consumer failed at construction. Shapes now
+# travel with the library that produces the graph they validate.
+#
+# Three versions, not one. A dataset pins the version its mapping was written
+# against (see `profile` in mapping_spec.schema.json); a newer ontology release
+# must not retroactively invalidate it, so the window has to hold more than
+# `current`. Dropping or adding a version is an edit to this block and nothing
+# else.
+#
+# Only the four machine-consumed files per version. `README.md`, `widoco.conf`,
+# `sections/` and `examples/` are documentation inputs and stay out — listing
+# files rather than copying directories is what keeps that true by construction.
+#
+# `specs/current/` is deliberately absent: it is a byte copy of the newest
+# version, so packaging it would ship the same bytes twice and give "which
+# version is this" two answers. `current` is a resolution rule in profiles.py —
+# the highest packaged version — not a directory.
+#
+# The destination is `ontology_profiles/`, not `profiles/`, because
+# `celine/mapper/profiles.py` is a module: a sibling directory of the same name
+# is a namespace-package portion competing with it for the import name.
 [tool.hatch.build.targets.wheel.force-include]
 "open-repository.yaml" = "celine/mapper/open-repository.yaml"
+
+"specs/v0.8/celine.ttl" = "celine/mapper/ontology_profiles/celine/v0.8/ontology.ttl"
+"specs/v0.8/celine.shacl.ttl" = "celine/mapper/ontology_profiles/celine/v0.8/shapes.ttl"
+"specs/v0.8/celine.jsonld" = "celine/mapper/ontology_profiles/celine/v0.8/context.jsonld"
+"specs/v0.8/celine.schema.json" = "celine/mapper/ontology_profiles/celine/v0.8/schema.json"
+
+"specs/v0.9/celine.ttl" = "celine/mapper/ontology_profiles/celine/v0.9/ontology.ttl"
+"specs/v0.9/celine.shacl.ttl" = "celine/mapper/ontology_profiles/celine/v0.9/shapes.ttl"
+"specs/v0.9/celine.jsonld" = "celine/mapper/ontology_profiles/celine/v0.9/context.jsonld"
+"specs/v0.9/celine.schema.json" = "celine/mapper/ontology_profiles/celine/v0.9/schema.json"
+
+"specs/v0.10/celine.ttl" = "celine/mapper/ontology_profiles/celine/v0.10/ontology.ttl"
+"specs/v0.10/celine.shacl.ttl" = "celine/mapper/ontology_profiles/celine/v0.10/shapes.ttl"
+"specs/v0.10/celine.jsonld" = "celine/mapper/ontology_profiles/celine/v0.10/context.jsonld"
+"specs/v0.10/celine.schema.json" = "celine/mapper/ontology_profiles/celine/v0.10/schema.json"
 
 [tool.ruff]
 line-length = 100

@@ -1,6 +1,14 @@
 # Maps an AssetDetailSchema dict (from rec-registry list_assets() / get_asset())
 # to saref:Device.
 version: "1"
+
+# The ontology profile whose shapes validate this mapping's output. Pinned,
+# not left to resolve: a dataset bound to this spec asserts conformance
+# against these shapes, and a later ontology release must not decide
+# retroactively that it stopped conforming.
+profile:
+  name: celine
+  version: v0.10
 target_type: "saref:Device"
 id_template: "https://w3id.org/celine/device/{key}"
 label_template: "{name}"

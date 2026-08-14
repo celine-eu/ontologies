@@ -51,6 +51,24 @@ class OutputMapper:
         spec = MappingSpecLoader().load(path)
         return cls(spec=spec, context=context, base_uri=base_uri)
 
+    @classmethod
+    def from_mapping(
+        cls,
+        mapping: dict[str, Any],
+        context: dict[str, Any] | None = None,
+        base_uri: str = "https://w3id.org/celine/",
+    ) -> "OutputMapper":
+        """Construct from an already-parsed mapping document.
+
+        The form a consumer has when the spec was resolved elsewhere and stored
+        — ``dataset-api`` keeps it in a JSON column on the catalogue entry.
+        Schema-validated, like the file path variant: without this the caller
+        round-trips a dict through a temporary YAML file, which is how the
+        validation quietly stops happening.
+        """
+        spec = MappingSpecLoader().load_from_dict(mapping)
+        return cls(spec=spec, context=context, base_uri=base_uri)
+
     def map(self, row: dict[str, Any]) -> dict[str, Any]:
         """Map a single input row to a JSON-LD node dict.
 

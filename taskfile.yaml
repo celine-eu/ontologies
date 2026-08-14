@@ -1,6 +1,44 @@
 version: "3"
 
 tasks:
+  verify:wheel:
+    desc: >-
+      Build the wheel and load every packaged ontology profile from a venv that
+      is NOT this checkout. The suite cannot prove this: run from the repo root,
+      profile resolution falls back to `specs/`, so "packaged correctly" and
+      "found the source tree" look identical — which is exactly how the old
+      `<site-packages>/specs/current` default survived until deployment.
+    vars:
+      OUT: '{{.OUT | default "/tmp/celine-ontologies-wheelcheck"}}'
+    cmds:
+      - |
+        set -e
+        rm -rf "{{.OUT}}"
+        uv build --wheel -o "{{.OUT}}/dist"
+        uv venv "{{.OUT}}/venv"
+        uv pip install --python "{{.OUT}}/venv/bin/python" \
+          "$(ls {{.OUT}}/dist/*.whl)[mapper]"
+        # Run from /tmp: cwd must not be the checkout, or `specs/` is reachable
+        # again through the fallback and the check proves nothing.
+        cd "{{.OUT}}" && "{{.OUT}}/venv/bin/python" -c '
+        from celine.mapper import GraphBuilder, MappingSpecLoader
+        from celine.mapper.profiles import available_profiles, load_profile
+
+        found = available_profiles()
+        assert found.get("celine"), "no packaged celine profile in the wheel"
+        for version in found["celine"]:
+            profile = load_profile("celine", version)
+            assert profile.source == "packaged", f"{version} resolved from {profile.source}"
+            print("ok", profile)
+
+        for name in MappingSpecLoader.available():
+            spec = MappingSpecLoader().load_by_name(name)
+            builder = GraphBuilder.for_spec(spec)
+            result = builder.validate_shacl(builder.to_rdf_graph(builder.build_document([])))
+            assert result.conforms, f"{name}: {result}"
+        print("ok", len(MappingSpecLoader.available()), "specs resolve their pinned profile")
+        '
+
   release:
     cmds:
       - uv run semantic-release -v version --no-vcs-release

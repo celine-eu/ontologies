@@ -11,6 +11,24 @@
       "type": "string",
       "enum": ["1"]
     },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "description": "The ontology profile whose SHACL shapes can validate this mapping's output. Absent means the newest packaged CELINE profile, resolved at validation time — legal, but a weaker statement than a pin: the shapes that ran are then whatever the deployed library happened to carry.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Profile name, e.g. 'celine'. Not every mapping targets CELINE — a spec may map purely onto SOSA, SAREF or CIM terms."
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Version pin, e.g. 'v0.10'. Pinning is what stops a newer ontology release from retroactively deciding a dataset stopped conforming; the shipped window of versions is what makes an old pin still resolvable."
+        }
+      }
+    },
     "target_type": {
       "type": "string",
       "minLength": 1,

@@ -4,6 +4,14 @@
 # Source columns: provider, run_time_utc, forecast_time_utc, lat, lon,
 #                 asob_s_wm2, performance_ratio, pv_kwh_per_kwp_hourly
 version: "1"
+
+# The ontology profile whose shapes validate this mapping's output. Pinned,
+# not left to resolve: a dataset bound to this spec asserts conformance
+# against these shapes, and a later ontology release must not decide
+# retroactively that it stopped conforming.
+profile:
+  name: celine
+  version: v0.10
 target_type: "peco:Forecast"
 id_template: "https://w3id.org/celine/forecast/pv/{community_key}/{forecast_time_utc}"
 

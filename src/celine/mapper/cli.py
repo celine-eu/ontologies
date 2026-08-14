@@ -74,10 +74,21 @@ def cmd_shacl_check(
         None, "--context", "-c",
         help='JSON object with context variables.',
     ),
+    profile: Optional[str] = typer.Option(
+        None, "--profile",
+        help="Ontology profile to validate against. Defaults to the spec's own pin.",
+    ),
+    profile_version: Optional[str] = typer.Option(
+        None, "--profile-version",
+        help="Override the spec's version pin — answers 'would this still conform "
+             "under version N+1?' before an upgrade is made.",
+    ),
 ) -> None:
     """Map input rows, build a JSON-LD document, and run SHACL validation."""
     from celine.mapper.output_mapper import OutputMapper  # noqa: PLC0415
-    from celine.mapper.graph import CelineGraphBuilder  # noqa: PLC0415
+    from celine.mapper.graph import GraphBuilder  # noqa: PLC0415
+    from celine.mapper.profiles import ProfileError  # noqa: PLC0415
+    from celine.mapper.spec import MappingSpecLoader  # noqa: PLC0415
 
     context: dict = json.loads(context_json) if context_json else {}
 
@@ -85,10 +96,22 @@ def cmd_shacl_check(
         data = json.load(fh)
     rows = data if isinstance(data, list) else [data]
 
-    mapper = OutputMapper.from_yaml_path(spec_path, context=context)
+    spec = MappingSpecLoader().load(spec_path)
+    mapper = OutputMapper(spec=spec, context=context)
     nodes = mapper.map_many(rows)
 
-    builder = CelineGraphBuilder()
+    try:
+        builder = GraphBuilder.for_spec(spec, profile=profile, version=profile_version)
+    except ProfileError as exc:
+        typer.echo(f"✗ {exc}", err=True)
+        raise typer.Exit(1)
+
+    # Printed on every run, pass or fail. "Conforms" is not a statement on its
+    # own — conforming to v0.8 and to v0.10 are different claims, and an
+    # unpinned spec validated against whatever shipped is a third.
+    pinned = "pinned" if (spec.profile and spec.profile.version) else "unpinned"
+    typer.echo(f"Profile: {builder.profile}  [{pinned}]")
+
     document = builder.build_document(nodes)
 
     try:
@@ -110,6 +133,32 @@ def cmd_shacl_check(
         raise typer.Exit(1)
 
 
+@mapper_app.command("profiles")
+def cmd_profiles() -> None:
+    """List the ontology profiles and versions available to validate against.
+
+    The answer to "what can I pin a mapping spec to" — which should not require
+    unpacking a wheel by hand.
+    """
+    from celine.mapper.profiles import available_profiles, load_profile  # noqa: PLC0415
+
+    found = available_profiles()
+    if not found:
+        typer.echo(
+            "No profiles available. From an installed package this means the wheel "
+            "was built without the force-include block in pyproject.toml.",
+            err=True,
+        )
+        raise typer.Exit(1)
+
+    for name, versions in found.items():
+        newest = load_profile(name)
+        typer.echo(f"{name}  (default: {newest.version}, from {newest.source})")
+        for version in versions:
+            marker = " *" if version == newest.version else ""
+            typer.echo(f"  {version}{marker}")
+
+
 @mapper_app.command("inspect")
 def cmd_inspect(
     spec_path: Path = typer.Argument(..., help="Path to a MappingSpec YAML file."),
@@ -121,6 +170,11 @@ def cmd_inspect(
 
     typer.echo(f"Spec:         {spec_path.name}")
     typer.echo(f"Version:      {spec.version}")
+    if spec.profile:
+        pin = spec.profile.version or "(unpinned — newest available)"
+        typer.echo(f"Profile:      {spec.profile.name} {pin}")
+    else:
+        typer.echo("Profile:      (undeclared — newest CELINE available)")
     typer.echo(f"Target type:  {spec.target_type}")
     typer.echo(f"ID template:  {spec.id_template}")
     if spec.label_template:
