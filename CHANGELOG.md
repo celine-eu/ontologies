@@ -2,6 +2,19 @@
 
 <!-- version list -->
 
+## v1.10.0 (2026-08-14)
+
+### Chores
+
+- Update workflows
+  ([`55b3fc2`](https://github.com/celine-eu/ontologies/commit/55b3fc2171103d06f7023786fd2d76e367aa3032))
+
+### Features
+
+- Package celine ontology in wheel
+  ([`629aba8`](https://github.com/celine-eu/ontologies/commit/629aba8a738f0c12ab9e91ef029ede87e7c222be))
+
+
 ## v1.9.0 (2026-08-13)
 
 ### Features
