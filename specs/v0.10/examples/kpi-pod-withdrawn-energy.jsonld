@@ -1,5 +1,8 @@
 {
-  "@context": "https://w3id.org/celine-eu/v0.5/celine.jsonld",
+  "@context": [
+    "https://w3id.org/celine-eu/v0.10/celine.jsonld",
+    { "ex": "https://example.org/celine/" }
+  ],
   "@graph": [
     {
       "@id": "ex:interval_2025_07",

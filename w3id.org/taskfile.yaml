@@ -1,0 +1,104 @@
+version: "3"
+
+# Local Apache for the w3id.org redirect rules.
+#
+# The rules under test are NOT in this repository. They live in a clone of the
+# w3id.org fork, so the loop is: edit there, `task w3id:test` here, open the PR
+# when it is green. Keeping one copy is deliberate — a second copy in this repo
+# would drift from the one that actually gets submitted.
+
+vars:
+  # Where the w3id.org fork is checked out. Workspace-relative by default, the
+  # same convention the rest of the platform uses; override for any other layout:
+  #   W3ID_CLONE=/path/to/w3id.org task w3id:test
+  CLONE: '{{.W3ID_CLONE | default "../../../../w3id.org"}}'
+  CONTAINER: celine-w3id
+  PORT: '{{.W3ID_PORT | default "8730"}}'
+  HOST: '{{.W3ID_HOST | default "w3id.localhost"}}'
+
+tasks:
+  check:clone:
+    internal: true
+    cmds:
+      - |
+        set -e
+        if [ ! -f "{{.CLONE}}/celine-eu/.htaccess" ]; then
+          echo "No .htaccess at {{.CLONE}}/celine-eu/" >&2
+          echo "" >&2
+          echo "Clone the fork beside the workspace, or point W3ID_CLONE at it:" >&2
+          echo "  git clone git@github.com:celine-eu/w3id.org.git" >&2
+          echo "  W3ID_CLONE=/path/to/w3id.org task w3id:test" >&2
+          exit 1
+        fi
+
+  up:
+    desc: Start Apache with the fork's celine-eu/ mounted as a w3id namespace
+    deps: [check:clone]
+    cmds:
+      - |
+        set -e
+        docker rm -f {{.CONTAINER}} >/dev/null 2>&1 || true
+        docker run -d --name {{.CONTAINER}} \
+          -p {{.PORT}}:80 \
+          -v "$(cd {{.CLONE}} && pwd)/celine-eu:/var/www/w3id/celine-eu:ro" \
+          -v "$(pwd)/conf/w3id.conf:/usr/local/apache2/conf/extra/w3id.conf:ro" \
+          httpd:2.4 \
+          sh -c "sed -i 's|^#LoadModule rewrite_module|LoadModule rewrite_module|' \
+                   /usr/local/apache2/conf/httpd.conf && \
+                 echo 'Include conf/extra/w3id.conf' >> /usr/local/apache2/conf/httpd.conf && \
+                 httpd-foreground" >/dev/null
+
+        # The mount is read-only and live: edit the .htaccess in the clone and the
+        # next request picks it up. No restart, because .htaccess is per-request.
+        for _ in $(seq 30); do
+          if curl -sf -o /dev/null "http://{{.HOST}}:{{.PORT}}/celine-eu/"; then
+            echo "Apache up at http://{{.HOST}}:{{.PORT}}/celine-eu"
+            echo "Serving rules from $(cd {{.CLONE}} && pwd)/celine-eu/.htaccess"
+            exit 0
+          fi
+          sleep 0.5
+        done
+        echo "Apache did not come up; see: task w3id:logs" >&2
+        exit 1
+
+  down:
+    desc: Stop and remove the Apache container
+    cmds:
+      - docker rm -f {{.CONTAINER}} >/dev/null 2>&1 || true
+      - echo "stopped"
+
+  logs:
+    desc: Tail Apache's log (rewrite tracing is on at trace3)
+    cmds:
+      - docker logs -f {{.CONTAINER}}
+
+  test:
+    desc: >-
+      Run the negotiation matrix against the local Apache. Add -- --live to also
+      check every redirect target exists on the published site.
+    deps: [check:clone]
+    cmds:
+      - task: up
+      - python3 tests/negotiation.py --base "http://{{.HOST}}:{{.PORT}}" {{.CLI_ARGS}}
+      - task: down
+
+  ask:
+    desc: >-
+      Single request against the local Apache, showing the whole chain.
+      Usage: task w3id:ask -- /celine-eu/v0.10 'text/turtle'
+    silent: true
+    cmds:
+      - |
+        set -e
+        set -- {{.CLI_ARGS}}
+        path="${1:-/celine-eu}"
+        accept="${2:-text/turtle}"
+        echo "GET $path   Accept: $accept"
+        curl -sIL -H "Accept: $accept" "http://{{.HOST}}:{{.PORT}}$path" \
+          | grep -iE '^(HTTP/|location:|content-type:)' || true
+
+  diff:
+    desc: Show what is staged in the fork, i.e. what the PR would contain
+    deps: [check:clone]
+    cmds:
+      - git -C "{{.CLONE}}" diff -- celine-eu

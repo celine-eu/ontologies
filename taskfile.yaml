@@ -1,5 +1,12 @@
 version: "3"
 
+includes:
+  # Local Apache for the w3id.org redirect rules. The rules themselves live in a
+  # clone of the fork, not here — see w3id.org/README.md.
+  w3id:
+    taskfile: ./w3id.org/taskfile.yaml
+    dir: ./w3id.org
+
 tasks:
   verify:wheel:
     desc: >-
