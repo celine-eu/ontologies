@@ -1,0 +1,56 @@
+[
+  {
+    "observation_id": "78f2af7cc530b2ab0fce6e187435997f",
+    "result_time": "2024-06-01T00:00:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/connection-point/device-meter-alice-001",
+    "sensor_iri": "https://w3id.org/celine-eu/id/device/device-meter-alice-001",
+    "observed_property": "https://w3id.org/celine-eu#GridImportEnergy",
+    "value": 1.2,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "8da9d5d98026398324c55a2b137e9b3d",
+    "result_time": "2024-06-01T00:00:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/connection-point/device-meter-alice-001",
+    "sensor_iri": "https://w3id.org/celine-eu/id/device/device-meter-alice-001",
+    "observed_property": "https://w3id.org/celine-eu#GridExportEnergy",
+    "value": 0.8,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "dbc30b226fae8aabbeb3725ce032b733",
+    "result_time": "2024-06-01T00:00:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/connection-point/device-meter-alice-001",
+    "sensor_iri": "https://w3id.org/celine-eu/id/device/device-meter-alice-001",
+    "observed_property": "https://w3id.org/celine-eu#SelfConsumedEnergy",
+    "value": 0.7,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "dbaf18ba75ea5ee4d4a31afd1832e0b7",
+    "result_time": "2024-06-01T00:15:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/connection-point/device-meter-alice-001",
+    "sensor_iri": "https://w3id.org/celine-eu/id/device/device-meter-alice-001",
+    "observed_property": "https://w3id.org/celine-eu#GridImportEnergy",
+    "value": 0.9,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "6474296ba2743b8a3478a1310db03bf8",
+    "result_time": "2024-06-01T00:15:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/connection-point/device-meter-alice-001",
+    "sensor_iri": "https://w3id.org/celine-eu/id/device/device-meter-alice-001",
+    "observed_property": "https://w3id.org/celine-eu#GridExportEnergy",
+    "value": 1.1,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "eeb06c5d191048ec45412862f5bc5909",
+    "result_time": "2024-06-01T00:15:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/connection-point/device-meter-alice-001",
+    "sensor_iri": "https://w3id.org/celine-eu/id/device/device-meter-alice-001",
+    "observed_property": "https://w3id.org/celine-eu#SelfConsumedEnergy",
+    "value": 0.9,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  }
+]

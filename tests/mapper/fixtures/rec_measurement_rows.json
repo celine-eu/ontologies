@@ -1,0 +1,110 @@
+[
+  {
+    "observation_id": "55740661d9a41d0dc81ab810d23cb3b1",
+    "result_time": "2024-06-01T00:00:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/sharing-group/it-folgaria/cp-0421",
+    "sensor_iri": null,
+    "observed_property": "https://w3id.org/celine-eu#GridImportEnergy",
+    "value": 12.5,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "a5941d0401363349d8dfbd1e0db2255b",
+    "result_time": "2024-06-01T00:00:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/sharing-group/it-folgaria/cp-0421",
+    "sensor_iri": null,
+    "observed_property": "https://w3id.org/celine-eu#GridExportEnergy",
+    "value": 8.3,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "a9509b298b363a7ec12c12990a82960d",
+    "result_time": "2024-06-01T00:00:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/sharing-group/it-folgaria/cp-0421",
+    "sensor_iri": null,
+    "observed_property": "https://w3id.org/celine-eu#CollectivelySharedEnergy",
+    "value": 7.1,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "e261ce79eac2c6ae18b470eee3fed65f",
+    "result_time": "2024-06-01T00:00:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/sharing-group/it-folgaria/cp-0421",
+    "sensor_iri": null,
+    "observed_property": "https://w3id.org/celine-eu#SelfConsumptionRatio",
+    "value": 0.856,
+    "unit": "http://qudt.org/vocab/unit/UNITLESS"
+  },
+  {
+    "observation_id": "6584f3a1f8df0eb5ccb39694baf0ad89",
+    "result_time": "2024-06-01T00:15:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/sharing-group/it-folgaria/cp-0421",
+    "sensor_iri": null,
+    "observed_property": "https://w3id.org/celine-eu#GridImportEnergy",
+    "value": 11.2,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "9328816ede1c58651e795fbf53c31bbe",
+    "result_time": "2024-06-01T00:15:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/sharing-group/it-folgaria/cp-0421",
+    "sensor_iri": null,
+    "observed_property": "https://w3id.org/celine-eu#GridExportEnergy",
+    "value": 9.1,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "2e586697ad4b36a9d1e1d10b420e8252",
+    "result_time": "2024-06-01T00:15:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/sharing-group/it-folgaria/cp-0421",
+    "sensor_iri": null,
+    "observed_property": "https://w3id.org/celine-eu#CollectivelySharedEnergy",
+    "value": 8.4,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "150a2679ada230738bf48ea9b0931ccf",
+    "result_time": "2024-06-01T00:15:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/sharing-group/it-folgaria/cp-0421",
+    "sensor_iri": null,
+    "observed_property": "https://w3id.org/celine-eu#SelfConsumptionRatio",
+    "value": 0.923,
+    "unit": "http://qudt.org/vocab/unit/UNITLESS"
+  },
+  {
+    "observation_id": "a577ca2bce144179816a7ef2422d4204",
+    "result_time": "2024-06-01T00:30:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/sharing-group/it-folgaria/cp-0422",
+    "sensor_iri": null,
+    "observed_property": "https://w3id.org/celine-eu#GridImportEnergy",
+    "value": 10.8,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "96560467ef44d8d44400c64512b01435",
+    "result_time": "2024-06-01T00:30:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/sharing-group/it-folgaria/cp-0422",
+    "sensor_iri": null,
+    "observed_property": "https://w3id.org/celine-eu#GridExportEnergy",
+    "value": 10.5,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "de60ff680e78d498ba1e02ad59de151d",
+    "result_time": "2024-06-01T00:30:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/sharing-group/it-folgaria/cp-0422",
+    "sensor_iri": null,
+    "observed_property": "https://w3id.org/celine-eu#CollectivelySharedEnergy",
+    "value": 9.9,
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR"
+  },
+  {
+    "observation_id": "36dda9a9f33be178c25d8f99283b2172",
+    "result_time": "2024-06-01T00:30:00+00:00",
+    "feature_iri": "https://w3id.org/celine-eu/id/sharing-group/it-folgaria/cp-0422",
+    "sensor_iri": null,
+    "observed_property": "https://w3id.org/celine-eu#SelfConsumptionRatio",
+    "value": 0.943,
+    "unit": "http://qudt.org/vocab/unit/UNITLESS"
+  }
+]

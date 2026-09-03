@@ -31,17 +31,21 @@ def _nodes(spec_file: str, fixture_file: str, context: dict | None = None) -> li
 
 def test_build_document_structure() -> None:
     builder = CelineGraphBuilder()
-    nodes = _nodes("obs_rec_energy.yaml", "rec_energy_rows.json", {"community_key": "it-folgaria"})
+    nodes = _nodes("obs_energy_measurement.yaml", "rec_measurement_rows.json")
     doc = builder.build_document(nodes)
     assert "@context" in doc
     assert "@graph" in doc
     assert isinstance(doc["@graph"], list)
-    assert len(doc["@graph"]) == 3
+    # Twelve, not three: the replacement spec takes one quantity per row, and
+    # the fixture unpivots the same three intervals into import, export,
+    # collectively-shared and ratio. SSN allows an Observation exactly one
+    # sosa:observedProperty, which is what the superseded wide-row spec broke.
+    assert len(doc["@graph"]) == 12
 
 
 def test_build_document_context_has_celine_prefix() -> None:
     builder = CelineGraphBuilder()
-    nodes = _nodes("obs_rec_energy.yaml", "rec_energy_rows.json", {"community_key": "x"})
+    nodes = _nodes("obs_energy_measurement.yaml", "rec_measurement_rows.json")
     doc = builder.build_document(nodes)
     ctx = doc["@context"]
     assert "celine" in ctx
@@ -56,7 +60,7 @@ def test_build_document_context_has_celine_prefix() -> None:
 def test_json_schema_valid_document() -> None:
     """A document with @id and @type on all nodes should pass."""
     builder = CelineGraphBuilder()
-    nodes = _nodes("obs_rec_energy.yaml", "rec_energy_rows.json", {"community_key": "x"})
+    nodes = _nodes("obs_energy_measurement.yaml", "rec_measurement_rows.json")
     doc = builder.build_document(nodes)
     builder.validate_json_schema(doc)  # must not raise
 
@@ -85,7 +89,7 @@ def test_to_rdf_graph_parses() -> None:
     import rdflib  # noqa: PLC0415
 
     builder = CelineGraphBuilder()
-    nodes = _nodes("obs_rec_energy.yaml", "rec_energy_rows.json", {"community_key": "x"})
+    nodes = _nodes("obs_energy_measurement.yaml", "rec_measurement_rows.json")
     doc = builder.build_document(nodes)
     g = builder.to_rdf_graph(doc)
     assert isinstance(g, rdflib.Graph)
@@ -96,10 +100,10 @@ def test_to_rdf_graph_parses() -> None:
 # validate_shacl
 # ---------------------------------------------------------------------------
 
-def test_shacl_valid_rec_energy_observations() -> None:
+def test_shacl_valid_energy_measurement_observations() -> None:
     """sosa:Observation nodes have @id and @type, so they conform as NodeBase."""
     builder = CelineGraphBuilder()
-    nodes = _nodes("obs_rec_energy.yaml", "rec_energy_rows.json", {"community_key": "it-folgaria"})
+    nodes = _nodes("obs_energy_measurement.yaml", "rec_measurement_rows.json")
     doc = builder.build_document(nodes)
     g = builder.to_rdf_graph(doc)
     result = builder.validate_shacl(g)
@@ -135,7 +139,7 @@ def test_validate_full_skip_shacl() -> None:
 
 def test_validate_full_with_shacl() -> None:
     builder = CelineGraphBuilder()
-    nodes = _nodes("obs_meter_energy.yaml", "meter_data_rows.json")
+    nodes = _nodes("obs_energy_measurement.yaml", "meter_measurement_rows.json")
     doc, shacl_result = builder.validate_full(nodes, skip_shacl=False)
     assert shacl_result is not None
     assert shacl_result.conforms is True

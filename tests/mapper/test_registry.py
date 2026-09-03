@@ -112,7 +112,7 @@ def test_specs_are_loadable_by_name():
     """Consumers bind a dataset to a spec by name — dataset-api stores it in
     `DatasetEntry.ontology_path` — because a name is the only form that survives
     being written into a governance file in one repository and read in another."""
-    spec = MappingSpecLoader().load_by_name("obs_rec_energy")
+    spec = MappingSpecLoader().load_by_name("obs_energy_measurement")
     assert spec.target_type == "sosa:Observation"
 
 
@@ -125,5 +125,5 @@ def test_unknown_spec_name_lists_the_alternatives():
     error has to be readable by someone who cannot see this directory."""
     from celine.mapper import SpecValidationError
 
-    with pytest.raises(SpecValidationError, match="obs_rec_energy"):
-        MappingSpecLoader().load_by_name("obs_rec_enrgy")
+    with pytest.raises(SpecValidationError, match="obs_energy_measurement"):
+        MappingSpecLoader().load_by_name("obs_energy_measuremnt")

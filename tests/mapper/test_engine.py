@@ -29,6 +29,21 @@ def _fixture(name: str) -> list[dict] | dict:
         return json.load(fh)
 
 
+# One row in the shape of the `*_measurements_*` gold views: one quantity, one
+# observed property, one surrogate that already encodes the grain. The wide-row
+# fixtures this replaced put three or four quantities on one sosa:Observation,
+# which SSN forbids.
+_MEASUREMENT = {
+    "observation_id": "55740661d9a41d0dc81ab810d23cb3b1",
+    "result_time": "2024-06-01T00:00:00+00:00",
+    "observed_property": "https://w3id.org/celine-eu#GridImportEnergy",
+    "value": "12.5",
+    "unit": "http://qudt.org/vocab/unit/KiloW-HR",
+    "feature_iri": "https://w3id.org/celine-eu/id/sharing-group/it-folgaria/cp-0421",
+    "sensor_iri": "https://w3id.org/celine-eu/id/device/dev-001",
+}
+
+
 # ---------------------------------------------------------------------------
 # kind=literal
 # ---------------------------------------------------------------------------
@@ -42,19 +57,10 @@ def test_literal_string_field() -> None:
 
 
 def test_literal_decimal_coercion() -> None:
-    eng = _engine("obs_rec_energy.yaml")
-    row = {
-        "ts": "2024-06-01T00:00:00+00:00",
-        "rec_id": "it-folgaria",
-        "substation_id": "cp-0421",
-        "total_consumption_kwh": "12.5",
-        "total_production_kwh": "8.3",
-        "self_consumption_kwh": "7.1",
-        "self_consumption_ratio": "0.856",
-    }
-    node = eng.map_one(row)
-    assert node["sosa:hasSimpleResult"] == 7.1
-    assert isinstance(node["rdf:value"], float)
+    eng = _engine("obs_energy_measurement.yaml")
+    node = eng.map_one(_MEASUREMENT)
+    assert node["sosa:hasSimpleResult"] == 12.5
+    assert isinstance(node["sosa:hasSimpleResult"], float)
 
 
 def test_literal_none_skipped() -> None:
@@ -69,14 +75,17 @@ def test_literal_none_skipped() -> None:
 # ---------------------------------------------------------------------------
 
 def test_iri_produces_at_id() -> None:
-    eng = _engine("obs_meter_energy.yaml")
+    """Through an `iri_template`, which is what applies the base.
+
+    Moved off obs_meter_energy when that spec was deleted. obs_meter_forecast is
+    the remaining packaged spec whose `kind: iri` field renders a template rather
+    than passing an already-absolute column through.
+    """
+    eng = _engine("obs_meter_forecast.yaml")
     row = {
-        "_id": "row-001",
         "device_id": "dev-001",
-        "ts": "2024-06-01T00:00:00+00:00",
-        "consumption_kw": 1.2,
-        "production_kw": 0.8,
-        "self_consumed_kw": 0.7,
+        "timestamp": "2024-06-01T00:00:00+00:00",
+        "total_consumption_kwh": 1.2,
     }
     node = eng.map_one(row)
     sensor = node["sosa:madeBySensor"]
@@ -119,18 +128,21 @@ def test_nested_list_multiple_items() -> None:
 # ---------------------------------------------------------------------------
 
 def test_constant_injected() -> None:
-    eng = _engine("obs_rec_energy.yaml")
+    """The remaining constants are the three forecast specs\' dead property IRIs.
+
+    Asserted as-is on purpose: they point at `https://w3id.org/celine/property/…`,
+    which nothing declares and which does not resolve. Replacing them is workplan
+    step 16, and it waits on the ontology minting a term for specific PV yield.
+    This test pins current behaviour, not a claim that the value is right.
+    """
+    eng = _engine("obs_meter_forecast.yaml")
     row = {
-        "ts": "2024-06-01T00:00:00+00:00",
-        "rec_id": "it-folgaria",
-        "substation_id": "cp-0421",
+        "device_id": "dev-001",
+        "timestamp": "2024-06-01T00:00:00+00:00",
         "total_consumption_kwh": 10.0,
-        "total_production_kwh": 8.0,
-        "self_consumption_kwh": 7.0,
-        "self_consumption_ratio": 0.875,
     }
     node = eng.map_one(row)
-    assert node["sosa:observedProperty"] == "https://w3id.org/celine/property/self-consumption-kwh"
+    assert node["sosa:observedProperty"] == "https://w3id.org/celine/property/meter-energy-forecast-kwh"
 
 
 # ---------------------------------------------------------------------------
@@ -150,15 +162,19 @@ def test_id_uses_context_var() -> None:
     assert "2024-06-01" in node["@id"]
 
 
-def test_id_uses_row_columns_for_the_models_full_grain() -> None:
-    """obs_rec_energy is grouped by (ts, rec_id, substation_id). An @id built
-    from fewer of those mints one IRI for several distinct rows."""
-    eng = _engine("obs_rec_energy.yaml")
-    base = {"ts": "2024-06-01T00:00:00+00:00", "rec_id": "it-folgaria",
-            "self_consumption_kwh": 7.0, "total_consumption_kwh": 10.0,
-            "total_production_kwh": 8.0, "self_consumption_ratio": 0.7}
-    a = eng.map_one({**base, "substation_id": "cp-0421"})
-    b = eng.map_one({**base, "substation_id": "cp-0422"})
+def test_id_uses_the_surrogate_that_carries_the_grain() -> None:
+    """The grain moved into the view, and this pins that it is still honoured.
+
+    obs_rec_energy built its @id from (ts, rec_id, substation_id) directly, and
+    dropping any one of them minted a single IRI for distinct rows — the defect
+    recorded against digital-twin\'s copy. obs_energy_measurement instead keys on
+    `observation_id`, an md5 the view computes over its own full grain, which is
+    what lets one id_template serve three source tables whose grains differ. Two
+    rows that differ only in the surrogate must still land on different IRIs.
+    """
+    eng = _engine("obs_energy_measurement.yaml")
+    a = eng.map_one({**_MEASUREMENT, "observation_id": "aaa"})
+    b = eng.map_one({**_MEASUREMENT, "observation_id": "bbb"})
     assert a["@id"] != b["@id"]
 
 
@@ -174,18 +190,19 @@ def test_type_set_from_spec() -> None:
 # ---------------------------------------------------------------------------
 
 def test_required_field_raises() -> None:
-    eng = _engine("obs_meter_energy.yaml")
-    row = {"ts": "2024-06-01T00:00:00+00:00", "consumption_kw": 1.0}  # missing device_id
+    """A required *field*, not a template variable — those fail earlier, in the
+    renderer, and would prove something else."""
+    eng = _engine("obs_energy_measurement.yaml")
+    row = {k: v for k, v in _MEASUREMENT.items() if k != "observed_property"}
     with pytest.raises(MappingError) as exc_info:
         eng.map_one(row)
-    assert "device_id" in str(exc_info.value)
+    assert "observed_property" in str(exc_info.value)
 
 
 def test_required_field_empty_string_raises() -> None:
-    eng = _engine("obs_meter_energy.yaml")
-    row = {"ts": "2024-06-01T00:00:00+00:00", "device_id": "", "consumption_kw": 1.0}
+    eng = _engine("obs_energy_measurement.yaml")
     with pytest.raises(MappingError):
-        eng.map_one(row)
+        eng.map_one({**_MEASUREMENT, "observed_property": ""})
 
 
 # ---------------------------------------------------------------------------
@@ -193,19 +210,22 @@ def test_required_field_empty_string_raises() -> None:
 # ---------------------------------------------------------------------------
 
 def test_map_many_energy_rows() -> None:
-    eng = _engine("obs_rec_energy.yaml", context={"community_key": "it-folgaria"})
-    rows = _fixture("rec_energy_rows.json")
+    eng = _engine("obs_energy_measurement.yaml")
+    rows = _fixture("rec_measurement_rows.json")
     nodes = eng.map_many(rows)
-    assert len(nodes) == 3
+    # Three intervals x four quantities. One quantity per Observation is the
+    # whole reason this spec superseded the wide-row one.
+    assert len(nodes) == 12
     assert all(n["@type"] == "sosa:Observation" for n in nodes)
     assert all("@id" in n for n in nodes)
 
 
 def test_map_many_meter_rows() -> None:
-    eng = _engine("obs_meter_energy.yaml")
-    rows = _fixture("meter_data_rows.json")
+    eng = _engine("obs_energy_measurement.yaml")
+    rows = _fixture("meter_measurement_rows.json")
     nodes = eng.map_many(rows)
-    assert len(nodes) == 2
+    # Two intervals x three quantities.
+    assert len(nodes) == 6
 
 
 def test_map_many_pv_forecast() -> None:

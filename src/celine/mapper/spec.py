@@ -144,7 +144,7 @@ class MappingSpecLoader:
         return self._parse(data, source=source)
 
     def load_by_name(self, name: str) -> MappingSpec:
-        """Load one of the packaged specs by name, e.g. ``"obs_rec_energy"``.
+        """Load one of the packaged specs by name, e.g. ``"obs_energy_measurement"``.
 
         Resolved through ``importlib.resources``, not a filesystem path, so it
         works from an installed wheel as well as a checkout. Consumers bind a

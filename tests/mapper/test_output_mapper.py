@@ -22,8 +22,7 @@ def _fixture(name: str) -> list[dict] | dict:
 # ---------------------------------------------------------------------------
 
 def test_from_yaml_path() -> None:
-    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_rec_energy.yaml",
-                                         context={"community_key": "x"})
+    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_energy_measurement.yaml")
     assert mapper is not None
 
 
@@ -32,9 +31,8 @@ def test_from_yaml_path() -> None:
 # ---------------------------------------------------------------------------
 
 def test_map_returns_dict() -> None:
-    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_rec_energy.yaml",
-                                         context={"community_key": "it-folgaria"})
-    rows = _fixture("rec_energy_rows.json")
+    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_energy_measurement.yaml")
+    rows = _fixture("rec_measurement_rows.json")
     result = mapper.map(rows[0])
     assert isinstance(result, dict)
     assert "@id" in result
@@ -42,16 +40,15 @@ def test_map_returns_dict() -> None:
 
 
 def test_map_type_correct() -> None:
-    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_rec_energy.yaml",
-                                         context={"community_key": "it-folgaria"})
-    row = _fixture("rec_energy_rows.json")[0]
+    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_energy_measurement.yaml")
+    row = _fixture("rec_measurement_rows.json")[0]
     result = mapper.map(row)
     assert result["@type"] == "sosa:Observation"
 
 
 def test_map_meter_row() -> None:
-    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_meter_energy.yaml")
-    row = _fixture("meter_data_rows.json")[0]
+    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_energy_measurement.yaml")
+    row = _fixture("meter_measurement_rows.json")[0]
     result = mapper.map(row)
     assert result["@type"] == "sosa:Observation"
     assert result["sosa:madeBySensor"]["@id"].endswith("device-meter-alice-001")
@@ -91,9 +88,8 @@ def test_map_asset() -> None:
 # ---------------------------------------------------------------------------
 
 def test_map_many_returns_list() -> None:
-    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_rec_energy.yaml",
-                                         context={"community_key": "it-folgaria"})
-    rows = _fixture("rec_energy_rows.json")
+    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_energy_measurement.yaml")
+    rows = _fixture("rec_measurement_rows.json")
     results = mapper.map_many(rows)
     assert len(results) == len(rows)
     assert all(isinstance(r, dict) for r in results)
@@ -101,9 +97,8 @@ def test_map_many_returns_list() -> None:
 
 def test_map_many_unique_ids() -> None:
     """Each row must produce a unique @id."""
-    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_rec_energy.yaml",
-                                         context={"community_key": "it-folgaria"})
-    rows = _fixture("rec_energy_rows.json")
+    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_energy_measurement.yaml")
+    rows = _fixture("rec_measurement_rows.json")
     ids = [mapper.map(r)["@id"] for r in rows]
     assert len(set(ids)) == len(ids)
 
@@ -114,12 +109,12 @@ def test_map_many_unique_ids() -> None:
 
 def test_executor_pattern() -> None:
     """Mimic how the DT executor uses output_mapper: [output_mapper.map(item) for item in items]."""
-    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_meter_energy.yaml")
-    raw_items = _fixture("meter_data_rows.json")
+    mapper = OutputMapper.from_yaml_path(SPECS_DIR / "obs_energy_measurement.yaml")
+    raw_items = _fixture("meter_measurement_rows.json")
 
     mapped_items = [mapper.map(item) for item in raw_items]
 
-    assert len(mapped_items) == 2
+    assert len(mapped_items) == 6
     for item in mapped_items:
         assert "@id" in item
         assert "@type" in item
@@ -137,9 +132,9 @@ def test_from_mapping_matches_from_yaml_path() -> None:
 
     from celine.mapper.output_mapper import OutputMapper
 
-    spec_path = SPECS_DIR / "obs_rec_energy.yaml"
-    context = {"community_key": "it-folgaria"}
-    with (FIXTURES_DIR / "rec_energy_rows.json").open() as fh:
+    spec_path = SPECS_DIR / "obs_energy_measurement.yaml"
+    context: dict = {}
+    with (FIXTURES_DIR / "rec_measurement_rows.json").open() as fh:
         rows = json.load(fh)
 
     from_path = OutputMapper.from_yaml_path(spec_path, context=context)

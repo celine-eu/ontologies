@@ -148,14 +148,14 @@ def test_packaged_specs_are_pinned() -> None:
 
 
 def test_builder_honours_the_specs_pin() -> None:
-    spec = _loader.load_by_name("obs_rec_energy")
+    spec = _loader.load_by_name("obs_energy_measurement")
     builder = GraphBuilder.for_spec(spec)
     assert builder.profile.version == spec.profile.version
 
 
 def test_override_answers_the_upgrade_question() -> None:
     """`--profile-version` exists so an upgrade is decided, not discovered."""
-    spec = _loader.load_by_name("obs_rec_energy")
+    spec = _loader.load_by_name("obs_energy_measurement")
     builder = GraphBuilder.for_spec(spec, version="v0.8")
     assert builder.profile.version == "v0.8"
     assert spec.profile.version != "v0.8", "fixture no longer proves an override happened"
@@ -164,7 +164,7 @@ def test_override_answers_the_upgrade_question() -> None:
 def test_result_reports_which_shapes_ran() -> None:
     """`conforms` alone is not a claim — against which version is half of it."""
     pytest.importorskip("pyshacl")
-    spec = _loader.load_by_name("obs_rec_energy")
+    spec = _loader.load_by_name("obs_energy_measurement")
     builder = GraphBuilder.for_spec(spec)
     document = builder.build_document([])
     result = builder.validate_shacl(builder.to_rdf_graph(document))

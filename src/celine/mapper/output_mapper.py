@@ -20,9 +20,8 @@ class OutputMapper:
         from pathlib import Path
         from celine.mapper import OutputMapper
 
-        rec_energy_mapper = OutputMapper.from_yaml_path(
-            Path(__file__).parent / "specs" / "obs_rec_energy.yaml",
-            context={"community_key": "it-folgaria"},
+        energy_mapper = OutputMapper.from_yaml_path(
+            Path(__file__).parent / "specs" / "obs_energy_measurement.yaml",
         )
 
     Args:
