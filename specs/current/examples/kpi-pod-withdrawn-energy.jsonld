@@ -1,6 +1,6 @@
 {
   "@context": [
-    "https://w3id.org/celine-eu/v0.10/celine.jsonld",
+    "https://w3id.org/celine-eu/v0.11/celine.jsonld",
     { "ex": "https://example.org/celine/" }
   ],
   "@graph": [

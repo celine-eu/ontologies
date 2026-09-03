@@ -1,0 +1,38 @@
+<h2 id="intro" class="list">Introduction <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<span class="markdown">CELINE (Cross-sectorial integrated digital services Enabling energy Localized INnovation and community Empowerment) is a Horizon Europe research project (Grant Agreement No. 101160667) that develops a Digital Toolbox for households, energy communities and cooperative organisations to optimise energy management and support investment decisions around photovoltaic systems, battery storage, electric vehicles and heat pumps. The project validates its solutions across three European demonstration sites in Spain, Finland and Italy.
+
+The CELINE Core Ontology supports the semantic layer of this toolbox. It is a thin orchestration profile -- not a standalone domain ontology -- that binds together existing standards into a coherent semantic target for the CELINE ecosystem:
+
+- **PECO** (https://purl.org/peco) models the Energy Community structure, members, PODs and assets.
+- **SAREF / SAREF4ENER** (ETSI) covers smart devices and energy assets.
+- **SOSA/SSN** (W3C) covers sensor observations and measurements.
+- **QUDT** supplies quantity kinds and units for observation results.
+- **IEC CIM** (CIM100) provides the reference model for grid topology, aligned via skos:closeMatch.
+
+Version 0.10 adds the observable properties a REC energy dataset actually reports:
+
+- **Six sosa:ObservableProperty individuals**: GridImportEnergy, GridExportEnergy, SelfConsumedEnergy, CollectivelySharedEnergy, VirtualConsumedEnergy and SelfConsumptionRatio, each carrying qudt:hasQuantityKind. They give sosa:observedProperty a target that resolves. These are CELINE terms because no standard has them: quantitykind:Energy is the right quantity kind for five of the six and is asserted on each, but it does not distinguish energy drawn from the grid from energy fed into it, and that distinction is the whole content of a REC settlement.
+- **SOSA rather than SAREF for the observation structure**: saref:Measurement is deprecated in SAREF core v3.2.1 in favour of saref:Observation and convergence with SOSA/SSN, taking saref:Energy and the unit individuals with it. SOSA also supplies sosa:hasSimpleResult, the sanctioned way to put a literal result on an observation without an intermediate node a flat data row cannot mint. SAREF remains correct for the device side and CIM for the grid side.
+- **QUDT prefixes**: qudt, quantitykind and unit are bound, with no owl:imports added. Nothing already present supplied a unit -- SAREF's unit individuals are deprecated and celine:UnitOfMeasure is a four-concept SKOS scheme that resolves for nobody outside CELINE.
+- **rdfs:seeAlso to the KPI Catalog**: four of the six quantities already have a KPICatalog concept. A KPIDefinition is a period total or rate; an ObservableProperty is what one observation measures over one interval. The pairs are linked but kept distinct, which is why the shared-energy property is CollectivelySharedEnergy rather than SharedEnergy -- that IRI is a KPICatalog concept released in v0.5.
+- **celine:DefinedTermLabelShape**: a SHACL shape asserting sh:uniqueLang on rdfs:label and skos:prefLabel across every term the ontology defines, so that one IRI minted twice is reported rather than shipped. It uses sh:SPARQLTarget and therefore requires pyshacl advanced mode, as do the pre-existing concept shapes.
+
+Version 0.9 is a conformance fix and introduces no new terms:
+
+- **CIM namespace**: The cim: prefix now binds to the IEC CIM100 namespace, http://iec.ch/TC57/CIM100#. It previously bound to https://ontology.tno.nl/IEC_CIM/ -- where TNO hosts a copy of CIM, not where CIM mints its terms -- so all seven skos:closeMatch alignments to CIM expanded to IRIs that do not exist. CIM is the one external vocabulary CELINE references on documentary rather than resolvable authority: IEC CIM is a paid standard and its namespace IRIs answer HTTP 403, so these alignments are checked against the published CIM100 class documentation.
+- **GridOperator alignment**: celine:GridOperator moves from cim:Company, which exists in no CIM version, to cim:Organisation. Note cim:Operator is a control-room person, not the operating company.
+
+Version 0.8 was a conformance fix and introduced no new terms:
+
+- **SKOS top concepts**: The CommitmentMode, FlexibilityDirection, CostType and ConstraintType schemes now carry the skos:hasTopConcept assertions their SHACL shapes require. The concepts themselves already declared skos:inScheme and skos:topConceptOf, so only the scheme-side statement was missing. All four schemes are flat -- no skos:broader anywhere -- so every member is a top concept.
+- **Language tags**: Labels, prefLabels, descriptions and comments in those four schemes gain the @en tag already used by the other nine.
+
+Version 0.7 extended the ontology with:
+
+- **hasDataset**: A new object property linking assets and connection points to external, self-describing datasources (DatasetReference). This is the operational counterpart to the SimulationRun-scoped usesDataset/producesDataset properties.
+- **DatasetReference self-description**: Clarified that instances SHOULD declare conformance target (dct:conformsTo), format (dct:format), and access location (dcat:accessURL or dct:source) using DCAT/Dublin Core terms. DCAT prefix added (no owl:imports).
+- **Implementation-neutral wording**: All references to specific external catalogue products have been replaced with generic wording ("an external catalogue") throughout the ontology.
+
+Project website: https://www.celineproject.eu/
+Source code and issues: https://github.com/celine-eu
+Documentation: https://celine-eu.github.io/</span>

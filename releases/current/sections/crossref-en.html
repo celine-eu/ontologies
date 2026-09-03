@@ -16,6 +16,9 @@ This section provides details for each class and property defined by CELINE Core
   <li><a href="#FlexibilityCredit" title="https://w3id.org/celine-eu#FlexibilityCredit">Flexibility Credit</a></li>
   <li><a href="#FlexibilityEnvelope" title="https://w3id.org/celine-eu#FlexibilityEnvelope">Flexibility Envelope</a></li>
   <li><a href="#FlexibilityRequest" title="https://w3id.org/celine-eu#FlexibilityRequest">Flexibility Request</a></li>
+  <li><a href="#Forecast" title="https://w3id.org/celine-eu#Forecast">Forecast</a></li>
+  <li><a href="#ForecastModel" title="https://w3id.org/celine-eu#ForecastModel">Forecast model</a></li>
+  <li><a href="#ForecastRun" title="https://w3id.org/celine-eu#ForecastRun">Forecast run</a></li>
   <li><a href="#GridOperator" title="https://w3id.org/celine-eu#GridOperator">Grid Operator</a></li>
   <li><a href="#HeatPump" title="https://w3id.org/celine-eu#HeatPump">Heat Pump</a></li>
   <li><a href="#KPIDefinition" title="https://w3id.org/celine-eu#KPIDefinition">KPI Definition</a></li>
@@ -506,6 +509,81 @@ ex:cost_platform_fee a celine:CostItem ;
    </dt>
    <dd>
     <a href="#hasFlexibilityRequest" title="https://w3id.org/celine-eu#hasFlexibilityRequest">has flexibility request</a> <sup class="type-op" title="object property">op</sup>, <a href="#inResponseTo" title="https://w3id.org/celine-eu#inResponseTo">in response to</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="Forecast">
+  <h3>Forecast<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#Forecast</p>
+  <div class="comment">
+   <span class="markdown">An estimate of an observable property at a time later than the one at which the estimate was made. Distinguished from a measurement by celine:forecastTargetTime standing after sosa:resultTime, and by its type. Uses the same celine: observable properties as a measurement does, so a consumer comparing forecast against actual compares like with like.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/sosa/Observation" target="_blank" title="http://www.w3.org/ns/sosa/Observation">Observation</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#forecastRun" title="https://w3id.org/celine-eu#forecastRun">forecast run</a> <sup class="type-op" title="object property">op</sup>, <a href="#forecastTargetTime" title="https://w3id.org/celine-eu#forecastTargetTime">forecast target time</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasConfidence" title="https://w3id.org/celine-eu#hasConfidence">has confidence</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasLowerBound" title="https://w3id.org/celine-eu#hasLowerBound">has lower bound</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasUpperBound" title="https://w3id.org/celine-eu#hasUpperBound">has upper bound</a> <sup class="type-dp" title="data property">dp</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="ForecastModel">
+  <h3>Forecast model<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#ForecastModel</p>
+  <div class="comment">
+   <span class="markdown">The algorithm or computational method that produced a forecast — a statistical model, a physical simulation, or a foundation model. Reached through sosa:usedProcedure, which SOSA already declares for exactly this. Reusable: one individual per model, referenced by every forecast it produced, which is what makes 'which model said this' answerable after the fact.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/sosa/Procedure" target="_blank" title="http://www.w3.org/ns/sosa/Procedure">Procedure</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="ForecastRun">
+  <h3>Forecast run<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#ForecastRun</p>
+  <div class="comment">
+   <span class="markdown">One execution of a celine:ForecastModel, producing the series of forecasts that share a horizon. Exists so a series is addressable as one thing without sosa:ObservationCollection, which lives in the SSN extension rather than the sosa.ttl this profile imports — reaching for it would mean a fifth owl:imports, which is a design decision and not an editing step. A run is referenced by IRI; describing it further is deferred.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#forecastRun" title="https://w3id.org/celine-eu#forecastRun">forecast run</a> <sup class="type-op" title="object property">op</sup>
    </dd>
   </dl>
  </div>
@@ -1075,6 +1153,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#earnedBy" title="https://w3id.org/celine-eu#earnedBy">earned by</a></li>
   <li><a href="#envelopeFor" title="https://w3id.org/celine-eu#envelopeFor">envelope for</a></li>
   <li><a href="#evidencedBy" title="https://w3id.org/celine-eu#evidencedBy">evidenced by</a></li>
+  <li><a href="#forecastRun" title="https://w3id.org/celine-eu#forecastRun">forecast run</a></li>
   <li><a href="#generatesCredit" title="https://w3id.org/celine-eu#generatesCredit">generates credit</a></li>
   <li><a href="#hasAvailabilityWindow" title="https://w3id.org/celine-eu#hasAvailabilityWindow">has availability window</a></li>
   <li><a href="#hasCommitmentMode" title="https://w3id.org/celine-eu#hasCommitmentMode">has commitment mode</a></li>
@@ -1280,6 +1359,37 @@ ex:cost_platform_fee a celine:CostItem ;
     </dt>
     <dd>
      <a href="http://www.w3.org/ns/sosa/Observation" target="_blank" title="http://www.w3.org/ns/sosa/Observation">Observation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="forecastRun">
+  <h3>forecast run<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#forecastRun</p>
+  <div class="comment">
+   <span class="markdown">The run that produced this forecast. Forecasts sharing a run are one series.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Forecast" title="https://w3id.org/celine-eu#Forecast">Forecast</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#ForecastRun" title="https://w3id.org/celine-eu#ForecastRun">Forecast run</a> <sup class="type-c" title="class">c</sup>
     </dd>
    </dl>
   </div>
@@ -3022,12 +3132,16 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#creditAmount" title="https://w3id.org/celine-eu#creditAmount">credit amount</a></li>
   <li><a href="#creditBalance" title="https://w3id.org/celine-eu#creditBalance">credit balance</a></li>
   <li><a href="#currency" title="https://w3id.org/celine-eu#currency">currency</a></li>
+  <li><a href="#forecastTargetTime" title="https://w3id.org/celine-eu#forecastTargetTime">forecast target time</a></li>
   <li><a href="#grossAmount" title="https://w3id.org/celine-eu#grossAmount">gross amount</a></li>
+  <li><a href="#hasConfidence" title="https://w3id.org/celine-eu#hasConfidence">has confidence</a></li>
   <li><a href="#hasKPIDescription" title="https://w3id.org/celine-eu#hasKPIDescription">has KPI description</a></li>
   <li><a href="#hasKPIFormula" title="https://w3id.org/celine-eu#hasKPIFormula">has KPI formula</a></li>
   <li><a href="#hasKPIName" title="https://w3id.org/celine-eu#hasKPIName">has KPI name</a></li>
   <li><a href="#hasKPIValue" title="https://w3id.org/celine-eu#hasKPIValue">has KPI value</a></li>
   <li><a href="#hasLocalIdentifier" title="https://w3id.org/celine-eu#hasLocalIdentifier">has local identifier</a></li>
+  <li><a href="#hasLowerBound" title="https://w3id.org/celine-eu#hasLowerBound">has lower bound</a></li>
+  <li><a href="#hasUpperBound" title="https://w3id.org/celine-eu#hasUpperBound">has upper bound</a></li>
   <li><a href="#maxActivationDuration" title="https://w3id.org/celine-eu#maxActivationDuration">max activation duration</a></li>
   <li><a href="#maxActivationsPerDay" title="https://w3id.org/celine-eu#maxActivationsPerDay">max activations per day</a></li>
   <li><a href="#maxFlexDown" title="https://w3id.org/celine-eu#maxFlexDown">max flex down</a></li>
@@ -3256,6 +3370,37 @@ ex:cost_platform_fee a celine:CostItem ;
    </dl>
   </div>
  </div>
+ <div class="entity" id="forecastTargetTime">
+  <h3>forecast target time<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#forecastTargetTime</p>
+  <div class="comment">
+   <span class="markdown">The instant the forecast is about, as a literal. A literal shortcut for sosa:phenomenonTime, whose time:TemporalEntity range requires a node — the same relationship sosa:hasSimpleResult has to sosa:hasResult, and reached for the same reason: the rows these forecasts are built from are flat columns. A consumer needing an interval rather than an instant should use sosa:phenomenonTime directly; this property does not replace it.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Forecast" title="https://w3id.org/celine-eu#Forecast">Forecast</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#dateTime" target="_blank" title="http://www.w3.org/2001/XMLSchema#dateTime">date Time</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
  <div class="entity" id="grossAmount">
   <h3>gross amount<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> https://w3id.org/celine-eu#grossAmount</p>
@@ -3277,6 +3422,37 @@ ex:cost_platform_fee a celine:CostItem ;
     </dt>
     <dd>
      <a href="#RedistributionResult" title="https://w3id.org/celine-eu#RedistributionResult">Redistribution Result</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#decimal" target="_blank" title="http://www.w3.org/2001/XMLSchema#decimal">decimal</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasConfidence">
+  <h3>has confidence<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasConfidence</p>
+  <div class="comment">
+   <span class="markdown">The confidence level the bounds cover, as a fraction in [0,1] — 0.95 for a 95% prediction interval. A fraction rather than a percentage so it needs no unit; stated explicitly because a bound without a level is not interpretable.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Forecast" title="https://w3id.org/celine-eu#Forecast">Forecast</a> <sup class="type-c" title="class">c</sup>
     </dd>
     <dt>
      has range
@@ -3438,6 +3614,68 @@ ex:cost_platform_fee a celine:CostItem ;
     </dt>
     <dd>
      <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasLowerBound">
+  <h3>has lower bound<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasLowerBound</p>
+  <div class="comment">
+   <span class="markdown">Lower end of the forecast's prediction interval, in the same unit as sosa:hasSimpleResult. The interval's confidence level is celine:hasConfidence; without it a bound states a range but not how much of the distribution it covers.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Forecast" title="https://w3id.org/celine-eu#Forecast">Forecast</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#decimal" target="_blank" title="http://www.w3.org/2001/XMLSchema#decimal">decimal</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasUpperBound">
+  <h3>has upper bound<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#hasUpperBound</p>
+  <div class="comment">
+   <span class="markdown">Upper end of the forecast's prediction interval, in the same unit as sosa:hasSimpleResult. See celine:hasLowerBound.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Forecast" title="https://w3id.org/celine-eu#Forecast">Forecast</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#decimal" target="_blank" title="http://www.w3.org/2001/XMLSchema#decimal">decimal</a>
     </dd>
    </dl>
   </div>
@@ -3873,6 +4111,7 @@ ex:cost_platform_fee a celine:CostItem ;
   <li><a href="#SelfSufficiencyRate" title="https://w3id.org/celine-eu#SelfSufficiencyRate">Self-Sufficiency Rate</a></li>
   <li><a href="#SharedEnergy" title="https://w3id.org/celine-eu#SharedEnergy">Shared Energy</a></li>
   <li><a href="#SharedEnergyMemberShare" title="https://w3id.org/celine-eu#SharedEnergyMemberShare">Shared Energy Member Share</a></li>
+  <li><a href="#SpecificPVYield" title="https://w3id.org/celine-eu#SpecificPVYield">Specific PV yield</a></li>
   <li><a href="#StatusSuspended" title="https://w3id.org/celine-eu#StatusSuspended">Suspended</a></li>
   <li><a href="#MethodTotal" title="https://w3id.org/celine-eu#MethodTotal">Total</a></li>
   <li><a href="#UnitOfMeasure" title="https://w3id.org/celine-eu#UnitOfMeasure">Unit of Measure</a></li>
@@ -7010,6 +7249,35 @@ ex:cost_platform_fee a celine:CostItem ;
    </dd>
    <dd>
     <a href="http://www.w3.org/2004/02/skos/core#topConceptOf" target="_blank" title="http://www.w3.org/2004/02/skos/core#topConceptOf">top Concept Of</a> <sup class="type-ap" title="annotation property">ap</sup> <a href="#KPICatalog" title="https://w3id.org/celine-eu#KPICatalog">KPI Catalog</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="SpecificPVYield">
+  <h3>Specific PV yield<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/celine-eu#SpecificPVYield</p>
+  <div class="comment">
+   <span class="markdown">Photovoltaic energy yield normalised by installed peak power, in kWh per kWp, so the figure is independent of plant size — which is the point: the datasets carrying it rank rooftops that do not exist yet. Numerically equal to equivalent full-load hours. Carries no qudt:hasQuantityKind on purpose, and it is the only property here that does not: kWh/kWp is energy over power, so quantitykind:Energy and quantitykind:DimensionlessRatio are both false, and quantitykind:Time, though dimensionally correct, reads as a duration to a consumer who does not already know the identity. A wrong quantity kind silently corrupts unit arithmetic; none corrupts nobody. The unit carries the meaning.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    <a href="https://w3id.org/celine-eu">https://w3id.org/celine-eu</a>
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/sosa/ObservableProperty" target="_blank" title="http://www.w3.org/ns/sosa/ObservableProperty">Observable Property</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2004/02/skos/core#prefLabel" target="_blank" title="http://www.w3.org/2004/02/skos/core#prefLabel">pref Label</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"Specific PV yield"@en</span>
    </dd>
   </dl>
  </div>

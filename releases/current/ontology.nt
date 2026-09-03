@@ -1,5 +1,5 @@
 <https://w3id.org/celine-eu> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
-<https://w3id.org/celine-eu> <http://www.w3.org/2002/07/owl#versionIRI> <https://w3id.org/celine-eu/v0.10> .
+<https://w3id.org/celine-eu> <http://www.w3.org/2002/07/owl#versionIRI> <https://w3id.org/celine-eu/v0.11> .
 <https://w3id.org/celine-eu> <http://www.w3.org/2002/07/owl#imports> <https://purl.org/peco/peco-core> .
 <https://w3id.org/celine-eu> <http://www.w3.org/2002/07/owl#imports> <https://raw.githubusercontent.com/w3c/sdw/dee1bdd3c339d8a0ab512c7f9bc97a08912ad7d6/ssn/integrated/sosa.ttl> .
 <https://w3id.org/celine-eu> <http://www.w3.org/2002/07/owl#imports> <https://saref.etsi.org/core/v3.1.1/saref.ttl> .
@@ -7,17 +7,17 @@
 <https://w3id.org/celine-eu> <http://purl.org/dc/terms/created> "2026-03-24"^^<http://www.w3.org/2001/XMLSchema#date> .
 <https://w3id.org/celine-eu> <http://purl.org/dc/terms/description> "The CELINE Core Ontology is a lightweight orchestration profile for\n    Renewable Energy Communities (RECs) and Digital Twin workflows. It connects established\n    standards — PECO, SAREF, SAREF4ENER, SOSA/SSN — without redefining their domain\n    semantics, providing a minimal coordination layer for simulation scenarios, dataset\n    references, KPI definition and evaluation, and REC flexibility commitment and settlement." .
 <https://w3id.org/celine-eu> <http://purl.org/dc/terms/license> <https://creativecommons.org/licenses/by/4.0/> .
-<https://w3id.org/celine-eu> <http://purl.org/dc/terms/modified> "2026-08-09"^^<http://www.w3.org/2001/XMLSchema#date> .
+<https://w3id.org/celine-eu> <http://purl.org/dc/terms/modified> "2026-09-03"^^<http://www.w3.org/2001/XMLSchema#date> .
 <https://w3id.org/celine-eu> <http://purl.org/dc/terms/title> "CELINE Core Ontology" .
 <https://w3id.org/celine-eu> <http://purl.org/vocab/vann/preferredNamespacePrefix> "celine" .
 <https://w3id.org/celine-eu> <http://purl.org/vocab/vann/preferredNamespaceUri> "https://w3id.org/celine-eu#" .
-<https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#comment> "Version 0.6 adds registry-aligned grid topology (Substation,\n    PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),\n    regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass\n    for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,\n    ElectricityMeter, EVCharger, HeatPump), member modeling (hasMember linkage, MemberRole\n    and MemberStatus vocabularies, hasDeliveryPoint for member-to-POD linkage), and\n    SharingGroup — a community partition for shared self-consumption accounting within a\n    regulatory zone, aligned with the RED II (2018/2001) double-counting prohibition.\n    CIM alignment via skos:closeMatch to IEC 61968 profile; SAREF alignment via\n    skos:closeMatch only — no new owl:imports. Asset technical attributes are intentionally\n    omitted; specs live in an external catalogue, addressed by celine:hasLocalIdentifier.\n    Version 0.7 adds hasDataset (asset/connection-point → DatasetReference) as the\n    operational counterpart to the SimulationRun-scoped usesDataset/producesDataset;\n    clarifies DatasetReference self-description via DCAT/DCT terms; generalises\n    external-catalogue wording to remove implementation-specific naming.\n    Version 0.8 is a conformance fix, no new terms: the CommitmentMode,\n    FlexibilityDirection, CostType and ConstraintType schemes gain the\n    skos:hasTopConcept assertions their SHACL shapes require — the concepts already\n    declared skos:inScheme and skos:topConceptOf, so only the scheme-side statement\n    was missing. All four schemes are flat, so every member is a top concept. Their\n    labels, prefLabels, descriptions and comments also gain the @en tag the other\n    nine schemes already carry.\n    Version 0.9 is a conformance fix, no new terms: the cim: prefix bound to\n    https://ontology.tno.nl/IEC_CIM/ — where TNO hosts a copy of CIM, not where CIM\n    mints its terms — so every skos:closeMatch to CIM resolved to nothing. It now\n    binds the IEC CIM100 namespace, http://iec.ch/TC57/CIM100#. Those alignments are\n    checked against the CIM100 class documentation rather than dereferenced: IEC CIM\n    is a paid standard and its namespace IRIs answer HTTP 403, so this is the one\n    external vocabulary CELINE references on documentary rather than resolvable\n    authority. celine:GridOperator also moves from cim:Company, which exists in no\n    CIM version, to cim:Organisation — note cim:Operator is a control-room person,\n    not the company.\n    Version 0.10 adds the observable properties a REC energy dataset actually\n    reports — grid import and export, self-consumed, collectively shared and\n    virtual consumed energy, and the self-consumption ratio — as\n    sosa:ObservableProperty individuals carrying qudt:hasQuantityKind. They exist\n    because no standard names them: quantitykind:Energy does not distinguish\n    import from export, and SAREF's saref:Energy is deprecated as of v3.2.1.\n    They give sosa:observedProperty a target that resolves. The energy mapping\n    specs previously pointed it at https://w3id.org/celine/property/* IRIs, which\n    are in neither this namespace (note celine-eu, not celine) nor any other, and\n    which nothing declared; the three forecast specs still do, and the forecast\n    properties they need are not minted here. Where a quantity also has a\n    celine:KPICatalog concept the two are linked with rdfs:seeAlso: the KPI is a\n    period total or rate, the observable property is what one observation\n    measures over one interval." .
+<https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#comment> "Version 0.6 adds registry-aligned grid topology (Substation,\n    PrimarySubstation, SecondarySubstation, PowerTransformer, DistributionFeeder),\n    regulatory zones, the GridOperator actor, a generalised ConnectionPoint superclass\n    for PECO Electric_POD, a presence-only asset inventory (PVSystem, BatteryStorage,\n    ElectricityMeter, EVCharger, HeatPump), member modeling (hasMember linkage, MemberRole\n    and MemberStatus vocabularies, hasDeliveryPoint for member-to-POD linkage), and\n    SharingGroup — a community partition for shared self-consumption accounting within a\n    regulatory zone, aligned with the RED II (2018/2001) double-counting prohibition.\n    CIM alignment via skos:closeMatch to IEC 61968 profile; SAREF alignment via\n    skos:closeMatch only — no new owl:imports. Asset technical attributes are intentionally\n    omitted; specs live in an external catalogue, addressed by celine:hasLocalIdentifier.\n    Version 0.7 adds hasDataset (asset/connection-point → DatasetReference) as the\n    operational counterpart to the SimulationRun-scoped usesDataset/producesDataset;\n    clarifies DatasetReference self-description via DCAT/DCT terms; generalises\n    external-catalogue wording to remove implementation-specific naming.\n    Version 0.8 is a conformance fix, no new terms: the CommitmentMode,\n    FlexibilityDirection, CostType and ConstraintType schemes gain the\n    skos:hasTopConcept assertions their SHACL shapes require — the concepts already\n    declared skos:inScheme and skos:topConceptOf, so only the scheme-side statement\n    was missing. All four schemes are flat, so every member is a top concept. Their\n    labels, prefLabels, descriptions and comments also gain the @en tag the other\n    nine schemes already carry.\n    Version 0.9 is a conformance fix, no new terms: the cim: prefix bound to\n    https://ontology.tno.nl/IEC_CIM/ — where TNO hosts a copy of CIM, not where CIM\n    mints its terms — so every skos:closeMatch to CIM resolved to nothing. It now\n    binds the IEC CIM100 namespace, http://iec.ch/TC57/CIM100#. Those alignments are\n    checked against the CIM100 class documentation rather than dereferenced: IEC CIM\n    is a paid standard and its namespace IRIs answer HTTP 403, so this is the one\n    external vocabulary CELINE references on documentary rather than resolvable\n    authority. celine:GridOperator also moves from cim:Company, which exists in no\n    CIM version, to cim:Organisation — note cim:Operator is a control-room person,\n    not the company.\n    Version 0.10 adds the observable properties a REC energy dataset actually\n    reports — grid import and export, self-consumed, collectively shared and\n    virtual consumed energy, and the self-consumption ratio — as\n    sosa:ObservableProperty individuals carrying qudt:hasQuantityKind. They exist\n    because no standard names them: quantitykind:Energy does not distinguish\n    import from export, and SAREF's saref:Energy is deprecated as of v3.2.1.\n    They give sosa:observedProperty a target that resolves. The energy mapping\n    specs previously pointed it at https://w3id.org/celine/property/* IRIs, which\n    are in neither this namespace (note celine-eu, not celine) nor any other, and\n    which nothing declared; the three forecast specs still do, and the forecast\n    properties they need are not minted here. Where a quantity also has a\n    celine:KPICatalog concept the two are linked with rdfs:seeAlso: the KPI is a\n    period total or rate, the observable property is what one observation\n    measures over one interval.\n    Version 0.11 finishes what v0.10 left open — the forecast half. celine:Forecast\n    is a sosa:Observation subclass, not a peco:Forecast: SOSA defines an Observation\n    as the act of a Procedure to \"estimate or calculate\" a value, which a computed\n    forecast is, and defines a Procedure as a reusable \"algorithm or computational\n    method\", which is what a forecasting model is. So sosa:usedProcedure names the\n    model through celine:ForecastModel, and the six observable properties above serve\n    measurement and forecast alike rather than being doubled. peco:Forecast was the\n    alternative and is well formed, but its peco:Property_of_interest requires a value\n    and a unit node, making a forecast three nested levels deep — unbuildable from the\n    flat rows every mapping spec here reads. Prediction bounds, confidence and the\n    forecast's target time are CELINE datatype properties so the node stays flat;\n    celine:forecastTargetTime is a literal shortcut for sosa:phenomenonTime, whose\n    time:TemporalEntity range would have reintroduced the nesting, in the same spirit\n    as SOSA's own sosa:hasSimpleResult shortcut for sosa:hasResult. celine:SpecificPVYield\n    is added as the seventh observable property and is the one that carries no\n    qudt:hasQuantityKind, deliberately: kWh/kWp is energy over power, so Energy and\n    DimensionlessRatio are both false and Time, while dimensionally right, reads as a\n    duration. geo: is bound for WGS84 coordinates and, like time:, is referenced without\n    being imported — the import set stays at four." .
 <https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#label> "CELINE Core Ontology" .
 <https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <https://celine-eu.github.io/> .
 <https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <https://github.com/celine-eu> .
 <https://w3id.org/celine-eu> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <https://www.celineproject.eu/> .
-<https://w3id.org/celine-eu> <http://www.w3.org/2002/07/owl#priorVersion> <https://w3id.org/celine-eu/v0.9> .
-<https://w3id.org/celine-eu> <http://www.w3.org/2002/07/owl#versionInfo> "0.10.0" .
+<https://w3id.org/celine-eu> <http://www.w3.org/2002/07/owl#priorVersion> <https://w3id.org/celine-eu/v0.10> .
+<https://w3id.org/celine-eu> <http://www.w3.org/2002/07/owl#versionInfo> "0.11.0" .
 # 
 # 
 # #################################################################
@@ -94,6 +94,14 @@
 <https://w3id.org/celine-eu#evidencedBy> <http://www.w3.org/2000/01/rdf-schema#comment> "SOSA observation(s) that meter the actual flexibility delivered, grounding the credit in measured data." .
 <https://w3id.org/celine-eu#evidencedBy> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#evidencedBy> <http://www.w3.org/2000/01/rdf-schema#label> "evidenced by" .
+# 
+# https://w3id.org/celine-eu#forecastRun
+<https://w3id.org/celine-eu#forecastRun> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://w3id.org/celine-eu#forecastRun> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/celine-eu#Forecast> .
+<https://w3id.org/celine-eu#forecastRun> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/celine-eu#ForecastRun> .
+<https://w3id.org/celine-eu#forecastRun> <http://www.w3.org/2000/01/rdf-schema#comment> "The run that produced this forecast. Forecasts sharing a run are one series."@en .
+<https://w3id.org/celine-eu#forecastRun> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#forecastRun> <http://www.w3.org/2000/01/rdf-schema#label> "forecast run"@en .
 # 
 # https://w3id.org/celine-eu#generatesCredit
 <https://w3id.org/celine-eu#generatesCredit> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
@@ -673,6 +681,15 @@ _:genid25 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 <https://w3id.org/celine-eu#currency> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#currency> <http://www.w3.org/2000/01/rdf-schema#label> "currency" .
 # 
+# https://w3id.org/celine-eu#forecastTargetTime
+<https://w3id.org/celine-eu#forecastTargetTime> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://w3id.org/celine-eu#forecastTargetTime> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/celine-eu#Forecast> .
+<https://w3id.org/celine-eu#forecastTargetTime> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://w3id.org/celine-eu#forecastTargetTime> <http://www.w3.org/2000/01/rdf-schema#comment> "The instant the forecast is about, as a literal. A literal shortcut for sosa:phenomenonTime, whose time:TemporalEntity range requires a node — the same relationship sosa:hasSimpleResult has to sosa:hasResult, and reached for the same reason: the rows these forecasts are built from are flat columns. A consumer needing an interval rather than an instant should use sosa:phenomenonTime directly; this property does not replace it."@en .
+<https://w3id.org/celine-eu#forecastTargetTime> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#forecastTargetTime> <http://www.w3.org/2000/01/rdf-schema#label> "forecast target time"@en .
+<https://w3id.org/celine-eu#forecastTargetTime> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://www.w3.org/ns/sosa/phenomenonTime> .
+# 
 # https://w3id.org/celine-eu#grossAmount
 <https://w3id.org/celine-eu#grossAmount> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
 <https://w3id.org/celine-eu#grossAmount> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/celine-eu#RedistributionResult> .
@@ -680,6 +697,14 @@ _:genid25 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 <https://w3id.org/celine-eu#grossAmount> <http://www.w3.org/2000/01/rdf-schema#comment> "Monetary value of the member's credit balance before cost deductions (creditBalance x conversionRate)." .
 <https://w3id.org/celine-eu#grossAmount> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#grossAmount> <http://www.w3.org/2000/01/rdf-schema#label> "gross amount" .
+# 
+# https://w3id.org/celine-eu#hasConfidence
+<https://w3id.org/celine-eu#hasConfidence> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://w3id.org/celine-eu#hasConfidence> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/celine-eu#Forecast> .
+<https://w3id.org/celine-eu#hasConfidence> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#decimal> .
+<https://w3id.org/celine-eu#hasConfidence> <http://www.w3.org/2000/01/rdf-schema#comment> "The confidence level the bounds cover, as a fraction in [0,1] — 0.95 for a 95% prediction interval. A fraction rather than a percentage so it needs no unit; stated explicitly because a bound without a level is not interpretable."@en .
+<https://w3id.org/celine-eu#hasConfidence> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#hasConfidence> <http://www.w3.org/2000/01/rdf-schema#label> "has confidence"@en .
 # 
 # https://w3id.org/celine-eu#hasKPIDescription
 <https://w3id.org/celine-eu#hasKPIDescription> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
@@ -728,6 +753,22 @@ _:genid29 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 <https://w3id.org/celine-eu#hasLocalIdentifier> <http://www.w3.org/2000/01/rdf-schema#comment> "Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into an external catalogue."@en .
 <https://w3id.org/celine-eu#hasLocalIdentifier> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#hasLocalIdentifier> <http://www.w3.org/2000/01/rdf-schema#label> "has local identifier"@en .
+# 
+# https://w3id.org/celine-eu#hasLowerBound
+<https://w3id.org/celine-eu#hasLowerBound> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://w3id.org/celine-eu#hasLowerBound> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/celine-eu#Forecast> .
+<https://w3id.org/celine-eu#hasLowerBound> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#decimal> .
+<https://w3id.org/celine-eu#hasLowerBound> <http://www.w3.org/2000/01/rdf-schema#comment> "Lower end of the forecast's prediction interval, in the same unit as sosa:hasSimpleResult. The interval's confidence level is celine:hasConfidence; without it a bound states a range but not how much of the distribution it covers."@en .
+<https://w3id.org/celine-eu#hasLowerBound> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#hasLowerBound> <http://www.w3.org/2000/01/rdf-schema#label> "has lower bound"@en .
+# 
+# https://w3id.org/celine-eu#hasUpperBound
+<https://w3id.org/celine-eu#hasUpperBound> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://w3id.org/celine-eu#hasUpperBound> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/celine-eu#Forecast> .
+<https://w3id.org/celine-eu#hasUpperBound> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#decimal> .
+<https://w3id.org/celine-eu#hasUpperBound> <http://www.w3.org/2000/01/rdf-schema#comment> "Upper end of the forecast's prediction interval, in the same unit as sosa:hasSimpleResult. See celine:hasLowerBound."@en .
+<https://w3id.org/celine-eu#hasUpperBound> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#hasUpperBound> <http://www.w3.org/2000/01/rdf-schema#label> "has upper bound"@en .
 # 
 # https://w3id.org/celine-eu#maxActivationDuration
 <https://w3id.org/celine-eu#maxActivationDuration> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
@@ -921,6 +962,33 @@ _:genid29 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 <https://w3id.org/celine-eu#FlexibilityRequest> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
 <https://w3id.org/celine-eu#FlexibilityRequest> <http://www.w3.org/2000/01/rdf-schema#label> "Flexibility Request"@en .
 <https://w3id.org/celine-eu#FlexibilityRequest> <http://www.w3.org/2004/02/skos/core#example> "ex:req_001 a celine:FlexibilityRequest ;\n    celine:requestedBy              ex:dso_enel ;\n    celine:hasFlexibilityDirection  celine:FlexDown ;\n    celine:requestedFlexibility     \"10.0\"^^xsd:decimal ;\n    celine:hasTimeInterval          ex:interval_2025_07_01_peak ;\n    celine:hasRequestStatus         celine:RequestFulfilled ;\n    celine:resultsInCommitment      ex:fc_001 , ex:fc_002 ." .
+# 
+# https://w3id.org/celine-eu#Forecast
+<https://w3id.org/celine-eu#Forecast> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://w3id.org/celine-eu#Forecast> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/sosa/Observation> .
+<https://w3id.org/celine-eu#Forecast> <http://www.w3.org/2000/01/rdf-schema#comment> "An estimate of an observable property at a time later than the one at which the estimate was made. Distinguished from a measurement by celine:forecastTargetTime standing after sosa:resultTime, and by its type. Uses the same celine: observable properties as a measurement does, so a consumer comparing forecast against actual compares like with like."@en .
+<https://w3id.org/celine-eu#Forecast> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#Forecast> <http://www.w3.org/2000/01/rdf-schema#label> "Forecast"@en .
+<https://w3id.org/celine-eu#Forecast> <http://www.w3.org/2000/01/rdf-schema#label> "Previsione"@it .
+<https://w3id.org/celine-eu#Forecast> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://purl.org/peco/peco-core#Forecast> .
+<https://w3id.org/celine-eu#Forecast> <http://www.w3.org/2004/02/skos/core#prefLabel> "Forecast"@en .
+# 
+# https://w3id.org/celine-eu#ForecastModel
+<https://w3id.org/celine-eu#ForecastModel> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://w3id.org/celine-eu#ForecastModel> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/sosa/Procedure> .
+<https://w3id.org/celine-eu#ForecastModel> <http://www.w3.org/2000/01/rdf-schema#comment> "The algorithm or computational method that produced a forecast — a statistical model, a physical simulation, or a foundation model. Reached through sosa:usedProcedure, which SOSA already declares for exactly this. Reusable: one individual per model, referenced by every forecast it produced, which is what makes 'which model said this' answerable after the fact."@en .
+<https://w3id.org/celine-eu#ForecastModel> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#ForecastModel> <http://www.w3.org/2000/01/rdf-schema#label> "Forecast model"@en .
+<https://w3id.org/celine-eu#ForecastModel> <http://www.w3.org/2000/01/rdf-schema#label> "Modello previsionale"@it .
+<https://w3id.org/celine-eu#ForecastModel> <http://www.w3.org/2004/02/skos/core#prefLabel> "Forecast model"@en .
+# 
+# https://w3id.org/celine-eu#ForecastRun
+<https://w3id.org/celine-eu#ForecastRun> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://w3id.org/celine-eu#ForecastRun> <http://www.w3.org/2000/01/rdf-schema#comment> "One execution of a celine:ForecastModel, producing the series of forecasts that share a horizon. Exists so a series is addressable as one thing without sosa:ObservationCollection, which lives in the SSN extension rather than the sosa.ttl this profile imports — reaching for it would mean a fifth owl:imports, which is a design decision and not an editing step. A run is referenced by IRI; describing it further is deferred."@en .
+<https://w3id.org/celine-eu#ForecastRun> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#ForecastRun> <http://www.w3.org/2000/01/rdf-schema#label> "Esecuzione previsionale"@it .
+<https://w3id.org/celine-eu#ForecastRun> <http://www.w3.org/2000/01/rdf-schema#label> "Forecast run"@en .
+<https://w3id.org/celine-eu#ForecastRun> <http://www.w3.org/2004/02/skos/core#prefLabel> "Forecast run"@en .
 # 
 # https://w3id.org/celine-eu#GridOperator
 <https://w3id.org/celine-eu#GridOperator> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
@@ -1930,6 +1998,15 @@ _:genid29 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 <https://w3id.org/celine-eu#SharedEnergyMemberShare> <http://www.w3.org/2004/02/skos/core#definition> "Share of the community's shared energy attributed to an individual member during the evaluation period."@en .
 <https://w3id.org/celine-eu#SharedEnergyMemberShare> <http://www.w3.org/2004/02/skos/core#inScheme> <https://w3id.org/celine-eu#KPICatalog> .
 <https://w3id.org/celine-eu#SharedEnergyMemberShare> <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://w3id.org/celine-eu#KPICatalog> .
+# 
+# https://w3id.org/celine-eu#SpecificPVYield
+<https://w3id.org/celine-eu#SpecificPVYield> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://w3id.org/celine-eu#SpecificPVYield> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/sosa/ObservableProperty> .
+<https://w3id.org/celine-eu#SpecificPVYield> <http://www.w3.org/2000/01/rdf-schema#comment> "Photovoltaic energy yield normalised by installed peak power, in kWh per kWp, so the figure is independent of plant size — which is the point: the datasets carrying it rank rooftops that do not exist yet. Numerically equal to equivalent full-load hours. Carries no qudt:hasQuantityKind on purpose, and it is the only property here that does not: kWh/kWp is energy over power, so quantitykind:Energy and quantitykind:DimensionlessRatio are both false, and quantitykind:Time, though dimensionally correct, reads as a duration to a consumer who does not already know the identity. A wrong quantity kind silently corrupts unit arithmetic; none corrupts nobody. The unit carries the meaning."@en .
+<https://w3id.org/celine-eu#SpecificPVYield> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <https://w3id.org/celine-eu> .
+<https://w3id.org/celine-eu#SpecificPVYield> <http://www.w3.org/2000/01/rdf-schema#label> "Resa specifica fotovoltaica"@it .
+<https://w3id.org/celine-eu#SpecificPVYield> <http://www.w3.org/2000/01/rdf-schema#label> "Specific PV yield"@en .
+<https://w3id.org/celine-eu#SpecificPVYield> <http://www.w3.org/2004/02/skos/core#prefLabel> "Specific PV yield"@en .
 # 
 # https://w3id.org/celine-eu#StatusActive
 <https://w3id.org/celine-eu#StatusActive> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .

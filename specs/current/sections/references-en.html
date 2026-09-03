@@ -29,6 +29,10 @@
 
 - W3C. (2017). *Shapes Constraint Language (SHACL)*, §Advanced Features (`sh:SPARQLTarget`). The CELINE profile selects focus nodes with SPARQL targets, which validators skip silently unless advanced mode is enabled. https://www.w3.org/TR/shacl-af/
 
+- W3C. (2003). *Basic Geo (WGS84 lat/long) Vocabulary*. Namespace `http://www.w3.org/2003/01/geo/wgs84_pos#`. Used for `geo:lat` and `geo:long` as decimal literals on the feature of interest. Referenced, not imported — as `time:` is. https://www.w3.org/2003/01/geo/
+
+- W3C. (2017). *Time Ontology in OWL*. Namespace `http://www.w3.org/2006/time#`. `sosa:phenomenonTime` ranges over `time:TemporalEntity`, which is why `celine:forecastTargetTime` exists as a literal shortcut. https://www.w3.org/TR/owl-time/
+
 - W3C. (2009). *SKOS Simple Knowledge Organization System Reference*. https://www.w3.org/TR/skos-reference/
 
 - W3C. (2020). *Data Catalog Vocabulary (DCAT) — Version 2*. https://www.w3.org/TR/vocab-dcat-2/

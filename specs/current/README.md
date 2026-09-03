@@ -1,12 +1,136 @@
-# CELINE Ontology v0.10
+# CELINE Ontology v0.11
 
 **Namespace**: `https://w3id.org/celine-eu#`
 **IRI**: `https://w3id.org/celine-eu`
-**Version IRI**: `https://w3id.org/celine-eu/v0.10`
+**Version IRI**: `https://w3id.org/celine-eu/v0.11`
 
-Adds the six observable properties a REC energy dataset actually reports, so that
-`sosa:observedProperty` has a target that resolves. Additive: no term is removed or retyped,
-and existing instance data validates unchanged.
+Finishes the half v0.10 left open. v0.10 gave measurement a `sosa:observedProperty` that
+resolves and said, in its own comment, that "the three forecast specs still do [point at dead
+IRIs], and the forecast properties they need are not minted here". They are minted here — and
+not as the six forecast counterparts that sentence implied. Additive: no term is removed or
+retyped, and existing instance data validates unchanged.
+
+## Changes from v0.10
+
+### New class — `celine:Forecast`, a `sosa:Observation` subclass
+
+The decision is a reading of SOSA rather than a stretch of it, and both definitions are in
+the `sosa.ttl` this profile already imports:
+
+- `sosa:Observation` — *"Act of carrying out an (Observation) Procedure to **estimate or
+  calculate** a value of a property of a FeatureOfInterest."* A computed forecast is an
+  estimate. SOSA nowhere restricts this to a physical reading.
+- `sosa:Procedure` — *"A workflow, protocol, plan, **algorithm, or computational method** …
+  A Procedure is **re-usable**, and might be involved in many Observations."* That is a
+  forecasting model, including a foundation model, described by the standard.
+
+`sosa:usedProcedure` carries `schema:domainIncludes sosa:Observation`, so nothing is bent.
+
+The subclass is declared rather than left implicit for two reasons: a consumer selects
+forecasts by type instead of comparing two timestamps, and one future `ObservationShape`
+reaches both families.
+
+**The consequence worth stating plainly: the six observable properties are shared between
+measurement and forecast rather than doubled.** A forecast of grid import and a measurement
+of grid import name the same property, so comparing forecast against actual compares like
+with like — which is the whole reason anyone stores both.
+
+### New classes and properties (8)
+
+| Term | Type | Purpose |
+|---|---|---|
+| `celine:Forecast` | class, `rdfs:subClassOf sosa:Observation` | An estimate for a time later than the one it was made at |
+| `celine:ForecastModel` | class, `rdfs:subClassOf sosa:Procedure` | The model that produced it, reached by `sosa:usedProcedure` |
+| `celine:ForecastRun` | class | One execution of a model; forecasts sharing a run are one series |
+| `celine:forecastRun` | object property | `Forecast` → `ForecastRun` |
+| `celine:forecastTargetTime` | datatype property, `xsd:dateTime` | The instant the forecast is about |
+| `celine:hasLowerBound` | datatype property, `xsd:decimal` | Lower end of the prediction interval |
+| `celine:hasUpperBound` | datatype property, `xsd:decimal` | Upper end of the prediction interval |
+| `celine:hasConfidence` | datatype property, `xsd:decimal` | The level those bounds cover, as a fraction in [0,1] |
+
+### Why not `peco:Forecast`
+
+PECO has a Forecast class, it is well formed, and it was the working answer until it was
+costed. `peco:Forecast` requires `peco:related_to_property_of_interest` exactly once onto
+`peco:Property_of_interest`, which itself requires `has_value` exactly once onto `peco:Value`,
+which requires a unit node and a quantity. **One forecast row becomes three nested levels
+plus a `peco:Unit` individual**, where the metering specs use a flat `qudt:hasUnit` IRI.
+
+Every mapping spec in this project reads flat SQL rows, and the mapper only builds a nested
+node from a column that already holds a dict. So the PECO shape is not reachable without
+either restructuring the dbt views or extending the mapper — before a single forecast is
+served. `skos:closeMatch celine:Forecast peco:Forecast` records the correspondence without
+inheriting the cost.
+
+Worth knowing what was wrong before, because it was not only the dead IRIs: the three
+forecast specs put `sosa:observedProperty` on a `peco:Forecast`, whose domain is
+`sosa:Observation`. Under OWL-RL that does not fail — it silently *infers* the Forecast is an
+Observation. v0.11 makes the type explicit instead of leaving it to be derived by accident.
+
+### Why `celine:forecastTargetTime` and not `sosa:phenomenonTime`
+
+`sosa:phenomenonTime` has range `time:TemporalEntity`, so its value must be a node and a
+literal will not do — the one thing that would have reintroduced the nesting this design
+exists to avoid. `celine:forecastTargetTime` is the literal shortcut, and the precedent is
+SOSA's own: `sosa:hasSimpleResult` stands in exactly this relation to `sosa:hasResult`. It
+carries `rdfs:seeAlso sosa:phenomenonTime` and does **not** replace it — a consumer needing
+an interval rather than an instant should use `sosa:phenomenonTime` directly.
+
+`sosa:ObservationCollection` would have been the natural home for a forecast series, but it
+lives in the SSN extension rather than the `sosa.ttl` imported here, and pulling it in would
+be a fifth `owl:imports` — a design decision with a record, not an editing step. A shared
+`celine:ForecastRun` gives the same grouping without one.
+
+### New — `sosa:ObservableProperty` individual (1)
+
+| Individual | Quantity kind | Reports |
+|---|---|---|
+| `celine:SpecificPVYield` | *none — see below* | PV energy yield normalised by installed peak power, in kWh/kWp |
+
+**The only property in this profile with no `qudt:hasQuantityKind`, deliberately.** kWh/kWp
+is energy over *power*, so `quantitykind:Energy` and `quantitykind:DimensionlessRatio` are
+both false — the latter is what `celine:SelfConsumptionRatio` correctly uses, because that
+one is energy over energy. `quantitykind:Time` is dimensionally right (1 kWh/kWp is one
+equivalent full-load hour) but reads as a duration to any consumer who does not already know
+the identity. A wrong quantity kind silently corrupts unit arithmetic; none corrupts nobody,
+so the unit carries the meaning and the comment states the equivalence.
+
+It cannot be avoided by remodelling as absolute energy: the datasets carrying it rank rooftops
+that do not exist yet, so there is no plant to be absolute about.
+
+### New prefix — WGS84 `geo:`
+
+`geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>`, for `geo:lat` and `geo:long` as
+`xsd:decimal` literals. **Referenced, not imported** — the same treatment `time:` has had
+since v0.5, so the import set stays at four.
+
+This exists because `obs_pv_forecast.yaml` was putting `lat` on `peco:has_property_kind` and
+`lon` on `peco:has_property_of_interest`, both *object* properties in PECO's property chain.
+Coordinates belong on the feature of interest, whose type `geo:lat` names
+(`geo:SpatialThing`) — not on the forecast, which would infer that a forecast is a place.
+
+### Deferred — SHACL shapes for the new classes
+
+`celine.shacl.ttl` gains no shape in v0.11. That is this profile's convention for a TBox that
+has not been reviewed, and it is recorded rather than left as an omission.
+
+There is a sharper reason too. The profile still carries **no shape targeting
+`sosa:Observation`**, the type of every metering row and now of every forecast, so those
+datasets conform because there is nothing to violate. That shape has to land *after* the
+three forecast mapping specs are corrected, never before: landing it first turns every
+metering and forecast conformance report red at once.
+
+### Migration notes
+
+- **Nothing breaks.** Additive only; v0.10 instance data validates unchanged.
+- **Forecast producers** should emit `@type: celine:Forecast`, a `celine:forecastTargetTime`,
+  and a `sosa:observedProperty` drawn from the seven declared individuals — not a
+  `https://w3id.org/celine/property/*` constant, which is in no namespace and never resolved.
+- **`celine-pipelines`** needs the forecast views to emit the columns these map from:
+  `forecast_target_time`, the bound pair, `confidence`, a `model_iri` and a `run_iri`, and a
+  `feature_iri` for the location where coordinates were being carried inline.
+- **Consumers comparing forecast to actual** can now join on `sosa:observedProperty`
+  directly, which was not possible while the two used different vocabularies.
 
 ## Changes from v0.9
 

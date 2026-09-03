@@ -14,7 +14,19 @@
 @prefix dcat:   <http://www.w3.org/ns/dcat#> .
 
 ################################################################################
-# CELINE SHACL Profile v0.10
+# CELINE SHACL Profile v0.11
+#
+# v0.11 adds no shapes. celine:Forecast, celine:ForecastModel and celine:ForecastRun are
+# new classes and their full shapes are deferred, which is this profile's convention for a
+# TBox that has not been reviewed — recorded here rather than left as an omission.
+#
+# There is a second, sharper reason to defer, and it is a sequencing one. This profile still
+# carries NO shape targeting sosa:Observation, which is the type of every metering row and,
+# from v0.11, of every forecast. Those datasets conform because there is nothing to violate.
+# The shape has to land AFTER the three forecast mapping specs are corrected, never before:
+# landing it first turns every metering and forecast conformance report red at once. Because
+# conformance is on request and never a gate, that would be a report changing its mind rather
+# than an outage — but it is still the wrong order.
 ################################################################################
 
 celine:CommunityContextShape

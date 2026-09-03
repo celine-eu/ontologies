@@ -7,7 +7,7 @@
 @base <https://w3id.org/celine-eu#> .
 
 <https://w3id.org/celine-eu> rdf:type owl:Ontology ;
-                              owl:versionIRI <https://w3id.org/celine-eu/v0.10> ;
+                              owl:versionIRI <https://w3id.org/celine-eu/v0.11> ;
                               owl:imports <https://purl.org/peco/peco-core> ,
                                           <https://raw.githubusercontent.com/w3c/sdw/dee1bdd3c339d8a0ab512c7f9bc97a08912ad7d6/ssn/integrated/sosa.ttl> ,
                                           <https://saref.etsi.org/core/v3.1.1/saref.ttl> ,
@@ -19,7 +19,7 @@
     semantics, providing a minimal coordination layer for simulation scenarios, dataset
     references, KPI definition and evaluation, and REC flexibility commitment and settlement.""" ;
                               <http://purl.org/dc/terms/license> <https://creativecommons.org/licenses/by/4.0/> ;
-                              <http://purl.org/dc/terms/modified> "2026-08-09"^^xsd:date ;
+                              <http://purl.org/dc/terms/modified> "2026-09-03"^^xsd:date ;
                               <http://purl.org/dc/terms/title> "CELINE Core Ontology" ;
                               <http://purl.org/vocab/vann/preferredNamespacePrefix> "celine" ;
                               <http://purl.org/vocab/vann/preferredNamespaceUri> "https://w3id.org/celine-eu#" ;
@@ -68,13 +68,32 @@
     properties they need are not minted here. Where a quantity also has a
     celine:KPICatalog concept the two are linked with rdfs:seeAlso: the KPI is a
     period total or rate, the observable property is what one observation
-    measures over one interval.""" ;
+    measures over one interval.
+    Version 0.11 finishes what v0.10 left open — the forecast half. celine:Forecast
+    is a sosa:Observation subclass, not a peco:Forecast: SOSA defines an Observation
+    as the act of a Procedure to \"estimate or calculate\" a value, which a computed
+    forecast is, and defines a Procedure as a reusable \"algorithm or computational
+    method\", which is what a forecasting model is. So sosa:usedProcedure names the
+    model through celine:ForecastModel, and the six observable properties above serve
+    measurement and forecast alike rather than being doubled. peco:Forecast was the
+    alternative and is well formed, but its peco:Property_of_interest requires a value
+    and a unit node, making a forecast three nested levels deep — unbuildable from the
+    flat rows every mapping spec here reads. Prediction bounds, confidence and the
+    forecast's target time are CELINE datatype properties so the node stays flat;
+    celine:forecastTargetTime is a literal shortcut for sosa:phenomenonTime, whose
+    time:TemporalEntity range would have reintroduced the nesting, in the same spirit
+    as SOSA's own sosa:hasSimpleResult shortcut for sosa:hasResult. celine:SpecificPVYield
+    is added as the seventh observable property and is the one that carries no
+    qudt:hasQuantityKind, deliberately: kWh/kWp is energy over power, so Energy and
+    DimensionlessRatio are both false and Time, while dimensionally right, reads as a
+    duration. geo: is bound for WGS84 coordinates and, like time:, is referenced without
+    being imported — the import set stays at four.""" ;
                               rdfs:label "CELINE Core Ontology" ;
                               rdfs:seeAlso <https://celine-eu.github.io/> ,
                                            <https://github.com/celine-eu> ,
                                            <https://www.celineproject.eu/> ;
-                              owl:priorVersion <https://w3id.org/celine-eu/v0.9> ;
-                              owl:versionInfo "0.10.0" .
+                              owl:priorVersion <https://w3id.org/celine-eu/v0.10> ;
+                              owl:versionInfo "0.11.0" .
 
 #################################################################
 #    Annotation properties
@@ -153,6 +172,15 @@
              rdfs:comment "SOSA observation(s) that meter the actual flexibility delivered, grounding the credit in measured data." ;
              rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
              rdfs:label "evidenced by" .
+
+
+###  https://w3id.org/celine-eu#forecastRun
+:forecastRun rdf:type owl:ObjectProperty ;
+             rdfs:domain :Forecast ;
+             rdfs:range :ForecastRun ;
+             rdfs:comment "The run that produced this forecast. Forecasts sharing a run are one series."@en ;
+             rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+             rdfs:label "forecast run"@en .
 
 
 ###  https://w3id.org/celine-eu#generatesCredit
@@ -750,6 +778,16 @@
           rdfs:label "currency" .
 
 
+###  https://w3id.org/celine-eu#forecastTargetTime
+:forecastTargetTime rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Forecast ;
+                    rdfs:range xsd:dateTime ;
+                    rdfs:comment "The instant the forecast is about, as a literal. A literal shortcut for sosa:phenomenonTime, whose time:TemporalEntity range requires a node — the same relationship sosa:hasSimpleResult has to sosa:hasResult, and reached for the same reason: the rows these forecasts are built from are flat columns. A consumer needing an interval rather than an instant should use sosa:phenomenonTime directly; this property does not replace it."@en ;
+                    rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+                    rdfs:label "forecast target time"@en ;
+                    rdfs:seeAlso <http://www.w3.org/ns/sosa/phenomenonTime> .
+
+
 ###  https://w3id.org/celine-eu#grossAmount
 :grossAmount rdf:type owl:DatatypeProperty ;
              rdfs:domain :RedistributionResult ;
@@ -757,6 +795,15 @@
              rdfs:comment "Monetary value of the member's credit balance before cost deductions (creditBalance x conversionRate)." ;
              rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
              rdfs:label "gross amount" .
+
+
+###  https://w3id.org/celine-eu#hasConfidence
+:hasConfidence rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Forecast ;
+               rdfs:range xsd:decimal ;
+               rdfs:comment "The confidence level the bounds cover, as a fraction in [0,1] — 0.95 for a 95% prediction interval. A fraction rather than a percentage so it needs no unit; stated explicitly because a bound without a level is not interpretable."@en ;
+               rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+               rdfs:label "has confidence"@en .
 
 
 ###  https://w3id.org/celine-eu#hasKPIDescription
@@ -806,6 +853,24 @@
                     rdfs:comment "Local identifier string. For connection points: the national metering code (POD, CUPS, PRM, etc.). For assets: the registry's local asset key, used as the lookup handle into an external catalogue."@en ;
                     rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
                     rdfs:label "has local identifier"@en .
+
+
+###  https://w3id.org/celine-eu#hasLowerBound
+:hasLowerBound rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Forecast ;
+               rdfs:range xsd:decimal ;
+               rdfs:comment "Lower end of the forecast's prediction interval, in the same unit as sosa:hasSimpleResult. The interval's confidence level is celine:hasConfidence; without it a bound states a range but not how much of the distribution it covers."@en ;
+               rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+               rdfs:label "has lower bound"@en .
+
+
+###  https://w3id.org/celine-eu#hasUpperBound
+:hasUpperBound rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Forecast ;
+               rdfs:range xsd:decimal ;
+               rdfs:comment "Upper end of the forecast's prediction interval, in the same unit as sosa:hasSimpleResult. See celine:hasLowerBound."@en ;
+               rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+               rdfs:label "has upper bound"@en .
 
 
 ###  https://w3id.org/celine-eu#maxActivationDuration
@@ -1089,6 +1154,36 @@ ex:cost_platform_fee a celine:CostItem ;
     celine:hasTimeInterval          ex:interval_2025_07_01_peak ;
     celine:hasRequestStatus         celine:RequestFulfilled ;
     celine:resultsInCommitment      ex:fc_001 , ex:fc_002 .""" .
+
+
+###  https://w3id.org/celine-eu#Forecast
+:Forecast rdf:type owl:Class ;
+          rdfs:subClassOf <http://www.w3.org/ns/sosa/Observation> ;
+          rdfs:comment "An estimate of an observable property at a time later than the one at which the estimate was made. Distinguished from a measurement by celine:forecastTargetTime standing after sosa:resultTime, and by its type. Uses the same celine: observable properties as a measurement does, so a consumer comparing forecast against actual compares like with like."@en ;
+          rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+          rdfs:label "Forecast"@en ,
+                     "Previsione"@it ;
+          <http://www.w3.org/2004/02/skos/core#closeMatch> <https://purl.org/peco/peco-core#Forecast> ;
+          <http://www.w3.org/2004/02/skos/core#prefLabel> "Forecast"@en .
+
+
+###  https://w3id.org/celine-eu#ForecastModel
+:ForecastModel rdf:type owl:Class ;
+               rdfs:subClassOf <http://www.w3.org/ns/sosa/Procedure> ;
+               rdfs:comment "The algorithm or computational method that produced a forecast — a statistical model, a physical simulation, or a foundation model. Reached through sosa:usedProcedure, which SOSA already declares for exactly this. Reusable: one individual per model, referenced by every forecast it produced, which is what makes 'which model said this' answerable after the fact."@en ;
+               rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+               rdfs:label "Forecast model"@en ,
+                          "Modello previsionale"@it ;
+               <http://www.w3.org/2004/02/skos/core#prefLabel> "Forecast model"@en .
+
+
+###  https://w3id.org/celine-eu#ForecastRun
+:ForecastRun rdf:type owl:Class ;
+             rdfs:comment "One execution of a celine:ForecastModel, producing the series of forecasts that share a horizon. Exists so a series is addressable as one thing without sosa:ObservationCollection, which lives in the SSN extension rather than the sosa.ttl this profile imports — reaching for it would mean a fifth owl:imports, which is a design decision and not an editing step. A run is referenced by IRI; describing it further is deferred."@en ;
+             rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+             rdfs:label "Esecuzione previsionale"@it ,
+                        "Forecast run"@en ;
+             <http://www.w3.org/2004/02/skos/core#prefLabel> "Forecast run"@en .
 
 
 ###  https://w3id.org/celine-eu#GridOperator
@@ -2242,6 +2337,16 @@ ex:cost_platform_fee a celine:CostItem ;
                          <http://www.w3.org/2004/02/skos/core#definition> "Share of the community's shared energy attributed to an individual member during the evaluation period."@en ;
                          <http://www.w3.org/2004/02/skos/core#inScheme> :KPICatalog ;
                          <http://www.w3.org/2004/02/skos/core#topConceptOf> :KPICatalog .
+
+
+###  https://w3id.org/celine-eu#SpecificPVYield
+:SpecificPVYield rdf:type owl:NamedIndividual ,
+                          <http://www.w3.org/ns/sosa/ObservableProperty> ;
+                 rdfs:comment "Photovoltaic energy yield normalised by installed peak power, in kWh per kWp, so the figure is independent of plant size — which is the point: the datasets carrying it rank rooftops that do not exist yet. Numerically equal to equivalent full-load hours. Carries no qudt:hasQuantityKind on purpose, and it is the only property here that does not: kWh/kWp is energy over power, so quantitykind:Energy and quantitykind:DimensionlessRatio are both false, and quantitykind:Time, though dimensionally correct, reads as a duration to a consumer who does not already know the identity. A wrong quantity kind silently corrupts unit arithmetic; none corrupts nobody. The unit carries the meaning."@en ;
+                 rdfs:isDefinedBy <https://w3id.org/celine-eu> ;
+                 rdfs:label "Resa specifica fotovoltaica"@it ,
+                            "Specific PV yield"@en ;
+                 <http://www.w3.org/2004/02/skos/core#prefLabel> "Specific PV yield"@en .
 
 
 ###  https://w3id.org/celine-eu#StatusActive

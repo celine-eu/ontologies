@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://w3id.org/celine-eu/v0.10/celine.schema.json",
+  "$id": "https://w3id.org/celine-eu/v0.11/celine.schema.json",
   "title": "CELINE JSON-LD schema",
   "type": "object",
   "required": [
@@ -1180,10 +1180,90 @@
           "$ref": "#/$defs/AssetInstance"
         },
         {
+          "$ref": "#/$defs/Forecast"
+        },
+        {
           "$ref": "#/$defs/NodeBase"
         },
         {
           "$ref": "#/$defs/Observation"
+        }
+      ]
+    },
+    "Forecast": {
+      "description": "A celine:Forecast — a sosa:Observation subclass whose target time is later than the time the estimate was made. Emitted by the three forecast mapping specs. Carries the same observedProperty / hasSimpleResult / hasUnit shape as Observation, plus the prediction bounds, the confidence level those bounds cover, the run it belongs to, and usedProcedure naming the model that produced it. forecastTargetTime is required: without it a forecast is indistinguishable from a measurement.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/NodeBase"
+        },
+        {
+          "properties": {
+            "@type": {
+              "anyOf": [
+                {
+                  "const": "celine:Forecast"
+                },
+                {
+                  "type": "array",
+                  "contains": {
+                    "const": "celine:Forecast"
+                  }
+                }
+              ]
+            },
+            "observedProperty": {
+              "$ref": "#/$defs/IRI"
+            },
+            "hasSimpleResult": {
+              "type": [
+                "number",
+                "string"
+              ]
+            },
+            "resultTime": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "forecastTargetTime": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "hasFeatureOfInterest": {
+              "$ref": "#/$defs/IRI"
+            },
+            "usedProcedure": {
+              "$ref": "#/$defs/IRI"
+            },
+            "forecastRun": {
+              "$ref": "#/$defs/IRI"
+            },
+            "hasUnit": {
+              "$ref": "#/$defs/IRI"
+            },
+            "hasLowerBound": {
+              "type": [
+                "number",
+                "string"
+              ]
+            },
+            "hasUpperBound": {
+              "type": [
+                "number",
+                "string"
+              ]
+            },
+            "hasConfidence": {
+              "type": [
+                "number",
+                "string"
+              ]
+            }
+          },
+          "required": [
+            "observedProperty",
+            "resultTime",
+            "forecastTargetTime"
+          ]
         }
       ]
     }
