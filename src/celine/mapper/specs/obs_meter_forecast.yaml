@@ -5,7 +5,24 @@
 #   total_production_kwh, total_consumption_kwh, net_exchange_kwh,
 #   total_production_lower, total_production_upper,
 #   total_consumption_lower, total_consumption_upper, pct_autoconsumption
-version: "1"
+# Migrated 2026-09-03 to spec format `version: "2"` (Jinja) with **relative**
+# id/iri templates. Two changes, one edit, because both rewrite the same lines:
+#
+#   - Templates are Jinja (`{{ var }}`), rendered in a sandbox with StrictUndefined,
+#     so a template naming a column the row does not carry now fails instead of
+#     rendering an empty string into the middle of an IRI. The schema had claimed
+#     these fields were Jinja since they were written; they were `str.format_map`.
+#   - `id_template` and `iri_template` no longer hardcode `https://w3id.org/celine/`,
+#     which is not a registered w3id namespace and answered 404 for every instance
+#     IRI this spec ever emitted. The base is now the caller's (`base_uri`, set from
+#     deployment configuration), because entities are named by the service that
+#     serves them. **This changes every emitted IRI, which is the point.**
+#
+# `kind: constant` values are untouched and stay absolute: they name ontology
+# *terms*, which belong to whoever publishes the vocabulary, not entities this
+# mapping mints.
+#
+version: "2"
 
 # The ontology profile whose shapes validate this mapping's output. Pinned,
 # not left to resolve: a dataset bound to this spec asserts conformance
@@ -15,7 +32,7 @@ profile:
   name: celine
   version: v0.10
 target_type: "peco:Forecast"
-id_template: "https://w3id.org/celine/forecast/meter/{device_id}/{timestamp}"
+id_template: "forecast/meter/{{ device_id }}/{{ timestamp }}"
 
 fields:
   - source: timestamp
@@ -26,7 +43,7 @@ fields:
   - source: device_id
     target: "sosa:madeBySensor"
     kind: iri
-    iri_template: "https://w3id.org/celine/device/{value}"
+    iri_template: "device/{{ value }}"
     required: true
 
   - source: total_consumption_kwh

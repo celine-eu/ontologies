@@ -9,7 +9,8 @@
   "properties": {
     "version": {
       "type": "string",
-      "enum": ["1"]
+      "enum": ["1", "2"],
+      "description": "Spec FORMAT version, which selects the template dialect for id_template, iri_template, label_template and templated constants. '1' is str.format_map with single-brace {var}. '2' is Jinja, rendered in a sandbox with StrictUndefined so a template naming a variable the row does not carry fails instead of silently rendering an empty string into an IRI. Unrelated to `profile.version`, which is the ontology version. Selected here rather than sniffed from the template text so a literal brace never changes what a file means."
     },
     "profile": {
       "type": "object",
@@ -37,11 +38,11 @@
     "id_template": {
       "type": "string",
       "minLength": 1,
-      "description": "Jinja2 template for @id. Variables: row fields + context dict."
+      "description": "Template for @id. Dialect follows `version`: {var} under '1', {{ var }} under '2'. Variables: row fields + context dict. A relative result has the caller's base_uri applied, which is how a deployment decides where its entities live; an absolute result is left alone."
     },
     "label_template": {
       "type": "string",
-      "description": "Optional Jinja2 template for rdfs:label shorthand."
+      "description": "Optional template for rdfs:label shorthand. Dialect follows `version`."
     },
     "context_vars": {
       "type": "array",
@@ -85,7 +86,7 @@
         },
         "iri_template": {
           "type": "string",
-          "description": "Jinja2 template for kind=iri. {value} is the source field value."
+          "description": "Template for kind=iri. Dialect follows `version`; the source field value is available as `value`. A relative result has base_uri applied, same as id_template — object references and subjects must land in the same namespace."
         },
         "value": {
           "description": "Constant value for kind=constant."

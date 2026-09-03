@@ -37,9 +37,17 @@ def _loader() -> MappingSpecLoader:
 def test_bundled_specs_load(spec_file: str) -> None:
     """All bundled spec files must load without errors."""
     spec = _loader().load(SPECS_DIR / spec_file)
-    assert spec.version == "1"
+    # Migrated 2026-09-03. The assertion is kept pinned to an exact version rather
+    # than relaxed to `in ("1", "2")`: the format version selects the template
+    # dialect, so a spec silently drifting between them is a spec whose templates
+    # mean something else.
+    assert spec.version == "2"
     assert spec.target_type
     assert spec.id_template
+    # Relative, so the deployment's base decides where these entities live.
+    # `https://w3id.org/celine/` is not a registered namespace and every instance
+    # IRI built on it answered 404.
+    assert not spec.id_template.startswith("http")
 
 
 def test_spec_is_frozen() -> None:

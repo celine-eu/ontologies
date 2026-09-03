@@ -4,7 +4,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from celine.mapper.engine import MappingEngine
+from celine.mapper.engine import DEFAULT_BASE_URI, MappingEngine
 from celine.mapper.spec import MappingSpec, MappingSpecLoader
 
 
@@ -29,14 +29,17 @@ class OutputMapper:
         spec: Parsed MappingSpec.
         context: Caller-supplied variables (e.g. EntityInfo.metadata) injected
                  into id_template alongside row fields.
-        base_uri: IRI prefix for generated node identifiers.
+        base_uri: IRI prefix for the entities this mapping mints. Defaults to
+                  ``DEFAULT_BASE_URI``, which is deliberately a `.localhost`
+                  placeholder — the real value is deployment configuration.
+                  Ontology *terms* named by ``kind: constant`` are unaffected.
     """
 
     def __init__(
         self,
         spec: MappingSpec,
         context: dict[str, Any] | None = None,
-        base_uri: str = "https://w3id.org/celine/",
+        base_uri: str = DEFAULT_BASE_URI,
     ) -> None:
         self._engine = MappingEngine(spec=spec, context=context, base_uri=base_uri)
 
@@ -45,7 +48,7 @@ class OutputMapper:
         cls,
         path: Path,
         context: dict[str, Any] | None = None,
-        base_uri: str = "https://w3id.org/celine/",
+        base_uri: str = DEFAULT_BASE_URI,
     ) -> "OutputMapper":
         """Construct from a MappingSpec YAML file."""
         spec = MappingSpecLoader().load(path)
@@ -56,7 +59,7 @@ class OutputMapper:
         cls,
         mapping: dict[str, Any],
         context: dict[str, Any] | None = None,
-        base_uri: str = "https://w3id.org/celine/",
+        base_uri: str = DEFAULT_BASE_URI,
     ) -> "OutputMapper":
         """Construct from an already-parsed mapping document.
 

@@ -24,6 +24,12 @@ classifiers = [
 dependencies = [
     "jsonschema>=4.0",
     "pyyaml>=6.0",
+    # Runtime, not the `mapper` extra: `id_template` is core to every spec, and a
+    # spec declaring format version "2" cannot be rendered without it. The schema
+    # had described these fields as Jinja since they were written while the
+    # implementation was `str.format_map`; that gap is closed, so the dependency
+    # is now real rather than aspirational.
+    "jinja2>=3.1",
 ]
 
 [project.optional-dependencies]

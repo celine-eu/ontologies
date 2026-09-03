@@ -17,7 +17,24 @@
 # Every term below was checked there rather than inferred from the CIM naming
 # pattern — `cim:Substation.Region` looks plausible and does not exist, while
 # `cim:Substation.SubGeographicalRegion` does.
-version: "1"
+# Migrated 2026-09-03 to spec format `version: "2"` (Jinja) with **relative**
+# id/iri templates. Two changes, one edit, because both rewrite the same lines:
+#
+#   - Templates are Jinja (`{{ var }}`), rendered in a sandbox with StrictUndefined,
+#     so a template naming a column the row does not carry now fails instead of
+#     rendering an empty string into the middle of an IRI. The schema had claimed
+#     these fields were Jinja since they were written; they were `str.format_map`.
+#   - `id_template` and `iri_template` no longer hardcode `https://w3id.org/celine/`,
+#     which is not a registered w3id namespace and answered 404 for every instance
+#     IRI this spec ever emitted. The base is now the caller's (`base_uri`, set from
+#     deployment configuration), because entities are named by the service that
+#     serves them. **This changes every emitted IRI, which is the point.**
+#
+# `kind: constant` values are untouched and stay absolute: they name ontology
+# *terms*, which belong to whoever publishes the vocabulary, not entities this
+# mapping mints.
+#
+version: "2"
 
 # The ontology profile whose shapes validate this mapping's output. Pinned,
 # not left to resolve: a dataset bound to this spec asserts conformance
@@ -27,7 +44,7 @@ profile:
   name: celine
   version: v0.10
 target_type: "cim:Substation"
-id_template: "https://w3id.org/celine/substation/{asset_id}"
+id_template: "substation/{{ asset_id }}"
 
 fields:
   - source: asset_id
@@ -49,7 +66,7 @@ fields:
   - source: municipality
     target: "cim:Substation.SubGeographicalRegion"
     kind: iri
-    iri_template: "https://w3id.org/celine/region/{value}"
+    iri_template: "region/{{ value }}"
 
   # Substation-to-substation containment. CIM's Equipment.EquipmentContainer is
   # for Equipment inside a container, not for one Substation under another, so
@@ -58,13 +75,13 @@ fields:
   - source: parent_substation_name
     target: "dct:isPartOf"
     kind: iri
-    iri_template: "https://w3id.org/celine/substation/{value}"
+    iri_template: "substation/{{ value }}"
 
   # The distribution system operator responsible for the asset.
   - source: dso_id
     target: "dct:publisher"
     kind: iri
-    iri_template: "https://w3id.org/celine/dso/{value}"
+    iri_template: "dso/{{ value }}"
 
   - target: "cim:IdentifiedObject.description"
     kind: constant

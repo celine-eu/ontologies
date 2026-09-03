@@ -53,6 +53,7 @@ name = "celine-ontologies"
 version = "1.10.1"
 source = { editable = "." }
 dependencies = [
+    { name = "jinja2" },
     { name = "jsonschema" },
     { name = "pyyaml" },
 ]
@@ -87,6 +88,7 @@ test = [
 requires-dist = [
     { name = "celine-ontologies", extras = ["mapper", "cli"], marker = "extra == 'all'" },
     { name = "httpx", marker = "extra == 'cli'", specifier = ">=0.28.1" },
+    { name = "jinja2", specifier = ">=3.1" },
     { name = "jsonschema", specifier = ">=4.0" },
     { name = "pyshacl", marker = "extra == 'mapper'", specifier = ">=0.26.0" },
     { name = "pyyaml", specifier = ">=6.0" },
@@ -406,7 +408,7 @@ name = "jinja2"
 version = "3.1.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "markupsafe", marker = "python_full_version >= '3.11'" },
+    { name = "markupsafe" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/df/bf/f7da0350254c0ed7c72f3e33cef02e048281fec7ecec5f032d4aac52226b/jinja2-3.1.6.tar.gz", hash = "sha256:0137fb05990d35f1275a587e9aee6d56da821fc83491a0fb838183be43f66d6d", size = 245115, upload-time = "2025-03-05T20:05:02.478Z" }
 wheels = [

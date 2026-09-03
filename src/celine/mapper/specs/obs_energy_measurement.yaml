@@ -55,7 +55,24 @@
 # Every other spec in this directory has that defect (kind: iri + iri_template
 # over a bare-key column). Here it is pushed to the producing side instead: the
 # dbt view emits the full IRI, and the context is correct as served.
-version: "1"
+# Migrated 2026-09-03 to spec format `version: "2"` (Jinja) with **relative**
+# id/iri templates. Two changes, one edit, because both rewrite the same lines:
+#
+#   - Templates are Jinja (`{{ var }}`), rendered in a sandbox with StrictUndefined,
+#     so a template naming a column the row does not carry now fails instead of
+#     rendering an empty string into the middle of an IRI. The schema had claimed
+#     these fields were Jinja since they were written; they were `str.format_map`.
+#   - `id_template` and `iri_template` no longer hardcode `https://w3id.org/celine/`,
+#     which is not a registered w3id namespace and answered 404 for every instance
+#     IRI this spec ever emitted. The base is now the caller's (`base_uri`, set from
+#     deployment configuration), because entities are named by the service that
+#     serves them. **This changes every emitted IRI, which is the point.**
+#
+# `kind: constant` values are untouched and stay absolute: they name ontology
+# *terms*, which belong to whoever publishes the vocabulary, not entities this
+# mapping mints.
+#
+version: "2"
 
 # The ontology profile whose shapes validate this mapping's output. Pinned,
 # not left to resolve: a dataset bound to this spec asserts conformance
@@ -70,7 +87,7 @@ target_type: "sosa:Observation"
 # grain differs per source table — (device_id, ts, property) for metering,
 # (rec_id, substation_id, ts, property) for the community models — so hashing it
 # upstream is what lets one id_template serve all three.
-id_template: "https://w3id.org/celine-eu/id/observation/{observation_id}"
+id_template: "observation/{{ observation_id }}"
 
 fields:
   - source: observation_id
