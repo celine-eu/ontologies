@@ -2,6 +2,36 @@
 
 <!-- version list -->
 
+## v1.11.0 (2026-09-03)
+
+### Bug Fixes
+
+- Correct v0.2 refs, add current, update w3id.org mapping
+  ([`ab1c693`](https://github.com/celine-eu/ontologies/commit/ab1c693df19e03f4faf5dfceecf80ff4156a1b62))
+
+### Chores
+
+- Untrack .harness staging area
+  ([`044b6f4`](https://github.com/celine-eu/ontologies/commit/044b6f4750948615e9ed6f50b3df0e7370531b99))
+
+- Update harness
+  ([`93ad71d`](https://github.com/celine-eu/ontologies/commit/93ad71d7b01cc29a45f1b1d6390f11f5515ecae9))
+
+### Features
+
+- Add jinja templating
+  ([`eaf3360`](https://github.com/celine-eu/ontologies/commit/eaf336099ace97ac1ba069bbd88fe962c0786eba))
+
+- Review mapper settings
+  ([`c75e4bb`](https://github.com/celine-eu/ontologies/commit/c75e4bba54ae120fd2f107daacc193659bd73aa7))
+
+- Review mapping, release v0.11
+  ([`4ba7de8`](https://github.com/celine-eu/ontologies/commit/4ba7de8bdf88757cdf77b8f192e731c3400cba26))
+
+- Review w3id.org setup, expose only entities, review base urls
+  ([`91ae248`](https://github.com/celine-eu/ontologies/commit/91ae24884dbffc6cf8b3323e8f6ea534dbb29f0a))
+
+
 ## v1.10.1 (2026-08-14)
 
 ### Bug Fixes
