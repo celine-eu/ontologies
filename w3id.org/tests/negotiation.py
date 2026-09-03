@@ -76,6 +76,12 @@ CASES = [
     ("shacl shapes",    "v0.10/celine.shacl.ttl",   "text/turtle", "v0.10/celine.shacl.ttl"),
     ("v0.5 context",    "v0.5/celine.jsonld",       "*/*",         "v0.5/celine.jsonld"),
     ("serialization",   "v0.10/ontology.nt",        "*/*",         "v0.10/ontology.nt"),
+
+    # ── unversioned artifacts follow `current`, matching the release model ──
+    ("current context", "celine.jsonld",      "*/*",         "celine.jsonld"),
+    ("current shapes",  "celine.shacl.ttl",   "text/turtle", "celine.shacl.ttl"),
+    ("current schema",  "celine.schema.json", "*/*",         "celine.schema.json"),
+    ("current ttl",     "ontology.ttl",       "text/turtle", "ontology.ttl"),
 ]
 
 # Content-Type the published site must return, checked only under --live.

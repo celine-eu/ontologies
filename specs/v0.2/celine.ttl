@@ -1,4 +1,4 @@
-@prefix celine: <https://w3id.org/celine/ontology#> .
+@prefix celine: <https://w3id.org/celine-eu#> .
 @prefix owl:    <http://www.w3.org/2002/07/owl#> .
 @prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
@@ -15,8 +15,9 @@
 # Ontology
 ################################################################################
 
-celine:CELINEOntology
+<https://w3id.org/celine-eu>
     a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/celine-eu/v0.2> ;
     dct:title "CELINE Core Ontology" ;
     dct:description """
     Lightweight orchestration ontology for Renewable Energy Communities
