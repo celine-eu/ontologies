@@ -1,79 +1,114 @@
-# Maps rows from ds_dev_gold.meters_energy_forecast
-# (fetcher: meter_forecast) to peco:Forecast nodes.
+# Maps one row of a meter energy *forecast* view to a celine:Forecast.
 #
-# Source columns: device_id, timestamp, period,
-#   total_production_kwh, total_consumption_kwh, net_exchange_kwh,
-#   total_production_lower, total_production_upper,
-#   total_consumption_lower, total_consumption_upper, pct_autoconsumption
-# Migrated 2026-09-03 to spec format `version: "2"` (Jinja) with **relative**
-# id/iri templates. Two changes, one edit, because both rewrite the same lines:
+# Rewritten 2026-09-03 for ontology v0.11. The previous version was
+# `target_type: peco:Forecast` carrying `sosa:observedProperty`, whose domain is
+# `sosa:Observation` — so under OWL-RL the graph was already inferring the forecast
+# was an Observation, silently. v0.11 declares `celine:Forecast rdfs:subClassOf
+# sosa:Observation`, which makes that explicit and lets a forecast and a measurement
+# of the same quantity name the same observable property. See the v0.11 README for
+# why `peco:Forecast` was not kept.
 #
-#   - Templates are Jinja (`{{ var }}`), rendered in a sandbox with StrictUndefined,
-#     so a template naming a column the row does not carry now fails instead of
-#     rendering an empty string into the middle of an IRI. The schema had claimed
-#     these fields were Jinja since they were written; they were `str.format_map`.
-#   - `id_template` and `iri_template` no longer hardcode `https://w3id.org/celine/`,
-#     which is not a registered w3id namespace and answered 404 for every instance
-#     IRI this spec ever emitted. The base is now the caller's (`base_uri`, set from
-#     deployment configuration), because entities are named by the service that
-#     serves them. **This changes every emitted IRI, which is the point.**
+# ── One quantity per row, like obs_energy_measurement ────────────────────────
+# The previous version put `total_production_kwh` on `peco:has_quantity` and
+# `net_exchange_kwh` on `rdf:value`. Those are not "the second and third results" —
+# SSN allows an Observation exactly one `sosa:observedProperty`, and they were
+# reached for because the row had nowhere else to put the numbers. That is the same
+# defect that superseded obs_meter_energy.yaml and obs_rec_energy.yaml.
 #
-# `kind: constant` values are untouched and stay absolute: they name ontology
-# *terms*, which belong to whoever publishes the vocabulary, not entities this
-# mapping mints.
+# So this spec maps ONE quantity, and `observed_property` comes from a **column**
+# rather than a constant — the pipeline knows which quantity a row carries, and a
+# constant here is how the old spec ended up asserting a property IRI that nothing
+# declared. `celine-pipelines` must unpivot the forecast view the way
+# `meters_measurements_15m.sql` already unpivots metering.
 #
+# Columns no longer mapped, and why: `total_production_kwh` and `net_exchange_kwh`
+# need their own rows; `pct_autoconsumption` is a self-consumption share, not a
+# forecast confidence level, and is its own quantity (celine:SelfConsumptionRatio);
+# `period` restated the view's granularity, which the interval between rows already
+# carries.
+#
+# ── resultTime and target time were swapped ──────────────────────────────────
+# The previous version put the forecast's *target* timestamp on `sosa:resultTime`,
+# which is when the estimate was produced. A forecast made at 06:00 for 18:00 has
+# resultTime 06:00 and target time 18:00; conflating them makes every forecast look
+# like a measurement taken at the moment it describes.
+#
+# Source columns: run_time, forecast_target_time, device_id, observed_property,
+#                 value, unit, lower_bound, upper_bound, confidence,
+#                 model_iri, run_iri, feature_iri
 version: "2"
 
-# The ontology profile whose shapes validate this mapping's output. Pinned,
-# not left to resolve: a dataset bound to this spec asserts conformance
-# against these shapes, and a later ontology release must not decide
-# retroactively that it stopped conforming.
+# The ontology profile whose shapes validate this mapping's output. Pinned, not left
+# to resolve: a dataset bound to this spec asserts conformance against these shapes,
+# and a later ontology release must not decide retroactively that it stopped
+# conforming.
 profile:
   name: celine
-  version: v0.10
-target_type: "peco:Forecast"
-id_template: "forecast/meter/{{ device_id }}/{{ timestamp }}"
+  version: v0.11
+
+target_type: "celine:Forecast"
+
+# Keyed on the run as well as the target: two runs forecasting the same instant are
+# two forecasts, and dropping the run mints one IRI for both.
+id_template: "forecast/meter/{{ device_id }}/{{ run_time }}/{{ forecast_target_time }}"
 
 fields:
-  - source: timestamp
+  # When the estimate was produced.
+  - source: run_time
     target: "sosa:resultTime"
     datatype: xsd:dateTime
     required: true
 
-  - source: device_id
-    target: "sosa:madeBySensor"
-    kind: iri
-    iri_template: "device/{{ value }}"
+  # The instant the estimate is about. A literal shortcut for sosa:phenomenonTime,
+  # whose time:TemporalEntity range needs a node a flat row cannot mint.
+  - source: forecast_target_time
+    target: "celine:forecastTargetTime"
+    datatype: xsd:dateTime
     required: true
 
-  - source: total_consumption_kwh
+  # One of the celine: observable properties declared in v0.10/v0.11, taken from the
+  # column because the pipeline knows which quantity this row carries.
+  - source: observed_property
+    target: "sosa:observedProperty"
+    kind: iri
+    required: true
+
+  - source: value
     target: "sosa:hasSimpleResult"
     datatype: xsd:decimal
 
-  - source: total_production_kwh
-    target: "peco:has_quantity"
+  - source: unit
+    target: "qudt:hasUnit"
+    kind: iri
+
+  # The prediction interval, and the level it covers. A bound without a level states
+  # a range but not how much of the distribution it spans, so the third is not
+  # decoration.
+  - source: lower_bound
+    target: "celine:hasLowerBound"
     datatype: xsd:decimal
 
-  - source: net_exchange_kwh
-    target: "rdf:value"
+  - source: upper_bound
+    target: "celine:hasUpperBound"
     datatype: xsd:decimal
 
-  - source: total_consumption_lower
-    target: "peco:has_lower_limit"
+  - source: confidence
+    target: "celine:hasConfidence"
     datatype: xsd:decimal
 
-  - source: total_consumption_upper
-    target: "peco:has_upper_limit"
-    datatype: xsd:decimal
+  # The model that produced it. Not sosa:madeBySensor, which the previous version
+  # used for device_id: no sensor made this reading, an algorithm did, and SOSA has
+  # sosa:usedProcedure for exactly that.
+  - source: model_iri
+    target: "sosa:usedProcedure"
+    kind: iri
 
-  - source: pct_autoconsumption
-    target: "peco:has_weight"
-    datatype: xsd:decimal
+  - source: run_iri
+    target: "celine:forecastRun"
+    kind: iri
 
-  - source: period
-    target: "peco:application_period"
-    datatype: xsd:string
-
-  - target: "sosa:observedProperty"
-    kind: constant
-    value: "https://w3id.org/celine/property/meter-energy-forecast-kwh"
+  # The connection point the meter serves — the thing the forecast is about. The
+  # meter is not the feature of interest and, for a forecast, is not a sensor either.
+  - source: feature_iri
+    target: "sosa:hasFeatureOfInterest"
+    kind: iri

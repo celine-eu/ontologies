@@ -77,23 +77,14 @@ def test_literal_none_skipped() -> None:
 def test_iri_produces_at_id() -> None:
     """Through an `iri_template`, which is what applies the base.
 
-    Moved off obs_meter_energy when that spec was deleted. obs_meter_forecast is
-    the remaining packaged spec whose `kind: iri` field renders a template rather
-    than passing an already-absolute column through.
+    Rehomed twice: off obs_meter_energy when that spec was deleted, then off
+    obs_meter_forecast when v0.11 removed its `sosa:madeBySensor` — no sensor makes
+    a forecast, an algorithm does, so that field became `sosa:usedProcedure` on an
+    IRI the pipeline supplies. rec_asset still renders a template.
     """
-    eng = _engine("obs_meter_forecast.yaml")
-    row = {
-        "device_id": "dev-001",
-        "timestamp": "2024-06-01T00:00:00+00:00",
-        "total_consumption_kwh": 1.2,
-    }
-    node = eng.map_one(row)
-    sensor = node["sosa:madeBySensor"]
-    assert isinstance(sensor, dict)
-    # The engine's default base, applied to a now-relative `iri_template`.
-    # Before 2026-09-03 no base was applied to `iri_template` at all and this
-    # asserted `https://w3id.org/celine/device/dev-001`, an IRI that 404s.
-    assert sensor["@id"] == "http://api.celine.localhost/entities/device/dev-001"
+    eng = _engine("rec_asset.yaml", context={"community_key": "it-folgaria"})
+    node = eng.map_one({"key": "pv-001", "name": "Roof array", "sensor_id": "dev-001"})
+    assert node["sosa:isHostedBy"]["@id"].endswith("/sensor/dev-001")
 
 
 # ---------------------------------------------------------------------------
@@ -128,38 +119,42 @@ def test_nested_list_multiple_items() -> None:
 # ---------------------------------------------------------------------------
 
 def test_constant_injected() -> None:
-    """The remaining constants are the three forecast specs\' dead property IRIs.
+    """From an inline spec, because no packaged spec carries a constant any more.
 
-    Asserted as-is on purpose: they point at `https://w3id.org/celine/property/…`,
-    which nothing declares and which does not resolve. Replacing them is workplan
-    step 16, and it waits on the ontology minting a term for specific PV yield.
-    This test pins current behaviour, not a claim that the value is right.
+    That is the point rather than an inconvenience: every `kind: constant` in this
+    directory was a `sosa:observedProperty` pointing at a
+    `https://w3id.org/celine/property/…` IRI in no namespace, and v0.11 replaced the
+    last three with a column the pipeline fills. The feature still works and is
+    still tested; nothing in the shipped specs needs it.
     """
-    eng = _engine("obs_meter_forecast.yaml")
-    row = {
-        "device_id": "dev-001",
-        "timestamp": "2024-06-01T00:00:00+00:00",
-        "total_consumption_kwh": 10.0,
-    }
-    node = eng.map_one(row)
-    assert node["sosa:observedProperty"] == "https://w3id.org/celine/property/meter-energy-forecast-kwh"
+    spec = _V2.replace(
+        "fields: []",
+        'fields:\n'
+        '  - target: "sosa:observedProperty"\n'
+        '    kind: constant\n'
+        '    value: "https://w3id.org/celine-eu#GridImportEnergy"',
+    )
+    node = _inline(spec).map_one({"device_id": "dev-001"})
+    # Not rebased: a constant names an ontology term, not an entity this spec mints.
+    assert node["sosa:observedProperty"] == "https://w3id.org/celine-eu#GridImportEnergy"
 
 
 # ---------------------------------------------------------------------------
 # @id generation
 # ---------------------------------------------------------------------------
 
-def test_id_uses_context_var() -> None:
-    """Moved off obs_rec_energy, which no longer takes one: its rows carry
-    `rec_id` and `substation_id` of their own, so pulling the community from the
-    caller's context was both unnecessary and a way for the two to disagree.
-    obs_pv_forecast still keys on a context variable, so it covers the feature."""
-    eng = _engine("obs_pv_forecast.yaml", context={"community_key": "it-folgaria"})
-    row = {"forecast_time_utc": "2024-06-01T00:00:00+00:00", "run_time_utc": "2024-06-01T00:00:00+00:00",
-           "provider": "acme", "pv_kwh_per_kwp_hourly": 0.4}
-    node = eng.map_one(row)
-    assert "it-folgaria" in node["@id"]
-    assert "2024-06-01" in node["@id"]
+def test_context_var_reaches_a_template() -> None:
+    """Caller context still reaches templates — but no longer any `id_template`.
+
+    Every packaged spec now keys its `@id` on row columns alone. That is a
+    correction, not an accident: obs_rec_energy took the community from the caller
+    while its rows carried `rec_id`, which is how the two get to disagree, and the
+    v0.11 forecast rewrite removed the last of them. rec_asset still projects
+    `community_key` into an `iri_template`, which is what this covers.
+    """
+    eng = _engine("rec_asset.yaml", context={"community_key": "it-folgaria"})
+    node = eng.map_one({"key": "pv-001", "name": "Roof array"})
+    assert node["celine:usesAsset"]["@id"].endswith("/context/it-folgaria")
 
 
 def test_id_uses_the_surrogate_that_carries_the_grain() -> None:
@@ -229,11 +224,16 @@ def test_map_many_meter_rows() -> None:
 
 
 def test_map_many_pv_forecast() -> None:
-    eng = _engine("obs_pv_forecast.yaml", context={"community_key": "it-folgaria"})
+    eng = _engine("obs_pv_forecast.yaml")
     rows = _fixture("pv_forecast_rows.json")
     nodes = eng.map_many(rows)
     assert len(nodes) == 2
-    assert all(n["@type"] == "peco:Forecast" for n in nodes)
+    # celine:Forecast, not peco:Forecast — v0.11. The type is declared rather than
+    # left to OWL-RL to infer from a sosa: property on a peco: class.
+    assert all(n["@type"] == "celine:Forecast" for n in nodes)
+    # A forecast is about a later instant than the one it was made at. Conflating
+    # the two was the previous spec's defect, so it is asserted rather than assumed.
+    assert all(n["celine:forecastTargetTime"] > n["sosa:resultTime"] for n in nodes)
 
 
 # ---------------------------------------------------------------------------

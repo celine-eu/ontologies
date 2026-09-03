@@ -31,7 +31,7 @@ from celine.mapper.spec import MappingSpecLoader
 #: The packaging policy, restated as a test. `pyproject.toml` force-includes
 #: exactly these versions; a dataset may pin any of them and must still resolve.
 #: Dropping one from the wheel without deciding to drop it fails here.
-SHIPPED_VERSIONS = ("v0.8", "v0.9", "v0.10")
+SHIPPED_VERSIONS = ("v0.9", "v0.10", "v0.11")
 
 _loader = MappingSpecLoader()
 

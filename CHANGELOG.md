@@ -105,6 +105,79 @@
   ([`658067b`](https://github.com/celine-eu/ontologies/commit/658067bb3b108f38b378200c0491f889810f66b4))
 
 
+## Ontology v0.11 (2026-09-03)
+
+Additive. Closes v0.10's own deferred item — the forecast observable properties — but not in
+the shape that entry anticipated. Nothing removed or retyped; v0.10 instance data validates
+unchanged.
+
+### Added
+
+- **`celine:Forecast`, `rdfs:subClassOf sosa:Observation`.** A reading of SOSA rather than a
+  stretch of it: `sosa:Observation` is the *"act of carrying out an (Observation) Procedure
+  to estimate or calculate a value"*, which a computed forecast is, and `sosa:Procedure` is
+  *"a workflow, protocol, plan, algorithm, or computational method … re-usable, and might be
+  involved in many Observations"*, which is a forecasting model. `sosa:usedProcedure` carries
+  `schema:domainIncludes sosa:Observation`.
+- **`celine:ForecastModel`, `rdfs:subClassOf sosa:Procedure`**, reached by
+  `sosa:usedProcedure` — one individual per model, so *which model said this* is answerable
+  after the fact. A statistical model, a physical simulation and a foundation model are all
+  the same shape here.
+- **`celine:ForecastRun` and `celine:forecastRun`.** Forecasts sharing a run are one series.
+  `sosa:ObservationCollection` would have been the natural home and is not available: it
+  lives in the SSN extension, not the `sosa.ttl` imported here, and reaching for it would
+  mean a fifth `owl:imports`.
+- **`celine:forecastTargetTime`** (`xsd:dateTime`), the literal shortcut for
+  `sosa:phenomenonTime` — whose `time:TemporalEntity` range requires a node a flat row cannot
+  mint. Exactly the relation `sosa:hasSimpleResult` has to `sosa:hasResult`, reached for the
+  same reason. Carries `rdfs:seeAlso sosa:phenomenonTime` and does not replace it.
+- **`celine:hasLowerBound`, `celine:hasUpperBound`, `celine:hasConfidence`** (`xsd:decimal`):
+  the prediction interval and the level it covers, as a fraction in [0,1]. A bound without a
+  level is not interpretable, so the third is not optional decoration.
+- **`celine:SpecificPVYield`**, a seventh `sosa:ObservableProperty`. PV yield normalised by
+  installed peak power, kWh/kWp.
+- **WGS84 prefix `geo:`** for `geo:lat` / `geo:long` as decimal literals. Referenced, not
+  imported — as `time:` already is. The import set stays at four.
+
+### Notes
+
+- **The six v0.10 properties are shared between measurement and forecast, not doubled.**
+  v0.10's deferred entry implied minting forecast counterparts; that would have made a
+  forecast of grid import and a measurement of grid import name different things, and
+  comparing forecast against actual is most of why anyone stores both.
+- **Why not `peco:Forecast`**, which exists and is well formed. It requires
+  `related_to_property_of_interest` exactly once onto `peco:Property_of_interest`, which
+  requires `has_value` exactly once onto `peco:Value`, which requires a unit node and a
+  quantity — one forecast row becomes three nested levels plus a `peco:Unit` individual.
+  Every mapping spec here reads flat SQL rows and the mapper only nests on a column that
+  already holds a dict, so that shape is unreachable without restructuring the views or
+  extending the mapper. `skos:closeMatch` records the correspondence without the cost.
+- **What was wrong was not only the dead IRIs.** The three forecast specs put
+  `sosa:observedProperty` on a `peco:Forecast`, whose domain is `sosa:Observation`. Under
+  OWL-RL that does not fail — it silently *infers* the Forecast is an Observation. v0.11
+  declares the type instead of leaving it to be derived by accident.
+- **`celine:SpecificPVYield` carries no `qudt:hasQuantityKind`, and it is the only term here
+  that does not.** kWh/kWp is energy over *power*: `quantitykind:Energy` and
+  `quantitykind:DimensionlessRatio` are both false — the latter is what
+  `celine:SelfConsumptionRatio` correctly uses, being energy over energy — and
+  `quantitykind:Time`, though dimensionally right (1 kWh/kWp is one equivalent full-load
+  hour), reads as a duration. A wrong quantity kind silently corrupts unit arithmetic; none
+  corrupts nobody. The unit carries the meaning and the comment states the equivalence.
+- **`geo:` exists because coordinates were on object properties.** `obs_pv_forecast.yaml` put
+  `lat` on `peco:has_property_kind` and `lon` on `peco:has_property_of_interest`, both object
+  properties in PECO's property chain. They belong on the feature of interest, whose type
+  `geo:lat` names — not on the forecast, which would infer a forecast is a place.
+
+### Deferred
+
+- **A `sosa:Observation` shape in `celine.shacl.ttl`**, still. It now covers forecasts too,
+  which raises what it is worth — and it must land *after* the three forecast mapping specs
+  are corrected, never before: landing it first turns every metering and forecast conformance
+  report red at once.
+- Full SHACL shapes for `celine:Forecast`, `celine:ForecastModel` and `celine:ForecastRun`.
+- `skos:closeMatch` from `celine:UnitOfMeasure` concepts to their QUDT units.
+- SHACL shapes for v0.6 grid topology and asset classes.
+
 ## Ontology v0.10 (2026-08-09)
 
 Additive. Names what a REC energy dataset reports, so `sosa:observedProperty` has a

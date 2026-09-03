@@ -1,66 +1,90 @@
-# Maps rows from ds_dev_gold.cer_energy_forecast
-# (fetcher: rec_forecast) to peco:Forecast nodes.
+# Maps one row of a REC energy *forecast* view to a celine:Forecast.
 #
-# Source columns: datetime, prediction, period, lower, upper
-# Migrated 2026-09-03 to spec format `version: "2"` (Jinja) with **relative**
-# id/iri templates. Two changes, one edit, because both rewrite the same lines:
+# Rewritten 2026-09-03 for ontology v0.11, alongside obs_meter_forecast.yaml and
+# obs_pv_forecast.yaml. The reasoning is the same and is written out in full in
+# obs_meter_forecast.yaml: peco:Forecast carrying a sosa: property was a domain
+# mismatch OWL-RL resolved silently, resultTime held the target instant rather than
+# the run, and one row carried more than one quantity.
 #
-#   - Templates are Jinja (`{{ var }}`), rendered in a sandbox with StrictUndefined,
-#     so a template naming a column the row does not carry now fails instead of
-#     rendering an empty string into the middle of an IRI. The schema had claimed
-#     these fields were Jinja since they were written; they were `str.format_map`.
-#   - `id_template` and `iri_template` no longer hardcode `https://w3id.org/celine/`,
-#     which is not a registered w3id namespace and answered 404 for every instance
-#     IRI this spec ever emitted. The base is now the caller's (`base_uri`, set from
-#     deployment configuration), because entities are named by the service that
-#     serves them. **This changes every emitted IRI, which is the point.**
+# ── The constant was wrong twice over ────────────────────────────────────────
+# The previous version asserted
+# `https://w3id.org/celine/property/rec-energy-forecast-kw` — an IRI in no
+# namespace, and one naming **kW** where the models emit energy. kW is power and kWh
+# is energy, and `xsd:decimal` carries no unit to contradict a wrong reading; this is
+# the identical slip corrected in the metering specs on 2026-08-09, which the
+# forecast specs never received.
 #
-# `kind: constant` values are untouched and stay absolute: they name ontology
-# *terms*, which belong to whoever publishes the vocabulary, not entities this
-# mapping mints.
+# It is not replaced with a different constant. `observed_property` comes from a
+# column, so the pipeline states which of the celine: observable properties a row
+# carries — grid import for a community consumption forecast, collectively shared
+# energy for a sharing forecast. Guessing here would produce a conformant graph of
+# wrong statements, which is the failure mode SHACL cannot see.
 #
+# Columns no longer mapped: `period` restated the view's granularity, which the
+# interval between rows already carries.
+#
+# Source columns: run_time, forecast_target_time, observed_property, value, unit,
+#                 lower_bound, upper_bound, confidence, model_iri, run_iri,
+#                 feature_iri
 version: "2"
 
-# The ontology profile whose shapes validate this mapping's output. Pinned,
-# not left to resolve: a dataset bound to this spec asserts conformance
-# against these shapes, and a later ontology release must not decide
-# retroactively that it stopped conforming.
 profile:
   name: celine
-  version: v0.10
-target_type: "peco:Forecast"
-id_template: "forecast/rec/{{ community_key }}/{{ datetime }}"
+  version: v0.11
 
-context_vars:
-  - community_key
+target_type: "celine:Forecast"
+
+# The feature is in the IRI rather than a context variable: the previous version took
+# `community_key` from the caller's context while the row carried its own keys, which
+# is how the two get to disagree. Same correction the metering specs took.
+id_template: "forecast/rec/{{ feature_key }}/{{ run_time }}/{{ forecast_target_time }}"
 
 fields:
-  - source: datetime
+  - source: run_time
     target: "sosa:resultTime"
     datatype: xsd:dateTime
     required: true
 
-  - source: prediction
+  - source: forecast_target_time
+    target: "celine:forecastTargetTime"
+    datatype: xsd:dateTime
+    required: true
+
+  - source: observed_property
+    target: "sosa:observedProperty"
+    kind: iri
+    required: true
+
+  - source: value
     target: "sosa:hasSimpleResult"
     datatype: xsd:decimal
 
-  - source: lower
-    target: "peco:has_lower_limit"
-    datatype: xsd:decimal
-
-  - source: upper
-    target: "peco:has_upper_limit"
-    datatype: xsd:decimal
-
-  - source: period
-    target: "peco:application_period"
-    datatype: xsd:string
-
-  # Feature of interest: the REC (community_key from context_vars)
-  - target: "sosa:hasFeatureOfInterest"
+  - source: unit
+    target: "qudt:hasUnit"
     kind: iri
-    iri_template: "rec/{{ community_key }}"
 
-  - target: "sosa:observedProperty"
-    kind: constant
-    value: "https://w3id.org/celine/property/rec-energy-forecast-kw"
+  - source: lower_bound
+    target: "celine:hasLowerBound"
+    datatype: xsd:decimal
+
+  - source: upper_bound
+    target: "celine:hasUpperBound"
+    datatype: xsd:decimal
+
+  - source: confidence
+    target: "celine:hasConfidence"
+    datatype: xsd:decimal
+
+  - source: model_iri
+    target: "sosa:usedProcedure"
+    kind: iri
+
+  - source: run_iri
+    target: "celine:forecastRun"
+    kind: iri
+
+  # The REC or sharing group the forecast is about, resolved to an IRI upstream so
+  # the consumer is not left inferring it from whichever key happens to be non-null.
+  - source: feature_iri
+    target: "sosa:hasFeatureOfInterest"
+    kind: iri

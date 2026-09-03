@@ -1,79 +1,103 @@
-# Maps rows from ds_dev_gold.pv_potential_forecast_hourly
-# (fetcher: pv_potential_forecast) to peco:Forecast nodes.
+# Maps one row of a PV potential *forecast* view to a celine:Forecast.
 #
-# Source columns: provider, run_time_utc, forecast_time_utc, lat, lon,
-#                 asob_s_wm2, performance_ratio, pv_kwh_per_kwp_hourly
-# Migrated 2026-09-03 to spec format `version: "2"` (Jinja) with **relative**
-# id/iri templates. Two changes, one edit, because both rewrite the same lines:
+# Rewritten 2026-09-03 for ontology v0.11. This spec needed more than a new target
+# type: four of its fields put values on properties that cannot carry them.
 #
-#   - Templates are Jinja (`{{ var }}`), rendered in a sandbox with StrictUndefined,
-#     so a template naming a column the row does not carry now fails instead of
-#     rendering an empty string into the middle of an IRI. The schema had claimed
-#     these fields were Jinja since they were written; they were `str.format_map`.
-#   - `id_template` and `iri_template` no longer hardcode `https://w3id.org/celine/`,
-#     which is not a registered w3id namespace and answered 404 for every instance
-#     IRI this spec ever emitted. The base is now the caller's (`base_uri`, set from
-#     deployment configuration), because entities are named by the service that
-#     serves them. **This changes every emitted IRI, which is the point.**
+# ── What was wrong, recorded so it is not reintroduced ───────────────────────
+#   lat               -> peco:has_property_kind        an OBJECT property,
+#                                                      Property_of_interest -> Property
+#   lon               -> peco:has_property_of_interest an OBJECT property
+#   performance_ratio -> rdf:value                     a generic slot, already the
+#                                                      dumping ground
+#   asob_s_wm2        -> peco:has_quantity             belongs to peco:Value, and is
+#                                                      an irradiation, not this
 #
-# `kind: constant` values are untouched and stay absolute: they name ontology
-# *terms*, which belong to whoever publishes the vocabulary, not entities this
-# mapping mints.
+# Latitude is not a property kind. These survived because nothing validates them —
+# the profile has no shape reaching this type, so the graph parsed, SHACL passed and
+# the statements were nonsense.
 #
+# Coordinates are a decimal pair and belong on the **feature of interest**, whose
+# type `geo:lat` names (geo:SpatialThing) — not on the forecast, which would infer a
+# forecast is a place. v0.11 binds the WGS84 `geo:` prefix for that, referenced and
+# not imported, as `time:` already is. The location is described once in its own
+# entry and referenced here by `feature_iri`, which is also the delegation shape this
+# project prefers for assets: describe the thing in a catalogue, point at it here.
+#
+# `performance_ratio` and `asob_s_wm2` are separate quantities. If they are worth
+# keeping they are worth their own rows, from a view that unpivots them; parking
+# them on this node is what the wide-row specs were deleted for.
+#
+# The observed property is `celine:SpecificPVYield`, minted in v0.11 — kWh per kWp,
+# normalised by installed peak power so the figure is independent of plant size,
+# which is the point: these datasets rank rooftops that do not exist yet. It is the
+# one observable property with no qudt:hasQuantityKind, and the ontology says why.
+# Taken from a column all the same, for the same reason as the other two specs.
+#
+# Source columns: run_time, forecast_target_time, observed_property, value, unit,
+#                 lower_bound, upper_bound, confidence, model_iri, run_iri,
+#                 feature_iri, provider
 version: "2"
 
-# The ontology profile whose shapes validate this mapping's output. Pinned,
-# not left to resolve: a dataset bound to this spec asserts conformance
-# against these shapes, and a later ontology release must not decide
-# retroactively that it stopped conforming.
 profile:
   name: celine
-  version: v0.10
-target_type: "peco:Forecast"
-id_template: "forecast/pv/{{ community_key }}/{{ forecast_time_utc }}"
+  version: v0.11
 
-context_vars:
-  - community_key
+target_type: "celine:Forecast"
+
+id_template: "forecast/pv/{{ feature_key }}/{{ run_time }}/{{ forecast_target_time }}"
 
 fields:
-  - source: forecast_time_utc
+  - source: run_time
     target: "sosa:resultTime"
     datatype: xsd:dateTime
     required: true
 
-  - source: run_time_utc
-    target: "peco:created_at"
+  - source: forecast_target_time
+    target: "celine:forecastTargetTime"
     datatype: xsd:dateTime
+    required: true
 
-  - source: provider
-    target: "dct:source"
-    datatype: xsd:string
+  - source: observed_property
+    target: "sosa:observedProperty"
+    kind: iri
+    required: true
 
-  - source: pv_kwh_per_kwp_hourly
+  - source: value
     target: "sosa:hasSimpleResult"
     datatype: xsd:decimal
 
-  - source: performance_ratio
-    target: "rdf:value"
-    datatype: xsd:decimal
-
-  - source: asob_s_wm2
-    target: "peco:has_quantity"
-    datatype: xsd:decimal
-
-  - source: lat
-    target: "peco:has_property_kind"
-    datatype: xsd:decimal
-
-  - source: lon
-    target: "peco:has_property_of_interest"
-    datatype: xsd:decimal
-
-  # Feature of interest: the community (community_key from context_vars)
-  - target: "sosa:hasFeatureOfInterest"
+  - source: unit
+    target: "qudt:hasUnit"
     kind: iri
-    iri_template: "rec/{{ community_key }}"
 
-  - target: "sosa:observedProperty"
-    kind: constant
-    value: "https://w3id.org/celine/property/pv-kwh-per-kwp-hourly"
+  - source: lower_bound
+    target: "celine:hasLowerBound"
+    datatype: xsd:decimal
+
+  - source: upper_bound
+    target: "celine:hasUpperBound"
+    datatype: xsd:decimal
+
+  - source: confidence
+    target: "celine:hasConfidence"
+    datatype: xsd:decimal
+
+  - source: model_iri
+    target: "sosa:usedProcedure"
+    kind: iri
+
+  - source: run_iri
+    target: "celine:forecastRun"
+    kind: iri
+
+  # The location the forecast is about. Its coordinates live on this entity, as
+  # geo:lat / geo:long, not restated on every forecast row.
+  - source: feature_iri
+    target: "sosa:hasFeatureOfInterest"
+    kind: iri
+
+  # Who supplied the underlying weather input. Distinct from sosa:usedProcedure,
+  # which names the model that turned it into a yield.
+  - source: provider
+    target: "dct:source"
+    datatype: xsd:string
