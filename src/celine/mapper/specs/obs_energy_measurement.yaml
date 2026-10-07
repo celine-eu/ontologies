@@ -8,7 +8,7 @@
 #   ds_dev_gold.rec_measurements_15m             (apps/rec_it)
 #   ds_dev_gold.rec_measurements_per_device_15m  (apps/rec_it)
 #
-# Source columns: observation_id, result_time, device_id, rec_id, substation_id,
+# Source columns: observation_id, result_time, device_id, community_id, substation_id,
 #                 feature_iri, sensor_iri, observed_property, value, unit
 #
 # ── Why this exists rather than obs_meter_energy / obs_rec_energy ─────────────
@@ -85,7 +85,7 @@ target_type: "sosa:Observation"
 
 # Keyed on the view's own surrogate, which is an md5 of the full grain. The
 # grain differs per source table — (device_id, ts, property) for metering,
-# (rec_id, substation_id, ts, property) for the community models — so hashing it
+# (community_id, substation_id, ts, property) for the community models — so hashing it
 # upstream is what lets one id_template serve all three.
 id_template: "observation/{{ observation_id }}"
 
@@ -124,7 +124,7 @@ fields:
   # The thing the reading is about — a connection point, a device, a community,
   # a substation. Which of those it is varies by source table, which is why the
   # view resolves it to an IRI rather than leaving the consumer to guess from
-  # whichever of rec_id / substation_id / device_id happens to be non-null.
+  # whichever of community_id / substation_id / device_id happens to be non-null.
   - source: feature_iri
     target: "sosa:hasFeatureOfInterest"
     kind: iri
@@ -135,10 +135,12 @@ fields:
     target: "sosa:madeBySensor"
     kind: iri
 
-# Deliberately unmapped: `device_id`, `rec_id` and `substation_id`.
+# Deliberately unmapped: `device_id`, `community_id` and `substation_id`.
 #
 # They are **governance columns, not semantic ones**. `device_id` is what the
-# `rec_registry` row filter matches on, so it has to survive into every view
+# `rec_registry` row filter matches on, and `community_id` what the
+# `organization_match` filter matches on for the community models (it holds the
+# community's organisation alias), so each has to survive into every view
 # verbatim or the filter silently stops constraining anything — the columns are
 # carried for that reason, and `feature_iri` / `sensor_iri` already state the
 # same facts in the form the ontology wants.
